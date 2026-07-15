@@ -11,9 +11,9 @@ import { cn } from "@/lib/utils";
 export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
-      { title: "About — Where Finance Finally Clicks | Fin-Envision Learning" },
+      { title: "About — Learn Finance the Way the Industry Works | Fin-Envision Learning" },
       { name: "description", content: "Fin-Envision offers certified programs in CFA® and Financial Modelling — 5,000+ students trained, 80–90% success rate, 8+ years of teaching experience, led by Manoj Rajgopal, CFA." },
-      { property: "og:title", content: "About — Where Finance Finally Clicks" },
+      { property: "og:title", content: "About — Learn Finance the Way the Industry Works" },
       { property: "og:description", content: "We don't just teach finance — we transform how you learn it." },
       { property: "og:url", content: "/about" },
     ],
@@ -160,7 +160,7 @@ function AboutPage() {
             transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
             className="mt-6 max-w-5xl text-balance font-display text-5xl font-semibold leading-[1.02] tracking-tight md:text-7xl lg:text-[5.5rem]"
           >
-            Where Finance <GradientAccent>Finally</GradientAccent> Clicks.
+            Learn Finance the <GradientAccent>Way</GradientAccent> the Industry Works.
           </motion.h1>
 
           <div className="mt-14 grid gap-10 lg:grid-cols-[1.1fr_1fr] lg:items-end">
