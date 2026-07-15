@@ -352,7 +352,7 @@ function Hero() {
                 <div className="mt-6 text-center">
                   <div className="text-xs font-medium text-muted-foreground">Starting at</div>
                   <div className="mt-2 font-display text-4xl font-bold text-primary md:text-5xl">
-                    ₹34,900 <span className="text-2xl text-accent">($411)</span>
+                    ₹20,000 <span className="text-2xl text-accent">onwards</span>
                   </div>
                   <p className="mt-3 text-sm text-muted-foreground">
                     Discover our extensive range of <strong className="text-foreground">packages</strong>,{" "}
