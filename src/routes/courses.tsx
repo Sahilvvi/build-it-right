@@ -241,7 +241,7 @@ function CoursesPage() {
       <ChapterNav />
       
       <Opportunities />
-      <Curriculum />
+      
       <Eligibility />
       <ImportantNote />
       <PlanExam />
