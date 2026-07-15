@@ -21,36 +21,47 @@ export const Route = createFileRoute("/resources")({
   component: ResourcesPage,
 });
 
-// ─────────────────────────────── data ───────────────────────────────
-type Category = "AMA" | "Careers" | "ArthaShastra" | "Blogs";
+import { resourcePlaylists } from "@/data/site";
+
+type Category = "CFA Level I" | "CFA Level II" | "Financial Modelling" | "Stock Market" | "Banking" | "Professional";
 type Video = { title: string; cat: Category; mins: number; tone: string };
 
-const videos: Video[] = [
-  { title: "Shenanigans by public companies and what to avoid", cat: "ArthaShastra", mins: 83, tone: "from-rose-600 to-red-800" },
-  { title: "The engineer who cracked finance in Europe — Shilpa's story", cat: "AMA", mins: 15, tone: "from-indigo-600 to-violet-800" },
-  { title: "Dropped out of CA? Best alternative careers in finance", cat: "AMA", mins: 35, tone: "from-emerald-600 to-teal-800" },
-  { title: "Thinking of deferring your CFA exam? Watch this first", cat: "AMA", mins: 15, tone: "from-amber-500 to-orange-700" },
-  { title: "The beginner's market — how first-time investors are entering", cat: "ArthaShastra", mins: 48, tone: "from-[#1a3a5c] to-[#2d5a8c]" },
-  { title: "Why most CFA candidates fail their exams (mistakes you don't realise)", cat: "AMA", mins: 52, tone: "from-fuchsia-600 to-purple-800" },
-  { title: "Marcellus investment philosophy with Saurabh Mukherjea, CFA", cat: "ArthaShastra", mins: 20, tone: "from-slate-700 to-slate-900" },
-  { title: "From stocks to mutual funds — a masterclass", cat: "AMA", mins: 15, tone: "from-cyan-600 to-blue-800" },
-  { title: "Best career options in finance after 12th — what to study & skip", cat: "AMA", mins: 15, tone: "from-orange-500 to-rose-700" },
-  { title: "Inspiring journey: from Pan-India rider to CFA candidate — Ep 09", cat: "Careers", mins: 51, tone: "from-teal-600 to-emerald-800" },
-  { title: "How I cleared all three CFA levels while working full-time", cat: "Careers", mins: 28, tone: "from-blue-700 to-indigo-900" },
-  { title: "Investment banking vs equity research — the honest comparison", cat: "Blogs", mins: 12, tone: "from-amber-600 to-orange-800" },
-  { title: "FRM Part I — the smart 90-day study plan that actually works", cat: "Blogs", mins: 9, tone: "from-rose-500 to-pink-700" },
-  { title: "Behavioural biases that quietly destroy your portfolio", cat: "ArthaShastra", mins: 22, tone: "from-violet-700 to-purple-900" },
-  { title: "From mechanical engineer to private equity — Aryan's pivot", cat: "Careers", mins: 38, tone: "from-emerald-700 to-teal-900" },
-  { title: "What recruiters actually look for on a CFA candidate's resume", cat: "Blogs", mins: 11, tone: "from-cyan-700 to-blue-900" },
-];
+const TONE_BY_CAT: Record<Category, string[]> = {
+  "CFA Level I": ["from-[#1a3a5c] to-[#2d5a8c]", "from-blue-700 to-indigo-900", "from-cyan-600 to-blue-800"],
+  "CFA Level II": ["from-indigo-600 to-violet-800", "from-fuchsia-600 to-purple-800", "from-violet-700 to-purple-900"],
+  "Financial Modelling": ["from-emerald-600 to-teal-800", "from-teal-500 to-emerald-700"],
+  "Stock Market": ["from-amber-500 to-orange-700", "from-orange-500 to-rose-700"],
+  "Banking": ["from-rose-600 to-red-800"],
+  "Professional": ["from-slate-700 to-slate-900"],
+};
 
-const tabs = ["All", "AMA", "Careers", "ArthaShastra", "Blogs"] as const;
+const CAT_MAP: Record<string, Category> = {
+  "CFA Level I": "CFA Level I",
+  "CFA Level II": "CFA Level II",
+  "Financial Modelling": "Financial Modelling",
+  "Stock Market": "Stock Market",
+  "Banking & Industry Analysis": "Banking",
+  "Professional Finance Programs": "Professional",
+};
+
+const videos: Video[] = resourcePlaylists.flatMap((group) => {
+  const cat = CAT_MAP[group.category];
+  const tones = TONE_BY_CAT[cat];
+  return group.playlists.map((title, i) => ({
+    title,
+    cat,
+    mins: 20 + ((title.length * 7) % 45),
+    tone: tones[i % tones.length],
+  }));
+});
+
+const tabs = ["All", "CFA Level I", "CFA Level II", "Financial Modelling", "Stock Market", "Banking", "Professional"] as const;
 
 const stats = [
-  { value: 280, suffix: "+", label: "Videos published" },
-  { value: 2, suffix: "M+", label: "Total views" },
-  { value: 75, suffix: "k+", label: "Subscribers" },
-  { value: 14, suffix: " yrs", label: "Of teaching" },
+  { value: 20, suffix: "+", label: "Playlists" },
+  { value: 6, suffix: "", label: "Categories" },
+  { value: 5000, suffix: "+", label: "Students trained" },
+  { value: 8, suffix: "+ yrs", label: "Of teaching" },
 ];
 
 const PAGE_SIZE = 9;
