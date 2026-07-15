@@ -244,7 +244,7 @@ function CoursesPage() {
       
       <Eligibility />
       <ImportantNote />
-      <PlanExam />
+      
       <Pricing />
       <LeadForm />
       <CourseFaqs />
