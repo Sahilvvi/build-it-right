@@ -239,7 +239,7 @@ function CoursesPage() {
     <SiteLayout>
       <Hero />
       <ChapterNav />
-      <AboutCFA />
+      
       <Opportunities />
       <Curriculum />
       <Eligibility />
