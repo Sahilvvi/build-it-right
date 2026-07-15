@@ -190,39 +190,69 @@ function AboutPage() {
         </div>
       </section>
 
-      {/* WORK GALLERY — auto-scrolling marquee */}
+      {/* MISSION · VISION · VALUES */}
       <section className="relative -mt-12 pb-24 md:pb-32">
         <FadeIn className="container-px mx-auto max-w-7xl">
-          <div className="flex flex-col items-start gap-5 md:flex-row md:items-end md:justify-between">
-            <div className="flex flex-col gap-4">
-              <EyebrowBadge>Inside Fin-Envision</EyebrowBadge>
-              <h2 className="font-display text-3xl font-semibold tracking-tight md:text-5xl">
-                Where work feels like <GradientAccent>family.</GradientAccent>
-              </h2>
-            </div>
-            <div className="text-sm font-medium uppercase tracking-[0.22em] text-muted-foreground">Pune · Bengaluru · Mumbai</div>
+          <div className="flex flex-col gap-4">
+            <EyebrowBadge>Inside Fin-Envision</EyebrowBadge>
+            <h2 className="max-w-3xl font-display text-3xl font-semibold tracking-tight md:text-5xl">
+              What we <GradientAccent>stand for.</GradientAccent>
+            </h2>
           </div>
         </FadeIn>
 
-        <div className="group relative mt-12 overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_8%,black_92%,transparent)]">
-          <motion.div
-            className="flex gap-5"
-            animate={{ x: ["0%", "-50%"] }}
-            transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
-          >
-            {[...gallery, ...gallery].map((g, i) => (
-              <div key={i} className={cn("relative h-72 w-[22rem] shrink-0 overflow-hidden rounded-3xl bg-gradient-to-br shadow-elevated transition-transform hover:scale-[1.02]", g.tone)}>
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(255,255,255,0.25),transparent_60%)]" />
-                <div className="absolute inset-0 bg-[linear-gradient(transparent_60%,rgba(0,0,0,0.55))]" />
-                <div className="absolute bottom-5 left-5 right-5 flex items-end justify-between text-white">
-                  <div className="font-display text-lg font-semibold drop-shadow">{g.label}</div>
-                  <Sparkles className="h-5 w-5 opacity-80" />
-                </div>
-              </div>
-            ))}
-          </motion.div>
+        <div className="container-px mx-auto mt-12 grid max-w-7xl gap-6 lg:grid-cols-3">
+          {[
+            {
+              label: "Our Mission",
+              tone: "from-[#1a3a5c] to-[#2d5a8c]",
+              body: "To simplify finance education and equip every learner with practical skills required for successful careers in global finance.",
+            },
+            {
+              label: "Our Vision",
+              tone: "from-indigo-700 to-violet-800",
+              body: "To become the most trusted finance learning platform by making quality education accessible, practical, and career-oriented.",
+            },
+            {
+              label: "Our Values",
+              tone: "from-amber-500 to-orange-600",
+              values: [
+                "Practical Learning",
+                "Student First",
+                "Industry Relevance",
+                "Continuous Mentorship",
+                "Excellence Through Consistency",
+              ],
+            },
+          ].map((card, i) => (
+            <motion.div
+              key={card.label}
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-80px" }}
+              transition={{ duration: 0.5, delay: i * 0.08 }}
+              className="group relative overflow-hidden rounded-3xl border border-border bg-card p-8 shadow-elevated transition-all hover:-translate-y-1 hover:border-accent/40"
+            >
+              <div className={cn("absolute inset-x-0 top-0 h-1.5 bg-gradient-to-r", card.tone)} />
+              <div className="text-xs font-bold uppercase tracking-[0.24em] text-accent">{card.label}</div>
+              {card.body && (
+                <p className="mt-5 text-pretty text-lg leading-relaxed text-foreground/80">{card.body}</p>
+              )}
+              {card.values && (
+                <ul className="mt-5 space-y-3">
+                  {card.values.map((v) => (
+                    <li key={v} className="flex items-center gap-3 text-base text-foreground/85">
+                      <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
+                      {v}
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </motion.div>
+          ))}
         </div>
       </section>
+
 
       {/* FOUNDER SPOTLIGHT */}
       <section className="relative overflow-hidden bg-background py-24 md:py-32">
