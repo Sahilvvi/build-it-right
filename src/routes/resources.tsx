@@ -248,21 +248,21 @@ function ResourcesPage() {
                     >
                       <Play className="h-10 w-10 translate-x-0.5 fill-current" />
                     </motion.div>
-                    <div className="mt-6 font-display text-3xl font-semibold italic">ArthaShastra</div>
-                    <div className="mt-2 text-xs uppercase tracking-[0.2em] text-white/70">with Fin-Envision</div>
+                    <div className="mt-6 font-display text-3xl font-semibold italic">CFA Level I</div>
+                    <div className="mt-2 text-xs uppercase tracking-[0.2em] text-white/70">Foundation series</div>
                   </div>
                 </div>
-                <span className="absolute left-4 top-4 rounded-full bg-white/15 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-white backdrop-blur">Popular playlist</span>
+                <span className="absolute left-4 top-4 rounded-full bg-white/15 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-white backdrop-blur">Most-watched category</span>
               </div>
             </div>
 
             <div className="relative">
-              <EyebrowBadge>Popular playlist</EyebrowBadge>
+              <EyebrowBadge>Most-watched category</EyebrowBadge>
               <h2 className="mt-5 font-display text-4xl font-semibold leading-tight tracking-tight md:text-5xl">
-                "ArthaShastra" <GradientAccent>with Fin-Envision</GradientAccent>
+                CFA Level I <GradientAccent>with Manoj Sir</GradientAccent>
               </h2>
               <p className="mt-5 text-pretty text-muted-foreground md:text-lg">
-                Short explainers on money, markets, and decision-making — plain English, real examples. Bring your CFA® / FRM® doubts or career questions. Thirty minutes, zero fluff.
+                Nine deep-dive playlists across Financial Statement Analysis, Quants, Economics, Equity Investments, Fixed Income and Corporate Finance — the exact concept-first approach used inside our classroom, made free on YouTube.
               </p>
 
               <div className="mt-8 flex flex-wrap items-center gap-3">
