@@ -73,7 +73,7 @@ const team: TeamMember[] = [
   { name: "QBank Author", role: "Question Bank Author", cat: "Content", tone: "from-emerald-600 to-teal-800" },
 ];
 
-const tabs = ["All", "Leadership", "Communications", "Success", "Content", "Career"] as const;
+
 
 const heroStats = [
   { value: 5000, suffix: "+", label: "Students trained" },
