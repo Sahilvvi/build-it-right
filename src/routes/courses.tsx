@@ -238,7 +238,7 @@ function CoursesPage() {
   return (
     <SiteLayout>
       <Hero />
-      <ChapterNav />
+      
       
       <Opportunities />
       
