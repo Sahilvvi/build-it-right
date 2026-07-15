@@ -277,7 +277,7 @@ function AboutPage() {
 
               <div className="mt-10 grid gap-8 sm:grid-cols-2">
                 <div>
-                  <div className="text-xs font-bold uppercase tracking-[0.24em] text-accent">Work</div>
+                  <div className="text-xs font-bold uppercase tracking-[0.24em] text-accent">Manoj Sir's Journey</div>
                   <ul className="mt-4 space-y-3">
                     {leadership.work.map((w, i) => (
                       <motion.li
