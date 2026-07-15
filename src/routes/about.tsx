@@ -165,12 +165,12 @@ function AboutPage() {
 
           <div className="mt-14 grid gap-10 lg:grid-cols-[1.1fr_1fr] lg:items-end">
             <FadeIn>
-              <div className="text-xs font-bold uppercase tracking-[0.28em] text-accent">Want to know us…</div>
+              <div className="text-xs font-bold uppercase tracking-[0.28em] text-accent">Who we are</div>
               <p className="mt-5 text-pretty text-lg leading-relaxed text-white/85 md:text-xl">
-                We don't just teach finance — we transform how you learn it. For over a decade we've been demystifying the complexities with straight-talk lessons so that finance no longer feels like fog. <span className="text-white">Learn by doing — cases, drills, past-paper rigor. Mentors stay until it clicks.</span>
+                Fin-Envision is a leading training institute offering certified programs in Financial Modelling and CFA. As the name suggests, <span className="text-white">"Financial Envision"</span> is about giving a future perspective to your career — helping individuals realize their potential through mentoring and imparting skills.
               </p>
               <p className="mt-5 text-pretty text-base text-white/70 md:text-lg">
-                Fin-Envision Learning is a learner-first finance academy built on three promises: <em className="not-italic text-accent">clarity, practice, and people who care.</em> We primarily help CFA® / FRM® aspirants — and emerging professionals — turn complex finance into career-ready skills.
+                Formulated through years of teaching experience, our coaching methodology places utmost emphasis on problem solving and conceptual clarity. Every instructor is carefully selected for their blend of expertise and passion for teaching — the human touch and care for each candidate is the real hallmark of Fin-Envision.
               </p>
             </FadeIn>
 
