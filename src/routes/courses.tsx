@@ -243,7 +243,7 @@ function CoursesPage() {
       <Opportunities />
       
       <Eligibility />
-      <ImportantNote />
+      
       
       <Pricing />
       <LeadForm />
