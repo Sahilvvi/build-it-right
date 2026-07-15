@@ -155,7 +155,7 @@ function ResourcesPage() {
             transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
             className="mt-6 max-w-5xl text-balance font-display text-5xl font-semibold leading-[1.02] tracking-tight md:text-7xl lg:text-[5.5rem]"
           >
-            Finance insights you can <GradientAccent>actually use.</GradientAccent>
+            Learn Finance with <GradientAccent>Manoj Rajgopal.</GradientAccent>
           </motion.h1>
 
           <motion.p
@@ -164,7 +164,7 @@ function ResourcesPage() {
             transition={{ duration: 0.8, delay: 0.25 }}
             className="mt-6 max-w-2xl text-pretty text-lg text-white/75 md:text-xl"
           >
-            Short explainers on money, markets, and decision-making — plain English, real examples. Bring your CFA® / FRM® doubts or career questions. Thirty minutes, zero fluff.
+            Access our complete library of finance playlists covering CFA®, Financial Modelling, Stock Markets, Corporate Finance, Investment Banking, and more. All resources are available free on YouTube and are designed to help you learn at your own pace.
           </motion.p>
 
           {/* search + stats */}
