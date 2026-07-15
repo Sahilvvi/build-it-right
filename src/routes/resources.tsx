@@ -494,7 +494,7 @@ function ResourcesPage() {
               >
                 <div className="text-center text-white">
                   <Youtube className="mx-auto h-16 w-16 text-accent" />
-                  <div className="mt-4 font-display text-3xl font-semibold">@lumenedge</div>
+                  <div className="mt-4 font-display text-3xl font-semibold">@FinEnvision</div>
                   <div className="mt-1 text-xs uppercase tracking-[0.2em] text-white/70">Subscribe on YouTube</div>
                 </div>
               </motion.div>
