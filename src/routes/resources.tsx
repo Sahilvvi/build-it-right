@@ -285,7 +285,7 @@ function ResourcesPage() {
               </div>
 
               <div className="mt-8 flex flex-wrap gap-2">
-                {["12 episodes", "Avg 28 min", "Updated weekly"].map((p) => (
+                {["9 playlists", "Concept-first", "Free on YouTube"].map((p) => (
                   <span key={p} className="rounded-full border border-border bg-background/60 px-3 py-1.5 text-xs font-medium text-muted-foreground">{p}</span>
                 ))}
               </div>
