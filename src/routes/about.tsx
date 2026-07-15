@@ -263,7 +263,7 @@ function AboutPage() {
                   </div>
                 </div>
                 <motion.div animate={{ y: [0, -10, 0] }} transition={{ duration: 6, repeat: Infinity }} className="absolute -bottom-6 -right-6 hidden rounded-2xl border border-border bg-card p-5 shadow-elevated md:block">
-                  <div className="text-xs uppercase tracking-[0.2em] text-muted-foreground">14+ years</div>
+                  <div className="text-xs uppercase tracking-[0.2em] text-muted-foreground">8+ years</div>
                   <div className="font-display text-lg font-semibold">Finance · Markets · Teaching</div>
                 </motion.div>
               </div>
