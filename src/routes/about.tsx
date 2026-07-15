@@ -41,12 +41,13 @@ const leadership = {
   role: "Founder & Lead Instructor",
   quote: "My ability to creatively simplify complicated concepts comes from genuinely caring about each student's journey — concept clarity always beats rote learning.",
   work: [
-    "Founder & Lead Instructor at Fin-Envision Learning",
-    "Cleared all CFA exams in the first attempt",
-    "Worked on buy-side and sell-side at firms like Crisil and JHP",
-    "Rich experience in Investment Banking and Financial Modeling",
-    "Trained 1,500+ candidates across Mumbai over the years",
-    "Frequent speaker at corporate and institutional sessions",
+    "Founder and Lead Instructor of Fin-Envision Learning.",
+    "Cleared all three levels of the CFA® Program in the first attempt.",
+    "Worked with reputed organizations such as CRISIL and JHP, gaining valuable industry exposure.",
+    "Has successfully trained over 5,000 students across Mumbai.",
+    "Known for simplifying complex financial concepts into easy-to-understand, practical lessons.",
+    "Focuses on bridging the gap between academic learning and real-world finance.",
+    "Dedicated to mentoring students for successful careers in finance through industry-oriented training and personalized guidance.",
   ],
   creds: ["CFA Charterholder", "Investment Banking", "Financial Modeling", "Portfolio Strategy"],
 };
@@ -75,10 +76,10 @@ const team: TeamMember[] = [
 const tabs = ["All", "Leadership", "Communications", "Success", "Content", "Career"] as const;
 
 const heroStats = [
-  { value: 1500, suffix: "+", label: "Students trained" },
+  { value: 5000, suffix: "+", label: "Students trained" },
   { value: 90, suffix: "%", label: "Success rate" },
   { value: 109, suffix: "", label: "Google reviews" },
-  { value: 14, suffix: " yrs", label: "Teaching experience" },
+  { value: 8, suffix: "+ yrs", label: "Teaching experience" },
 ];
 
 /* Premium section heading — homepage signature with ping-dot eyebrow */
