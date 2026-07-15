@@ -11,9 +11,9 @@ import { cn } from "@/lib/utils";
 export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
-      { title: "About — Where Finance Finally Clicks | Fin-Envision Learning" },
+      { title: "About — Learn Finance the Way the Industry Works | Fin-Envision Learning" },
       { name: "description", content: "Fin-Envision offers certified programs in CFA® and Financial Modelling — 5,000+ students trained, 80–90% success rate, 8+ years of teaching experience, led by Manoj Rajgopal, CFA." },
-      { property: "og:title", content: "About — Where Finance Finally Clicks" },
+      { property: "og:title", content: "About — Learn Finance the Way the Industry Works" },
       { property: "og:description", content: "We don't just teach finance — we transform how you learn it." },
       { property: "og:url", content: "/about" },
     ],
