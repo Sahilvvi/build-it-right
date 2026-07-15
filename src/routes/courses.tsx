@@ -106,29 +106,32 @@ const CURRICULUM = {
 
 type Level = keyof typeof CURRICULUM;
 
-const PRICING_TABS = ["Core Packs", "Combo"] as const;
+const PRICING_TABS = ["Offline (Classroom)", "Online"] as const;
 
 const PLANS = {
-  "Core Packs": [
-    { tier: "Level I", price: "₹34,900", note: "Single level · Live + recorded", popular: false },
-    { tier: "Level II", price: "₹39,900", note: "Single level · Live + recorded", popular: true },
-    { tier: "Level III", price: "₹44,900", note: "Single level · Live + recorded", popular: false },
+  "Offline (Classroom)": [
+    { tier: "CFA Level 1", price: "₹36,000", note: "140+ hours · Live classroom", popular: true },
+    { tier: "CFA Level 2", price: "₹40,000", note: "80+ hours · Live classroom", popular: false },
+    { tier: "CFA Level 3", price: "₹25,000", note: "60+ hours · Live classroom", popular: false },
+    { tier: "Financial Modelling", price: "₹25,000", note: "Classroom programme · Internship included", popular: false },
   ],
-  Combo: [
-    { tier: "I + II Combo", price: "₹62,900", note: "Save ₹11,900 vs separate", popular: false },
-    { tier: "I + II + III", price: "₹89,900", note: "Full Charter prep · Best value", popular: true },
-    { tier: "Retakers Pack", price: "₹14,900", note: "QBank + revision + mocks", popular: false },
+  Online: [
+    { tier: "CFA Level 1", price: "₹20,000", note: "140+ hours · Recorded lectures", popular: true },
+    { tier: "Level 2 Online", price: "₹25,000", note: "80+ hours · Recorded lectures", popular: false },
+    { tier: "Level 3 Online", price: "₹25,000", note: "60+ hours · Recorded lectures", popular: false },
+    { tier: "Financial Modelling", price: "₹20,000", note: "Online programme · Full project walkthrough", popular: false },
   ],
 } as const;
 
 const PLAN_INCLUDES = [
-  "120+ hrs live classes per level",
-  "8,000+ QBank questions",
-  "6 full-length mock exams",
-  "Weekly doubt clinics with mentors",
-  "Lifetime access to recordings",
-  "Placement support & CV review",
+  "Bilingual instruction — English + Hindi",
+  "Level 1: 140+ hrs · Level 2: 80+ hrs · Level 3: 60+ hrs",
+  "Unlimited views of recorded lectures",
+  "100% coverage of the CFA® curriculum",
+  "Weekly doubt-solving sessions with mentors",
+  "Subject-wise tests and full mock exams",
 ];
+
 
 const IMPORTANT_NOTES = [
   "Earning the CFA Charter requires completing all three exams plus qualifying work experience.",
@@ -252,7 +255,7 @@ function CoursesPage() {
 /* ─────────── HERO ─────────── */
 
 function Hero() {
-  const [activePricing, setActivePricing] = useState<typeof PRICING_TABS[number]>("Core Packs");
+  const [activePricing, setActivePricing] = useState<typeof PRICING_TABS[number]>("Offline (Classroom)");
 
   return (
     <section className="relative overflow-hidden bg-[hsl(220_55%_12%)] pb-20 pt-14 text-primary-foreground md:pt-20">
@@ -349,7 +352,7 @@ function Hero() {
                 <div className="mt-6 text-center">
                   <div className="text-xs font-medium text-muted-foreground">Starting at</div>
                   <div className="mt-2 font-display text-4xl font-bold text-primary md:text-5xl">
-                    ₹34,900 <span className="text-2xl text-accent">($411)</span>
+                    ₹20,000 <span className="text-2xl text-accent">onwards</span>
                   </div>
                   <p className="mt-3 text-sm text-muted-foreground">
                     Discover our extensive range of <strong className="text-foreground">packages</strong>,{" "}
@@ -929,7 +932,7 @@ function PlanExam() {
 /* ─────────── PRICING ─────────── */
 
 function Pricing() {
-  const [tab, setTab] = useState<typeof PRICING_TABS[number]>("Core Packs");
+  const [tab, setTab] = useState<typeof PRICING_TABS[number]>("Offline (Classroom)");
   const plans = PLANS[tab];
 
   return (
