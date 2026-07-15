@@ -143,8 +143,7 @@ function ConicRing({ size = "h-14 w-14" }: { size?: string }) {
 
 // ─────────────────────────────── component ───────────────────────────────
 function AboutPage() {
-  const [active, setActive] = useState<(typeof tabs)[number]>("All");
-  const filtered = active === "All" ? team : team.filter((m) => m.cat === active);
+
 
   return (
     <SiteLayout>
