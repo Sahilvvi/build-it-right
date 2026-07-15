@@ -255,7 +255,7 @@ function CoursesPage() {
 /* ─────────── HERO ─────────── */
 
 function Hero() {
-  const [activePricing, setActivePricing] = useState<typeof PRICING_TABS[number]>("Core Packs");
+  const [activePricing, setActivePricing] = useState<typeof PRICING_TABS[number]>("Offline (Classroom)");
 
   return (
     <section className="relative overflow-hidden bg-[hsl(220_55%_12%)] pb-20 pt-14 text-primary-foreground md:pt-20">
@@ -932,7 +932,7 @@ function PlanExam() {
 /* ─────────── PRICING ─────────── */
 
 function Pricing() {
-  const [tab, setTab] = useState<typeof PRICING_TABS[number]>("Core Packs");
+  const [tab, setTab] = useState<typeof PRICING_TABS[number]>("Offline (Classroom)");
   const plans = PLANS[tab];
 
   return (
