@@ -692,7 +692,7 @@ function Curriculum() {
 
 function Eligibility() {
   return (
-    <section className="relative overflow-hidden bg-secondary/40 py-24 md:py-32">
+    <section className="relative overflow-hidden bg-secondary/40 pb-24 pt-4 md:pb-32 md:pt-6">
       <div className="pointer-events-none absolute -left-32 top-1/3 h-[400px] w-[400px] rounded-full bg-accent/10 blur-3xl" />
       <div className="container-px relative mx-auto max-w-7xl">
         <EyebrowBadge>Eligibility</EyebrowBadge>
