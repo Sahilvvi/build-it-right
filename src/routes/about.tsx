@@ -160,7 +160,7 @@ function AboutPage() {
             transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
             className="mt-6 max-w-5xl text-balance font-display text-5xl font-semibold leading-[1.02] tracking-tight md:text-7xl lg:text-[5.5rem]"
           >
-            Where Finance <GradientAccent>Finally</GradientAccent> Clicks.
+            Learn Finance the <GradientAccent>Way</GradientAccent> the Industry Works.
           </motion.h1>
 
           <div className="mt-14 grid gap-10 lg:grid-cols-[1.1fr_1fr] lg:items-end">
