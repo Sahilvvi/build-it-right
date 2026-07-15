@@ -12,7 +12,7 @@ export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
       { title: "About — Where Finance Finally Clicks | Fin-Envision Learning" },
-      { name: "description", content: "A learner-first finance academy built on clarity, practice, and people who care. 75,000+ candidates trained across 50+ countries." },
+      { name: "description", content: "Fin-Envision offers certified programs in CFA® and Financial Modelling — 5,000+ students trained, 80–90% success rate, 8+ years of teaching experience, led by Manoj Rajgopal, CFA." },
       { property: "og:title", content: "About — Where Finance Finally Clicks" },
       { property: "og:description", content: "We don't just teach finance — we transform how you learn it." },
       { property: "og:url", content: "/about" },
@@ -41,12 +41,13 @@ const leadership = {
   role: "Founder & Lead Instructor",
   quote: "My ability to creatively simplify complicated concepts comes from genuinely caring about each student's journey — concept clarity always beats rote learning.",
   work: [
-    "Founder & Lead Instructor at Fin-Envision Learning",
-    "Cleared all CFA exams in the first attempt",
-    "Worked on buy-side and sell-side at firms like Crisil and JHP",
-    "Rich experience in Investment Banking and Financial Modeling",
-    "Trained 1,500+ candidates across Mumbai over the years",
-    "Frequent speaker at corporate and institutional sessions",
+    "Founder and Lead Instructor of Fin-Envision Learning.",
+    "Cleared all three levels of the CFA® Program in the first attempt.",
+    "Worked with reputed organizations such as CRISIL and JHP, gaining valuable industry exposure.",
+    "Has successfully trained over 5,000 students across Mumbai.",
+    "Known for simplifying complex financial concepts into easy-to-understand, practical lessons.",
+    "Focuses on bridging the gap between academic learning and real-world finance.",
+    "Dedicated to mentoring students for successful careers in finance through industry-oriented training and personalized guidance.",
   ],
   creds: ["CFA Charterholder", "Investment Banking", "Financial Modeling", "Portfolio Strategy"],
 };
@@ -75,10 +76,10 @@ const team: TeamMember[] = [
 const tabs = ["All", "Leadership", "Communications", "Success", "Content", "Career"] as const;
 
 const heroStats = [
-  { value: 1500, suffix: "+", label: "Students trained" },
+  { value: 5000, suffix: "+", label: "Students trained" },
   { value: 90, suffix: "%", label: "Success rate" },
   { value: 109, suffix: "", label: "Google reviews" },
-  { value: 14, suffix: " yrs", label: "Teaching experience" },
+  { value: 8, suffix: "+ yrs", label: "Teaching experience" },
 ];
 
 /* Premium section heading — homepage signature with ping-dot eyebrow */
@@ -164,12 +165,12 @@ function AboutPage() {
 
           <div className="mt-14 grid gap-10 lg:grid-cols-[1.1fr_1fr] lg:items-end">
             <FadeIn>
-              <div className="text-xs font-bold uppercase tracking-[0.28em] text-accent">Want to know us…</div>
+              <div className="text-xs font-bold uppercase tracking-[0.28em] text-accent">Who we are</div>
               <p className="mt-5 text-pretty text-lg leading-relaxed text-white/85 md:text-xl">
-                We don't just teach finance — we transform how you learn it. For over a decade we've been demystifying the complexities with straight-talk lessons so that finance no longer feels like fog. <span className="text-white">Learn by doing — cases, drills, past-paper rigor. Mentors stay until it clicks.</span>
+                Fin-Envision is a leading training institute offering certified programs in Financial Modelling and CFA. As the name suggests, <span className="text-white">"Financial Envision"</span> is about giving a future perspective to your career — helping individuals realize their potential through mentoring and imparting skills.
               </p>
               <p className="mt-5 text-pretty text-base text-white/70 md:text-lg">
-                Fin-Envision Learning is a learner-first finance academy built on three promises: <em className="not-italic text-accent">clarity, practice, and people who care.</em> We primarily help CFA® / FRM® aspirants — and emerging professionals — turn complex finance into career-ready skills.
+                Formulated through years of teaching experience, our coaching methodology places utmost emphasis on problem solving and conceptual clarity. Every instructor is carefully selected for their blend of expertise and passion for teaching — the human touch and care for each candidate is the real hallmark of Fin-Envision.
               </p>
             </FadeIn>
 
@@ -262,7 +263,7 @@ function AboutPage() {
                   </div>
                 </div>
                 <motion.div animate={{ y: [0, -10, 0] }} transition={{ duration: 6, repeat: Infinity }} className="absolute -bottom-6 -right-6 hidden rounded-2xl border border-border bg-card p-5 shadow-elevated md:block">
-                  <div className="text-xs uppercase tracking-[0.2em] text-muted-foreground">14+ years</div>
+                  <div className="text-xs uppercase tracking-[0.2em] text-muted-foreground">8+ years</div>
                   <div className="font-display text-lg font-semibold">Finance · Markets · Teaching</div>
                 </motion.div>
               </div>

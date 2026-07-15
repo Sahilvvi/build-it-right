@@ -24,11 +24,108 @@ export const navLinks = [
 ];
 
 export const stats = [
-  { value: "90%", label: "Success rate" },
-  { value: "1,500+", label: "Students trained" },
+  { value: "80–90%", label: "Success rate" },
+  { value: "5,000+", label: "Students trained" },
   { value: "109", label: "Google reviews" },
+  { value: "8+ yrs", label: "Teaching experience" },
   { value: "1st", label: "Attempt focus" },
-  { value: "4.9★", label: "Avg. rating" },
+];
+
+export const whyUs = [
+  {
+    title: "Comprehensive Learning",
+    body: "Our programs are designed to take you from the fundamentals to advanced concepts with complete syllabus coverage, structured study plans, mock tests, revision sessions, and continuous support throughout your learning journey.",
+  },
+  {
+    title: "Practical Teaching Methodology",
+    body: "Finance becomes easier when concepts are connected to the real world. We simplify complex topics using live business examples, case studies, visual explanations, and practical applications that make learning engaging and memorable.",
+  },
+  {
+    title: "Dedicated Mentorship",
+    body: "Learning doesn't end after the lecture. Receive continuous guidance through doubt-solving sessions, personalized mentoring, exam strategies, and career advice to help you stay on track and achieve your goals.",
+  },
+];
+
+export const aboutContent = {
+  whoWeAreHeading: "Learn Finance the Way the Industry Works.",
+  whoWeAre: [
+    "Fin-Envision is a leading training institute, where we provide certified programs in Financial Modelling and CFA. As the name suggests \u201CFinancial Envision\u201D is to give a future perspective to your career. Our approach is to help individuals realize their potential by mentoring and imparting skills.",
+    "Formulated through years of teaching experience, our coaching methodology places utmost emphasis on problem solving and conceptual clarity. Ultimately, it is the people that make Fin-Envision the success story it is today, with every instructor carefully selected for their blend of expertise and passion for teaching. The human touch, caring for each and every candidate, and providing them with the best preparation for success, is the real hallmark of Fin-Envision.",
+  ],
+  mission:
+    "To simplify finance education and equip every learner with practical skills required for successful careers in global finance.",
+  vision:
+    "To become the most trusted finance learning platform by making quality education accessible, practical, and career-oriented.",
+  values: [
+    "Practical Learning",
+    "Student First",
+    "Industry Relevance",
+    "Continuous Mentorship",
+    "Excellence Through Consistency",
+  ],
+  founderBullets: [
+    "Founder and Lead Instructor of Fin-Envision Learning.",
+    "Cleared all three levels of the CFA\u00AE Program in the first attempt.",
+    "Worked with reputed organizations such as CRISIL and JHP, gaining valuable industry exposure.",
+    "Has successfully trained over 5,000 students across Mumbai.",
+    "Known for simplifying complex financial concepts into easy-to-understand, practical lessons.",
+    "Focuses on bridging the gap between academic learning and real-world finance.",
+    "Dedicated to mentoring students for successful careers in finance through industry-oriented training and personalized guidance.",
+  ],
+};
+
+export type PlaylistCategory = {
+  category: string;
+  playlists: string[];
+};
+
+export const resourcePlaylists: PlaylistCategory[] = [
+  {
+    category: "CFA Level I",
+    playlists: [
+      "CFA Level 1 \u2013 FSA \u2013 Financial Analysis Techniques (Ratios)",
+      "CFA Level 1 \u2013 FSA | Income Statement",
+      "CFA Level 1 \u2013 Quants | Time Value of Money",
+      "CFA Level 1 \u2013 Economics | Understanding Business Cycle",
+      "CFA Level 1 \u2013 Equity Investments | Market Organization and Structure",
+      "CFA Level 1 \u2013 Equity Investments | Company Analysis: Forecasting",
+      "CFA Level 1 \u2013 Fixed Income | Introduction to Fixed Income",
+      "CFA Level 1 \u2013 Corporate Finance | Capital Budgeting",
+      "CFA Level 1 \u2013 Corporate Issuers | Working Capital and Liquidity",
+    ],
+  },
+  {
+    category: "CFA Level II",
+    playlists: [
+      "CFA Level 2 Pre-Requisite",
+      "CFA Level 2 \u2013 FSA | Intercorporate Investments",
+      "CFA Level 2 \u2013 Derivatives | Contingent Claims",
+      "CFA Level 2 \u2013 Equity | Private Company Valuation",
+      "CFA Level 2 \u2013 Alternative Investments | Investments in Real Estate",
+    ],
+  },
+  {
+    category: "Financial Modelling",
+    playlists: [
+      "Financial Modeling Demo Sessions",
+      "Company Analysis",
+    ],
+  },
+  {
+    category: "Stock Market",
+    playlists: [
+      "Basics of Stock Market",
+      "Watch List Vs Warn List",
+    ],
+  },
+  {
+    category: "Banking & Industry Analysis",
+    playlists: ["Banking Series"],
+  },
+  {
+    category: "Professional Finance Programs",
+    playlists: ["Mini MBA in Finance"],
+  },
 ];
 
 export const tickerItems = [
