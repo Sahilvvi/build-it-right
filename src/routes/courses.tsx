@@ -346,7 +346,7 @@ function Hero() {
                 </div>
 
                 <Link
-                  to="/career-guidance"
+                  to="/contact"
                   className="group/btn mt-6 flex items-center justify-center gap-2 rounded-full bg-primary py-4 text-sm font-bold uppercase tracking-[0.16em] text-primary-foreground transition-all hover:bg-primary/90 hover:shadow-[0_18px_36px_-18px_hsl(var(--primary)/0.8)]"
                 >
                   See Plans & Fees
@@ -879,7 +879,7 @@ function Pricing() {
                   </ul>
 
                   <Link
-                    to="/career-guidance"
+                    to="/contact"
                     className={
                       "group/btn mt-7 inline-flex w-full items-center justify-center gap-2 rounded-full py-3 text-xs font-bold uppercase tracking-[0.18em] transition-all " +
                       (p.popular
@@ -925,7 +925,7 @@ function Pricing() {
                 <div className="font-display text-3xl font-bold text-primary">₹14,900</div>
               </div>
               <Link
-                to="/career-guidance"
+                to="/contact"
                 className="group/btn inline-flex items-center gap-2 rounded-full bg-primary px-5 py-3 text-xs font-bold uppercase tracking-[0.18em] text-primary-foreground transition-all hover:bg-primary/90 hover:shadow-[0_16px_32px_-12px_hsl(var(--primary)/0.6)]"
               >
                 Add to Plan <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover/btn:translate-x-0.5" />
@@ -1067,7 +1067,7 @@ function CourseFaqs() {
               Talk to a counsellor for a quick, no-pressure walkthrough.
             </p>
             <Link
-              to="/career-guidance"
+              to="/contact"
               className="group/btn mt-4 inline-flex items-center gap-2 text-sm font-bold text-primary hover:text-accent"
             >
               Talk to a counsellor <ArrowRight className="h-4 w-4 transition-transform group-hover/btn:translate-x-0.5" />

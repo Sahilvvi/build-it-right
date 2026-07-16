@@ -40,7 +40,6 @@ const cols = [
     title: "Support",
     items: [
       { l: "Contact Us", to: "/contact" },
-      { l: "Career Guidance", to: "/career-guidance" },
       { l: "Help Center", to: "/contact" },
       { l: "Refund Policy", to: "/contact" },
     ],

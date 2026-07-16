@@ -19,7 +19,6 @@ export const navLinks = [
   { label: "CFA", to: "/cfa" },
   { label: "About", to: "/about" },
   { label: "Resources", to: "/resources" },
-  { label: "Career Guidance", to: "/career-guidance" },
   { label: "Contact", to: "/contact" },
 ];
 
@@ -140,7 +139,6 @@ export const tickerItems = [
 export const categories = [
   { slug: "cfa", title: "CFA Program", count: 3, hue: "from-blue-500 to-indigo-500" },
   { slug: "financial-modeling", title: "Financial Modeling", count: 1, hue: "from-indigo-500 to-violet-500" },
-  { slug: "career", title: "Career Guidance", count: 2, hue: "from-cyan-500 to-blue-500" },
   { slug: "resources", title: "Self-study Resources", count: 4, hue: "from-amber-500 to-orange-500" },
 ];
 
@@ -408,7 +406,7 @@ export const resources = [
   { type: "Video", title: "Financial Modeling — Relaxo case study", reads: "Full walkthrough" },
 ];
 
-export const resourceCategories = ["CFA Level 1", "CFA Level 2", "CFA Level 3", "Financial Modeling", "Career Guidance"];
+export const resourceCategories = ["CFA Level 1", "CFA Level 2", "CFA Level 3", "Financial Modeling"];
 
 export const services = [
   { title: "Classroom Coaching", body: "In-person CFA & Financial Modeling classes in Mumbai." },
@@ -416,7 +414,6 @@ export const services = [
   { title: "Doubt Clinics", body: "Ongoing doubt-solving sessions through the program." },
   { title: "Mock Tests", body: "Subject tests and full mock exams under timed conditions." },
   { title: "Handwritten Notes", body: "Concise, concept-first notes for every topic." },
-  { title: "Career Guidance", body: "Pointers on Equity Research, IB, Credit Rating & more." },
 ];
 
 export const enrollmentSteps = [
