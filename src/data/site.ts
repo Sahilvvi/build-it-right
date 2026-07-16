@@ -85,12 +85,6 @@ export const resourcePlaylists: PlaylistCategory[] = [
       "CFA Level 1 \u2013 FSA \u2013 Financial Analysis Techniques (Ratios)",
       "CFA Level 1 \u2013 FSA | Income Statement",
       "CFA Level 1 \u2013 Quants | Time Value of Money",
-      "CFA Level 1 \u2013 Economics | Understanding Business Cycle",
-      "CFA Level 1 \u2013 Equity Investments | Market Organization and Structure",
-      "CFA Level 1 \u2013 Equity Investments | Company Analysis: Forecasting",
-      "CFA Level 1 \u2013 Fixed Income | Introduction to Fixed Income",
-      "CFA Level 1 \u2013 Corporate Finance | Capital Budgeting",
-      "CFA Level 1 \u2013 Corporate Issuers | Working Capital and Liquidity",
     ],
   },
   {
