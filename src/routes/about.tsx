@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 
-import { ArrowRight, Mail, Users, Target, Compass, Phone, Quote } from "lucide-react";
+import { ArrowRight, Users, Target, Compass, Quote } from "lucide-react";
 import { SiteLayout } from "@/components/site/Layout";
 import { FadeIn, Stagger, StaggerItem, staggerItemVariants, Counter } from "@/components/site/primitives";
 import { PremiumOrbs, AmbientDark, AmbientLight, EyebrowBadge, GradientAccent } from "@/components/site/premium";
@@ -368,134 +368,6 @@ function AboutPage() {
         </div>
       </section>
 
-
-      {/* JOIN US / PARTNER */}
-      <section className="relative overflow-hidden bg-[hsl(220_55%_10%)] py-24 text-primary-foreground">
-        <AmbientDark />
-        <div className="container-px relative mx-auto max-w-7xl">
-          <div className="mx-auto max-w-3xl text-center">
-            <EyebrowBadge tone="dark">Let's build together</EyebrowBadge>
-            <motion.h2
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.7 }}
-              className="mt-5 text-balance font-display text-4xl font-bold tracking-tight md:text-5xl lg:text-6xl"
-            >
-              Work with us, <GradientAccent>or hire from us.</GradientAccent>
-            </motion.h2>
-            <p className="mt-5 text-pretty text-white/70 md:text-lg">
-              Two doors. Same mission — make finance click for the next generation of analysts, traders, and CFOs.
-            </p>
-          </div>
-
-          <Stagger className="mt-14 grid gap-6 lg:grid-cols-2">
-            {[
-              {
-                t: "Our team is thriving!",
-                b: 'Work with people who love turning "I don\'t get it" into "Got it." Help us grow the learner community.',
-                cta: "inquire@lumenedge.com",
-                href: "mailto:inquire@lumenedge.com",
-                icon: Mail,
-                kicker: "Careers · Mentor roles · Internships",
-                stats: [
-                  { v: "40+", l: "Team members" },
-                  { v: "4.9★", l: "Glassdoor" },
-                  { v: "100%", l: "Remote-friendly" },
-                ],
-                tag: "We're hiring",
-              },
-              {
-                t: "Join hands with us",
-                b: "Corporate Training · Hire From Us · University Partnership — let's design a programme that fits your team.",
-                cta: "+91 88887 33330",
-                href: "tel:+918888733330",
-                icon: Phone,
-                kicker: "Partnerships · Hiring · L&D",
-                stats: [
-                  { v: "130+", l: "Hiring partners" },
-                  { v: "27k+", l: "Talent pool" },
-                  { v: "≤ 1h", l: "Reply time" },
-                ],
-                tag: "Talk to partnerships",
-              },
-            ].map((c) => (
-              <StaggerItem key={c.t} variants={staggerItemVariants}>
-                <motion.a
-                  href={c.href}
-                  whileHover={{ y: -6 }}
-                  transition={{ type: "spring", stiffness: 220, damping: 18 }}
-                  className="group relative block overflow-hidden rounded-[2rem] p-[1.5px]"
-                >
-                  {/* rotating conic border */}
-                  <motion.span
-                    aria-hidden
-                    className="absolute inset-[-40%] opacity-70"
-                    style={{
-                      background:
-                        "conic-gradient(from 0deg, hsl(var(--accent)/0.55), transparent 30%, hsl(var(--primary)/0.7) 55%, transparent 80%, hsl(var(--accent)/0.55))",
-                    }}
-                    animate={{ rotate: 360 }}
-                    transition={{ duration: 14, repeat: Infinity, ease: "linear" }}
-                  />
-                  <div className="relative overflow-hidden rounded-[calc(2rem-1.5px)] bg-[hsl(220_55%_11%)] p-10">
-                    {/* decorative mesh */}
-                    <div className="pointer-events-none absolute -right-24 -top-24 h-64 w-64 rounded-full bg-accent/15 blur-3xl transition-opacity duration-500 group-hover:opacity-90" />
-                    <div className="pointer-events-none absolute -left-24 bottom-0 h-56 w-56 rounded-full bg-primary/30 blur-3xl opacity-50" />
-                    {/* shimmer sweep */}
-                    <div className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/10 to-transparent transition-transform duration-1000 group-hover:translate-x-full" />
-
-                    <div className="relative flex items-start justify-between gap-4">
-                      <div className="relative grid h-14 w-14 place-items-center">
-                        <motion.span
-                          aria-hidden
-                          className="absolute inset-0 rounded-full"
-                          style={{
-                            background:
-                              "conic-gradient(from 0deg, hsl(var(--accent)), transparent 60%, hsl(var(--accent)))",
-                          }}
-                          animate={{ rotate: 360 }}
-                          transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
-                        />
-                        <div className="relative grid h-12 w-12 place-items-center rounded-full bg-gradient-brand text-primary-foreground shadow-glow">
-                          <c.icon className="h-5 w-5" />
-                        </div>
-                      </div>
-                      <span className="inline-flex items-center gap-2 rounded-full border border-accent/30 bg-accent/10 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.2em] text-accent">
-                        <span className="relative flex h-1.5 w-1.5">
-                          <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-70" />
-                          <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-accent" />
-                        </span>
-                        {c.tag}
-                      </span>
-                    </div>
-
-                    <div className="relative mt-6 text-[11px] font-bold uppercase tracking-[0.22em] text-white/55">
-                      {c.kicker}
-                    </div>
-                    <div className="relative mt-2 font-display text-3xl font-semibold text-white md:text-4xl">{c.t}</div>
-                    <p className="relative mt-3 text-white/70">{c.b}</p>
-
-                    <div className="relative mt-7 grid grid-cols-3 gap-3 border-y border-white/10 py-5">
-                      {c.stats.map((s) => (
-                        <div key={s.l}>
-                          <div className="font-display text-2xl font-bold text-white">{s.v}</div>
-                          <div className="mt-1 text-[10px] uppercase tracking-[0.18em] text-white/50">{s.l}</div>
-                        </div>
-                      ))}
-                    </div>
-
-                    <div className="relative mt-6 inline-flex items-center gap-2 rounded-xl bg-gradient-brand px-5 py-3 text-sm font-semibold text-primary-foreground shadow-glow transition-transform group-hover:-translate-y-0.5">
-                      {c.cta}
-                      <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-                    </div>
-                  </div>
-                </motion.a>
-              </StaggerItem>
-            ))}
-          </Stagger>
-        </div>
-      </section>
 
       {/* FAQ */}
       <FAQ
