@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 
-import { ArrowRight, Linkedin, Mail, Sparkles, Users, Target, Compass, Phone, Quote } from "lucide-react";
+import { ArrowRight, Mail, Sparkles, Users, Target, Compass, Phone, Quote } from "lucide-react";
 import { SiteLayout } from "@/components/site/Layout";
 import { FadeIn, Stagger, StaggerItem, staggerItemVariants, Counter } from "@/components/site/primitives";
 import { PremiumOrbs, AmbientDark, AmbientLight, EyebrowBadge, GradientAccent } from "@/components/site/premium";
@@ -52,26 +52,6 @@ const leadership = {
   creds: ["CFA Charterholder", "Investment Banking", "Financial Modeling", "Portfolio Strategy"],
 };
 
-type TeamMember = { name: string; role: string; cat: "Leadership" | "Communications" | "Success" | "Content" | "Career"; lead?: boolean; tone: string };
-
-const team: TeamMember[] = [
-  { name: "Manoj Rajgopal, CFA", role: "Founder & Lead Instructor", cat: "Leadership", tone: "from-[#1a3a5c] to-[#2d5a8c]" },
-  { name: "Senior Faculty", role: "CFA Charterholder · Equity Research", cat: "Leadership", tone: "from-slate-700 to-slate-900" },
-  { name: "Modeling Faculty", role: "Financial Modeling Instructor", cat: "Leadership", tone: "from-indigo-700 to-violet-800" },
-  { name: "Admissions Team", role: "Candidate Counselling", cat: "Communications", lead: true, tone: "from-amber-500 to-orange-600" },
-  { name: "Course Advisor", role: "Course Counsellor — CFA", cat: "Communications", tone: "from-rose-500 to-pink-700" },
-  { name: "Batch Coordinator", role: "Batch & Schedule Coordinator", cat: "Communications", tone: "from-emerald-500 to-teal-700" },
-  { name: "Support Desk", role: "Student Support Associate", cat: "Communications", tone: "from-cyan-600 to-blue-800" },
-  { name: "Doubt Clinic Lead", role: "Doubt-Solving Mentor", cat: "Success", lead: true, tone: "from-[#0f2a44] to-[#1e4976]" },
-  { name: "Mock Test Lead", role: "Assessments & Mocks", cat: "Success", tone: "from-rose-600 to-red-800" },
-  { name: "Mentor — L1", role: "CFA Level 1 Mentor", cat: "Success", tone: "from-teal-500 to-emerald-700" },
-  { name: "Mentor — L2", role: "CFA Level 2 Mentor", cat: "Success", tone: "from-orange-500 to-rose-700" },
-  { name: "Career Mentor", role: "Career Guidance Lead", cat: "Career", lead: true, tone: "from-amber-500 to-orange-700" },
-  { name: "Placement Liaison", role: "Industry Partnerships", cat: "Career", tone: "from-slate-600 to-slate-900" },
-  { name: "Notes Editor", role: "Handwritten Notes Lead", cat: "Content", lead: true, tone: "from-pink-500 to-rose-700" },
-  { name: "Video Editor", role: "Lecture Production", cat: "Content", tone: "from-indigo-600 to-blue-900" },
-  { name: "QBank Author", role: "Question Bank Author", cat: "Content", tone: "from-emerald-600 to-teal-800" },
-];
 
 
 
@@ -346,51 +326,6 @@ function AboutPage() {
         </div>
       </section>
 
-      {/* MEET THE CREW — dark stage like homepage */}
-      <section className="relative overflow-hidden bg-[hsl(220_50%_9%)] py-24 text-primary-foreground md:py-32">
-        <AmbientDark />
-        <div className="container-px relative mx-auto max-w-7xl">
-          <PremiumHeader
-            tone="dark"
-            eyebrow="The Crew"
-            title={<>Meet your <GradientAccent>Fin-Envision</GradientAccent> crew.</>}
-            description="We've built a ground team dedicated to one mission — your success. Think of us as your backstage support system, making sure you shine on stage."
-          />
-
-          <motion.div layout className="mt-12 grid gap-5 sm:grid-cols-2 md:grid-cols-3">
-            {team.filter((m) => m.cat === "Leadership").map((m, i) => (
-              <motion.div
-                key={m.name}
-                initial={{ opacity: 0, y: 24 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-80px" }}
-                transition={{ duration: 0.45, delay: i * 0.06 }}
-                className="group relative overflow-hidden rounded-3xl border border-white/10 bg-white/[0.04] backdrop-blur-md transition-all hover:-translate-y-1 hover:border-accent/40 hover:bg-white/[0.08]"
-              >
-                <div className={cn("relative aspect-[4/5] overflow-hidden bg-gradient-to-br", m.tone)}>
-                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(255,255,255,0.25),transparent_60%)]" />
-                  <div className="absolute inset-0 bg-[linear-gradient(transparent_55%,rgba(0,0,0,0.7))]" />
-                  <div className="absolute inset-0 grid place-items-center font-display text-6xl font-bold text-white/90 transition-transform duration-500 group-hover:scale-110">
-                    {m.name.split(" ").map((p) => p[0]).slice(0, 2).join("")}
-                  </div>
-                  {m.lead && (
-                    <span className="absolute left-4 top-4 rounded-full bg-accent px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.18em] text-accent-foreground shadow">
-                      Team Lead
-                    </span>
-                  )}
-                  <a href="#" aria-label="LinkedIn" className="absolute right-4 top-4 grid h-9 w-9 place-items-center rounded-full bg-white/15 text-white opacity-0 backdrop-blur transition-opacity group-hover:opacity-100 hover:bg-white/25">
-                    <Linkedin className="h-4 w-4" />
-                  </a>
-                </div>
-                <div className="p-5">
-                  <div className="font-display text-base font-semibold text-white">{m.name}</div>
-                  <div className="mt-1 text-xs text-white/60">{m.role}</div>
-                </div>
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
-      </section>
 
       {/* LEADERSHIP PILLARS */}
       <section className="container-px mx-auto max-w-7xl py-24 md:py-32">
