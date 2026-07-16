@@ -3,8 +3,8 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Star, ArrowRight, ArrowUpRight, CheckCircle2, Lightbulb, Calendar,
-  Target, GraduationCap, Users, Briefcase,
-  Trophy, ScrollText, Phone, Mail, User,
+  Target, GraduationCap, Users,
+  ScrollText, Phone, Mail, User,
   Sparkles, MessageSquare, ChevronDown,
 } from "lucide-react";
 import { SiteLayout } from "@/components/site/Layout";
@@ -230,9 +230,6 @@ function CoursesPage() {
   return (
     <SiteLayout>
       <Hero />
-      <Eligibility />
-      
-      
       <Pricing />
       <LeadForm />
       <CourseFaqs />
@@ -604,92 +601,6 @@ function Curriculum() {
             </div>
           </motion.div>
         </AnimatePresence>
-      </div>
-    </section>
-  );
-}
-
-/* ─────────── ELIGIBILITY ─────────── */
-
-function Eligibility() {
-  return (
-    <section className="relative overflow-hidden bg-secondary/40 pb-24 pt-4 md:pb-32 md:pt-6">
-      <div className="pointer-events-none absolute -left-32 top-1/3 h-[400px] w-[400px] rounded-full bg-accent/10 blur-3xl" />
-      <div className="container-px relative mx-auto max-w-7xl">
-        <EyebrowBadge>Eligibility</EyebrowBadge>
-        <GradientHeading accent="start here">Eligibility —</GradientHeading>
-
-        <div className="mt-14 grid gap-6 lg:grid-cols-3">
-          {[
-            {
-              icon: GraduationCap, title: "For Students",
-              items: [
-                "Eligible with a bachelor's degree (or equivalent), or within 23 months of graduating.",
-                "B.Com / BBA students may sit for Level I in their 2nd year (prepare in 1st year).",
-              ],
-              iconBg: "bg-primary text-primary-foreground",
-            },
-            {
-              icon: Briefcase, title: "Without a Degree",
-              items: [
-                "4,000 hours of relevant professional work experience over at least 36 months.",
-                "Education and work experience cannot overlap when counting hours.",
-              ],
-              iconBg: "bg-accent text-accent-foreground",
-            },
-          ].map((card, idx) => (
-            <motion.div
-              key={card.title}
-              initial={{ opacity: 0, y: 18 }} whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }} transition={{ duration: 0.55, delay: idx * 0.08 }}
-              whileHover={{ y: -6 }}
-              className="group relative overflow-hidden rounded-3xl border border-border bg-card p-7 shadow-soft transition-all hover:border-accent/40 hover:shadow-[0_24px_48px_-24px_hsl(var(--accent)/0.45)]"
-            >
-              <div className="pointer-events-none absolute -right-16 -top-16 h-40 w-40 rounded-full bg-accent/10 opacity-0 blur-3xl transition-opacity duration-500 group-hover:opacity-100" />
-              <span className={"relative grid h-12 w-12 place-items-center rounded-2xl shadow-soft " + card.iconBg}>
-                <card.icon className="h-5 w-5" />
-              </span>
-              <h3 className="mt-5 font-display text-xl font-semibold">{card.title}</h3>
-              <ul className="mt-4 space-y-3 text-sm text-foreground/80">
-                {card.items.map((it) => (
-                  <li key={it} className="flex gap-2">
-                    <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-accent" />
-                    {it}
-                  </li>
-                ))}
-              </ul>
-            </motion.div>
-          ))}
-
-          <motion.div
-            initial={{ opacity: 0, y: 18 }} whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }} transition={{ duration: 0.55, delay: 0.16 }}
-            whileHover={{ y: -6 }}
-            className="relative overflow-hidden rounded-3xl p-[1px] shadow-[0_30px_60px_-25px_hsl(var(--primary)/0.6)]"
-          >
-            <span className="absolute inset-0 rounded-3xl bg-gradient-to-br from-accent/50 via-white/10 to-primary/40" />
-            <div className="relative rounded-[calc(1.5rem-1px)] bg-gradient-to-br from-primary to-[#2a4ea8] p-7 text-primary-foreground">
-              <div className="pointer-events-none absolute -right-16 -top-16 h-44 w-44 rounded-full bg-accent/30 blur-3xl" />
-              <span className="grid h-12 w-12 place-items-center rounded-2xl bg-white/15 text-accent backdrop-blur">
-                <Trophy className="h-5 w-5" />
-              </span>
-              <h3 className="mt-5 font-display text-xl font-semibold text-white">Scholarships</h3>
-              <p className="mt-4 text-sm leading-relaxed text-white/80">
-                Explore merit- and need-based scholarships that can lower your exam costs. See eligibility, deadlines, and how to apply.
-              </p>
-              <div className="mt-4 text-[11px] uppercase tracking-wider text-white/55">
-                Note: Fin-Envision Learning can't grant or influence scholarships
-              </div>
-              <a
-                href="https://www.cfainstitute.org/programs/cfa-program/scholarships"
-                target="_blank" rel="noreferrer"
-                className="mt-6 inline-flex items-center gap-2 rounded-full bg-accent px-5 py-2.5 text-xs font-bold uppercase tracking-[0.18em] text-accent-foreground shadow-[0_14px_28px_-12px_hsl(var(--accent)/0.7)] transition-transform hover:scale-105"
-              >
-                Read on Official Site <ArrowUpRight className="h-3.5 w-3.5" />
-              </a>
-            </div>
-          </motion.div>
-        </div>
       </div>
     </section>
   );
