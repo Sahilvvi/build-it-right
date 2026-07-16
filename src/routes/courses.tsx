@@ -3,13 +3,13 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Star, ArrowRight, ArrowUpRight, CheckCircle2, Lightbulb, Calendar,
-  Target, GraduationCap, ClipboardCheck, BookOpenCheck, Users, Briefcase,
-  TrendingUp, Building2, Wallet, Trophy, ScrollText, Phone, Mail, User,
+  Target, GraduationCap, Users, Briefcase,
+  Trophy, ScrollText, Phone, Mail, User,
   Sparkles, MessageSquare, ChevronDown,
 } from "lucide-react";
 import { SiteLayout } from "@/components/site/Layout";
 import { faqs } from "@/data/site";
-import heroImg from "@/assets/hero-classroom.jpg";
+
 
 export const Route = createFileRoute("/courses")({
   head: () => ({
@@ -45,14 +45,6 @@ const WHO_ITS_FOR = [
   "Non-finance entrants seeking industry-aligned, benchmarked skills.",
 ];
 
-const OPPORTUNITY_ROLES = [
-  { label: "Investment Banking", icon: Briefcase },
-  { label: "Financial Analyst", icon: TrendingUp },
-  { label: "Consulting", icon: ClipboardCheck },
-  { label: "Portfolio Management", icon: Wallet },
-  { label: "Private Wealth", icon: Building2 },
-  { label: "Equity Research", icon: BookOpenCheck },
-];
 
 const CURRICULUM = {
   "Level I": {
@@ -238,10 +230,6 @@ function CoursesPage() {
   return (
     <SiteLayout>
       <Hero />
-      
-      
-      <Opportunities />
-      
       <Eligibility />
       
       
@@ -496,73 +484,6 @@ function AboutCFA() {
                 </div>
               </motion.div>
             ))}
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/* ─────────── OPPORTUNITIES ─────────── */
-
-function Opportunities() {
-  return (
-    <section className="relative overflow-hidden bg-secondary/40 py-24 md:py-32">
-      <div className="pointer-events-none absolute -right-32 top-1/4 h-[400px] w-[400px] rounded-full bg-accent/10 blur-3xl" />
-      <div className="pointer-events-none absolute -left-32 bottom-0 h-[400px] w-[400px] rounded-full bg-primary/10 blur-3xl" />
-
-      <div className="container-px relative mx-auto max-w-7xl">
-        <div className="grid gap-12 lg:grid-cols-[1fr_1.1fr] lg:items-center">
-          <motion.div
-            initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }} transition={{ duration: 0.8 }}
-            className="relative aspect-[4/3] overflow-hidden rounded-[2rem] p-[1px]"
-          >
-            <span className="absolute inset-0 rounded-[2rem] bg-gradient-to-br from-accent/40 via-white/10 to-primary/40" />
-            <div className="relative h-full w-full overflow-hidden rounded-[calc(2rem-1px)]">
-              <img src={heroImg} alt="Finance trading floor" className="h-full w-full object-cover transition-transform duration-700 hover:scale-105" loading="lazy" />
-              <div className="absolute inset-0 bg-gradient-to-tr from-primary/70 via-primary/15 to-transparent" />
-              <motion.div
-                initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }} transition={{ duration: 0.7, delay: 0.2 }}
-                className="absolute bottom-6 left-6 right-6 rounded-2xl border border-white/40 bg-white/95 p-5 backdrop-blur"
-              >
-                <div className="text-[10px] font-bold uppercase tracking-[0.22em] text-accent">
-                  Career Outcomes
-                </div>
-                <div className="mt-1 font-display text-xl font-semibold text-foreground">
-                  250+ firms · ₹8–30L typical range
-                </div>
-              </motion.div>
-            </div>
-          </motion.div>
-
-          <div>
-            <EyebrowBadge>Where it leads</EyebrowBadge>
-            <GradientHeading accent="CFA® Program">Opportunities with the</GradientHeading>
-            <p className="mt-5 max-w-xl text-base text-muted-foreground">
-              Common pathways include equity research, credit research, portfolio management, investment banking, private equity and private wealth. Roles vary by market and experience.
-            </p>
-
-            <div className="mt-8 flex flex-wrap gap-3">
-              {OPPORTUNITY_ROLES.map((r, i) => {
-                const Icon = r.icon;
-                return (
-                  <motion.span
-                    key={r.label}
-                    initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }}
-                    viewport={{ once: true }} transition={{ duration: 0.4, delay: i * 0.05 }}
-                    whileHover={{ y: -4 }}
-                    className="group inline-flex items-center gap-2 rounded-full border border-border bg-card px-4 py-2.5 text-sm font-semibold text-foreground shadow-soft transition-all hover:border-accent hover:text-accent hover:shadow-[0_14px_28px_-14px_hsl(var(--accent)/0.5)]"
-                  >
-                    <span className="grid h-6 w-6 place-items-center rounded-full bg-accent/15 text-accent transition-colors group-hover:bg-accent group-hover:text-accent-foreground">
-                      <Icon className="h-3.5 w-3.5" />
-                    </span>
-                    {r.label}
-                  </motion.span>
-                );
-              })}
-            </div>
           </div>
         </div>
       </div>
