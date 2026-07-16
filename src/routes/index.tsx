@@ -115,7 +115,6 @@ const COURSE_FILTERS = [
   { key: "all", label: "All Courses" },
   { key: "cfa", label: "CFA Program" },
   { key: "financial-modeling", label: "Financial Modeling" },
-  { key: "career", label: "Career Guidance" },
 ] as const;
 
 // Per-course visual identity
@@ -1652,7 +1651,7 @@ function FinalCta() {
           </div>
           <div className="flex flex-col gap-3 md:items-end">
             <Link
-              to="/career-guidance"
+              to="/contact"
               className="group inline-flex items-center justify-center gap-2 rounded-full bg-accent pl-6 pr-2 py-2 text-sm font-bold uppercase tracking-[0.18em] text-accent-foreground shadow-elevated"
             >
               Book Free Guidance
