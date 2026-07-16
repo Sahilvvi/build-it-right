@@ -52,26 +52,6 @@ const leadership = {
   creds: ["CFA Charterholder", "Investment Banking", "Financial Modeling", "Portfolio Strategy"],
 };
 
-type TeamMember = { name: string; role: string; cat: "Leadership" | "Communications" | "Success" | "Content" | "Career"; lead?: boolean; tone: string };
-
-const team: TeamMember[] = [
-  { name: "Manoj Rajgopal, CFA", role: "Founder & Lead Instructor", cat: "Leadership", tone: "from-[#1a3a5c] to-[#2d5a8c]" },
-  { name: "Senior Faculty", role: "CFA Charterholder · Equity Research", cat: "Leadership", tone: "from-slate-700 to-slate-900" },
-  { name: "Modeling Faculty", role: "Financial Modeling Instructor", cat: "Leadership", tone: "from-indigo-700 to-violet-800" },
-  { name: "Admissions Team", role: "Candidate Counselling", cat: "Communications", lead: true, tone: "from-amber-500 to-orange-600" },
-  { name: "Course Advisor", role: "Course Counsellor — CFA", cat: "Communications", tone: "from-rose-500 to-pink-700" },
-  { name: "Batch Coordinator", role: "Batch & Schedule Coordinator", cat: "Communications", tone: "from-emerald-500 to-teal-700" },
-  { name: "Support Desk", role: "Student Support Associate", cat: "Communications", tone: "from-cyan-600 to-blue-800" },
-  { name: "Doubt Clinic Lead", role: "Doubt-Solving Mentor", cat: "Success", lead: true, tone: "from-[#0f2a44] to-[#1e4976]" },
-  { name: "Mock Test Lead", role: "Assessments & Mocks", cat: "Success", tone: "from-rose-600 to-red-800" },
-  { name: "Mentor — L1", role: "CFA Level 1 Mentor", cat: "Success", tone: "from-teal-500 to-emerald-700" },
-  { name: "Mentor — L2", role: "CFA Level 2 Mentor", cat: "Success", tone: "from-orange-500 to-rose-700" },
-  { name: "Career Mentor", role: "Career Guidance Lead", cat: "Career", lead: true, tone: "from-amber-500 to-orange-700" },
-  { name: "Placement Liaison", role: "Industry Partnerships", cat: "Career", tone: "from-slate-600 to-slate-900" },
-  { name: "Notes Editor", role: "Handwritten Notes Lead", cat: "Content", lead: true, tone: "from-pink-500 to-rose-700" },
-  { name: "Video Editor", role: "Lecture Production", cat: "Content", tone: "from-indigo-600 to-blue-900" },
-  { name: "QBank Author", role: "Question Bank Author", cat: "Content", tone: "from-emerald-600 to-teal-800" },
-];
 
 
 
