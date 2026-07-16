@@ -230,9 +230,6 @@ function CoursesPage() {
   return (
     <SiteLayout>
       <Hero />
-      <Eligibility />
-      
-      
       <Pricing />
       <LeadForm />
       <CourseFaqs />
