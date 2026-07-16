@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion, AnimatePresence, useInView } from "framer-motion";
 import { useState, useRef, useEffect } from "react";
 import { cn } from "@/lib/utils";
-import { ArrowRight, ArrowUpRight, Quote, MonitorPlay, Sparkles, BookOpen, GraduationCap, Briefcase, Repeat, Crown, Star, Rocket, ClipboardList, Users, Target, Trophy, ChevronLeft, ChevronRight, Play, BarChart3, MessageSquare, Apple, Smartphone } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Quote, MonitorPlay, Sparkles, BookOpen, GraduationCap, Briefcase, Crown, Star, Rocket, ClipboardList, Users, Target, Trophy, ChevronLeft, ChevronRight, Play, BarChart3, MessageSquare, Apple, Smartphone } from "lucide-react";
 import { SiteLayout } from "@/components/site/Layout";
 import { FadeIn } from "@/components/site/primitives";
 import { CompaniesMarquee } from "@/components/site/Marquee";
@@ -32,7 +32,6 @@ function Home() {
       <PlacementAnalytics />
       <FounderSpotlight />
       <TestimonialsSection />
-      <CareerStage />
       <YourJourney />
       <DownloadApp />
       <CompaniesSection />
