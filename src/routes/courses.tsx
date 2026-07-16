@@ -3,13 +3,13 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Star, ArrowRight, ArrowUpRight, CheckCircle2, Lightbulb, Calendar,
-  Target, GraduationCap, ClipboardCheck, BookOpenCheck, Users, Briefcase,
-  TrendingUp, Building2, Wallet, Trophy, ScrollText, Phone, Mail, User,
+  Target, GraduationCap, Users, Briefcase,
+  Trophy, ScrollText, Phone, Mail, User,
   Sparkles, MessageSquare, ChevronDown,
 } from "lucide-react";
 import { SiteLayout } from "@/components/site/Layout";
 import { faqs } from "@/data/site";
-import heroImg from "@/assets/hero-classroom.jpg";
+
 
 export const Route = createFileRoute("/courses")({
   head: () => ({
@@ -45,14 +45,6 @@ const WHO_ITS_FOR = [
   "Non-finance entrants seeking industry-aligned, benchmarked skills.",
 ];
 
-const OPPORTUNITY_ROLES = [
-  { label: "Investment Banking", icon: Briefcase },
-  { label: "Financial Analyst", icon: TrendingUp },
-  { label: "Consulting", icon: ClipboardCheck },
-  { label: "Portfolio Management", icon: Wallet },
-  { label: "Private Wealth", icon: Building2 },
-  { label: "Equity Research", icon: BookOpenCheck },
-];
 
 const CURRICULUM = {
   "Level I": {
@@ -238,10 +230,6 @@ function CoursesPage() {
   return (
     <SiteLayout>
       <Hero />
-      
-      
-      <Opportunities />
-      
       <Eligibility />
       
       
