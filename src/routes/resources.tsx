@@ -64,7 +64,7 @@ const stats = [
   { value: 8, suffix: "+ yrs", label: "Of teaching" },
 ];
 
-const PAGE_SIZE = 9;
+const PAGE_SIZE = 3;
 
 /* Premium section heading */
 function PremiumHeader({
