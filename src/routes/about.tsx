@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 
-import { ArrowRight, Mail, Sparkles, Users, Target, Compass, Phone, Quote } from "lucide-react";
+import { ArrowRight, Mail, Users, Target, Compass, Phone, Quote } from "lucide-react";
 import { SiteLayout } from "@/components/site/Layout";
 import { FadeIn, Stagger, StaggerItem, staggerItemVariants, Counter } from "@/components/site/primitives";
 import { PremiumOrbs, AmbientDark, AmbientLight, EyebrowBadge, GradientAccent } from "@/components/site/premium";
