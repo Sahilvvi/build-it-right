@@ -159,6 +159,37 @@ function WhyUs() {
 
 /* ─────────────────────────  HERO  ───────────────────────── */
 
+function HeroVideo() {
+  const ref = useRef<HTMLVideoElement>(null);
+  useEffect(() => {
+    const v = ref.current;
+    if (!v) return;
+    v.muted = true;
+    v.playsInline = true;
+    const tryPlay = () => v.play().catch(() => {});
+    tryPlay();
+    const onLoaded = () => tryPlay();
+    v.addEventListener("loadeddata", onLoaded);
+    return () => v.removeEventListener("loadeddata", onLoaded);
+  }, []);
+  return (
+    <video
+      ref={ref}
+      src="/hero.mp4"
+      poster="/hero-poster.jpg"
+      autoPlay
+      muted
+      loop
+      playsInline
+      // @ts-expect-error webkit attr
+      webkit-playsinline="true"
+      preload="auto"
+      aria-hidden
+      className="absolute inset-0 h-full w-full object-cover"
+    />
+  );
+}
+
 function Hero() {
   return (
     <section className="relative h-[88vh] min-h-[640px] w-full overflow-hidden bg-foreground">
