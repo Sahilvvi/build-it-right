@@ -420,8 +420,6 @@ function CourseTabs() {
 /* ─────────────────  PLACEMENT ANALYTICS  ───────────────── */
 
 const PLACEMENT_BARS = [12, 22, 35, 48, 62, 78, 92];
-const SALARY_BARS = [22, 38, 55, 72, 90];
-const HIRE_TAGS = ["Big 4", "Banks", "AMCs", "Fintech", "Consulting", "PE / VC"];
 
 function CountUp({ to, suffix = "", prefix = "", duration = 1.6 }: { to: number; suffix?: string; prefix?: string; duration?: number }) {
   const [val, setVal] = useState(0);
