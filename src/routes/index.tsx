@@ -8,8 +8,6 @@ import { FadeIn } from "@/components/site/primitives";
 import { CompaniesMarquee } from "@/components/site/Marquee";
 import { FAQ } from "@/components/site/FAQ";
 import { courses, testimonials, hiringCompanies, brand, faqs, stats, whyUs } from "@/data/site";
-import heroVideo from "@/assets/hero.mp4.asset.json";
-import heroPoster from "@/assets/hero-poster.jpg.asset.json";
 
 
 export const Route = createFileRoute("/")({
@@ -161,23 +159,41 @@ function WhyUs() {
 
 /* ─────────────────────────  HERO  ───────────────────────── */
 
+function HeroVideo() {
+  const ref = useRef<HTMLVideoElement>(null);
+  useEffect(() => {
+    const v = ref.current;
+    if (!v) return;
+    v.muted = true;
+    v.playsInline = true;
+    const tryPlay = () => v.play().catch(() => {});
+    tryPlay();
+    const onLoaded = () => tryPlay();
+    v.addEventListener("loadeddata", onLoaded);
+    return () => v.removeEventListener("loadeddata", onLoaded);
+  }, []);
+  return (
+    <video
+      ref={ref}
+      src="/hero.mp4"
+      poster="/hero-poster.jpg"
+      autoPlay
+      muted
+      loop
+      playsInline
+      {...({ "webkit-playsinline": "true" } as Record<string, string>)}
+      preload="auto"
+      aria-hidden
+      className="absolute inset-0 h-full w-full object-cover"
+    />
+  );
+}
+
 function Hero() {
   return (
     <section className="relative h-[88vh] min-h-[640px] w-full overflow-hidden bg-foreground">
-      <motion.video
-        src={heroVideo.url}
-        poster={heroPoster.url}
-        autoPlay
-        muted
-        loop
-        playsInline
-        preload="auto"
-        aria-hidden
-        className="absolute inset-0 h-full w-full object-cover"
-        initial={{ scale: 1.15 }}
-        animate={{ scale: 1 }}
-        transition={{ duration: 8, ease: "easeOut" }}
-      />
+      <HeroVideo />
+
       <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/30 to-black/70" />
       <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-b from-transparent to-background" />
 
