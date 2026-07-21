@@ -397,7 +397,7 @@ export const faqs = [
   },
   {
     q: "What are the fees for the CFA Program?",
-    a: "The CFA Institute exam fee is USD 990 (early) and USD 1,290 (standard) per level for 2024, plus a one-time enrolment fee of USD 350 for Level 1. The enrolment fee is not charged for further attempts or higher levels. Coaching fees are shared on enquiry.",
+    a: "The CFA Institute exam fee is ₹1,07,963 (early) and ₹1,41,109 (standard) per level, plus a one-time enrolment fee for Level 1. The enrolment fee is not charged for further attempts or higher levels. Coaching fees are shared on enquiry.",
   },
   {
     q: "How often is the CFA Level 1 exam conducted?",

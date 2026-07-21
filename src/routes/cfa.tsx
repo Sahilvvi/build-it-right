@@ -34,12 +34,12 @@ type LevelData = {
   tagline: string;
   description: string;
   meta: { duration: string; views: string; language: string; coverage: string; validity: string; courier: string };
-  pricing: { usd: string; inr: string };
+  pricing: { offline: string; online: string };
   weights: { subject: string; range: string }[];
   exam: { format: string[]; question: string[]; key: string[] };
   deadlines: { window: string; date: string }[];
   registration: { window: string; earlyBird: string; final: string };
-  fees: { early: { usd: string; inr: string; note: string }; standard: { usd: string; inr: string; note: string } };
+  fees: { early: { inr: string; note: string }; standard: { inr: string; note: string } };
 };
 
 const levels: Record<Level, LevelData> = {
@@ -48,8 +48,8 @@ const levels: Record<Level, LevelData> = {
     tagline: "Foundations · Tools · Ethics",
     description:
       "Build a strong foundation in finance. Level I introduces candidates to core concepts, tools, and ethical standards — focused on understanding over application. Ideal for students, non-finance backgrounds, and early-stage professionals starting their CFA preparation.",
-    meta: { duration: "350+ hours", views: "7 views / lecture", language: "English + Hindi", coverage: "100%", validity: "Until you clear your exam", courier: "As per location" },
-    pricing: { usd: "$188", inr: "₹15,799" },
+    meta: { duration: "140+ hours (live)", views: "7 views / lecture", language: "English + Hindi", coverage: "100%", validity: "Until you clear your exam", courier: "As per location" },
+    pricing: { offline: "₹36,000", online: "₹20,000" },
     weights: [
       { subject: "Ethics", range: "15 – 20%" },
       { subject: "Quants", range: "6 – 9%" },
@@ -75,8 +75,8 @@ const levels: Record<Level, LevelData> = {
     ],
     registration: { window: "12 Aug 2025 – 12 Feb 2026", earlyBird: "12 Aug – 14 Oct 2025", final: "15 Oct 2025 – 12 Feb 2026" },
     fees: {
-      early: { usd: "1,140", inr: "1,07,963", note: "Save $350 — best value for early planners" },
-      standard: { usd: "1,490", inr: "1,41,109", note: "Standard pricing applies" },
+      early: { inr: "₹1,07,963", note: "Best value for early planners" },
+      standard: { inr: "₹1,41,109", note: "Standard pricing applies" },
     },
   },
   L2: {
@@ -84,8 +84,8 @@ const levels: Record<Level, LevelData> = {
     tagline: "Application · Valuation · Analysis",
     description:
       "Shift from understanding to application. Level II asks you to apply Level I concepts to exam-style scenarios — particularly in valuation, financial statement analysis, and asset classes. The most analytical and application-driven stage of the program.",
-    meta: { duration: "200+ hours", views: "7 views / lecture", language: "English + Hindi", coverage: "100%", validity: "Until you clear your exam", courier: "As per location" },
-    pricing: { usd: "$229", inr: "₹19,001" },
+    meta: { duration: "80+ hours (live)", views: "7 views / lecture", language: "English + Hindi", coverage: "100%", validity: "Until you clear your exam", courier: "As per location" },
+    pricing: { offline: "₹40,000", online: "₹25,000" },
     weights: [
       { subject: "Ethics", range: "10 – 15%" },
       { subject: "Quants", range: "5 – 10%" },
@@ -110,8 +110,8 @@ const levels: Record<Level, LevelData> = {
     ],
     registration: { window: "12 Aug 2025 – 12 Feb 2026", earlyBird: "12 Aug – 14 Oct 2025", final: "15 Oct 2025 – 12 Feb 2026" },
     fees: {
-      early: { usd: "1,140", inr: "1,07,963", note: "Save $350 — best value for early planners" },
-      standard: { usd: "1,490", inr: "1,41,109", note: "Standard pricing applies" },
+      early: { inr: "₹1,07,963", note: "Best value for early planners" },
+      standard: { inr: "₹1,41,109", note: "Standard pricing applies" },
     },
   },
   L3: {
@@ -119,8 +119,8 @@ const levels: Record<Level, LevelData> = {
     tagline: "Portfolio · Wealth · Strategy",
     description:
       "The final stage focuses on portfolio management, wealth planning and strategic decision-making. In addition to item sets, Level III includes essay-based questions that ask you to clearly articulate investment decisions and reasoning.",
-    meta: { duration: "180+ hours", views: "7 views / lecture", language: "English + Hindi", coverage: "100%", validity: "1 year", courier: "As per location" },
-    pricing: { usd: "$229", inr: "₹19,001" },
+    meta: { duration: "60+ hours (live)", views: "7 views / lecture", language: "English + Hindi", coverage: "100%", validity: "1 year", courier: "As per location" },
+    pricing: { offline: "₹25,000", online: "₹25,000" },
     weights: [
       { subject: "Asset Allocation", range: "15 – 20%" },
       { subject: "Portfolio Construction", range: "15 – 20%" },
@@ -142,8 +142,8 @@ const levels: Record<Level, LevelData> = {
     ],
     registration: { window: "11 Nov 2025 – 6 May 2026", earlyBird: "11 Nov 2025 – 21 Jan 2026", final: "21 Jan – 6 May 2026" },
     fees: {
-      early: { usd: "1,140", inr: "1,07,963", note: "Save $350 — best value for early planners" },
-      standard: { usd: "1,490", inr: "1,41,109", note: "Standard pricing applies" },
+      early: { inr: "₹1,07,963", note: "Best value for early planners" },
+      standard: { inr: "₹1,41,109", note: "Standard pricing applies" },
     },
   },
 };
@@ -339,8 +339,8 @@ function CFAPage() {
                 <div className="relative rounded-[2rem] border border-white/15 bg-white/10 p-6 backdrop-blur-md">
                   <div className="text-[10px] uppercase tracking-[0.24em] text-accent">Enroll now</div>
                   <div className="mt-3 flex items-baseline gap-3">
-                    <span className="font-display text-5xl font-semibold text-white md:text-6xl">{data.pricing.usd}</span>
-                    <span className="text-sm text-white/60">or {data.pricing.inr}</span>
+                    <span className="font-display text-5xl font-semibold text-white md:text-6xl">{data.pricing.offline}</span>
+                    <span className="text-sm text-white/60">offline · {data.pricing.online} online</span>
                   </div>
                   <div className="mt-5 flex flex-wrap gap-2">
                     <button className="inline-flex items-center gap-2 rounded-full bg-accent px-4 py-2.5 text-sm font-semibold uppercase tracking-wider text-accent-foreground transition-transform hover:scale-[1.02]">
@@ -676,8 +676,7 @@ function CFAPage() {
                 </span>
                 <div className="relative mt-4 text-xs uppercase tracking-[0.2em] text-white/70">Early bird registration</div>
                 <div className="relative mt-3 flex items-baseline gap-3">
-                  <span className="font-display text-4xl font-semibold">USD {data.fees.early.usd}</span>
-                  <span className="text-sm text-white/70">/ INR {data.fees.early.inr}</span>
+                  <span className="font-display text-4xl font-semibold">{data.fees.early.inr}</span>
                 </div>
                 <p className="relative mt-3 flex items-center gap-2 text-sm text-white/80">
                   <Tag className="h-4 w-4 text-accent" /> {data.fees.early.note}
@@ -687,8 +686,7 @@ function CFAPage() {
               <div className="rounded-3xl border border-border bg-card p-7 shadow-card transition-all hover-lift">
                 <div className="text-xs uppercase tracking-[0.2em] text-muted-foreground">Standard registration</div>
                 <div className="mt-3 flex items-baseline gap-3">
-                  <span className="font-display text-4xl font-semibold">USD {data.fees.standard.usd}</span>
-                  <span className="text-sm text-muted-foreground">/ INR {data.fees.standard.inr}</span>
+                  <span className="font-display text-4xl font-semibold">{data.fees.standard.inr}</span>
                 </div>
                 <p className="mt-3 flex items-center gap-2 text-sm text-muted-foreground">
                   <Info className="h-4 w-4" /> {data.fees.standard.note}
