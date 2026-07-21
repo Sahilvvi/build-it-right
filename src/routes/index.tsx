@@ -7,7 +7,7 @@ import { SiteLayout } from "@/components/site/Layout";
 import { FadeIn } from "@/components/site/primitives";
 import { CompaniesMarquee } from "@/components/site/Marquee";
 import { FAQ } from "@/components/site/FAQ";
-import { courses, testimonials, hiringCompanies, brand, faqs, stats } from "@/data/site";
+import { courses, testimonials, hiringCompanies, brand, faqs, stats, whyUs } from "@/data/site";
 import heroImg from "@/assets/hero-classroom.jpg";
 import founderImg from "@/assets/founder.jpg";
 
