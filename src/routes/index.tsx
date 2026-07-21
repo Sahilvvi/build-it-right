@@ -72,42 +72,111 @@ function StatsStrip() {
 
 function WhyUs() {
   return (
-    <section className="relative py-20 md:py-28">
-      <div className="mx-auto max-w-7xl px-6">
+    <section className="relative overflow-hidden py-20 md:py-28">
+      {/* Ambient background */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 opacity-[0.18] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_60%,transparent_100%)]"
+        style={{
+          backgroundImage:
+            "linear-gradient(to right, hsl(var(--border)) 1px, transparent 1px), linear-gradient(to bottom, hsl(var(--border)) 1px, transparent 1px)",
+          backgroundSize: "56px 56px",
+        }}
+      />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute -left-40 top-1/4 h-[500px] w-[500px] rounded-full bg-primary/10 blur-[120px]"
+      />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute -right-40 bottom-1/4 h-[500px] w-[500px] rounded-full bg-accent/10 blur-[120px]"
+      />
+
+      <div className="relative mx-auto max-w-7xl px-6">
         <FadeIn>
           <div className="mx-auto max-w-2xl text-center">
-            <div className="inline-flex items-center gap-2 rounded-full border border-border/60 bg-card/70 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.22em] text-muted-foreground">
-              <Sparkles className="h-3 w-3 text-accent" /> Why Fin-Envision
+            <div className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.22em] text-primary">
+              <span className="relative flex h-2 w-2">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-75" />
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-primary" />
+              </span>
+              Why Fin-Envision
             </div>
-            <h2 className="mt-4 font-display text-3xl font-semibold tracking-tight md:text-4xl">
-              Three pillars that shape every learner.
+            <h2 className="mt-4 font-display text-3xl font-semibold tracking-tight md:text-5xl">
+              Three pillars that shape{" "}
+              <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+                every learner.
+              </span>
             </h2>
             <p className="mt-3 text-muted-foreground">
-              A learning system built on depth, real-world practice, and personal guidance.
+              A learning system built on depth, real-world practice, and{" "}
+              <span className="font-serif italic text-accent">personal guidance</span>.
             </p>
           </div>
         </FadeIn>
 
-        <div className="mt-12 grid gap-6 md:grid-cols-3">
-          {whyUs.map((p, i) => (
-            <FadeIn key={p.title} delay={i * 0.08}>
-              <div className="group relative h-full overflow-hidden rounded-3xl border border-border/60 bg-card/80 p-7 shadow-sm backdrop-blur transition hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-lg">
-                <div className="inline-flex h-10 w-10 items-center justify-center rounded-2xl bg-gradient-to-br from-primary to-accent font-display text-sm font-bold text-primary-foreground">
-                  0{i + 1}
+        <div className="mt-14 grid gap-6 md:grid-cols-3">
+          {whyUs.map((p, i) => {
+            const dashOffset = 40 + i * 40;
+            return (
+              <FadeIn key={p.title} delay={i * 0.1}>
+                <div className="group relative h-full rounded-2xl p-[1px] transition-all duration-500 hover:-translate-y-2">
+                  {/* Gradient border */}
+                  <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-primary/40 via-primary/10 to-accent/30 opacity-60 transition-opacity duration-500 group-hover:opacity-100" />
+                  {/* Sheen sweep */}
+                  <div className="pointer-events-none absolute inset-0 overflow-hidden rounded-2xl">
+                    <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/5 to-transparent transition-transform duration-1000 ease-in-out group-hover:translate-x-full" />
+                  </div>
+
+                  <div className="relative flex h-full flex-col rounded-2xl bg-card/80 p-8 backdrop-blur-xl">
+                    <div className="relative mb-6">
+                      <div className="flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-br from-primary to-accent font-display text-sm font-bold text-primary-foreground shadow-lg shadow-primary/20">
+                        0{i + 1}
+                      </div>
+                      <svg
+                        aria-hidden
+                        className="absolute -left-1 -top-1 h-14 w-14 -rotate-90 opacity-50 transition-transform duration-700 group-hover:rotate-[270deg]"
+                        viewBox="0 0 56 56"
+                      >
+                        <circle
+                          cx="28"
+                          cy="28"
+                          r="26"
+                          fill="none"
+                          strokeWidth="1"
+                          className="stroke-primary"
+                          strokeDasharray="163"
+                          strokeDashoffset={dashOffset}
+                          strokeLinecap="round"
+                        />
+                      </svg>
+                    </div>
+
+                    <h3 className="mb-3 font-display text-xl font-semibold leading-tight text-foreground">
+                      {p.title}
+                    </h3>
+                    <p className="mb-6 flex-grow text-sm leading-relaxed text-muted-foreground">
+                      {p.body}
+                    </p>
+
+                    <div className="mb-5 h-px w-full bg-gradient-to-r from-primary/30 via-accent/20 to-transparent" />
+
+                    <ul className="space-y-3">
+                      {p.items?.map((it) => (
+                        <li key={it} className="flex items-start gap-3 text-sm text-foreground/85">
+                          <span
+                            className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-accent"
+                            style={{ boxShadow: "0 0 8px hsl(var(--accent) / 0.7)" }}
+                          />
+                          <span>{it}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
                 </div>
-                <h3 className="mt-4 font-display text-xl font-semibold">{p.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{p.body}</p>
-                <ul className="mt-5 space-y-2 border-t border-border/60 pt-5 text-sm">
-                  {p.items?.map((it) => (
-                    <li key={it} className="flex items-start gap-2">
-                      <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
-                      <span className="text-foreground/85">{it}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </FadeIn>
-          ))}
+              </FadeIn>
+            );
+          })}
         </div>
       </div>
     </section>
