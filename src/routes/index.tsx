@@ -420,8 +420,6 @@ function CourseTabs() {
 /* ─────────────────  PLACEMENT ANALYTICS  ───────────────── */
 
 const PLACEMENT_BARS = [12, 22, 35, 48, 62, 78, 92];
-const SALARY_BARS = [22, 38, 55, 72, 90];
-const HIRE_TAGS = ["Big 4", "Banks", "AMCs", "Fintech", "Consulting", "PE / VC"];
 
 function CountUp({ to, suffix = "", prefix = "", duration = 1.6 }: { to: number; suffix?: string; prefix?: string; duration?: number }) {
   const [val, setVal] = useState(0);
@@ -535,171 +533,143 @@ function PlacementAnalytics() {
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-70" />
               <span className="relative inline-flex h-2 w-2 rounded-full bg-accent" />
             </span>
-            <p className="text-[11px] font-bold uppercase tracking-[0.32em] text-accent">Where Our Alumni Work</p>
+            <p className="text-[11px] font-bold uppercase tracking-[0.32em] text-accent">Numbers That Matter</p>
           </motion.div>
 
           <h2 className="mx-auto mt-6 max-w-4xl text-center text-balance font-display text-4xl font-semibold tracking-tight md:text-5xl lg:text-[3.6rem] lg:leading-[1.05]">
-            <CountUp to={3000} suffix="+" /> Students{" "}
-            <span className="bg-gradient-to-r from-primary via-primary to-accent bg-clip-text text-transparent">Placed at</span>
+            <CountUp to={5000} suffix="+" /> Learners{" "}
+            <span className="bg-gradient-to-r from-primary via-primary to-accent bg-clip-text text-transparent">Trained.</span>
             <br className="hidden md:block" />{" "}
-            <span className="italic text-accent">India's Top Firms</span>
+            <span className="italic text-accent">Results That Speak.</span>
           </h2>
           <p className="mx-auto mt-6 max-w-2xl text-center text-base text-muted-foreground md:text-lg">
-            A transparent look at outcomes — placement velocity, salary trajectory, and the hiring partners that show up on campus every cohort.
+            Eight years of teaching, thousands of success stories, and a track record built on first-attempt clears.
           </p>
         </FadeIn>
 
-        <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {/* Card 1 — Hiring Partners */}
-          <PremiumCard>
-            <Ring value={<CountUp to={250} suffix="+" />} label="Hiring partners" progress={0.78} />
-            <h3 className="mt-6 text-center font-display text-lg font-semibold tracking-tight">Hiring Partners</h3>
-            <p className="mt-1 text-center text-xs text-muted-foreground">Active recruiters across sectors</p>
-            <div className="mt-5 flex flex-wrap justify-center gap-1.5">
-              {HIRE_TAGS.map((t, i) => (
-                <motion.span
-                  key={t}
-                  initial={{ opacity: 0, scale: 0.85 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.4 + i * 0.06, duration: 0.4 }}
-                  className="rounded-full border border-primary/20 bg-primary/10 px-2.5 py-1 text-[10px] font-semibold text-primary backdrop-blur transition-colors hover:bg-primary/20"
-                >
-                  {t}
-                </motion.span>
-              ))}
+        {/* Hero stat + supporting stats */}
+        <div className="mt-16 grid gap-6 lg:grid-cols-3">
+          {/* HERO — Students Trained */}
+          <PremiumCard className="lg:col-span-2">
+            <div className="grid gap-6 md:grid-cols-[auto_1fr] md:items-center">
+              <Ring value={<CountUp to={5000} suffix="+" />} sub="students" label="Students trained" progress={0.9} />
+              <div>
+                <div className="text-[11px] font-bold uppercase tracking-[0.28em] text-accent">Since 2017</div>
+                <h3 className="mt-2 font-display text-3xl font-semibold tracking-tight md:text-4xl">
+                  5,000+ Students Trained
+                </h3>
+                <p className="mt-3 text-sm leading-relaxed text-muted-foreground md:text-base">
+                  Across CFA Levels I, II, III and Financial Modelling — from first-year undergrads to working professionals switching into finance.
+                </p>
+                <div className="mt-5 flex flex-wrap gap-1.5">
+                  {["CFA L1", "CFA L2", "CFA L3", "Financial Modelling"].map((t) => (
+                    <span
+                      key={t}
+                      className="rounded-full border border-primary/20 bg-primary/10 px-2.5 py-1 text-[10px] font-semibold text-primary backdrop-blur"
+                    >
+                      {t}
+                    </span>
+                  ))}
+                </div>
+              </div>
             </div>
           </PremiumCard>
 
-          {/* Card 2 — Avg Salary Hike */}
+          {/* Success Rate */}
           <PremiumCard delay={0.08}>
-            <div className="text-center font-display text-6xl font-bold leading-none">
-              <span className="bg-gradient-to-br from-primary to-accent bg-clip-text text-transparent">
-                <CountUp to={65} />
-              </span>
-              <span className="text-accent">%</span>
-            </div>
-            <div className="mt-3 text-center text-sm font-semibold text-foreground">Avg Salary Hike</div>
-            <div className="mt-1 text-center text-xs text-muted-foreground">Post-program vs prior role</div>
+            <div className="flex h-full flex-col items-center justify-center text-center">
+              <div className="font-display text-6xl font-bold leading-none">
+                <span className="bg-gradient-to-br from-primary to-accent bg-clip-text text-transparent">
+                  <CountUp to={80} />
+                </span>
+                <span className="text-accent">–90%</span>
+              </div>
+              <div className="mt-3 text-sm font-semibold text-foreground">Success Rate</div>
+              <div className="mt-1 text-xs text-muted-foreground">Consistent pass rates across cohorts</div>
 
-            <svg viewBox="0 0 200 70" className="mt-6 h-24 w-full overflow-visible">
-              <defs>
-                <linearGradient id="lineFill" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stopColor="hsl(var(--accent))" stopOpacity="0.4" />
-                  <stop offset="100%" stopColor="hsl(var(--accent))" stopOpacity="0" />
-                </linearGradient>
-                <linearGradient id="lineStroke" x1="0" y1="0" x2="1" y2="0">
-                  <stop offset="0%" stopColor="hsl(var(--primary))" />
-                  <stop offset="100%" stopColor="hsl(var(--accent))" />
-                </linearGradient>
-              </defs>
-              <motion.path
-                d="M0 55 L33 48 L66 42 L100 30 L133 22 L166 14 L200 6 L200 70 L0 70 Z"
-                fill="url(#lineFill)" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }}
-                viewport={{ once: true }} transition={{ delay: 0.8, duration: 0.8 }}
-              />
-              <motion.path
-                d="M0 55 L33 48 L66 42 L100 30 L133 22 L166 14 L200 6"
-                fill="none" stroke="url(#lineStroke)" strokeWidth="2.5" strokeLinecap="round"
-                initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }}
-                viewport={{ once: true }} transition={{ duration: 1.6, ease: "easeOut" }}
-                style={{ filter: "drop-shadow(0 2px 6px hsl(var(--accent)/0.45))" }}
-              />
-              <motion.circle
-                cx="200" cy="6" r="4" fill="hsl(var(--accent))"
-                initial={{ scale: 0 }} whileInView={{ scale: 1 }}
-                viewport={{ once: true }} transition={{ delay: 1.6, type: "spring" }}
-                style={{ filter: "drop-shadow(0 0 8px hsl(var(--accent)))" }}
-              />
-            </svg>
-            <div className="mt-3 flex justify-between text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">
-              <span>Before</span>
-              <span className="text-accent">After Fin-Envision</span>
-            </div>
-          </PremiumCard>
-
-          {/* Card 3 — Salary Range */}
-          <PremiumCard delay={0.16}>
-            <div className="text-center font-display text-5xl font-bold leading-none">
-              <span className="bg-gradient-to-br from-primary to-accent bg-clip-text text-transparent">₹8–30</span>
-              <span className="text-accent">L</span>
-            </div>
-            <div className="mt-3 text-center text-sm font-semibold text-foreground">Salary Range</div>
-            <div className="mt-1 text-center text-xs text-muted-foreground">Median band across roles</div>
-
-            <div className="mt-6 flex h-24 items-end justify-center gap-2">
-              {SALARY_BARS.map((h, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ height: 0, opacity: 0 }}
-                  whileInView={{ height: `${h}%`, opacity: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.9, delay: 0.15 * i, ease: [0.16, 1, 0.3, 1] }}
-                  className="relative w-6 rounded-t-md bg-gradient-to-t from-primary via-primary to-accent shadow-[0_-4px_20px_-2px_hsl(var(--accent)/0.5)]"
-                >
-                  <span className="absolute inset-x-0 top-0 h-1 rounded-t-md bg-white/30" />
-                </motion.div>
-              ))}
-            </div>
-            <div className="mt-3 flex justify-between text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">
-              <span>₹8L</span><span className="text-accent">Median ₹18L</span><span>₹30L</span>
-            </div>
-          </PremiumCard>
-
-          {/* Card 4 — Days to Placement */}
-          <PremiumCard delay={0.24}>
-            <Ring value={<>&lt;90</>} sub="days" label="Days to placement" progress={0.7} />
-            <h3 className="mt-6 text-center font-display text-lg font-semibold tracking-tight">Days to Placement</h3>
-            <p className="mt-1 text-center text-xs text-muted-foreground">Certification → Offer letter</p>
-            <div className="mt-5 space-y-2 text-[11px]">
-              {[
-                ["Interview-ready", "21d"],
-                ["First interview", "38d"],
-                ["Offer signed", "84d"],
-              ].map(([k, v], i) => (
-                <motion.div
-                  key={k}
-                  initial={{ opacity: 0, x: -10 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.4 + i * 0.1, duration: 0.5 }}
-                  className="flex items-center justify-between rounded-lg border border-border/60 bg-secondary/60 px-3 py-2 backdrop-blur transition-colors hover:border-primary/40 hover:bg-secondary/80"
-                >
-                  <span className="flex items-center gap-2 font-medium text-foreground/80">
-                    <span className="h-1.5 w-1.5 rounded-full bg-accent shadow-[0_0_6px_hsl(var(--accent))]" />
-                    {k}
-                  </span>
-                  <span className="font-bold text-primary">{v}</span>
-                </motion.div>
-              ))}
+              <svg viewBox="0 0 200 70" className="mt-6 h-20 w-full overflow-visible">
+                <defs>
+                  <linearGradient id="successFill" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stopColor="hsl(var(--accent))" stopOpacity="0.4" />
+                    <stop offset="100%" stopColor="hsl(var(--accent))" stopOpacity="0" />
+                  </linearGradient>
+                  <linearGradient id="successStroke" x1="0" y1="0" x2="1" y2="0">
+                    <stop offset="0%" stopColor="hsl(var(--primary))" />
+                    <stop offset="100%" stopColor="hsl(var(--accent))" />
+                  </linearGradient>
+                </defs>
+                <motion.path
+                  d="M0 40 L33 34 L66 30 L100 22 L133 18 L166 12 L200 8 L200 70 L0 70 Z"
+                  fill="url(#successFill)" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }}
+                  viewport={{ once: true }} transition={{ delay: 0.6, duration: 0.8 }}
+                />
+                <motion.path
+                  d="M0 40 L33 34 L66 30 L100 22 L133 18 L166 12 L200 8"
+                  fill="none" stroke="url(#successStroke)" strokeWidth="2.5" strokeLinecap="round"
+                  initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }}
+                  viewport={{ once: true }} transition={{ duration: 1.4, ease: "easeOut" }}
+                  style={{ filter: "drop-shadow(0 2px 6px hsl(var(--accent)/0.45))" }}
+                />
+              </svg>
             </div>
           </PremiumCard>
         </div>
 
-        {/* Stat strip — premium */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }} transition={{ duration: 0.8, delay: 0.2 }}
-          className="relative mt-10 overflow-hidden rounded-[28px] p-[1px]"
-        >
-          <div className="absolute inset-0 rounded-[28px] bg-gradient-to-r from-primary/40 via-accent/30 to-primary/40" />
-          <div className="relative grid grid-cols-2 gap-px overflow-hidden rounded-[27px] bg-border/40 backdrop-blur md:grid-cols-4">
-            {[
-              { v: 3000, suffix: "+", l: "Students placed" },
-              { v: 94, suffix: "%", l: "Placement rate" },
-              { v: 38, prefix: "₹", suffix: " LPA", l: "Highest package" },
-              { v: 180, suffix: "+", l: "Hiring partners" },
-            ].map((s, i) => (
-              <div key={s.l} className="group relative bg-card/95 p-7 text-center transition-colors hover:bg-card">
-                <div className="font-display text-3xl font-bold bg-gradient-to-br from-primary to-accent bg-clip-text text-transparent md:text-4xl">
-                  <CountUp to={s.v} prefix={s.prefix} suffix={s.suffix} duration={1.4 + i * 0.1} />
-                </div>
-                <div className="mt-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-muted-foreground">{s.l}</div>
-                <div className="pointer-events-none absolute inset-x-6 bottom-0 h-px bg-gradient-to-r from-transparent via-accent to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
+        {/* Second row — 3 supporting stats */}
+        <div className="mt-6 grid gap-6 md:grid-cols-3">
+          {/* Google Reviews */}
+          <PremiumCard delay={0.12}>
+            <div className="flex h-full flex-col items-center justify-center text-center">
+              <div className="inline-flex items-center gap-1 text-accent">
+                {[0, 1, 2, 3, 4].map((i) => (
+                  <Star key={i} className="h-4 w-4 fill-accent" />
+                ))}
               </div>
-            ))}
-          </div>
-        </motion.div>
+              <div className="mt-3 font-display text-6xl font-bold leading-none bg-gradient-to-br from-primary to-accent bg-clip-text text-transparent">
+                <CountUp to={216} />
+              </div>
+              <div className="mt-2 text-sm font-semibold text-foreground">Google Reviews</div>
+              <div className="mt-1 text-xs text-muted-foreground">Verified feedback from real students</div>
+              <div className="mt-4 inline-flex items-center gap-2 rounded-full border border-border/60 bg-secondary/60 px-3 py-1 text-[11px] font-semibold text-foreground/80">
+                <span className="h-1.5 w-1.5 rounded-full bg-accent shadow-[0_0_6px_hsl(var(--accent))]" />
+                4.9 average rating
+              </div>
+            </div>
+          </PremiumCard>
+
+          {/* Teaching Experience */}
+          <PremiumCard delay={0.2}>
+            <div className="flex h-full flex-col items-center justify-center text-center">
+              <Ring value={<CountUp to={8} suffix="+" />} sub="years" label="Teaching experience" progress={0.8} />
+              <h3 className="mt-6 font-display text-lg font-semibold tracking-tight">Teaching Experience</h3>
+              <p className="mt-1 text-xs text-muted-foreground">Refined over 8+ years in the classroom</p>
+              <div className="mt-4 grid w-full grid-cols-3 gap-1.5 text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">
+                <span className="rounded-md border border-border/60 bg-secondary/60 py-1.5">Live</span>
+                <span className="rounded-md border border-border/60 bg-secondary/60 py-1.5">Recorded</span>
+                <span className="rounded-md border border-border/60 bg-secondary/60 py-1.5">1:1</span>
+              </div>
+            </div>
+          </PremiumCard>
+
+          {/* Attempt Focus */}
+          <PremiumCard delay={0.28}>
+            <div className="flex h-full flex-col items-center justify-center text-center">
+              <div className="relative">
+                <div className="font-display text-[6rem] font-bold leading-none bg-gradient-to-br from-primary to-accent bg-clip-text text-transparent">
+                  1
+                  <span className="align-super text-3xl">st</span>
+                </div>
+                <div className="pointer-events-none absolute inset-0 -z-10 blur-2xl bg-primary/20" />
+              </div>
+              <div className="mt-2 text-sm font-semibold text-foreground">Attempt Focus</div>
+              <div className="mt-1 text-xs text-muted-foreground">Structured to clear on the very first try</div>
+              <div className="mt-4 inline-flex items-center gap-2 rounded-full border border-accent/30 bg-accent/10 px-3 py-1 text-[11px] font-semibold text-accent">
+                <Trophy className="h-3.5 w-3.5" />
+                First-attempt mindset
+              </div>
+            </div>
+          </PremiumCard>
+        </div>
       </div>
     </section>
   );
