@@ -110,9 +110,9 @@ const PLAN_BASE = [
 const HOURS_BY_TIER: Record<string, string> = {
   "CFA Level 1": "140+ hours of live teaching",
   "CFA Level 2": "80+ hours of live teaching",
-  "CFA Level 3": "16+ hours of live teaching",
+  "CFA Level 3": "60+ hours of live teaching",
   "Level 2 Online": "80+ hours of live teaching",
-  "Level 3 Online": "16+ hours of live teaching",
+  "Level 3 Online": "60+ hours of live teaching",
 };
 
 function includesFor(tier: string): string[] {
@@ -124,13 +124,13 @@ const PLANS = {
   "Offline (Classroom)": [
     { tier: "CFA Level 1", price: "₹36,000", note: "140+ hours · Live classroom", popular: true },
     { tier: "CFA Level 2", price: "₹40,000", note: "80+ hours · Live classroom", popular: false },
-    { tier: "CFA Level 3", price: "₹25,000", note: "16+ hours · Live classroom", popular: false },
+    { tier: "CFA Level 3", price: "₹25,000", note: "60+ hours · Live classroom", popular: false },
     { tier: "Financial Modelling", price: "₹25,000", note: "Classroom programme · Internship included", popular: false },
   ],
   Online: [
     { tier: "CFA Level 1", price: "₹20,000", note: "140+ hours · Recorded lectures", popular: true },
     { tier: "Level 2 Online", price: "₹25,000", note: "80+ hours · Recorded lectures", popular: false },
-    { tier: "Level 3 Online", price: "₹25,000", note: "16+ hours · Recorded lectures", popular: false },
+    { tier: "Level 3 Online", price: "₹25,000", note: "60+ hours · Recorded lectures", popular: false },
     { tier: "Financial Modelling", price: "₹20,000", note: "Online programme · Full project walkthrough", popular: false },
   ],
 } as const;
