@@ -28,8 +28,8 @@ function Home() {
   return (
     <SiteLayout>
       <Hero />
-      <CourseTabs />
       <StatsStrip />
+      <CourseTabs />
       <PlacementAnalytics />
       <FounderSpotlight />
       <TestimonialsSection />
