@@ -142,8 +142,8 @@ const levels: Record<Level, LevelData> = {
     ],
     registration: { window: "11 Nov 2025 – 6 May 2026", earlyBird: "11 Nov 2025 – 21 Jan 2026", final: "21 Jan – 6 May 2026" },
     fees: {
-      early: { usd: "1,140", inr: "1,07,963", note: "Save $350 — best value for early planners" },
-      standard: { usd: "1,490", inr: "1,41,109", note: "Standard pricing applies" },
+      early: { inr: "₹1,07,963", note: "Best value for early planners" },
+      standard: { inr: "₹1,41,109", note: "Standard pricing applies" },
     },
   },
 };
