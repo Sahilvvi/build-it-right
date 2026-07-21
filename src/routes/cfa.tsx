@@ -676,8 +676,7 @@ function CFAPage() {
                 </span>
                 <div className="relative mt-4 text-xs uppercase tracking-[0.2em] text-white/70">Early bird registration</div>
                 <div className="relative mt-3 flex items-baseline gap-3">
-                  <span className="font-display text-4xl font-semibold">USD {data.fees.early.usd}</span>
-                  <span className="text-sm text-white/70">/ INR {data.fees.early.inr}</span>
+                  <span className="font-display text-4xl font-semibold">{data.fees.early.inr}</span>
                 </div>
                 <p className="relative mt-3 flex items-center gap-2 text-sm text-white/80">
                   <Tag className="h-4 w-4 text-accent" /> {data.fees.early.note}
@@ -687,8 +686,7 @@ function CFAPage() {
               <div className="rounded-3xl border border-border bg-card p-7 shadow-card transition-all hover-lift">
                 <div className="text-xs uppercase tracking-[0.2em] text-muted-foreground">Standard registration</div>
                 <div className="mt-3 flex items-baseline gap-3">
-                  <span className="font-display text-4xl font-semibold">USD {data.fees.standard.usd}</span>
-                  <span className="text-sm text-muted-foreground">/ INR {data.fees.standard.inr}</span>
+                  <span className="font-display text-4xl font-semibold">{data.fees.standard.inr}</span>
                 </div>
                 <p className="mt-3 flex items-center gap-2 text-sm text-muted-foreground">
                   <Info className="h-4 w-4" /> {data.fees.standard.note}
