@@ -84,8 +84,8 @@ const levels: Record<Level, LevelData> = {
     tagline: "Application · Valuation · Analysis",
     description:
       "Shift from understanding to application. Level II asks you to apply Level I concepts to exam-style scenarios — particularly in valuation, financial statement analysis, and asset classes. The most analytical and application-driven stage of the program.",
-    meta: { duration: "200+ hours", views: "7 views / lecture", language: "English + Hindi", coverage: "100%", validity: "Until you clear your exam", courier: "As per location" },
-    pricing: { usd: "$229", inr: "₹19,001" },
+    meta: { duration: "80+ hours (live)", views: "7 views / lecture", language: "English + Hindi", coverage: "100%", validity: "Until you clear your exam", courier: "As per location" },
+    pricing: { offline: "₹40,000", online: "₹25,000" },
     weights: [
       { subject: "Ethics", range: "10 – 15%" },
       { subject: "Quants", range: "5 – 10%" },
