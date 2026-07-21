@@ -47,7 +47,7 @@ function ContactPage() {
     { icon: MessageCircle, label: "WhatsApp", value: brand.whatsapp, href: `https://wa.me/${brand.whatsapp.replace(/\D/g, "")}`, tone: "from-emerald-500 to-teal-700" },
     { icon: Phone, label: "Call us", value: brand.phone, href: `tel:${brand.phone.replace(/\s/g, "")}`, tone: "from-amber-500 to-orange-600" },
     { icon: Mail, label: "Email", value: brand.email, href: `mailto:${brand.email}`, tone: "from-rose-500 to-pink-700" },
-    { icon: MapPin, label: "Visit", value: "Lower Parel, Mumbai", tone: "from-indigo-600 to-violet-800" },
+    { icon: MapPin, label: "Visit", value: "Thane, Mumbai", tone: "from-indigo-600 to-violet-800" },
   ];
 
   return (
@@ -276,7 +276,7 @@ function ContactPage() {
                       </div>
                     </div>
                     <div className="mt-5 font-display text-2xl font-semibold">{brand.address}</div>
-                    <div className="mt-1 text-sm opacity-80">Near Phoenix Mills · 5 min from Lower Parel station</div>
+                    <div className="mt-1 text-sm opacity-80">Thane · easy access from station</div>
                   </div>
                 </div>
               </div>
@@ -362,7 +362,7 @@ function ContactPage() {
                 { q: "Replied on WhatsApp within minutes — even on a Sunday. Felt like a personal mentor, not a sales desk.", n: "Aditi R.", r: "CFA L2 candidate", tone: "from-emerald-500 to-teal-700" },
                 { q: "The counselling call was honest. They told me what NOT to take, mapped a 9-month plan, and stayed in touch.", n: "Karthik M.", r: "Working professional", tone: "from-amber-500 to-orange-600" },
                 { q: "Every email got a thoughtful reply with links, fee breakup and a recorded demo. No pressure tactics.", n: "Neha S.", r: "Engineering graduate", tone: "from-rose-500 to-pink-700" },
-                { q: "I visited the Lower Parel office, sat through a live class, and left with a clear roadmap the same day.", n: "Rohit P.", r: "Commerce graduate", tone: "from-indigo-600 to-violet-800" },
+                { q: "I visited the Thane office, sat through a live class, and left with a clear roadmap the same day.", n: "Rohit P.", r: "Commerce graduate", tone: "from-indigo-600 to-violet-800" },
                 { q: "Lifetime placement support is real. Got role alerts two years after my course ended.", n: "Sneha K.", r: "Alumni · 2022 batch", tone: "from-[#1a3a5c] to-[#2d5a8c]" },
               ].concat([
                 { q: "Replied on WhatsApp within minutes — even on a Sunday. Felt like a personal mentor, not a sales desk.", n: "Aditi R.", r: "CFA L2 candidate", tone: "from-emerald-500 to-teal-700" },
