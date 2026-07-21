@@ -761,8 +761,18 @@ function TestimonialsSection() {
 /* ─────────────────  FOUNDER SPOTLIGHT  ───────────────── */
 
 function FounderSpotlight() {
-  const expertise = ["Equity Research", "Risk Management", "Derivatives", "Portfolio Strategy"];
-  const credentials = ["Chartered Accountant", "CFA Charterholder", "FRM Charterholder", "CFP Charterholder", "LLB"];
+  const journey = [
+    "Founder and Lead Instructor of Fin-Envision Learning.",
+    "Cleared all three levels of the CFA® Program in the first attempt.",
+    "Worked with reputed organizations such as CRISIL and JHP, gaining valuable industry exposure.",
+    "Has successfully trained over 5,000 students across Mumbai.",
+    "Known for simplifying complex financial concepts into easy-to-understand, practical lessons.",
+    "Focuses on bridging the gap between academic learning and real-world finance.",
+    "Dedicated to mentoring students for successful careers in finance through industry-oriented training and personalized guidance.",
+  ];
+  const credentials = ["CFA Charterholder", "Investment Banking", "Financial Modeling", "Portfolio Strategy"];
+  const quote =
+    "My ability to creatively simplify complicated concepts comes from genuinely caring about each student's journey — concept clarity always beats rote learning.";
 
   return (
     <section className="relative overflow-hidden bg-background py-24 md:py-32">
@@ -795,8 +805,8 @@ function FounderSpotlight() {
             <p className="text-[11px] font-bold uppercase tracking-[0.32em] text-accent">Lead Instructor</p>
           </motion.div>
           <h2 className="mt-6 max-w-4xl font-display text-4xl font-semibold tracking-tight md:text-5xl lg:text-[3.6rem] lg:leading-[1.05]">
-            At the Helm of{" "}
-            <span className="bg-gradient-to-r from-primary via-primary to-accent bg-clip-text text-transparent">Fin-Envision Learning</span>
+            At the helm of{" "}
+            <span className="bg-gradient-to-r from-primary via-primary to-accent bg-clip-text text-transparent">Fin-Envision.</span>
           </h2>
         </FadeIn>
 
@@ -813,7 +823,7 @@ function FounderSpotlight() {
             <div className="pointer-events-none absolute -left-20 -top-20 h-56 w-56 rounded-full bg-primary/15 blur-3xl" />
             <div className="pointer-events-none absolute -bottom-20 -right-20 h-56 w-56 rounded-full bg-accent/15 blur-3xl" />
 
-            <div className="relative grid gap-10 lg:grid-cols-[1.05fr_1fr_1.05fr] lg:items-center">
+            <div className="relative grid gap-10 lg:grid-cols-[1fr_1.3fr] lg:items-start">
               {/* Left — Name block */}
               <div>
                 <motion.div
@@ -832,18 +842,49 @@ function FounderSpotlight() {
                   viewport={{ once: true }} transition={{ duration: 0.7, delay: 0.2 }}
                   className="mt-6 font-display text-5xl font-bold leading-[1.02] tracking-tight md:text-6xl"
                 >
-                  <span className="bg-gradient-to-br from-primary via-primary to-accent bg-clip-text text-transparent">Utkarsh</span>
+                  <span className="bg-gradient-to-br from-primary via-primary to-accent bg-clip-text text-transparent">Manoj</span>
                   <br />
-                  <span className="bg-gradient-to-br from-primary via-primary to-accent bg-clip-text text-transparent">Jain</span>
+                  <span className="bg-gradient-to-br from-primary via-primary to-accent bg-clip-text text-transparent">Rajgopal, CFA</span>
                 </motion.h3>
 
-                <p className="mt-5 font-display text-sm italic text-muted-foreground">A Lifelong Learner at Heart</p>
+                <p className="mt-5 font-display text-sm italic text-muted-foreground">Founder &amp; Lead Instructor</p>
 
-                <div className="mt-8 grid grid-cols-3 gap-3">
+                <motion.div
+                  initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }} transition={{ duration: 0.7, delay: 0.35 }}
+                  className="relative mt-8 overflow-hidden rounded-2xl p-[1px]"
+                >
+                  <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-primary/40 via-border/30 to-accent/40" />
+                  <div className="relative rounded-[15px] bg-card/95 p-5 backdrop-blur">
+                    <div className="flex items-center gap-3">
+                      <span className="grid h-10 w-10 place-items-center rounded-full bg-gradient-to-br from-accent/30 to-accent/10 text-accent shadow-[inset_0_0_0_1px_hsl(var(--accent)/0.3)]">
+                        <BookOpen className="h-5 w-5" />
+                      </span>
+                      <span className="text-[11px] font-bold uppercase tracking-[0.24em] text-foreground/80">
+                        Academic Credentials
+                      </span>
+                    </div>
+                    <div className="mt-4 flex flex-wrap gap-2">
+                      {credentials.map((c, i) => (
+                        <motion.span
+                          key={c}
+                          initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }}
+                          viewport={{ once: true }}
+                          transition={{ delay: 0.5 + i * 0.06, duration: 0.4 }}
+                          className="rounded-full border border-border bg-card px-3 py-1.5 text-xs font-medium shadow-card transition-all hover:border-accent/50 hover:text-accent"
+                        >
+                          {c}
+                        </motion.span>
+                      ))}
+                    </div>
+                  </div>
+                </motion.div>
+
+                <div className="mt-6 grid grid-cols-3 gap-3">
                   {[
-                    ["14+", "Years teaching"],
-                    ["27k+", "Learners"],
-                    ["4.9★", "Avg rating"],
+                    ["8+", "Years teaching"],
+                    ["5,000+", "Students"],
+                    ["1st", "Attempt"],
                   ].map(([v, l], i) => (
                     <motion.div
                       key={l}
@@ -863,109 +904,34 @@ function FounderSpotlight() {
                 </div>
               </div>
 
-              {/* Center — Portrait */}
-              <motion.div
-                initial={{ scale: 0.92, opacity: 0 }}
-                whileInView={{ scale: 1, opacity: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-                className="relative mx-auto w-full max-w-sm"
-              >
-                {/* rotating ring */}
-                <motion.div
-                  aria-hidden
-                  animate={{ rotate: 360 }}
-                  transition={{ duration: 28, repeat: Infinity, ease: "linear" }}
-                  className="absolute -inset-6 rounded-[2.75rem] opacity-70"
-                  style={{
-                    background:
-                      "conic-gradient(from 0deg, hsl(var(--primary)/0.5), hsl(var(--accent)/0.6), transparent 60%, hsl(var(--primary)/0.5))",
-                    filter: "blur(22px)",
-                  }}
-                />
-                <div className="absolute -inset-3 rounded-[2.25rem] bg-gradient-to-br from-primary/30 to-accent/30 blur-xl" />
-                <div className="relative overflow-hidden rounded-[2rem] p-[2px]">
-                  <div className="absolute inset-0 rounded-[2rem] bg-gradient-to-br from-primary via-primary/40 to-accent" />
-                  <div className="relative overflow-hidden rounded-[calc(2rem-2px)]">
-                    <img
-                      src={founderImg}
-                      alt="Founder Utkarsh Jain portrait"
-                      className="aspect-[4/5] h-full w-full object-cover transition-transform duration-700 hover:scale-105"
-                      loading="lazy"
-                      width={800}
-                      height={1000}
-                    />
-                    {/* subtle bottom gradient */}
-                    <div className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-card/60 to-transparent" />
-                  </div>
-                </div>
-                {/* floating chip */}
-                <motion.div
-                  initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }} transition={{ delay: 0.8, duration: 0.6 }}
-                  className="absolute -bottom-4 left-1/2 z-10 flex -translate-x-1/2 items-center gap-2 rounded-full border border-border/60 bg-card/90 px-4 py-2 backdrop-blur shadow-[0_10px_30px_-10px_hsl(var(--primary)/0.5)]"
-                >
-                  <Star className="h-3.5 w-3.5 fill-accent text-accent" />
-                  <span className="text-[11px] font-semibold tracking-wide text-foreground/90">Trusted by 27k+ learners</span>
-                </motion.div>
-              </motion.div>
-
-              {/* Right — Bio + credentials */}
+              {/* Right — Quote + Journey */}
               <div>
+                <Quote className="h-10 w-10 text-accent" />
                 <motion.p
                   initial={{ opacity: 0, y: 14 }} whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }} transition={{ duration: 0.7, delay: 0.2 }}
-                  className="relative pl-6 font-display text-lg italic leading-relaxed text-foreground/85 md:text-xl"
+                  className="mt-4 text-pretty text-xl italic leading-relaxed text-foreground/85 md:text-2xl"
                 >
-                  <span className="absolute left-0 top-0 h-full w-[3px] rounded-full bg-gradient-to-b from-primary via-accent to-transparent" />
-                  A portfolio consultant to UHNIs and guest faculty at leading business schools, Utkarsh brings real-world insights into every Fin-Envision Learning class. Known for his clarity and grounded approach, he makes complex finance practical, relevant, and easy to grasp.
+                  "{quote}"
                 </motion.p>
 
-                <motion.div
-                  initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }} transition={{ duration: 0.7, delay: 0.35 }}
-                  className="relative mt-8 overflow-hidden rounded-2xl p-[1px]"
-                >
-                  <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-primary/40 via-border/30 to-accent/40" />
-                  <div className="relative rounded-[15px] bg-card/95 p-5 backdrop-blur">
-                    <div className="flex items-center gap-3">
-                      <span className="grid h-10 w-10 place-items-center rounded-full bg-gradient-to-br from-accent/30 to-accent/10 text-accent shadow-[inset_0_0_0_1px_hsl(var(--accent)/0.3)]">
-                        <BookOpen className="h-5 w-5" />
-                      </span>
-                      <span className="text-[11px] font-bold uppercase tracking-[0.24em] text-foreground/80">
-                        Academic Credentials
-                      </span>
-                    </div>
-                    <div className="mt-4 flex flex-wrap gap-x-2 gap-y-2 text-sm font-semibold">
-                      {credentials.map((c, i, arr) => (
-                        <motion.span
-                          key={c}
-                          initial={{ opacity: 0, y: 6 }} whileInView={{ opacity: 1, y: 0 }}
-                          viewport={{ once: true }}
-                          transition={{ delay: 0.5 + i * 0.06, duration: 0.4 }}
-                          className="inline-flex items-center gap-2"
-                        >
-                          <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">{c}</span>
-                          {i < arr.length - 1 && <span className="text-accent/60">|</span>}
-                        </motion.span>
-                      ))}
-                    </div>
-                  </div>
-                </motion.div>
-
-                <div className="mt-5 flex flex-wrap gap-2">
-                  {expertise.map((t, i) => (
-                    <motion.span
-                      key={t}
-                      initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: 0.6 + i * 0.07, duration: 0.4 }}
-                      whileHover={{ y: -2 }}
-                      className="rounded-full border border-border/60 bg-card/80 px-3 py-1.5 text-[11px] font-semibold text-foreground/80 backdrop-blur transition-colors hover:border-primary/40 hover:text-primary"
-                    >
-                      {t}
-                    </motion.span>
-                  ))}
+                <div className="mt-10">
+                  <div className="text-xs font-bold uppercase tracking-[0.24em] text-accent">Manoj Sir's Journey</div>
+                  <ul className="mt-4 space-y-3">
+                    {journey.map((w, i) => (
+                      <motion.li
+                        key={w}
+                        initial={{ opacity: 0, x: -8 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.4, delay: i * 0.05 }}
+                        className="flex gap-3 text-sm leading-relaxed text-muted-foreground"
+                      >
+                        <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-gradient-to-br from-accent to-primary" />
+                        <span>{w}</span>
+                      </motion.li>
+                    ))}
+                  </ul>
                 </div>
               </div>
             </div>
