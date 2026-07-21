@@ -8,7 +8,8 @@ import { FadeIn } from "@/components/site/primitives";
 import { CompaniesMarquee } from "@/components/site/Marquee";
 import { FAQ } from "@/components/site/FAQ";
 import { courses, testimonials, hiringCompanies, brand, faqs, stats, whyUs } from "@/data/site";
-import heroImg from "@/assets/hero-classroom.jpg";
+import heroVideo from "@/assets/hero.mp4.asset.json";
+import heroPoster from "@/assets/hero-poster.jpg.asset.json";
 
 
 export const Route = createFileRoute("/")({
