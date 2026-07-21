@@ -29,6 +29,7 @@ function Home() {
     <SiteLayout>
       <Hero />
       <StatsStrip />
+      <WhyUs />
       <CourseTabs />
       <PlacementAnalytics />
       <FounderSpotlight />
