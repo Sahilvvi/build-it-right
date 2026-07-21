@@ -181,8 +181,7 @@ function HeroVideo() {
       muted
       loop
       playsInline
-      // @ts-expect-error webkit attr
-      webkit-playsinline="true"
+      {...({ "webkit-playsinline": "true" } as Record<string, string>)}
       preload="auto"
       aria-hidden
       className="absolute inset-0 h-full w-full object-cover"
