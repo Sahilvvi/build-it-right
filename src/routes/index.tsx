@@ -9,7 +9,7 @@ import { CompaniesMarquee } from "@/components/site/Marquee";
 import { FAQ } from "@/components/site/FAQ";
 import { courses, testimonials, hiringCompanies, brand, faqs, stats, whyUs } from "@/data/site";
 import heroImg from "@/assets/hero-classroom.jpg";
-import founderImg from "@/assets/founder.jpg";
+
 
 export const Route = createFileRoute("/")({
   head: () => ({
