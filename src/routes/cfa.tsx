@@ -34,12 +34,12 @@ type LevelData = {
   tagline: string;
   description: string;
   meta: { duration: string; views: string; language: string; coverage: string; validity: string; courier: string };
-  pricing: { usd: string; inr: string };
+  pricing: { offline: string; online: string };
   weights: { subject: string; range: string }[];
   exam: { format: string[]; question: string[]; key: string[] };
   deadlines: { window: string; date: string }[];
   registration: { window: string; earlyBird: string; final: string };
-  fees: { early: { usd: string; inr: string; note: string }; standard: { usd: string; inr: string; note: string } };
+  fees: { early: { inr: string; note: string }; standard: { inr: string; note: string } };
 };
 
 const levels: Record<Level, LevelData> = {
