@@ -276,7 +276,7 @@ function ContactPage() {
                       </div>
                     </div>
                     <div className="mt-5 font-display text-2xl font-semibold">{brand.address}</div>
-                    <div className="mt-1 text-sm opacity-80">Near Phoenix Mills · 5 min from Lower Parel station</div>
+                    <div className="mt-1 text-sm opacity-80">Thane · easy access from station</div>
                   </div>
                 </div>
               </div>
