@@ -34,14 +34,31 @@ export const whyUs = [
   {
     title: "Comprehensive Learning",
     body: "Our programs are designed to take you from the fundamentals to advanced concepts with complete syllabus coverage, structured study plans, mock tests, revision sessions, and continuous support throughout your learning journey.",
+    items: [
+      "Regular revision lectures",
+      "2500+ Practice questions",
+      "Handwritten Notes",
+      "Recorded videos with unlimited views",
+    ],
   },
   {
     title: "Practical Teaching Methodology",
     body: "Finance becomes easier when concepts are connected to the real world. We simplify complex topics using live business examples, case studies, visual explanations, and practical applications that make learning engaging and memorable.",
+    items: [
+      "Indian Market Focused Examples",
+      "Recorded videos and notes of curriculum solving",
+      "Career Oriented Approach",
+      "Study Planner",
+    ],
   },
   {
     title: "Dedicated Mentorship",
     body: "Learning doesn't end after the lecture. Receive continuous guidance through doubt-solving sessions, personalized mentoring, exam strategies, and career advice to help you stay on track and achieve your goals.",
+    items: [
+      "Personalised Doubt solving sessions",
+      "Career Guidance",
+      "Exam Support & Mentoring",
+    ],
   },
 ];
 
