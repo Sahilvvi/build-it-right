@@ -881,7 +881,7 @@ function Pricing() {
                   </div>
 
                   <ul className={"mt-6 space-y-2.5 text-sm " + (p.popular ? "text-white/85" : "text-foreground/80")}>
-                    {PLAN_INCLUDES.slice(0, 5).map((inc) => (
+                    {includesFor(p.tier).map((inc) => (
                       <li key={inc} className="flex items-start gap-2">
                         <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-accent" />
                         {inc}
