@@ -68,6 +68,52 @@ function StatsStrip() {
   );
 }
 
+/* ─────────────────────────  WHY US · 3 PILLARS  ───────────────────────── */
+
+function WhyUs() {
+  return (
+    <section className="relative py-20 md:py-28">
+      <div className="mx-auto max-w-7xl px-6">
+        <FadeIn>
+          <div className="mx-auto max-w-2xl text-center">
+            <div className="inline-flex items-center gap-2 rounded-full border border-border/60 bg-card/70 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.22em] text-muted-foreground">
+              <Sparkles className="h-3 w-3 text-accent" /> Why Fin-Envision
+            </div>
+            <h2 className="mt-4 font-display text-3xl font-semibold tracking-tight md:text-4xl">
+              Three pillars that shape every learner.
+            </h2>
+            <p className="mt-3 text-muted-foreground">
+              A learning system built on depth, real-world practice, and personal guidance.
+            </p>
+          </div>
+        </FadeIn>
+
+        <div className="mt-12 grid gap-6 md:grid-cols-3">
+          {whyUs.map((p, i) => (
+            <FadeIn key={p.title} delay={i * 0.08}>
+              <div className="group relative h-full overflow-hidden rounded-3xl border border-border/60 bg-card/80 p-7 shadow-sm backdrop-blur transition hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-lg">
+                <div className="inline-flex h-10 w-10 items-center justify-center rounded-2xl bg-gradient-to-br from-primary to-accent font-display text-sm font-bold text-primary-foreground">
+                  0{i + 1}
+                </div>
+                <h3 className="mt-4 font-display text-xl font-semibold">{p.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{p.body}</p>
+                <ul className="mt-5 space-y-2 border-t border-border/60 pt-5 text-sm">
+                  {p.items?.map((it) => (
+                    <li key={it} className="flex items-start gap-2">
+                      <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
+                      <span className="text-foreground/85">{it}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </FadeIn>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 /* ─────────────────────────  HERO  ───────────────────────── */
 
 function Hero() {
