@@ -164,15 +164,19 @@ function WhyUs() {
 function Hero() {
   return (
     <section className="relative h-[88vh] min-h-[640px] w-full overflow-hidden bg-foreground">
-      <motion.img
-        src={heroImg}
-        alt="Students learning in a sunlit lounge"
+      <motion.video
+        src={heroVideo.url}
+        poster={heroPoster.url}
+        autoPlay
+        muted
+        loop
+        playsInline
+        preload="auto"
+        aria-hidden
         className="absolute inset-0 h-full w-full object-cover"
         initial={{ scale: 1.15 }}
         animate={{ scale: 1 }}
         transition={{ duration: 8, ease: "easeOut" }}
-        width={1920}
-        height={1280}
       />
       <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/30 to-black/70" />
       <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-b from-transparent to-background" />
