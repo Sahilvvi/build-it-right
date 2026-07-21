@@ -58,7 +58,7 @@ const leadership = {
 const heroStats = [
   { value: 5000, suffix: "+", label: "Students trained" },
   { value: 90, suffix: "%", label: "Success rate" },
-  { value: 109, suffix: "", label: "Google reviews" },
+  { value: 216, suffix: "", label: "Google reviews" },
   { value: 8, suffix: "+ yrs", label: "Teaching experience" },
 ];
 

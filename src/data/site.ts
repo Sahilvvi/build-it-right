@@ -25,7 +25,7 @@ export const navLinks = [
 export const stats = [
   { value: "80–90%", label: "Success rate" },
   { value: "5,000+", label: "Students trained" },
-  { value: "109", label: "Google reviews" },
+  { value: "216", label: "Google reviews" },
   { value: "8+ yrs", label: "Teaching experience" },
   { value: "1st", label: "Attempt focus" },
 ];
@@ -344,9 +344,10 @@ export const testimonials = [
 ];
 
 export const hiringCompanies = [
-  "Crisil", "JHP", "Equity Research", "Investment Banking", "Credit Rating",
-  "Derivatives Desks", "Portfolio Management", "Asset Management",
-  "Wealth Advisory", "Corporate Finance", "Buy Side", "Sell Side",
+  "JP Morgan", "CRISIL", "Morgan Stanley", "KPMG", "Barclays", "HSBC",
+  "Mirae Asset Capital Markets", "NSE Indices Ltd", "PL Capital",
+  "Caprize Investment Managers", "Negen Capital Services Pvt Ltd",
+  "Philip Capital", "Motilal Oswal",
 ];
 
 export const journey = [
