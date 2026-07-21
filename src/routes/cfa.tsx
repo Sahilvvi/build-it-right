@@ -119,8 +119,8 @@ const levels: Record<Level, LevelData> = {
     tagline: "Portfolio · Wealth · Strategy",
     description:
       "The final stage focuses on portfolio management, wealth planning and strategic decision-making. In addition to item sets, Level III includes essay-based questions that ask you to clearly articulate investment decisions and reasoning.",
-    meta: { duration: "180+ hours", views: "7 views / lecture", language: "English + Hindi", coverage: "100%", validity: "1 year", courier: "As per location" },
-    pricing: { usd: "$229", inr: "₹19,001" },
+    meta: { duration: "60+ hours (live)", views: "7 views / lecture", language: "English + Hindi", coverage: "100%", validity: "1 year", courier: "As per location" },
+    pricing: { offline: "₹25,000", online: "₹25,000" },
     weights: [
       { subject: "Asset Allocation", range: "15 – 20%" },
       { subject: "Portfolio Construction", range: "15 – 20%" },
