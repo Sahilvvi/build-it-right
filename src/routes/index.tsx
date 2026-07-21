@@ -184,14 +184,19 @@ function HeroVideo() {
       {...({ "webkit-playsinline": "true" } as Record<string, string>)}
       preload="auto"
       aria-hidden
-      className="absolute inset-0 h-full w-full object-cover"
+      className="absolute inset-0 h-full w-full object-cover bg-black"
     />
   );
 }
 
 function Hero() {
   return (
-    <section className="relative h-[88vh] min-h-[640px] w-full overflow-hidden bg-foreground">
+    <section className="relative h-[88vh] min-h-[640px] w-full overflow-hidden bg-black">
+      <div
+        aria-hidden
+        className="absolute inset-0 bg-cover bg-center"
+        style={{ backgroundImage: "url(/hero-poster.jpg)" }}
+      />
       <HeroVideo />
 
       <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/30 to-black/70" />
