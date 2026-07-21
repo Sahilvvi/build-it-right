@@ -48,8 +48,8 @@ const levels: Record<Level, LevelData> = {
     tagline: "Foundations · Tools · Ethics",
     description:
       "Build a strong foundation in finance. Level I introduces candidates to core concepts, tools, and ethical standards — focused on understanding over application. Ideal for students, non-finance backgrounds, and early-stage professionals starting their CFA preparation.",
-    meta: { duration: "350+ hours", views: "7 views / lecture", language: "English + Hindi", coverage: "100%", validity: "Until you clear your exam", courier: "As per location" },
-    pricing: { usd: "$188", inr: "₹15,799" },
+    meta: { duration: "140+ hours (live)", views: "7 views / lecture", language: "English + Hindi", coverage: "100%", validity: "Until you clear your exam", courier: "As per location" },
+    pricing: { offline: "₹36,000", online: "₹20,000" },
     weights: [
       { subject: "Ethics", range: "15 – 20%" },
       { subject: "Quants", range: "6 – 9%" },
