@@ -7,7 +7,7 @@ import { SiteLayout } from "@/components/site/Layout";
 import { FadeIn } from "@/components/site/primitives";
 import { CompaniesMarquee } from "@/components/site/Marquee";
 import { FAQ } from "@/components/site/FAQ";
-import { courses, testimonials, hiringCompanies, brand, faqs } from "@/data/site";
+import { courses, testimonials, hiringCompanies, brand, faqs, stats } from "@/data/site";
 import heroImg from "@/assets/hero-classroom.jpg";
 import founderImg from "@/assets/founder.jpg";
 
@@ -29,6 +29,7 @@ function Home() {
     <SiteLayout>
       <Hero />
       <CourseTabs />
+      <StatsStrip />
       <PlacementAnalytics />
       <FounderSpotlight />
       <TestimonialsSection />
@@ -38,6 +39,31 @@ function Home() {
       <FAQ />
       <FinalCta />
     </SiteLayout>
+  );
+}
+
+/* ─────────────────────────  STATS STRIP  ───────────────────────── */
+
+function StatsStrip() {
+  return (
+    <section className="relative border-y border-border/60 bg-gradient-to-r from-primary/5 via-background to-accent/5 py-10 md:py-14">
+      <div className="mx-auto max-w-7xl px-6">
+        <div className="grid grid-cols-2 gap-6 sm:grid-cols-3 md:gap-8 lg:grid-cols-5">
+          {stats.map((s, i) => (
+            <FadeIn key={s.label} delay={i * 0.06}>
+              <div className="group relative flex flex-col items-center rounded-2xl border border-border/60 bg-card/70 px-4 py-6 text-center shadow-sm backdrop-blur transition hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-md">
+                <span className="bg-gradient-to-br from-primary to-accent bg-clip-text font-display text-3xl font-bold tracking-tight text-transparent md:text-4xl">
+                  {s.value}
+                </span>
+                <span className="mt-2 text-xs font-medium uppercase tracking-wider text-muted-foreground md:text-sm">
+                  {s.label}
+                </span>
+              </div>
+            </FadeIn>
+          ))}
+        </div>
+      </div>
+    </section>
   );
 }
 
