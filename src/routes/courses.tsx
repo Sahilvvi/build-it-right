@@ -281,10 +281,6 @@ function Hero() {
                   </div>
                 </div>
 
-                <div className="mt-7 inline-flex items-center gap-2 rounded-full border border-accent/30 bg-accent/10 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.24em] text-accent backdrop-blur">
-                  <Sparkles className="h-3 w-3" />
-                  CFA Institute Prep Provider
-                </div>
                 <h1 className="mt-4 font-display text-5xl font-bold leading-[1.05] text-white md:text-6xl lg:text-[4.2rem]">
                   CFA<sup className="text-2xl text-accent">®</sup> Prep{" "}
                   <span className="italic bg-gradient-to-r from-accent via-accent to-accent/70 bg-clip-text text-transparent">
