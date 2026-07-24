@@ -894,44 +894,6 @@ function Pricing() {
           </motion.div>
         </AnimatePresence>
 
-        {/* Revision pack callout */}
-        <motion.div
-          id="revision"
-          initial={{ opacity: 0, y: 18 }} whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }} transition={{ duration: 0.6 }}
-          className="relative mt-12 overflow-hidden rounded-[2rem] p-[1px]"
-        >
-          <span className="absolute inset-0 rounded-[2rem] bg-gradient-to-br from-accent/40 via-border to-primary/30" />
-          <div className="relative grid gap-6 rounded-[calc(2rem-1px)] border border-border bg-card p-8 backdrop-blur md:grid-cols-2 md:items-center md:p-10">
-            <div className="pointer-events-none absolute -right-20 -top-20 h-44 w-44 rounded-full bg-accent/15 blur-3xl" />
-            <div>
-              <div className="inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.22em] text-accent">
-                <Sparkles className="h-3 w-3" /> Revision Pack
-              </div>
-              <h3 className="mt-2 font-display text-2xl font-semibold md:text-3xl">
-                Final-mile sprint —{" "}
-                <span className="italic bg-gradient-to-r from-accent via-accent to-accent/70 bg-clip-text text-transparent">
-                  6 weeks to exam day
-                </span>
-              </h3>
-              <p className="mt-3 max-w-md text-sm text-muted-foreground">
-                Concentrated revision sessions, formula sheets, full-length mocks and weekly mentor reviews. Ideal for the final stretch before your exam window.
-              </p>
-            </div>
-            <div className="flex items-center gap-4 md:justify-end">
-              <div>
-                <div className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">Starting at</div>
-                <div className="font-display text-3xl font-bold text-primary">₹14,900</div>
-              </div>
-              <Link
-                to="/contact"
-                className="group/btn inline-flex items-center gap-2 rounded-full bg-primary px-5 py-3 text-xs font-bold uppercase tracking-[0.18em] text-primary-foreground transition-all hover:bg-primary/90 hover:shadow-[0_16px_32px_-12px_hsl(var(--primary)/0.6)]"
-              >
-                Add to Plan <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover/btn:translate-x-0.5" />
-              </Link>
-            </div>
-          </div>
-        </motion.div>
       </div>
     </section>
   );
