@@ -1689,19 +1689,6 @@ function CompaniesSection() {
           <CompaniesMarquee reverse speed="45s" />
         </div>
 
-        {/* Trust strip */}
-        <div className="mx-auto mt-12 grid max-w-3xl grid-cols-3 gap-px overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03] backdrop-blur">
-          {[
-            ["96%", "Placement rate"],
-            ["12+", "Hiring partners"],
-            ["48hr", "Avg interview turnaround"],
-          ].map(([v, l]) => (
-            <div key={l} className="bg-[hsl(220_55%_12%)] px-4 py-5 text-center">
-              <div className="font-display text-2xl font-bold text-accent md:text-3xl">{v}</div>
-              <div className="mt-1 text-[10px] font-semibold uppercase tracking-wider text-white/55">{l}</div>
-            </div>
-          ))}
-        </div>
       </div>
     </section>
   );
