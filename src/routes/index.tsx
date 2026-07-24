@@ -199,39 +199,8 @@ function Hero() {
       />
       <HeroVideo />
 
-      <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/30 to-black/70" />
       <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-b from-transparent to-background" />
 
-      <div className="container-px relative mx-auto flex h-full max-w-7xl flex-col items-center justify-end pb-28 text-center">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-          className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-4 py-1.5 text-[11px] font-semibold uppercase tracking-[0.22em] text-white/90 backdrop-blur-md"
-        >
-          <span className="h-1.5 w-1.5 rounded-full bg-accent" />
-          14 Years · Countless Success Stories
-        </motion.div>
-
-        <motion.h1
-          initial={{ opacity: 0, y: 28 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1], delay: 0.55 }}
-          className="mt-6 max-w-5xl text-balance font-display text-5xl font-semibold leading-[1.02] tracking-tight text-white md:text-6xl lg:text-7xl xl:text-[5.2rem]"
-        >
-          Learn What Finance{" "}
-          <span className="italic text-white/95">Really Feels Like</span>
-        </motion.h1>
-
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1, delay: 0.9 }}
-          className="mt-6 max-w-xl text-base text-white/75 md:text-lg"
-        >
-          Industry-led programs that move you from curious learner to career-ready professional.
-        </motion.p>
-      </div>
 
       {/* Scrolling indicator */}
       <motion.div
