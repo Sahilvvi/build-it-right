@@ -340,16 +340,13 @@ function CFAPage() {
                   <div className="text-[10px] uppercase tracking-[0.24em] text-accent">Enroll now</div>
                   <div className="mt-3 flex items-baseline gap-3">
                     <span className="font-display text-5xl font-semibold text-white md:text-6xl">{data.pricing.offline}</span>
-                    <span className="text-sm text-white/60">offline · {data.pricing.online} online</span>
                   </div>
                   <div className="mt-5 flex flex-wrap gap-2">
                     <button className="inline-flex items-center gap-2 rounded-full bg-accent px-4 py-2.5 text-sm font-semibold uppercase tracking-wider text-accent-foreground transition-transform hover:scale-[1.02]">
                       Enroll <ArrowRight className="h-4 w-4" />
                     </button>
-                    <button className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2.5 text-sm font-semibold text-white backdrop-blur hover:bg-white/20">
-                      <Download className="h-4 w-4" /> Brochure
-                    </button>
                   </div>
+
 
                   <div className="mt-6 grid grid-cols-2 gap-3 text-[11px]">
                     {[
