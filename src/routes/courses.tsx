@@ -251,9 +251,8 @@ function CoursesPage() {
 /* ─────────── HERO ─────────── */
 
 function Hero() {
-  const [activePricing, setActivePricing] = useState<typeof PRICING_TABS[number]>("Offline (Classroom)");
-
   return (
+
     <section className="relative overflow-hidden bg-[hsl(220_55%_12%)] pb-20 pt-14 text-primary-foreground md:pt-20">
       <AmbientDark />
 
@@ -266,7 +265,7 @@ function Hero() {
         >
           <span className="absolute inset-0 rounded-[2rem] bg-gradient-to-br from-accent/40 via-white/10 to-primary/40" />
           <div className="relative rounded-[calc(2rem-1px)] border border-white/10 bg-[#0b1a36]/80 p-6 backdrop-blur-md md:p-10">
-            <div className="grid gap-10 lg:grid-cols-[1.45fr_1fr]">
+            <div className="grid gap-10">
               {/* Left */}
               <div>
                 <div className="flex flex-wrap items-center gap-5">
@@ -302,74 +301,8 @@ function Hero() {
                 </div>
 
               </div>
-
-              {/* Right — Pricing card */}
-              <motion.div
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.8, delay: 0.15 }}
-                className="relative overflow-hidden rounded-[1.75rem] bg-white p-6 text-foreground shadow-[0_30px_60px_-20px_hsl(var(--accent)/0.45)] md:p-8"
-              >
-                <div className="pointer-events-none absolute -right-16 -top-16 h-44 w-44 rounded-full bg-accent/25 blur-3xl" />
-                {/* Tabs */}
-                <div className="flex items-center justify-center gap-8">
-                  {PRICING_TABS.map((t) => {
-                    const isActive = t === activePricing;
-                    return (
-                      <button
-                        key={t}
-                        onClick={() => setActivePricing(t)}
-                        className="relative pb-1 text-sm font-bold"
-                      >
-                        <span className={isActive ? "text-primary" : "text-muted-foreground"}>{t}</span>
-                        {isActive && (
-                          <motion.span
-                            layoutId="hero-price-tab"
-                            className="absolute -bottom-0.5 left-0 right-0 h-[3px] rounded-full bg-accent"
-                          />
-                        )}
-                      </button>
-                    );
-                  })}
-                </div>
-
-                <div className="mt-6 text-center">
-                  <div className="text-xs font-medium text-muted-foreground">Starting at</div>
-                  <div className="mt-2 font-display text-4xl font-bold text-primary md:text-5xl">
-                    ₹25,000 <span className="text-2xl text-accent">onwards</span>
-                  </div>
-                  <p className="mt-3 text-sm text-muted-foreground">
-                    Discover our extensive range of <strong className="text-foreground">packages</strong>,{" "}
-                    <strong className="text-foreground">combo packs</strong> and special offers.
-                  </p>
-                </div>
-
-                <Link
-                  to="/contact"
-                  className="group/btn mt-6 flex items-center justify-center gap-2 rounded-full bg-primary py-4 text-sm font-bold uppercase tracking-[0.16em] text-primary-foreground transition-all hover:bg-primary/90 hover:shadow-[0_18px_36px_-18px_hsl(var(--primary)/0.8)]"
-                >
-                  See Plans & Fees
-                  <ArrowRight className="h-4 w-4 transition-transform group-hover/btn:translate-x-0.5" />
-                </Link>
-
-                {/* Next batch ribbon */}
-                <div className="mt-6 flex items-center justify-between rounded-2xl bg-[hsl(var(--primary)/0.08)] px-4 py-3">
-                  <div className="flex items-center gap-2 text-sm font-semibold text-primary">
-                    <span className="grid h-7 w-7 place-items-center rounded-full bg-primary text-primary-foreground">
-                      <Calendar className="h-3.5 w-3.5" />
-                    </span>
-                    L1 · Next Batch
-                  </div>
-                  <div className="font-display text-base font-bold text-foreground">July 4</div>
-                </div>
-
-                <div className="mt-4 flex items-center justify-center gap-1.5">
-                  <span className="h-1.5 w-6 rounded-full bg-primary" />
-                  <span className="h-1.5 w-1.5 rounded-full bg-muted-foreground/30" />
-                  <span className="h-1.5 w-1.5 rounded-full bg-muted-foreground/30" />
-                </div>
-              </motion.div>
             </div>
+
           </div>
         </motion.div>
       </div>
