@@ -48,7 +48,7 @@ const levels: Record<Level, LevelData> = {
     tagline: "Foundations · Tools · Ethics",
     description:
       "Build a strong foundation in finance. Level I introduces candidates to core concepts, tools, and ethical standards — focused on understanding over application. Ideal for students, non-finance backgrounds, and early-stage professionals starting their CFA preparation.",
-    meta: { duration: "140+ hours (live)", views: "7 views / lecture", language: "English + Hindi", coverage: "100%", validity: "Until you clear your exam", courier: "As per location" },
+    meta: { duration: "140+ hours (live)", views: "Unlimited", language: "English + Hindi", coverage: "100%", validity: "Until exam", courier: "As per location" },
     pricing: { offline: "₹36,000", online: "₹20,000" },
     weights: [
       { subject: "Ethics", range: "15 – 20%" },
@@ -84,7 +84,7 @@ const levels: Record<Level, LevelData> = {
     tagline: "Application · Valuation · Analysis",
     description:
       "Shift from understanding to application. Level II asks you to apply Level I concepts to exam-style scenarios — particularly in valuation, financial statement analysis, and asset classes. The most analytical and application-driven stage of the program.",
-    meta: { duration: "80+ hours (live)", views: "7 views / lecture", language: "English + Hindi", coverage: "100%", validity: "Until you clear your exam", courier: "As per location" },
+    meta: { duration: "80+ hours (live)", views: "Unlimited", language: "English + Hindi", coverage: "100%", validity: "Until exam", courier: "As per location" },
     pricing: { offline: "₹40,000", online: "₹25,000" },
     weights: [
       { subject: "Ethics", range: "10 – 15%" },
@@ -119,7 +119,7 @@ const levels: Record<Level, LevelData> = {
     tagline: "Portfolio · Wealth · Strategy",
     description:
       "The final stage focuses on portfolio management, wealth planning and strategic decision-making. In addition to item sets, Level III includes essay-based questions that ask you to clearly articulate investment decisions and reasoning.",
-    meta: { duration: "60+ hours (live)", views: "7 views / lecture", language: "English + Hindi", coverage: "100%", validity: "1 year", courier: "As per location" },
+    meta: { duration: "60+ hours (live)", views: "Unlimited", language: "English + Hindi", coverage: "100%", validity: "Until exam", courier: "As per location" },
     pricing: { offline: "₹25,000", online: "₹25,000" },
     weights: [
       { subject: "Asset Allocation", range: "15 – 20%" },
@@ -340,16 +340,13 @@ function CFAPage() {
                   <div className="text-[10px] uppercase tracking-[0.24em] text-accent">Enroll now</div>
                   <div className="mt-3 flex items-baseline gap-3">
                     <span className="font-display text-5xl font-semibold text-white md:text-6xl">{data.pricing.offline}</span>
-                    <span className="text-sm text-white/60">offline · {data.pricing.online} online</span>
                   </div>
                   <div className="mt-5 flex flex-wrap gap-2">
                     <button className="inline-flex items-center gap-2 rounded-full bg-accent px-4 py-2.5 text-sm font-semibold uppercase tracking-wider text-accent-foreground transition-transform hover:scale-[1.02]">
                       Enroll <ArrowRight className="h-4 w-4" />
                     </button>
-                    <button className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2.5 text-sm font-semibold text-white backdrop-blur hover:bg-white/20">
-                      <Download className="h-4 w-4" /> Brochure
-                    </button>
                   </div>
+
 
                   <div className="mt-6 grid grid-cols-2 gap-3 text-[11px]">
                     {[
