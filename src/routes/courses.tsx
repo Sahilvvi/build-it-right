@@ -33,7 +33,7 @@ const CHAPTER_NAV = [
   { id: "level-2", label: "Level 2" },
   { id: "level-3", label: "Level 3" },
   { id: "pricing", label: "Pricing" },
-  { id: "revision", label: "Revision Pack" },
+  
   { id: "retakers", label: "Retakers Pack" },
   { id: "faq", label: "FAQ" },
 ];
