@@ -301,14 +301,6 @@ function Hero() {
                   />
                 </div>
 
-                <motion.button
-                  whileHover={{ y: -2 }}
-                  className="mt-8 inline-flex items-center gap-3 rounded-full border border-white/15 bg-white/[0.05] px-5 py-3 text-sm font-semibold text-white backdrop-blur transition-colors hover:border-accent/40 hover:shadow-[0_20px_40px_-20px_hsl(var(--accent)/0.5)]"
-                >
-                  <Calendar className="h-4 w-4 text-accent" />
-                  Get Live School Schedule
-                  <ArrowRight className="h-3.5 w-3.5" />
-                </motion.button>
               </div>
 
               {/* Right — Pricing card */}
