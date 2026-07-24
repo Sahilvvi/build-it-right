@@ -137,7 +137,7 @@ function ContactPage() {
                   {[
                     { v: 1, sfx: " day", lbl: "Avg reply", pfx: "≤ " },
                     { v: 27, sfx: "k+", lbl: "Learners helped" },
-                    { v: 130, sfx: "+", lbl: "Hiring partners" },
+                    
                     { v: 7, sfx: " days", lbl: "Open weekly" },
                   ].map((s, i) => (
                     <motion.div
