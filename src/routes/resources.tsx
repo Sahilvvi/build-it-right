@@ -451,7 +451,7 @@ function ResourcesPage() {
                 One new explainer. <GradientAccent>Every Sunday.</GradientAccent>
               </h2>
               <p className="mt-5 max-w-xl text-white/75 md:text-lg">
-                Curated drops, CFA / FRM tactics and career playbooks — straight to your inbox. No spam, ever.
+                Curated drops, CFA tactics and career playbooks — straight to your inbox. No spam, ever.
               </p>
 
               <form onSubmit={(e) => e.preventDefault()} className="mt-8 flex flex-col gap-3 sm:flex-row">
