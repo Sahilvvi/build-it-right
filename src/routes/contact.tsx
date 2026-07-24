@@ -336,63 +336,6 @@ function ContactPage() {
         </div>
       </section>
 
-      {/* SUPPORT TESTIMONIALS — auto-scroll marquee */}
-      <section className="relative overflow-hidden py-24 md:py-32">
-        <AmbientLight />
-        <div className="container-px relative mx-auto max-w-7xl">
-          <div className="flex flex-col items-start gap-5">
-            <EyebrowBadge>Support quality</EyebrowBadge>
-            <motion.h2
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-80px" }}
-              transition={{ duration: 0.6 }}
-              className="max-w-3xl font-display text-3xl font-semibold tracking-tight md:text-5xl"
-            >
-              The way we <GradientAccent>show up.</GradientAccent>
-            </motion.h2>
-          </div>
-
-          <div className="relative mt-12 overflow-hidden">
-            <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-24 bg-gradient-to-r from-background to-transparent" />
-            <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-24 bg-gradient-to-l from-background to-transparent" />
-            <div className="flex w-max gap-6 animate-marquee">
-              {[
-                { q: "Replied on WhatsApp within minutes — even on a Sunday. Felt like a personal mentor, not a sales desk.", n: "Aditi R.", r: "CFA L2 candidate", tone: "from-emerald-500 to-teal-700" },
-                { q: "The counselling call was honest. They told me what NOT to take, mapped a 9-month plan, and stayed in touch.", n: "Karthik M.", r: "Working professional", tone: "from-amber-500 to-orange-600" },
-                { q: "Every email got a thoughtful reply with links, fee breakup and a recorded demo. No pressure tactics.", n: "Neha S.", r: "Engineering graduate", tone: "from-rose-500 to-pink-700" },
-                { q: "I visited the Thane office, sat through a live class, and left with a clear roadmap the same day.", n: "Rohit P.", r: "Commerce graduate", tone: "from-indigo-600 to-violet-800" },
-                { q: "Lifetime placement support is real. Got role alerts two years after my course ended.", n: "Sneha K.", r: "Alumni · 2022 batch", tone: "from-[#1a3a5c] to-[#2d5a8c]" },
-              ].concat([
-                { q: "Replied on WhatsApp within minutes — even on a Sunday. Felt like a personal mentor, not a sales desk.", n: "Aditi R.", r: "CFA L2 candidate", tone: "from-emerald-500 to-teal-700" },
-                { q: "The counselling call was honest. They told me what NOT to take, mapped a 9-month plan, and stayed in touch.", n: "Karthik M.", r: "Working professional", tone: "from-amber-500 to-orange-600" },
-                { q: "Every email got a thoughtful reply with links, fee breakup and a recorded demo. No pressure tactics.", n: "Neha S.", r: "Engineering graduate", tone: "from-rose-500 to-pink-700" },
-              ]).map((t, i) => (
-                <article
-                  key={i}
-                  className="group relative flex w-[360px] flex-col overflow-hidden rounded-3xl border border-border bg-card p-7 shadow-soft transition-all hover-lift md:w-[440px]"
-                >
-                  <div className="pointer-events-none absolute -right-12 -top-12 h-40 w-40 rounded-full bg-accent/20 opacity-0 blur-3xl transition-opacity duration-500 group-hover:opacity-100" />
-                  <Quote className="h-9 w-9 text-accent" />
-                  <p className="mt-5 text-[15px] leading-relaxed text-foreground/85">"{t.q}"</p>
-                  <div className="mt-6 flex items-center gap-3 border-t border-border pt-5">
-                    <div className="relative grid h-12 w-12 place-items-center">
-                      <ConicRing size="h-12 w-12" />
-                      <div className={cn("relative grid h-10 w-10 place-items-center rounded-full bg-gradient-to-br font-display text-sm font-bold text-white shadow", t.tone)}>
-                        {t.n.split(" ").map((p) => p[0]).join("")}
-                      </div>
-                    </div>
-                    <div>
-                      <div className="font-display text-sm font-semibold">{t.n}</div>
-                      <div className="text-xs text-muted-foreground">{t.r}</div>
-                    </div>
-                  </div>
-                </article>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* FAQ */}
       <FAQ
