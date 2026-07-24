@@ -726,60 +726,6 @@ function CFAPage() {
         </Stagger>
       </section>
 
-      {/* CTA */}
-      <section className="container-px mx-auto max-w-7xl pb-24">
-        <div className="relative overflow-hidden rounded-[2.5rem] border border-border bg-navy-gradient p-10 text-primary-foreground md:p-16">
-          <AmbientDark />
-          <div className="pointer-events-none absolute -right-24 -top-24 h-80 w-80 rounded-full bg-accent/25 blur-3xl" />
-          <div className="pointer-events-none absolute -bottom-24 -left-24 h-80 w-80 rounded-full bg-white/10 blur-3xl" />
-
-          <div className="relative grid gap-10 lg:grid-cols-[1.5fr_1fr] lg:items-center">
-            <div>
-              <EyebrowBadge tone="dark">Got doubts?</EyebrowBadge>
-              <h2 className="mt-5 font-display text-4xl font-semibold leading-tight tracking-tight md:text-5xl">
-                We're just <GradientAccent>one click</GradientAccent> away.
-              </h2>
-              <p className="mt-5 max-w-xl text-white/75 md:text-lg">
-                Talk to a CFA mentor about eligibility, study plan, scholarships and how to pick the right starting level for your background.
-              </p>
-              <div className="mt-8 flex flex-wrap gap-3">
-                <Link to="/contact" className="inline-flex items-center gap-2 rounded-full bg-accent px-6 py-3 text-sm font-semibold uppercase tracking-wider text-accent-foreground transition-transform hover:scale-[1.02]">
-                  Book a free call <ArrowRight className="h-4 w-4" />
-                </Link>
-                <button className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-6 py-3 text-sm font-semibold uppercase tracking-wider text-white backdrop-blur hover:bg-white/20">
-                  <Download className="h-4 w-4" /> Download brochure
-                </button>
-              </div>
-            </div>
-
-            <div className="relative mx-auto grid aspect-square w-full max-w-xs place-items-center">
-              <motion.div
-                aria-hidden
-                animate={{ rotate: 360 }}
-                transition={{ duration: 18, repeat: Infinity, ease: "linear" }}
-                className="absolute -inset-4 rounded-full opacity-60"
-                style={{
-                  background:
-                    "conic-gradient(from 0deg, transparent 0deg, hsl(var(--accent)/0.5) 80deg, transparent 160deg, hsl(var(--primary)/0.5) 240deg, transparent 320deg)",
-                  mask: "radial-gradient(farthest-side, transparent calc(100% - 2px), #000 0)",
-                  WebkitMask: "radial-gradient(farthest-side, transparent calc(100% - 2px), #000 0)",
-                }}
-              />
-              <motion.div
-                animate={{ y: [0, -10, 0] }}
-                transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-                className="relative grid h-full w-full place-items-center rounded-full border border-white/15 bg-white/10 backdrop-blur"
-              >
-                <div className="text-center text-white">
-                  <BookOpen className="mx-auto h-14 w-14 text-accent" />
-                  <div className="mt-4 font-display text-3xl font-semibold">{levelLabels[level]}</div>
-                  <div className="mt-1 text-xs uppercase tracking-[0.2em] text-white/70">Currently viewing</div>
-                </div>
-              </motion.div>
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* FAQ */}
       <FAQ
