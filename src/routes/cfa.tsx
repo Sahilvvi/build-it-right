@@ -75,8 +75,8 @@ const levels: Record<Level, LevelData> = {
     ],
     registration: { window: "12 Aug 2025 – 12 Feb 2026", earlyBird: "12 Aug – 14 Oct 2025", final: "15 Oct 2025 – 12 Feb 2026" },
     fees: {
-      early: { inr: "₹1,07,963", note: "Best value for early planners" },
-      standard: { inr: "₹1,41,109", note: "Standard pricing applies" },
+      early: { inr: "$940", note: "Best value for early planners" },
+      standard: { inr: "$1,290", note: "Standard pricing applies" },
     },
   },
   L2: {
@@ -110,8 +110,8 @@ const levels: Record<Level, LevelData> = {
     ],
     registration: { window: "12 Aug 2025 – 12 Feb 2026", earlyBird: "12 Aug – 14 Oct 2025", final: "15 Oct 2025 – 12 Feb 2026" },
     fees: {
-      early: { inr: "₹1,07,963", note: "Best value for early planners" },
-      standard: { inr: "₹1,41,109", note: "Standard pricing applies" },
+      early: { inr: "$940", note: "Best value for early planners" },
+      standard: { inr: "$1,290", note: "Standard pricing applies" },
     },
   },
   L3: {
@@ -142,8 +142,8 @@ const levels: Record<Level, LevelData> = {
     ],
     registration: { window: "11 Nov 2025 – 6 May 2026", earlyBird: "11 Nov 2025 – 21 Jan 2026", final: "21 Jan – 6 May 2026" },
     fees: {
-      early: { inr: "₹1,07,963", note: "Best value for early planners" },
-      standard: { inr: "₹1,41,109", note: "Standard pricing applies" },
+      early: { inr: "$940", note: "Best value for early planners" },
+      standard: { inr: "$1,290", note: "Standard pricing applies" },
     },
   },
 };

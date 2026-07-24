@@ -654,7 +654,7 @@ function PlanExam() {
   const sections = [
     { letter: "A", title: "Exam Pattern", body: "Two 135-minute sessions of multiple-choice questions covering all 10 topics. Computer-based, delivered at Prometric centres globally." },
     { letter: "B", title: "Exam Periods", body: "Three windows per year — February, May, August, and November (subject to level)." },
-    { letter: "C", title: "Registration Fee", body: "Early: ₹1,07,963 · Standard: ₹1,41,109 per level. Coaching fees are shared on enquiry." },
+    { letter: "C", title: "Registration Fee", body: "Early: $940 · Standard: $1,290 per level. Coaching fees are shared on enquiry." },
   ];
 
   return (
