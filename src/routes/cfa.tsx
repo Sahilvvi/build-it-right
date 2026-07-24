@@ -164,7 +164,7 @@ const importantDetails = [
   { icon: GraduationCap, t: "Eligibility Criteria", b: "Bachelor's degree (or final year), or 4,000 hours of professional work experience." },
   { icon: FileText, t: "Exam Requirement", b: "Two valid IDs, calculator (BA II Plus or HP 12C), and CFA Institute confirmation." },
   { icon: Banknote, t: "Scholarships", b: "Access Access, Student, Women's, and Need-based scholarships to reduce exam fees." },
-  { icon: Calendar, t: "Deferral Policy", b: "One-time deferral per level, subject to fee and window — plan before registration closes." },
+  
   { icon: MapPin, t: "Test Centers", b: "Computer-based testing at Prometric centres across 400+ cities worldwide." },
   { icon: Info, t: "Ethics Code", b: "All candidates must adhere to the CFA Institute Code of Ethics & Standards of Conduct." },
 ];
