@@ -33,7 +33,7 @@ function Home() {
       <PlacementAnalytics />
       <FounderSpotlight />
       <TestimonialsSection />
-      <YourJourney />
+      
       <DownloadApp />
       <CompaniesSection />
       <FAQ />
