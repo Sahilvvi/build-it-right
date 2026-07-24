@@ -136,7 +136,6 @@ function ContactPage() {
                 <div className="mt-5 grid grid-cols-2 gap-3">
                   {[
                     { v: 1, sfx: " day", lbl: "Avg reply", pfx: "≤ " },
-                    { v: 27, sfx: "k+", lbl: "Learners helped" },
                     
                     { v: 7, sfx: " days", lbl: "Open weekly" },
                   ].map((s, i) => (
