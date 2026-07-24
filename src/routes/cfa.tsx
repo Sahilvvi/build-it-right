@@ -48,7 +48,7 @@ const levels: Record<Level, LevelData> = {
     tagline: "Foundations · Tools · Ethics",
     description:
       "Build a strong foundation in finance. Level I introduces candidates to core concepts, tools, and ethical standards — focused on understanding over application. Ideal for students, non-finance backgrounds, and early-stage professionals starting their CFA preparation.",
-    meta: { duration: "140+ hours (live)", views: "7 views / lecture", language: "English + Hindi", coverage: "100%", validity: "Until you clear your exam", courier: "As per location" },
+    meta: { duration: "140+ hours (live)", views: "Unlimited", language: "English + Hindi", coverage: "100%", validity: "Until exam", courier: "As per location" },
     pricing: { offline: "₹36,000", online: "₹20,000" },
     weights: [
       { subject: "Ethics", range: "15 – 20%" },
@@ -84,7 +84,7 @@ const levels: Record<Level, LevelData> = {
     tagline: "Application · Valuation · Analysis",
     description:
       "Shift from understanding to application. Level II asks you to apply Level I concepts to exam-style scenarios — particularly in valuation, financial statement analysis, and asset classes. The most analytical and application-driven stage of the program.",
-    meta: { duration: "80+ hours (live)", views: "7 views / lecture", language: "English + Hindi", coverage: "100%", validity: "Until you clear your exam", courier: "As per location" },
+    meta: { duration: "80+ hours (live)", views: "Unlimited", language: "English + Hindi", coverage: "100%", validity: "Until exam", courier: "As per location" },
     pricing: { offline: "₹40,000", online: "₹25,000" },
     weights: [
       { subject: "Ethics", range: "10 – 15%" },
@@ -119,7 +119,7 @@ const levels: Record<Level, LevelData> = {
     tagline: "Portfolio · Wealth · Strategy",
     description:
       "The final stage focuses on portfolio management, wealth planning and strategic decision-making. In addition to item sets, Level III includes essay-based questions that ask you to clearly articulate investment decisions and reasoning.",
-    meta: { duration: "60+ hours (live)", views: "7 views / lecture", language: "English + Hindi", coverage: "100%", validity: "1 year", courier: "As per location" },
+    meta: { duration: "60+ hours (live)", views: "Unlimited", language: "English + Hindi", coverage: "100%", validity: "Until exam", courier: "As per location" },
     pricing: { offline: "₹25,000", online: "₹25,000" },
     weights: [
       { subject: "Asset Allocation", range: "15 – 20%" },
