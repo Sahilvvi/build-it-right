@@ -251,9 +251,8 @@ function CoursesPage() {
 /* ─────────── HERO ─────────── */
 
 function Hero() {
-  const [activePricing, setActivePricing] = useState<typeof PRICING_TABS[number]>("Offline (Classroom)");
-
   return (
+
     <section className="relative overflow-hidden bg-[hsl(220_55%_12%)] pb-20 pt-14 text-primary-foreground md:pt-20">
       <AmbientDark />
 
