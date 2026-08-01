@@ -160,64 +160,157 @@ function WhyUs() {
 
 /* ─────────────────────────  HERO  ───────────────────────── */
 
-function HeroVideo() {
-  const ref = useRef<HTMLVideoElement>(null);
-  useEffect(() => {
-    const v = ref.current;
-    if (!v) return;
-    v.muted = true;
-    v.playsInline = true;
-    const tryPlay = () => v.play().catch(() => {});
-    tryPlay();
-    const onLoaded = () => tryPlay();
-    v.addEventListener("loadeddata", onLoaded);
-    return () => v.removeEventListener("loadeddata", onLoaded);
-  }, []);
+const HERO_STATS = [
+  { icon: Rocket, value: "80–90%", label: "Success rate" },
+  { icon: GraduationCap, value: "5,000+", label: "Students trained" },
+  { icon: Target, value: "Affordable", label: "Transparent pricing" },
+  { icon: Briefcase, value: "Placement", label: "Support & guidance" },
+];
+
+function HeroEnquiryForm() {
+  const [form, setForm] = useState({ name: "", email: "", phone: "", course: "" });
+
+  const onSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const text = `Hi Fin-Envision, I'd like to enquire.%0AName: ${encodeURIComponent(
+      form.name.trim().slice(0, 100),
+    )}%0AEmail: ${encodeURIComponent(form.email.trim().slice(0, 120))}%0APhone: ${encodeURIComponent(
+      form.phone.trim().slice(0, 20),
+    )}%0ACourse: ${encodeURIComponent(form.course.trim().slice(0, 300))}`;
+    window.open(`https://wa.me/${brand.whatsapp.replace(/\D/g, "")}?text=${text}`, "_blank", "noopener");
+  };
+
+  const field =
+    "w-full rounded-xl border border-white/15 bg-white/10 px-4 py-3 text-sm text-white placeholder:text-white/55 outline-none transition focus:border-primary/60 focus:bg-white/15 focus:ring-2 focus:ring-primary/30";
+
   return (
-    <video
-      ref={ref}
-      src="/hero.mp4"
-      poster="/hero-poster.jpg"
-      autoPlay
-      muted
-      loop
-      playsInline
-      {...({ "webkit-playsinline": "true" } as Record<string, string>)}
-      preload="auto"
-      aria-hidden
-      className="absolute inset-0 h-full w-full object-cover bg-black"
-    />
+    <motion.form
+      onSubmit={onSubmit}
+      initial={{ opacity: 0, y: 24 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.7, delay: 0.25 }}
+      className="relative w-full max-w-md rounded-3xl border border-white/15 bg-white/10 p-6 shadow-[0_40px_100px_-40px_rgba(0,0,0,0.9)] backdrop-blur-2xl md:p-7"
+    >
+      <div className="pointer-events-none absolute inset-x-6 -top-px h-px bg-gradient-to-r from-transparent via-white/50 to-transparent" />
+      <p className="mb-1 font-display text-lg font-semibold text-white">Enquire now</p>
+      <p className="mb-5 text-xs text-white/65">Get batch dates, fees and a free counselling call.</p>
+
+      <div className="space-y-3">
+        <input
+          required maxLength={100} className={field} placeholder="Name"
+          value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })}
+        />
+        <input
+          required type="email" maxLength={120} className={field} placeholder="Email"
+          value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })}
+        />
+        <input
+          required type="tel" maxLength={20} className={field} placeholder="Phone number"
+          value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })}
+        />
+        <textarea
+          rows={3} maxLength={300} className={cn(field, "resize-none")}
+          placeholder="Which course are you looking for?"
+          value={form.course} onChange={(e) => setForm({ ...form, course: e.target.value })}
+        />
+      </div>
+
+      <button
+        type="submit"
+        className="group mt-5 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-primary to-accent px-5 py-3.5 text-sm font-semibold text-primary-foreground shadow-lg shadow-primary/25 transition hover:shadow-xl hover:shadow-primary/35"
+      >
+        Enquire Now
+        <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+      </button>
+    </motion.form>
   );
 }
 
 function Hero() {
   return (
-    <section className="relative h-[88vh] min-h-[640px] w-full overflow-hidden bg-black">
+    <section className="relative w-full overflow-hidden bg-black pb-24 pt-28 md:pb-32 md:pt-36">
       <div
         aria-hidden
         className="absolute inset-0 bg-cover bg-center"
         style={{ backgroundImage: "url(/hero-poster.jpg)" }}
       />
-      <HeroVideo />
+      <div aria-hidden className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/70 to-black/50" />
+      <div aria-hidden className="absolute -left-32 top-1/4 h-[520px] w-[520px] rounded-full bg-primary/25 blur-[140px]" />
+      <div aria-hidden className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-b from-transparent to-background" />
 
-      <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-b from-transparent to-background" />
-
-
-      {/* Scrolling indicator */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.4 }}
-        className="absolute bottom-8 left-1/2 hidden -translate-x-1/2 md:block"
-      >
+      <div className="relative mx-auto grid max-w-7xl items-center gap-12 px-6 lg:grid-cols-[1.1fr_0.9fr]">
         <motion.div
-          animate={{ y: [0, 8, 0] }}
-          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-          className="flex h-10 w-6 items-start justify-center rounded-full border border-white/40 p-1"
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7 }}
         >
-          <span className="h-2 w-1 rounded-full bg-white/80" />
+          <div className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.22em] text-white/85 backdrop-blur">
+            <Sparkles className="h-3.5 w-3.5 text-accent" />
+            CFA & Financial Modeling · Mumbai
+          </div>
+
+          <h1 className="mt-5 font-display text-4xl font-semibold leading-[1.05] tracking-tight text-white md:text-6xl">
+            Your Path to CFA{" "}
+            <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+              Success Starts Here.
+            </span>
+          </h1>
+
+          <p className="mt-5 max-w-lg text-base text-white/75 md:text-lg">
+            Your future is secured with our proven track record — concept-first teaching,
+            complete curriculum coverage and mentorship until exam day.
+          </p>
+
+          <div className="mt-6 inline-flex items-center gap-3 rounded-full border border-white/15 bg-white/10 px-4 py-2 backdrop-blur">
+            <span className="text-sm font-semibold text-white">Excellent</span>
+            <span className="flex items-center gap-0.5">
+              {[0, 1, 2, 3, 4].map((i) => (
+                <Star key={i} className="h-4 w-4 fill-accent text-accent" />
+              ))}
+            </span>
+            <span className="text-sm text-white/75">216 Google reviews</span>
+          </div>
+
+          <div className="mt-8 flex flex-wrap items-center gap-4">
+            <Link
+              to="/courses"
+              className="group inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-primary to-accent px-7 py-3.5 text-sm font-semibold text-primary-foreground shadow-lg shadow-primary/25 transition hover:shadow-xl hover:shadow-primary/35"
+            >
+              Explore Courses
+              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+            </Link>
+            <Link
+              to="/contact"
+              className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/5 px-7 py-3.5 text-sm font-semibold text-white backdrop-blur transition hover:bg-white/15"
+            >
+              Talk to a mentor
+              <ArrowUpRight className="h-4 w-4" />
+            </Link>
+          </div>
         </motion.div>
-      </motion.div>
+
+        <div className="flex justify-center lg:justify-end">
+          <HeroEnquiryForm />
+        </div>
+      </div>
+
+      {/* Stats strip */}
+      <div className="relative mx-auto mt-14 max-w-6xl px-6">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.4 }}
+          className="grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-white/15 bg-white/10 backdrop-blur-2xl md:grid-cols-4"
+        >
+          {HERO_STATS.map(({ icon: Icon, value, label }) => (
+            <div key={label} className="flex flex-col items-center gap-2 px-5 py-6 text-center">
+              <Icon className="h-5 w-5 text-accent" />
+              <p className="font-display text-lg font-semibold text-white">{value}</p>
+              <p className="text-xs text-white/65">{label}</p>
+            </div>
+          ))}
+        </motion.div>
+      </div>
     </section>
   );
 }
