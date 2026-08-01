@@ -201,7 +201,7 @@ export const courses: Course[] = [
     duration: "Classroom + Online",
     level: "Intermediate",
     format: "Hybrid",
-    price: "On request",
+    price: "₹40,000 classroom / ₹25,000 online",
     rating: 4.9,
     learners: 420,
     outcomes: [
@@ -224,7 +224,7 @@ export const courses: Course[] = [
     duration: "Classroom + Online",
     level: "Advanced",
     format: "Hybrid",
-    price: "On request",
+    price: "₹25,000 classroom / ₹25,000 online",
     rating: 4.9,
     learners: 220,
     outcomes: [
