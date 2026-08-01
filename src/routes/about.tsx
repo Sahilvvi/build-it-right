@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 
-import { ArrowRight, Users, Target, Compass, Quote } from "lucide-react";
+import { ArrowRight, Users, Target, Compass } from "lucide-react";
 import { SiteLayout } from "@/components/site/Layout";
 import { FadeIn, Stagger, StaggerItem, staggerItemVariants, Counter } from "@/components/site/primitives";
 import { PremiumOrbs, AmbientDark, AmbientLight, EyebrowBadge, GradientAccent } from "@/components/site/premium";
@@ -282,12 +282,8 @@ function AboutPage() {
             </FadeIn>
 
             <FadeIn delay={0.1}>
-              <Quote className="h-10 w-10 text-accent" />
-              <p className="mt-4 text-pretty text-xl italic leading-relaxed text-foreground/85 md:text-2xl">
-                "{leadership.quote}"
-              </p>
+              <div className="grid gap-8 sm:grid-cols-2">
 
-              <div className="mt-10 grid gap-8 sm:grid-cols-2">
                 <div>
                   <div className="text-xs font-bold uppercase tracking-[0.24em] text-accent">Manoj Sir's Journey</div>
                   <ul className="mt-4 space-y-3">

@@ -767,8 +767,8 @@ function FounderSpotlight() {
     "Dedicated to mentoring students for successful careers in finance through industry-oriented training and personalized guidance.",
   ];
   const credentials = ["CFA Charterholder", "Investment Banking", "Financial Modeling", "Portfolio Strategy"];
-  const quote =
-    "My ability to creatively simplify complicated concepts comes from genuinely caring about each student's journey — concept clarity always beats rote learning.";
+
+
 
   return (
     <section className="relative overflow-hidden bg-background py-24 md:py-32">
@@ -914,18 +914,10 @@ function FounderSpotlight() {
                 </div>
               </div>
 
-              {/* Right — Quote + Journey */}
+              {/* Right — Journey */}
               <div>
-                <Quote className="h-10 w-10 text-accent" />
-                <motion.p
-                  initial={{ opacity: 0, y: 14 }} whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }} transition={{ duration: 0.7, delay: 0.2 }}
-                  className="mt-4 text-pretty text-xl italic leading-relaxed text-foreground/85 md:text-2xl"
-                >
-                  "{quote}"
-                </motion.p>
+                <div className="mt-0">
 
-                <div className="mt-10">
                   <div className="text-xs font-bold uppercase tracking-[0.24em] text-accent">Manoj Sir's Journey</div>
                   <ul className="mt-4 space-y-3">
                     {journey.map((w, i) => (
