@@ -8,6 +8,7 @@ import { FadeIn } from "@/components/site/primitives";
 import { CompaniesMarquee } from "@/components/site/Marquee";
 import { FAQ } from "@/components/site/FAQ";
 import { courses, testimonials, hiringCompanies, brand, faqs, stats, whyUs } from "@/data/site";
+import founderPhoto from "@/assets/manoj-rajgopal.jpg.asset.json";
 
 
 export const Route = createFileRoute("/")({
