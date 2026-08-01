@@ -5,7 +5,7 @@ import {
   Mail, Phone, MapPin,
 } from "lucide-react";
 import { brand } from "@/data/site";
-const logoAsset = { url: "/finenvision-logo.png" };
+const logoAsset = { url: "/finenvision-logo-light.png" };
 
 
 const cols = [
