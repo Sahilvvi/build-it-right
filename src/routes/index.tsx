@@ -767,8 +767,8 @@ function FounderSpotlight() {
     "Dedicated to mentoring students for successful careers in finance through industry-oriented training and personalized guidance.",
   ];
   const credentials = ["CFA Charterholder", "Investment Banking", "Financial Modeling", "Portfolio Strategy"];
-  const quote =
-    "My ability to creatively simplify complicated concepts comes from genuinely caring about each student's journey — concept clarity always beats rote learning.";
+
+
 
   return (
     <section className="relative overflow-hidden bg-background py-24 md:py-32">
