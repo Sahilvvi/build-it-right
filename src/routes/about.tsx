@@ -260,15 +260,17 @@ function AboutPage() {
                   }}
                 />
                 <div className="relative aspect-[4/5] overflow-hidden rounded-[2.5rem] bg-gradient-to-br from-[#1a3a5c] via-[#21426b] to-[#0f2a44] shadow-elevated">
-                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(255,255,255,0.25),transparent_60%)]" />
-                  <div className="grid h-full w-full place-items-center text-white">
-                    <div className="text-center">
-                      <div className="mx-auto grid h-40 w-40 place-items-center rounded-full bg-white/15 font-display text-6xl font-bold backdrop-blur">
-                        {leadership.initials}
-                      </div>
-                      <div className="mt-6 font-display text-3xl font-semibold">{leadership.name}</div>
-                      <div className="mt-1 text-sm uppercase tracking-[0.2em] text-white/70">Founder</div>
-                    </div>
+                  <img
+                    src={founderPhoto.url}
+                    alt={`${leadership.name} — Founder & Lead Instructor, Fin-Envision Learning`}
+                    className="absolute inset-0 h-full w-full object-cover object-top"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                  <div className="absolute inset-x-0 bottom-0 h-2/5 bg-gradient-to-t from-[#0b1f33] via-[#0b1f33]/70 to-transparent" />
+                  <div className="absolute inset-x-0 bottom-0 p-7 text-white">
+                    <div className="font-display text-3xl font-semibold">{leadership.name}</div>
+                    <div className="mt-1 text-sm uppercase tracking-[0.2em] text-white/70">Founder</div>
                   </div>
                 </div>
                 <motion.div animate={{ y: [0, -10, 0] }} transition={{ duration: 6, repeat: Infinity }} className="absolute -bottom-6 -right-6 hidden rounded-2xl border border-border bg-card p-5 shadow-elevated md:block">
