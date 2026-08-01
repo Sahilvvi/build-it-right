@@ -46,7 +46,7 @@ export function Navbar() {
             <img
               src={logoAsset.url}
               alt={brand.name}
-              className="h-10 w-auto md:h-11"
+              className="h-12 w-auto md:h-14"
               loading="eager"
               decoding="async"
             />

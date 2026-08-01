@@ -74,7 +74,7 @@ export function Footer() {
           <div>
             <Link to="/" className="inline-flex items-center gap-2.5" aria-label={brand.name}>
               <div className="rounded-xl bg-white p-2.5 shadow-elevated">
-                <img src={logoAsset.url} alt={brand.name} className="h-9 w-auto" />
+                <img src={logoAsset.url} alt={brand.name} className="h-14 w-auto" />
               </div>
             </Link>
 
