@@ -822,6 +822,20 @@ function FounderSpotlight() {
               {/* Left — Name block */}
               <div>
                 <motion.div
+                  initial={{ opacity: 0, scale: 0.96 }} whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }} transition={{ duration: 0.7 }}
+                  className="relative mb-8 aspect-[4/5] overflow-hidden rounded-[2rem] bg-gradient-to-br from-primary/20 to-accent/10 shadow-elevated"
+                >
+                  <img
+                    src={founderPhoto.url}
+                    alt="Manoj Rajgopal, CFA — Founder & Lead Instructor at Fin-Envision Learning"
+                    className="absolute inset-0 h-full w-full object-cover object-top"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </motion.div>
+
+                <motion.div
                   initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.1 }}
                   className="inline-flex items-center gap-3"
