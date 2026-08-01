@@ -914,18 +914,10 @@ function FounderSpotlight() {
                 </div>
               </div>
 
-              {/* Right — Quote + Journey */}
+              {/* Right — Journey */}
               <div>
-                <Quote className="h-10 w-10 text-accent" />
-                <motion.p
-                  initial={{ opacity: 0, y: 14 }} whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }} transition={{ duration: 0.7, delay: 0.2 }}
-                  className="mt-4 text-pretty text-xl italic leading-relaxed text-foreground/85 md:text-2xl"
-                >
-                  "{quote}"
-                </motion.p>
+                <div className="mt-0">
 
-                <div className="mt-10">
                   <div className="text-xs font-bold uppercase tracking-[0.24em] text-accent">Manoj Sir's Journey</div>
                   <ul className="mt-4 space-y-3">
                     {journey.map((w, i) => (
