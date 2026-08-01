@@ -229,12 +229,17 @@ function HeroEnquiryForm() {
 function Hero() {
   return (
     <section className="relative w-full overflow-hidden bg-black pb-24 pt-28 md:pb-32 md:pt-36">
+      <div aria-hidden className="absolute inset-0 bg-[radial-gradient(ellipse_at_20%_20%,hsl(var(--primary)/0.28),transparent_60%),radial-gradient(ellipse_at_85%_70%,hsl(var(--accent)/0.22),transparent_60%)]" />
       <div
         aria-hidden
-        className="absolute inset-0 bg-cover bg-center"
-        style={{ backgroundImage: "url(/hero-poster.jpg)" }}
+        className="pointer-events-none absolute inset-0 opacity-[0.12]"
+        style={{
+          backgroundImage:
+            "linear-gradient(to right, rgba(255,255,255,0.25) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.25) 1px, transparent 1px)",
+          backgroundSize: "64px 64px",
+          maskImage: "radial-gradient(ellipse at center, black 30%, transparent 80%)",
+        }}
       />
-      <div aria-hidden className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/70 to-black/50" />
       <div aria-hidden className="absolute -left-32 top-1/4 h-[520px] w-[520px] rounded-full bg-primary/25 blur-[140px]" />
       <div aria-hidden className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-b from-transparent to-background" />
 
