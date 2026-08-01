@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Phone, LogIn } from "lucide-react";
 import { navLinks, brand } from "@/data/site";
-const logoAsset = { url: "/finenvision-logo.png" };
+const logoAsset = { url: "/finenvision-logo-light.png" };
 import { cn } from "@/lib/utils";
 
 
@@ -46,7 +46,7 @@ export function Navbar() {
             <img
               src={logoAsset.url}
               alt={brand.name}
-              className="h-10 w-auto md:h-11"
+              className="h-12 w-auto md:h-14"
               loading="eager"
               decoding="async"
             />

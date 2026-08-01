@@ -5,7 +5,7 @@ import {
   Mail, Phone, MapPin,
 } from "lucide-react";
 import { brand } from "@/data/site";
-const logoAsset = { url: "/finenvision-logo.png" };
+const logoAsset = { url: "/finenvision-logo-light.png" };
 
 
 const cols = [
@@ -73,9 +73,7 @@ export function Footer() {
           {/* Brand block */}
           <div>
             <Link to="/" className="inline-flex items-center gap-2.5" aria-label={brand.name}>
-              <div className="rounded-xl bg-white p-2.5 shadow-elevated">
-                <img src={logoAsset.url} alt={brand.name} className="h-9 w-auto" />
-              </div>
+              <img src={logoAsset.url} alt={brand.name} className="h-16 w-auto" />
             </Link>
 
             <p className="mt-5 max-w-sm text-sm leading-relaxed text-white/65">
