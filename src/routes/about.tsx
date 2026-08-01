@@ -282,26 +282,7 @@ function AboutPage() {
             </FadeIn>
 
             <FadeIn delay={0.1}>
-              <div className="grid gap-8 sm:grid-cols-2">
-
-                <div>
-                  <div className="text-xs font-bold uppercase tracking-[0.24em] text-accent">Manoj Sir's Journey</div>
-                  <ul className="mt-4 space-y-3">
-                    {leadership.work.map((w, i) => (
-                      <motion.li
-                        key={w}
-                        initial={{ opacity: 0, x: -8 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.4, delay: i * 0.05 }}
-                        className="flex gap-3 text-sm text-muted-foreground"
-                      >
-                        <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-gradient-to-br from-accent to-primary" />
-                        {w}
-                      </motion.li>
-                    ))}
-                  </ul>
-                </div>
+              <div className="flex flex-col gap-8">
                 <div>
                   <div className="text-xs font-bold uppercase tracking-[0.24em] text-accent">Academic Credentials</div>
                   <div className="mt-4 flex flex-wrap gap-2">
@@ -318,6 +299,27 @@ function AboutPage() {
                       </motion.span>
                     ))}
                   </div>
+                </div>
+
+                <div className="h-px w-full bg-gradient-to-r from-primary/30 via-accent/20 to-transparent" />
+
+                <div>
+                  <div className="text-xs font-bold uppercase tracking-[0.24em] text-accent">Manoj Sir's Journey</div>
+                  <ul className="mt-5 space-y-3">
+                    {leadership.work.map((w, i) => (
+                      <motion.li
+                        key={w}
+                        initial={{ opacity: 0, x: -8 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.4, delay: i * 0.05 }}
+                        className="flex gap-3 rounded-xl border border-transparent bg-muted/30 px-4 py-3 text-sm leading-relaxed text-muted-foreground transition-colors hover:border-accent/30 hover:bg-muted/60"
+                      >
+                        <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-gradient-to-br from-accent to-primary" />
+                        <span>{w}</span>
+                      </motion.li>
+                    ))}
+                  </ul>
                 </div>
               </div>
             </FadeIn>
