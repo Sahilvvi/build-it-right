@@ -81,13 +81,16 @@ export function Navbar() {
               <Phone className="h-4 w-4" />
               <span className="hidden xl:inline">{brand.phone}</span>
             </a>
-            <Link
-              to="/contact"
+            <a
+              href="https://web.classplusapp.com"
+              target="_blank"
+              rel="noopener noreferrer"
               className="group hidden h-10 items-center gap-2 rounded-full bg-primary px-5 text-sm font-semibold tracking-wide text-primary-foreground shadow-elevated transition-all hover:bg-primary-glow md:inline-flex"
             >
               <LogIn className="h-4 w-4" />
               Login
-            </Link>
+            </a>
+
             <button
               aria-label="Toggle menu"
               onClick={() => setOpen((o) => !o)}
@@ -121,12 +124,16 @@ export function Navbar() {
                       {l.label}
                     </Link>
                   ))}
-                  <Link
-                    to="/contact"
+                  <a
+                    href="https://web.classplusapp.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={() => setOpen(false)}
                     className="mt-2 inline-flex items-center justify-center gap-2 rounded-full bg-primary px-5 py-3 text-center text-sm font-semibold tracking-wide text-primary-foreground"
                   >
                     <LogIn className="h-4 w-4" /> Login
-                  </Link>
+                  </a>
+
                 </div>
               </div>
             </motion.div>
