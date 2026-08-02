@@ -397,7 +397,7 @@ export const faqs = [
   },
   {
     q: "What are the fees for the CFA Program?",
-    a: "The CFA Institute exam fee is $940 (early) and $1,290 (standard) per level, plus a one-time enrolment fee for Level 1. The enrolment fee is not charged for further attempts or higher levels. Coaching fees are shared on enquiry.",
+    a: "The CFA Institute exam fee is $940 (early) and $1,290 (standard) per level, plus a one-time enrollment fee for Level 1. The enrollment fee is not charged for further attempts or higher levels. Coaching fees are shared on enquiry.",
   },
   {
     q: "How often is the CFA Level 1 exam conducted?",
@@ -431,6 +431,6 @@ export const services = [
 export const enrollmentSteps = [
   { title: "Enquire", body: "Share your details — we get back within a few minutes." },
   { title: "Counselling", body: "Free counselling on level, batch and study plan." },
-  { title: "Enrol", body: "Confirm your batch and complete the enrolment." },
+  { title: "Enroll", body: "Confirm your batch and complete the enrollment." },
   { title: "Start learning", body: "Join classroom + online sessions and begin." },
 ];
