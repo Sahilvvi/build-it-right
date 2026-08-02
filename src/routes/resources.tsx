@@ -394,26 +394,16 @@ function ResourcesPage() {
                     {!v.thumb && (
                       <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(255,255,255,0.25),transparent_60%)]" />
                     )}
-                    <div className="absolute inset-0 bg-[linear-gradient(transparent_55%,rgba(0,0,0,0.6))]" />
+                    <div className="absolute inset-0 bg-[linear-gradient(transparent_60%,rgba(0,0,0,0.55))]" />
 
-                    {/* shimmer sweep on hover */}
-                    <motion.div
-                      aria-hidden
-                      className="pointer-events-none absolute inset-y-0 -left-1/3 w-1/3 bg-gradient-to-r from-transparent via-white/25 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-                      animate={{ x: ["0%", "400%"] }}
-                      transition={{ duration: 1.6, repeat: Infinity, ease: "linear" }}
-                    />
-
-                    <div className="pointer-events-none absolute inset-0 grid place-items-center">
-                      <div className="relative grid h-16 w-16 place-items-center">
-                        <ConicRing size="h-16 w-16" />
-                        <div className="relative grid h-14 w-14 place-items-center rounded-full bg-white/95 text-foreground shadow-elevated transition-transform duration-300 group-hover:scale-110">
-                          <Play className="h-6 w-6 translate-x-0.5 fill-current" />
-                        </div>
+                    {/* minimal YouTube icon — only on hover, no circle/ring */}
+                    <div className="pointer-events-none absolute inset-0 grid place-items-center opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                      <div className="rounded-full bg-red-600 px-4 py-2 text-xs font-bold uppercase tracking-wider text-white shadow-lg">
+                        Watch on YouTube
                       </div>
                     </div>
 
-                    <span className="absolute right-3 top-3 inline-flex items-center gap-1 rounded-full bg-black/65 px-2.5 py-1 text-[11px] font-semibold text-white backdrop-blur">
+                    <span className="absolute right-3 top-3 inline-flex items-center gap-1 rounded-full bg-black/70 px-2.5 py-1 text-[11px] font-semibold text-white backdrop-blur">
                       <Clock className="h-3 w-3" /> {v.mins} min
                     </span>
                     <span className="absolute bottom-3 left-3 rounded-full bg-white/95 px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.16em] text-foreground">
