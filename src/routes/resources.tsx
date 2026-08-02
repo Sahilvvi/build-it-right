@@ -356,26 +356,32 @@ function ResourcesPage() {
                   href={v.url}
                   target="_blank"
                   rel="noopener noreferrer"
+                  onClick={(e) => {
+                    // Fallback for in-app / mobile browsers that block target=_blank
+                    const w = window.open(v.url, "_blank", "noopener,noreferrer");
+                    if (!w) window.location.href = v.url;
+                    e.preventDefault();
+                  }}
                   key={v.title}
                   layout
                   initial={{ opacity: 0, y: 24 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, scale: 0.95 }}
                   transition={{ duration: 0.5, delay: (i % 9) * 0.04, ease: [0.16, 1, 0.3, 1] }}
-                  className="group relative overflow-hidden rounded-3xl border border-border bg-card shadow-card transition-all hover-lift"
+                  className="group relative block cursor-pointer touch-manipulation overflow-hidden rounded-3xl border border-border bg-card shadow-card transition-all hover-lift"
                 >
-                  <div className={cn("relative aspect-video overflow-hidden bg-gradient-to-br", v.tone)}>
+                  <div className={cn("pointer-events-none relative aspect-video overflow-hidden bg-gradient-to-br", v.tone)}>
                     <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(255,255,255,0.25),transparent_60%)]" />
                     <div className="absolute inset-0 bg-[linear-gradient(transparent_55%,rgba(0,0,0,0.6))]" />
                     {/* shimmer sweep on hover */}
                     <motion.div
                       aria-hidden
-                      className="absolute inset-y-0 -left-1/3 w-1/3 bg-gradient-to-r from-transparent via-white/25 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+                      className="pointer-events-none absolute inset-y-0 -left-1/3 w-1/3 bg-gradient-to-r from-transparent via-white/25 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100"
                       animate={{ x: ["0%", "400%"] }}
                       transition={{ duration: 1.6, repeat: Infinity, ease: "linear" }}
                     />
 
-                    <div className="absolute inset-0 grid place-items-center">
+                    <div className="pointer-events-none absolute inset-0 grid place-items-center">
                       <div className="relative grid h-16 w-16 place-items-center">
                         <ConicRing size="h-16 w-16" />
                         <div className="relative grid h-14 w-14 place-items-center rounded-full bg-white/95 text-foreground shadow-elevated transition-transform duration-300 group-hover:scale-110">
@@ -391,6 +397,7 @@ function ResourcesPage() {
                       {v.cat}
                     </span>
                   </div>
+
                   <div className="p-5">
                     <h3 className="line-clamp-2 font-display text-base font-semibold leading-snug transition-colors group-hover:text-primary">
                       {v.title}
