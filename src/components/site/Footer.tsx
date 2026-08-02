@@ -122,18 +122,18 @@ export function Footer() {
                   {c.title}
                 </div>
               </div>
-              <ul className="mt-5 space-y-3 text-sm">
+              <ul className="mt-5 space-y-1 text-sm">
                 {c.items.map((i) => (
                   <li key={i.l}>
                     <Link
                       to={i.to}
-                      className="group inline-flex items-center gap-1.5 text-white/70 transition-colors hover:text-white"
+                      className="group flex w-full items-center gap-1.5 rounded-lg py-2 text-white/70 transition-colors hover:bg-white/5 hover:text-white"
                     >
                       <span className="relative">
                         {i.l}
                         <span className="absolute -bottom-0.5 left-0 h-px w-0 bg-accent transition-all group-hover:w-full" />
                       </span>
-                      <ArrowUpRight className="h-3 w-3 -translate-x-1 opacity-0 transition-all group-hover:translate-x-0 group-hover:opacity-100" />
+                      <ArrowUpRight className="h-3 w-3 -translate-x-1 text-accent/70 opacity-0 transition-all group-hover:translate-x-0 group-hover:opacity-100" />
                     </Link>
                   </li>
                 ))}
