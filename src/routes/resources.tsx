@@ -23,6 +23,8 @@ export const Route = createFileRoute("/resources")({
 
 import { resourcePlaylists } from "@/data/site";
 
+const YT_CHANNEL = "https://www.youtube.com/@financewithmanojrajgopal";
+
 type Category = "CFA Level I" | "CFA Level II" | "Financial Modelling" | "Stock Market" | "Banking" | "Professional";
 type Video = { title: string; cat: Category; mins: number; tone: string };
 
@@ -267,7 +269,9 @@ function ResourcesPage() {
 
               <div className="mt-8 flex flex-wrap items-center gap-3">
                 <a
-                  href="#"
+                  href={YT_CHANNEL}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="group/btn relative inline-flex items-center gap-2 overflow-hidden rounded-full bg-foreground px-6 py-3 text-sm font-semibold uppercase tracking-wider text-background transition-all hover:scale-[1.02] hover:shadow-elevated"
                 >
                   <motion.span
@@ -279,7 +283,7 @@ function ResourcesPage() {
                   <Youtube className="relative h-4 w-4" />
                   <span className="relative">Check YouTube playlist</span>
                 </a>
-                <a href="#" className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-6 py-3 text-sm font-semibold transition-all hover:scale-[1.02] hover:border-accent/40 hover:text-accent">
+                <a href={YT_CHANNEL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-6 py-3 text-sm font-semibold transition-all hover:scale-[1.02] hover:border-accent/40 hover:text-accent">
                   Browse all <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                 </a>
               </div>
@@ -339,7 +343,9 @@ function ResourcesPage() {
             <AnimatePresence mode="popLayout">
               {pageItems.map((v, i) => (
                 <motion.a
-                  href="#"
+                  href={YT_CHANNEL}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   key={v.title}
                   layout
                   initial={{ opacity: 0, y: 24 }}
