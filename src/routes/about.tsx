@@ -7,7 +7,7 @@ import { FadeIn, Stagger, StaggerItem, staggerItemVariants, Counter } from "@/co
 import { PremiumOrbs, AmbientDark, AmbientLight, EyebrowBadge, GradientAccent } from "@/components/site/premium";
 import { FAQ } from "@/components/site/FAQ";
 import { cn } from "@/lib/utils";
-import founderPhoto from "@/assets/manoj-rajgopal.jpg.asset.json";
+const FOUNDER_PHOTO = "/manoj-rajgopal.jpg";
 
 export const Route = createFileRoute("/about")({
   head: () => ({
@@ -262,7 +262,7 @@ function AboutPage() {
                 />
                 <div className="relative aspect-[4/5] overflow-hidden rounded-[2.5rem] bg-gradient-to-br from-[#1a3a5c] via-[#21426b] to-[#0f2a44] shadow-elevated">
                   <img
-                    src={founderPhoto.url}
+                    src={FOUNDER_PHOTO}
                     alt={`${leadership.name} — Founder & Lead Instructor, Fin-Envision Learning`}
                     className="absolute inset-0 h-full w-full object-cover object-top"
                     loading="lazy"
