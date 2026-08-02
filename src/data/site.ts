@@ -6,7 +6,7 @@ export const brand = {
   tagline: "Your Path to CFA Success Starts Here",
   description:
     "Fin-Envision is amongst the leading CFA classes in Mumbai, offering certified programs in CFA and Financial Modeling. Our concept-focused, practical approach helps students realise their potential and build a future in finance.",
-  email: "info@finenvision.com",
+  email: "contactfinenvision@gmail.com",
   phone: "+91 7304833625",
   whatsapp: "+91 7304833625",
   address: "Thane, Mumbai, Maharashtra, India",
