@@ -363,7 +363,7 @@ function ResourcesPage() {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, scale: 0.95 }}
                   transition={{ duration: 0.5, delay: (i % 9) * 0.04, ease: [0.16, 1, 0.3, 1] }}
-                  className="group relative block cursor-pointer touch-manipulation overflow-hidden rounded-3xl border border-border bg-card shadow-card transition-all hover-lift"
+                  className="group relative block cursor-pointer touch-manipulation overflow-hidden rounded-3xl border border-border bg-card shadow-card transition-all hover-lift hover:border-accent/40 hover:shadow-glow"
                 >
                   <div className={cn("pointer-events-none relative aspect-video overflow-hidden bg-gradient-to-br", v.tone)}>
                     {v.thumb && (
@@ -371,30 +371,30 @@ function ResourcesPage() {
                         src={v.thumb}
                         alt={`${v.title} — YouTube playlist thumbnail`}
                         loading="lazy"
-                        className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                        className="absolute inset-0 h-full w-full object-cover transition-all duration-500 group-hover:scale-105 group-hover:brightness-110 group-hover:contrast-105"
                       />
                     )}
                     {!v.thumb && (
-                      <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(255,255,255,0.25),transparent_60%)]" />
+                      <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(255,255,255,0.25),transparent_60%)] transition-opacity duration-300 group-hover:opacity-80" />
                     )}
-                    <div className="absolute inset-0 bg-[linear-gradient(transparent_60%,rgba(0,0,0,0.55))]" />
+                    <div className="absolute inset-0 bg-[linear-gradient(transparent_60%,rgba(0,0,0,0.55))] transition-opacity duration-300 group-hover:opacity-80" />
 
                     {/* minimal YouTube icon — only on hover, no circle/ring */}
                     <div className="pointer-events-none absolute inset-0 grid place-items-center opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                      <div className="rounded-full bg-red-600 px-4 py-2 text-xs font-bold uppercase tracking-wider text-white shadow-lg">
+                      <div className="rounded-full bg-red-600 px-4 py-2 text-xs font-bold uppercase tracking-wider text-white shadow-lg transition-transform duration-300 group-hover:scale-105">
                         Watch on YouTube
                       </div>
                     </div>
 
-                    <span className="absolute right-3 top-3 inline-flex items-center gap-1 rounded-full bg-black/70 px-2.5 py-1 text-[11px] font-semibold text-white backdrop-blur">
+                    <span className="absolute right-3 top-3 inline-flex items-center gap-1 rounded-full bg-black/70 px-2.5 py-1 text-[11px] font-semibold text-white backdrop-blur transition-colors duration-300 group-hover:bg-black/85">
                       <Clock className="h-3 w-3" /> {v.mins} min
                     </span>
-                    <span className="absolute bottom-3 left-3 rounded-full bg-black/70 px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.16em] text-white/95 backdrop-blur">
+                    <span className="absolute bottom-3 left-3 rounded-full bg-black/70 px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.16em] text-white/95 backdrop-blur transition-all duration-300 group-hover:bg-accent group-hover:text-accent-foreground group-hover:shadow-glow">
                       {v.cat}
                     </span>
                   </div>
 
-                  <div className="p-5">
+                  <div className="p-5 transition-colors duration-300 group-hover:bg-accent/[0.03]">
                     <h3 className="line-clamp-2 font-display text-base font-semibold leading-snug transition-colors group-hover:text-primary">
                       {v.title}
                     </h3>
