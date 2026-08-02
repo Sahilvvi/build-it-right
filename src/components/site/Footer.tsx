@@ -22,8 +22,8 @@ const cols = [
     title: "Courses",
     items: [
       { l: "All Programs", to: "/courses" },
-      { l: "CFA Track", to: "/courses" },
-      { l: "FRM Track", to: "/courses" },
+      { l: "CFA Track", to: "/cfa" },
+      { l: "Financial Modelling", to: "/courses" },
       { l: "Career Accelerator", to: "/courses" },
     ],
   },
