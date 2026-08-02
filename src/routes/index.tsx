@@ -926,7 +926,7 @@ function FounderSpotlight() {
                   className="group relative aspect-[4/5] overflow-hidden rounded-[2rem] bg-gradient-to-br from-primary/20 to-accent/10 shadow-elevated"
                 >
                   <img
-                    src={founderPhoto.url}
+                    src={FOUNDER_PHOTO}
                     alt="Manoj Rajgopal, CFA — Founder & Lead Instructor at Fin-Envision Learning"
                     className="absolute inset-0 h-full w-full object-cover object-top transition-transform duration-700 group-hover:scale-[1.03]"
                     loading="lazy"
