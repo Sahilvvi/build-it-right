@@ -108,8 +108,8 @@ const PLAN_BASE = [
 ];
 
 const HOURS_BY_TIER: Record<string, string> = {
-  "CFA Level 1": "140+ hours of live teaching",
-  "CFA Level 2": "80+ hours of live teaching",
+  "CFA Level 1": "Live Classroom Interactive Sessions",
+  "CFA Level 2": "Live Classroom Interactive Sessions",
   "CFA Level 3": "60+ hours of live teaching",
   "Level 2 Online": "80+ hours of live teaching",
   "Level 3 Online": "60+ hours of live teaching",
