@@ -26,7 +26,7 @@ import { resourcePlaylists } from "@/data/site";
 const YT_CHANNEL = "https://www.youtube.com/@financewithmanojrajgopal";
 
 type Category = "CFA Level I" | "CFA Level II" | "Financial Modelling" | "Stock Market" | "Banking" | "Professional";
-type Video = { title: string; cat: Category; mins: number; tone: string; url: string };
+type Video = { title: string; cat: Category; mins: number; tone: string; url: string; thumb?: string };
 
 const PLAYLIST_URLS: Record<string, string> = {
   "CFA Level 1 \u2013 FSA \u2013 Financial Analysis Techniques (Ratios)":
@@ -36,6 +36,16 @@ const PLAYLIST_URLS: Record<string, string> = {
   "CFA Level 1 \u2013 Quants | Time Value of Money":
     "https://youtube.com/playlist?list=PLzfcxNTCNDhhp8HrFCBUBMjr33HPrfhEI",
 };
+
+const PLAYLIST_THUMBS: Record<string, string> = {
+  "CFA Level 1 \u2013 FSA \u2013 Financial Analysis Techniques (Ratios)":
+    "https://i.ytimg.com/vi/bdlLEeYEs5Q/hqdefault.jpg",
+  "CFA Level 1 \u2013 FSA | Income Statement":
+    "https://i.ytimg.com/vi/db7v1Jli2j8/hqdefault.jpg",
+  "CFA Level 1 \u2013 Quants | Time Value of Money":
+    "https://i.ytimg.com/vi/oKhc21rQpuU/hqdefault.jpg",
+};
+
 
 const TONE_BY_CAT: Record<Category, string[]> = {
   "CFA Level I": ["from-[#1a3a5c] to-[#2d5a8c]", "from-blue-700 to-indigo-900", "from-cyan-600 to-blue-800"],
