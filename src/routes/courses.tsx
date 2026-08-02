@@ -819,7 +819,7 @@ function Pricing() {
                         : "border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground hover:shadow-[0_16px_32px_-12px_hsl(var(--primary)/0.6)]")
                     }
                   >
-                    Enrol Now <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover/btn:translate-x-0.5" />
+                    Enroll Now <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover/btn:translate-x-0.5" />
                   </Link>
                 </div>
               </motion.div>
