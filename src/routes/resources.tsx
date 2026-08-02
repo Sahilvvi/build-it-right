@@ -26,7 +26,16 @@ import { resourcePlaylists } from "@/data/site";
 const YT_CHANNEL = "https://www.youtube.com/@financewithmanojrajgopal";
 
 type Category = "CFA Level I" | "CFA Level II" | "Financial Modelling" | "Stock Market" | "Banking" | "Professional";
-type Video = { title: string; cat: Category; mins: number; tone: string };
+type Video = { title: string; cat: Category; mins: number; tone: string; url: string };
+
+const PLAYLIST_URLS: Record<string, string> = {
+  "CFA Level 1 \u2013 FSA \u2013 Financial Analysis Techniques (Ratios)":
+    "https://youtube.com/playlist?list=PLzfcxNTCNDhgTM6tnbGmkZt7Lznt7h7Zs",
+  "CFA Level 1 \u2013 FSA | Income Statement":
+    "https://youtube.com/playlist?list=PLzfcxNTCNDhit5ehwq3Scrm3PqQPV-4OZ",
+  "CFA Level 1 \u2013 Quants | Time Value of Money":
+    "https://youtube.com/playlist?list=PLzfcxNTCNDhhp8HrFCBUBMjr33HPrfhEI",
+};
 
 const TONE_BY_CAT: Record<Category, string[]> = {
   "CFA Level I": ["from-[#1a3a5c] to-[#2d5a8c]", "from-blue-700 to-indigo-900", "from-cyan-600 to-blue-800"],
@@ -54,6 +63,7 @@ const videos: Video[] = resourcePlaylists.flatMap((group) => {
     cat,
     mins: 20 + ((title.length * 7) % 45),
     tone: tones[i % tones.length],
+    url: PLAYLIST_URLS[title] ?? YT_CHANNEL,
   }));
 });
 
@@ -343,7 +353,7 @@ function ResourcesPage() {
             <AnimatePresence mode="popLayout">
               {pageItems.map((v, i) => (
                 <motion.a
-                  href={YT_CHANNEL}
+                  href={v.url}
                   target="_blank"
                   rel="noopener noreferrer"
                   key={v.title}
