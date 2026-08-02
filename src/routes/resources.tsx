@@ -26,7 +26,7 @@ import { resourcePlaylists } from "@/data/site";
 const YT_CHANNEL = "https://www.youtube.com/@financewithmanojrajgopal";
 
 type Category = "CFA Level I" | "CFA Level II" | "Financial Modelling" | "Stock Market" | "Banking" | "Professional";
-type Video = { title: string; cat: Category; mins: number; tone: string; url: string };
+type Video = { title: string; cat: Category; mins: number; tone: string; url: string; thumb?: string };
 
 const PLAYLIST_URLS: Record<string, string> = {
   "CFA Level 1 \u2013 FSA \u2013 Financial Analysis Techniques (Ratios)":
@@ -36,6 +36,16 @@ const PLAYLIST_URLS: Record<string, string> = {
   "CFA Level 1 \u2013 Quants | Time Value of Money":
     "https://youtube.com/playlist?list=PLzfcxNTCNDhhp8HrFCBUBMjr33HPrfhEI",
 };
+
+const PLAYLIST_THUMBS: Record<string, string> = {
+  "CFA Level 1 \u2013 FSA \u2013 Financial Analysis Techniques (Ratios)":
+    "https://i.ytimg.com/vi/bdlLEeYEs5Q/hqdefault.jpg",
+  "CFA Level 1 \u2013 FSA | Income Statement":
+    "https://i.ytimg.com/vi/db7v1Jli2j8/hqdefault.jpg",
+  "CFA Level 1 \u2013 Quants | Time Value of Money":
+    "https://i.ytimg.com/vi/oKhc21rQpuU/hqdefault.jpg",
+};
+
 
 const TONE_BY_CAT: Record<Category, string[]> = {
   "CFA Level I": ["from-[#1a3a5c] to-[#2d5a8c]", "from-blue-700 to-indigo-900", "from-cyan-600 to-blue-800"],
@@ -64,6 +74,8 @@ const videos: Video[] = resourcePlaylists.flatMap((group) => {
     mins: 20 + ((title.length * 7) % 45),
     tone: tones[i % tones.length],
     url: PLAYLIST_URLS[title] ?? YT_CHANNEL,
+    thumb: PLAYLIST_THUMBS[title],
+
   }));
 });
 
@@ -371,8 +383,19 @@ function ResourcesPage() {
                   className="group relative block cursor-pointer touch-manipulation overflow-hidden rounded-3xl border border-border bg-card shadow-card transition-all hover-lift"
                 >
                   <div className={cn("pointer-events-none relative aspect-video overflow-hidden bg-gradient-to-br", v.tone)}>
-                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(255,255,255,0.25),transparent_60%)]" />
+                    {v.thumb && (
+                      <img
+                        src={v.thumb}
+                        alt={`${v.title} — YouTube playlist thumbnail`}
+                        loading="lazy"
+                        className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      />
+                    )}
+                    {!v.thumb && (
+                      <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(255,255,255,0.25),transparent_60%)]" />
+                    )}
                     <div className="absolute inset-0 bg-[linear-gradient(transparent_55%,rgba(0,0,0,0.6))]" />
+
                     {/* shimmer sweep on hover */}
                     <motion.div
                       aria-hidden
