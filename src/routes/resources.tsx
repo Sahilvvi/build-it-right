@@ -389,7 +389,7 @@ function ResourcesPage() {
                     <span className="absolute right-3 top-3 inline-flex items-center gap-1 rounded-full bg-black/70 px-2.5 py-1 text-[11px] font-semibold text-white backdrop-blur">
                       <Clock className="h-3 w-3" /> {v.mins} min
                     </span>
-                    <span className="absolute bottom-3 left-3 rounded-full bg-white/95 px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.16em] text-foreground">
+                    <span className="absolute bottom-3 left-3 rounded-full bg-black/70 px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.16em] text-white/95 backdrop-blur">
                       {v.cat}
                     </span>
                   </div>
