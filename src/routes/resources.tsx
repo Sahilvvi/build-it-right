@@ -74,6 +74,8 @@ const videos: Video[] = resourcePlaylists.flatMap((group) => {
     mins: 20 + ((title.length * 7) % 45),
     tone: tones[i % tones.length],
     url: PLAYLIST_URLS[title] ?? YT_CHANNEL,
+    thumb: PLAYLIST_THUMBS[title],
+
   }));
 });
 
