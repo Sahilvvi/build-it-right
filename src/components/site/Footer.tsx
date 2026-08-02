@@ -52,7 +52,7 @@ const cols = [
 const SOCIALS = [
   { Icon: Linkedin, href: "#", label: "LinkedIn" },
   { Icon: Instagram, href: "#", label: "Instagram" },
-  { Icon: Youtube, href: "#", label: "YouTube" },
+  { Icon: Youtube, href: "https://www.youtube.com/@financewithmanojrajgopal", label: "YouTube" },
   { Icon: MessageCircle, href: "#", label: "WhatsApp" },
 ];
 
