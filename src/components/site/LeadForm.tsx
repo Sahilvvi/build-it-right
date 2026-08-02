@@ -57,7 +57,7 @@ export function LeadForm({ compact = false, defaultInterest }: { compact?: boole
       <Field name="name" label="Full name" placeholder="Aisha Verma" error={errors.name} />
       <div className="grid gap-4 md:grid-cols-2">
         <Field name="email" label="Email" placeholder="aisha@email.com" type="email" error={errors.email} />
-        <Field name="phone" label="Phone" placeholder="+91 73048 33625" type="tel" error={errors.phone} />
+        <Field name="phone" label="Phone" placeholder="+91 7304833625" type="tel" error={errors.phone} />
       </div>
       <div>
         <label className="mb-1.5 block text-xs font-medium uppercase tracking-wider text-muted-foreground">

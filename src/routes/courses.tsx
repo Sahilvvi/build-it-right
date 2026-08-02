@@ -884,7 +884,7 @@ function LeadForm() {
             <div className="grid gap-5">
               <FormField icon={User} label="Full Name" placeholder="Your full name" required />
               <FormField icon={Mail} label="Email" type="email" placeholder="you@work.com" required />
-              <FormField icon={Phone} label="Phone Number" type="tel" placeholder="+91 73048 33625" />
+              <FormField icon={Phone} label="Phone Number" type="tel" placeholder="+91 7304833625" />
               <div>
                 <label className="text-[11px] font-bold uppercase tracking-[0.18em] text-white/55">Drop a Message</label>
                 <textarea
