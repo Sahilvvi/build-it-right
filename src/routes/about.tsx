@@ -7,7 +7,7 @@ import { FadeIn, Stagger, StaggerItem, staggerItemVariants, Counter } from "@/co
 import { PremiumOrbs, AmbientDark, AmbientLight, EyebrowBadge, GradientAccent } from "@/components/site/premium";
 import { FAQ } from "@/components/site/FAQ";
 import { cn } from "@/lib/utils";
-import founderPhoto from "@/assets/manoj-rajgopal.jpg.asset.json";
+const FOUNDER_PHOTO = "/manoj-rajgopal.jpg";
 
 export const Route = createFileRoute("/about")({
   head: () => ({
