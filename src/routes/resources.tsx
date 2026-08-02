@@ -131,23 +131,6 @@ function PremiumHeader({
   );
 }
 
-/* Rotating conic-gradient ring — homepage signature */
-function ConicRing({ size = "h-14 w-14" }: { size?: string }) {
-  return (
-    <motion.span
-      aria-hidden
-      animate={{ rotate: 360 }}
-      transition={{ duration: 9, repeat: Infinity, ease: "linear" }}
-      className={cn("absolute -inset-1 rounded-full opacity-70", size)}
-      style={{
-        background:
-          "conic-gradient(from 0deg, hsl(var(--accent)), hsl(var(--primary)), transparent 60%, hsl(var(--accent)))",
-        mask: "radial-gradient(farthest-side, transparent calc(100% - 2px), #000 0)",
-        WebkitMask: "radial-gradient(farthest-side, transparent calc(100% - 2px), #000 0)",
-      }}
-    />
-  );
-}
 
 // ─────────────────────────────── component ───────────────────────────────
 function ResourcesPage() {
