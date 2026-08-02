@@ -47,7 +47,7 @@ function ContactPage() {
     { icon: MessageCircle, label: "WhatsApp", value: brand.whatsapp, href: `https://wa.me/${brand.whatsapp.replace(/\D/g, "")}`, tone: "from-emerald-500 to-teal-700" },
     { icon: Phone, label: "Call us", value: brand.phone, href: `tel:${brand.phone.replace(/\s/g, "")}`, tone: "from-amber-500 to-orange-600" },
     { icon: Mail, label: "Email", value: brand.email, href: `mailto:${brand.email}`, tone: "from-rose-500 to-pink-700" },
-    { icon: MapPin, label: "Visit", value: "Thane, Mumbai", tone: "from-indigo-600 to-violet-800" },
+    { icon: MapPin, label: "Visit", value: "Thane, Mumbai", href: "https://maps.app.goo.gl/3ira5ZEkf5i5YPGA9", tone: "from-indigo-600 to-violet-800" },
   ];
 
   return (
