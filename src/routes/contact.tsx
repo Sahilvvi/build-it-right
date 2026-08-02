@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import {
-  Mail, Phone, MapPin, MessageCircle, Clock, ArrowRight, Sparkles,
+  Mail, Phone, MapPin, MessageCircle, ArrowRight, Sparkles,
   Send, UserCheck, CalendarCheck, Rocket, Quote,
 } from "lucide-react";
 import { SiteLayout } from "@/components/site/Layout";
@@ -230,28 +230,6 @@ function ContactPage() {
                   </motion.div>
                 );
               })}
-              <motion.div
-                initial={{ opacity: 0, x: 24 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true, margin: "-40px" }}
-                transition={{ duration: 0.55, delay: 0.32, ease: [0.16, 1, 0.3, 1] }}
-              >
-                <div className="relative overflow-hidden rounded-3xl border border-border bg-gradient-to-br from-primary to-[#2a4ea8] p-5 text-primary-foreground shadow-elevated">
-                  <motion.span
-                    aria-hidden
-                    animate={{ x: ["-100%", "100%"] }}
-                    transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
-                    className="absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-transparent via-white/15 to-transparent"
-                  />
-                  <div className="relative flex items-center gap-3">
-                    <Clock className="h-5 w-5 text-accent" />
-                    <div>
-                      <div className="font-display font-semibold text-white">Hours</div>
-                      <div className="text-sm text-white/70">Mon–Sat · 9am – 9pm IST</div>
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
             </div>
           </div>
 
