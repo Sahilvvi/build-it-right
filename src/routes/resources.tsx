@@ -383,8 +383,19 @@ function ResourcesPage() {
                   className="group relative block cursor-pointer touch-manipulation overflow-hidden rounded-3xl border border-border bg-card shadow-card transition-all hover-lift"
                 >
                   <div className={cn("pointer-events-none relative aspect-video overflow-hidden bg-gradient-to-br", v.tone)}>
-                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(255,255,255,0.25),transparent_60%)]" />
+                    {v.thumb && (
+                      <img
+                        src={v.thumb}
+                        alt={`${v.title} — YouTube playlist thumbnail`}
+                        loading="lazy"
+                        className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      />
+                    )}
+                    {!v.thumb && (
+                      <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(255,255,255,0.25),transparent_60%)]" />
+                    )}
                     <div className="absolute inset-0 bg-[linear-gradient(transparent_55%,rgba(0,0,0,0.6))]" />
+
                     {/* shimmer sweep on hover */}
                     <motion.div
                       aria-hidden
