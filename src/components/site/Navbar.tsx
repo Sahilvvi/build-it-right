@@ -124,12 +124,16 @@ export function Navbar() {
                       {l.label}
                     </Link>
                   ))}
-                  <Link
-                    to="/contact"
+                  <a
+                    href="https://web.classplusapp.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={() => setOpen(false)}
                     className="mt-2 inline-flex items-center justify-center gap-2 rounded-full bg-primary px-5 py-3 text-center text-sm font-semibold tracking-wide text-primary-foreground"
                   >
                     <LogIn className="h-4 w-4" /> Login
-                  </Link>
+                  </a>
+
                 </div>
               </div>
             </motion.div>
