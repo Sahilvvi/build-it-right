@@ -19,15 +19,6 @@ const cols = [
     ],
   },
   {
-    title: "Courses",
-    items: [
-      { l: "All Programs", to: "/courses" },
-      { l: "CFA Track", to: "/cfa" },
-      { l: "FRM Track", to: "/courses" },
-      { l: "Career Accelerator", to: "/courses" },
-    ],
-  },
-  {
     title: "Resources",
     items: [
       { l: "Blog", to: "/resources" },
