@@ -68,15 +68,15 @@ const levels: Record<Level, LevelData> = {
       key: ["Average pass rate: 41% (2016 – 2025)", "No penalty for incorrect answers", "Results within 5 – 7 weeks"],
     },
     deadlines: [
-      { window: "May 2026", date: "12 – 18 May 2026" },
       { window: "August 2026", date: "18 – 24 Aug 2026" },
       { window: "November 2026", date: "11 – 17 Nov 2026" },
       { window: "February 2027", date: "22 – 28 Feb 2027" },
+      { window: "May 2027", date: "11 – 17 May 2027" },
     ],
-    registration: { window: "12 Aug 2025 – 12 Feb 2026", earlyBird: "12 Aug – 14 Oct 2025", final: "15 Oct 2025 – 12 Feb 2026" },
+    registration: { window: "11 Feb – 11 Aug 2026", earlyBird: "11 Feb – 15 Apr 2026", final: "16 Apr – 11 Aug 2026" },
     fees: {
-      early: { inr: "$940", note: "Best value for early planners" },
-      standard: { inr: "$1,290", note: "Standard pricing applies" },
+      early: { inr: "$1,140", note: "Best value for early planners" },
+      standard: { inr: "$1,490", note: "Standard pricing applies" },
     },
   },
   L2: {
@@ -104,14 +104,14 @@ const levels: Record<Level, LevelData> = {
       key: ["Average pass rate: 46% (2016 – 2025)", "No negative marking — attempt every question", "Results within 5 – 7 weeks"],
     },
     deadlines: [
-      { window: "May 2026", date: "19 – 23 May 2026" },
       { window: "August 2026", date: "25 – 29 Aug 2026" },
       { window: "November 2026", date: "18 – 22 Nov 2026" },
+      { window: "May 2027", date: "18 – 22 May 2027" },
     ],
-    registration: { window: "12 Aug 2025 – 12 Feb 2026", earlyBird: "12 Aug – 14 Oct 2025", final: "15 Oct 2025 – 12 Feb 2026" },
+    registration: { window: "11 Feb – 11 Aug 2026", earlyBird: "11 Feb – 15 Apr 2026", final: "16 Apr – 11 Aug 2026" },
     fees: {
-      early: { inr: "$940", note: "Best value for early planners" },
-      standard: { inr: "$1,290", note: "Standard pricing applies" },
+      early: { inr: "$1,140", note: "Best value for early planners" },
+      standard: { inr: "$1,490", note: "Standard pricing applies" },
     },
   },
   L3: {
@@ -139,11 +139,12 @@ const levels: Record<Level, LevelData> = {
     deadlines: [
       { window: "August 2026", date: "13 – 17 Aug 2026" },
       { window: "February 2027", date: "18 – 21 Feb 2027" },
+      { window: "August 2027", date: "11 – 14 Aug 2027" },
     ],
-    registration: { window: "11 Nov 2025 – 6 May 2026", earlyBird: "11 Nov 2025 – 21 Jan 2026", final: "21 Jan – 6 May 2026" },
+    registration: { window: "5 May – 5 Nov 2026", earlyBird: "5 May – 7 Jul 2026", final: "8 Jul – 5 Nov 2026" },
     fees: {
-      early: { inr: "$940", note: "Best value for early planners" },
-      standard: { inr: "$1,290", note: "Standard pricing applies" },
+      early: { inr: "$1,240", note: "Best value for early planners" },
+      standard: { inr: "$1,590", note: "Standard pricing applies" },
     },
   },
 };
@@ -588,42 +589,123 @@ function CFAPage() {
       <section className="container-px mx-auto max-w-7xl pb-24 md:pb-32">
         <PremiumHeader
           eyebrow="Deadlines & fees"
-          title={<>Official CFA exam dates & <GradientAccent>registration fees.</GradientAccent></>}
-          description="Exam dates and registration fees are updated by the CFA Institute. Please visit the official page for the most accurate and current information."
+          title={<>Registration windows for <GradientAccent>2026–2027.</GradientAccent></>}
+          description="Plan early — the earlier you register, the more you save."
         />
 
-        <FadeIn>
-          <div className="mt-14">
-            <a
-              href="https://www.cfainstitute.org/programs/cfa-program/dates-fees"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group relative block overflow-hidden rounded-[2rem] border border-border bg-card p-8 shadow-elevated transition-all hover:-translate-y-1 hover:border-accent/40 md:p-10"
-            >
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={level}
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.45 }}
+            className="mt-14 grid gap-8 lg:grid-cols-[1.2fr_1fr]"
+          >
+            {/* Exam windows timeline */}
+            <div className="relative overflow-hidden rounded-[2rem] border border-border bg-card p-8 shadow-elevated md:p-10">
               <div className="pointer-events-none absolute -right-24 -top-24 h-56 w-56 rounded-full bg-accent/15 blur-3xl" />
-              <div className="pointer-events-none absolute -left-24 -bottom-24 h-56 w-56 rounded-full bg-primary/15 blur-3xl" />
+              <EyebrowBadge>Exam windows</EyebrowBadge>
+              <h3 className="mt-4 font-display text-2xl font-semibold md:text-3xl">Pick your sitting.</h3>
 
-              <div className="relative flex flex-col items-start gap-6 lg:flex-row lg:items-center lg:justify-between">
-                <div className="max-w-2xl">
-                  <div className="inline-flex items-center gap-2 rounded-full border border-accent/30 bg-accent/10 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.16em] text-accent">
-                    <Calendar className="h-3.5 w-3.5" /> Official source
-                  </div>
-                  <h3 className="mt-4 font-display text-2xl font-semibold md:text-3xl">
-                    CFA Institute — Dates & Fees
-                  </h3>
-                  <p className="mt-3 text-muted-foreground">
-                    View the latest 2026–2027 exam windows, registration deadlines, early-bird pricing, and standard fees directly from the CFA Institute.
-                  </p>
-                </div>
-
-                <div className="inline-flex items-center gap-2 rounded-full bg-accent px-5 py-3 text-sm font-semibold uppercase tracking-wider text-accent-foreground transition-transform group-hover:scale-[1.02]">
-                  Visit official page
-                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+              <div className="relative mt-8">
+                <motion.div
+                  initial={{ scaleY: 0 }}
+                  whileInView={{ scaleY: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+                  style={{ transformOrigin: "top" }}
+                  className="absolute left-5 top-2 h-[calc(100%-1rem)] w-px bg-gradient-to-b from-accent via-primary/40 to-transparent"
+                />
+                <div className="space-y-5">
+                  {data.deadlines.map((d, i) => (
+                    <motion.div
+                      key={d.window}
+                      initial={{ opacity: 0, x: -12 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.5, delay: 0.2 + i * 0.1 }}
+                      className="flex items-start gap-5"
+                    >
+                      <div className="relative grid h-10 w-10 shrink-0 place-items-center">
+                        <ConicRing size="h-10 w-10" />
+                        <div className={cn("relative grid h-9 w-9 place-items-center rounded-full bg-gradient-to-br text-white shadow-glow", levelAccent[level])}>
+                          <Calendar className="h-4 w-4" />
+                        </div>
+                      </div>
+                      <div className="flex-1 rounded-2xl border border-border bg-background p-4 transition-colors hover:border-accent/50">
+                        <div className="text-[10px] uppercase tracking-[0.18em] text-muted-foreground">Exam window</div>
+                        <div className="mt-1 flex items-center justify-between gap-3">
+                          <span className="font-display text-base font-semibold">{d.window}</span>
+                          <span className="rounded-full bg-secondary px-3 py-1 text-xs font-medium">{d.date}</span>
+                        </div>
+                      </div>
+                    </motion.div>
+                  ))}
                 </div>
               </div>
-            </a>
-          </div>
-        </FadeIn>
+
+              <div className="mt-8 grid gap-3 sm:grid-cols-3">
+                {[
+                  { k: "Registration", v: data.registration.window },
+                  { k: "Early bird", v: data.registration.earlyBird },
+                  { k: "Final", v: data.registration.final },
+                ].map((p) => (
+                  <div key={p.k} className="rounded-2xl border border-dashed border-border bg-background p-4">
+                    <div className="text-[10px] uppercase tracking-[0.2em] text-accent">{p.k}</div>
+                    <div className="mt-1 text-sm font-semibold">{p.v}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Pricing cards */}
+            <div className="space-y-4">
+              <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-primary to-[#2a4ea8] p-7 text-primary-foreground shadow-elevated">
+                <div className="pointer-events-none absolute -right-16 -top-16 h-44 w-44 rounded-full bg-accent/30 blur-3xl" />
+                <motion.div
+                  aria-hidden
+                  animate={{ x: ["-100%", "100%"] }}
+                  transition={{ duration: 3.5, repeat: Infinity, ease: "linear" }}
+                  className="absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-transparent via-white/15 to-transparent"
+                />
+                <span className="relative inline-flex items-center gap-1.5 rounded-full bg-accent px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.16em] text-accent-foreground">
+                  <Sparkles className="h-3 w-3" /> Most picked
+                </span>
+                <div className="relative mt-4 text-xs uppercase tracking-[0.2em] text-white/70">Early bird registration</div>
+                <div className="relative mt-3 flex items-baseline gap-3">
+                  <span className="font-display text-4xl font-semibold">{data.fees.early.inr}</span>
+                </div>
+                <p className="relative mt-3 flex items-center gap-2 text-sm text-white/80">
+                  <Tag className="h-4 w-4 text-accent" /> {data.fees.early.note}
+                </p>
+              </div>
+
+              <div className="rounded-3xl border border-border bg-card p-7 shadow-card transition-all hover-lift">
+                <div className="text-xs uppercase tracking-[0.2em] text-muted-foreground">Standard registration</div>
+                <div className="mt-3 flex items-baseline gap-3">
+                  <span className="font-display text-4xl font-semibold">{data.fees.standard.inr}</span>
+                </div>
+                <p className="mt-3 flex items-center gap-2 text-sm text-muted-foreground">
+                  <Info className="h-4 w-4" /> {data.fees.standard.note}
+                </p>
+              </div>
+
+              <a
+                href="https://www.cfainstitute.org/programs/cfa-program/dates-fees"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex items-center justify-between rounded-2xl border border-white/10 bg-white/5 p-4 transition-colors hover:border-accent/40 hover:bg-white/[0.07]"
+              >
+                <div>
+                  <div className="text-[10px] uppercase tracking-[0.2em] text-accent">Official source</div>
+                  <div className="mt-1 text-sm font-semibold text-white/90">CFA Institute dates & fees</div>
+                </div>
+                <ArrowRight className="h-4 w-4 text-white/60 transition-transform group-hover:translate-x-1" />
+              </a>
+            </div>
+          </motion.div>
+        </AnimatePresence>
       </section>
 
       {/* IMPORTANT DETAILS */}
