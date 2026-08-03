@@ -60,7 +60,7 @@ export function Footer() {
 
       {/* Main grid */}
       <div className="container-px relative mx-auto max-w-7xl pb-10 pt-20">
-        <div className="grid gap-12 lg:grid-cols-[1.5fr_repeat(4,1fr)]">
+        <div className="grid gap-12 lg:grid-cols-[1.5fr_repeat(3,1fr)]">
           {/* Brand block */}
           <div>
             <Link to="/" className="inline-flex items-center gap-2.5" aria-label={brand.name}>
