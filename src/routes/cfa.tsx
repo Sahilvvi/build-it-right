@@ -162,13 +162,14 @@ const careers = [
 ];
 
 const importantDetails = [
-  { icon: GraduationCap, t: "Eligibility Criteria", b: "Bachelor's degree (or final year), or 4,000 hours of professional work experience." },
-  { icon: FileText, t: "Exam Requirement", b: "Two valid IDs, calculator (BA II Plus or HP 12C), and CFA Institute confirmation." },
-  { icon: Banknote, t: "Scholarships", b: "Access Access, Student, Women's, and Need-based scholarships to reduce exam fees." },
-  
-  { icon: MapPin, t: "Test Centers", b: "Computer-based testing at Prometric centres across 400+ cities worldwide." },
-  { icon: Info, t: "Ethics Code", b: "All candidates must adhere to the CFA Institute Code of Ethics & Standards of Conduct." },
+  { icon: GraduationCap, t: "Eligibility Criteria", b: "Any one of: bachelor's degree (or equivalent), final-year student (within 23 months of graduation for Level I), 4,000 hours of professional work experience, or a combination of higher education and work experience totalling at least 4,000 hours." },
+  { icon: FileText, t: "Exam Requirements", b: "A valid international passport, an approved calculator (Texas Instruments BA II Plus or HP 12C), and a confirmed exam appointment." },
+  { icon: Banknote, t: "Scholarships", b: "CFA Institute offers scholarship programs to eligible candidates that can significantly reduce registration fees. Availability, eligibility and deadlines vary by program." },
+
+  { icon: MapPin, t: "Test Centers", b: "The exam is a computer-based test at authorised Prometric test centers worldwide. Availability depends on the selected exam window and location." },
+  { icon: Info, t: "Ethics & Professional Standards", b: "All candidates must comply with the CFA Institute Code of Ethics and Standards of Professional Conduct throughout their CFA Program journey." },
 ];
+
 
 const comparisonRows = [
   { subject: "Ethics", l1: "15 – 20%", l2: "10 – 15%", l3: "—" },
