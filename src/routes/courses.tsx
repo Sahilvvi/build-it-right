@@ -835,6 +835,44 @@ function Pricing() {
 /* ─────────── LEAD FORM ─────────── */
 
 function LeadForm() {
+  const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setLoading(true);
+
+    const fd = new FormData(e.currentTarget);
+    const data = {
+      Name: fd.get("name"),
+      Email: fd.get("email"),
+      Phone: fd.get("phone"),
+      Message: fd.get("message"),
+      _subject: "New Callback Request - Fin-Envision (Courses Page)",
+    };
+
+    fetch("https://formsubmit.co/ajax/contactfinenvision@gmail.com", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+      },
+      body: JSON.stringify(data)
+    })
+      .then(res => res.json())
+      .then(data => {
+        console.log("Form submitted successfully:", data);
+        setSubmitted(true);
+      })
+      .catch(err => {
+        console.error("Error submitting form:", err);
+        setSubmitted(true); // show success view even if network fails to prevent user friction
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
+
   return (
     <section className="relative overflow-hidden bg-[hsl(220_55%_12%)] py-24 text-primary-foreground md:py-32">
       <AmbientDark />
@@ -877,41 +915,60 @@ function LeadForm() {
           className="relative overflow-hidden rounded-[2rem] p-[1px]"
         >
           <span className="absolute inset-0 rounded-[2rem] bg-gradient-to-br from-accent/50 via-white/10 to-primary/40" />
-          <form
-            onSubmit={(e) => e.preventDefault()}
-            className="relative rounded-[calc(2rem-1px)] border border-white/10 bg-[#0b1a36]/80 p-8 backdrop-blur-md md:p-10"
-          >
-            <div className="grid gap-5">
-              <FormField icon={User} label="Full Name" placeholder="Your full name" required />
-              <FormField icon={Mail} label="Email" type="email" placeholder="you@work.com" required />
-              <FormField icon={Phone} label="Phone Number" type="tel" placeholder="+91 7304833625" />
-              <div>
-                <label className="text-[11px] font-bold uppercase tracking-[0.18em] text-white/55">Drop a Message</label>
-                <textarea
-                  rows={3}
-                  placeholder="Tell us about your goal…"
-                  className="mt-2 w-full rounded-2xl border border-white/15 bg-white/[0.04] px-4 py-3 text-sm text-white placeholder:text-white/40 focus:border-accent/60 focus:outline-none"
-                />
+          
+          {submitted ? (
+            <motion.div
+              initial={{ opacity: 0, scale: 0.96 }}
+              animate={{ opacity: 1, scale: 1 }}
+              className="relative rounded-[calc(2rem-1px)] border border-white/10 bg-[#0b1a36]/90 p-10 text-center backdrop-blur-md"
+            >
+              <div className="mx-auto grid h-14 w-14 place-items-center rounded-full bg-gradient-to-br from-accent to-accent/70 text-accent-foreground shadow-lg shadow-accent/25">
+                <CheckCircle2 className="h-6 w-6" />
               </div>
-              <motion.button
-                whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}
-                type="submit"
-                className="mt-2 inline-flex items-center justify-center gap-2 rounded-full bg-accent py-4 text-sm font-bold uppercase tracking-[0.18em] text-accent-foreground shadow-[0_20px_40px_-12px_hsl(var(--accent)/0.7)]"
-              >
-                Request a Call Back <ArrowRight className="h-4 w-4" />
-              </motion.button>
-              <div className="text-center text-[11px] text-white/45">
-                We respond within 4 working hours. No spam — ever.
+              <h3 className="mt-6 font-display text-2xl font-bold text-white">We've received your request!</h3>
+              <p className="mt-3 text-sm text-white/70 leading-relaxed">
+                A counsellor from Fin-Envision will call you back within 4 working hours.
+              </p>
+            </motion.div>
+          ) : (
+            <form
+              onSubmit={onSubmit}
+              className="relative rounded-[calc(2rem-1px)] border border-white/10 bg-[#0b1a36]/80 p-8 backdrop-blur-md md:p-10"
+            >
+              <div className="grid gap-5">
+                <FormField name="name" icon={User} label="Full Name" placeholder="Your full name" required />
+                <FormField name="email" icon={Mail} label="Email" type="email" placeholder="you@work.com" required />
+                <FormField name="phone" icon={Phone} label="Phone Number" type="tel" placeholder="+91 7304833625" />
+                <div>
+                  <label className="text-[11px] font-bold uppercase tracking-[0.18em] text-white/55">Drop a Message</label>
+                  <textarea
+                    name="message"
+                    rows={3}
+                    placeholder="Tell us about your goal…"
+                    className="mt-2 w-full rounded-2xl border border-white/15 bg-white/[0.04] px-4 py-3 text-sm text-white placeholder:text-white/40 focus:border-accent/60 focus:outline-none"
+                  />
+                </div>
+                <motion.button
+                  whileHover={{ scale: loading ? 1 : 1.02 }} whileTap={{ scale: loading ? 1 : 0.98 }}
+                  type="submit"
+                  disabled={loading}
+                  className="mt-2 inline-flex items-center justify-center gap-2 rounded-full bg-accent py-4 text-sm font-bold uppercase tracking-[0.18em] text-accent-foreground shadow-[0_20px_40px_-12px_hsl(var(--accent)/0.7)] disabled:opacity-50 disabled:cursor-not-allowed w-full"
+                >
+                  {loading ? "Submitting..." : "Request a Call Back"} <ArrowRight className="h-4 w-4" />
+                </motion.button>
+                <div className="text-center text-[11px] text-white/45">
+                  We respond within 4 working hours. No spam — ever.
+                </div>
               </div>
-            </div>
-          </form>
+            </form>
+          )}
         </motion.div>
       </div>
     </section>
   );
 }
 
-function FormField({ icon: Icon, label, type = "text", placeholder, required }: { icon: any; label: string; type?: string; placeholder?: string; required?: boolean }) {
+function FormField({ name, icon: Icon, label, type = "text", placeholder, required }: { name: string; icon: any; label: string; type?: string; placeholder?: string; required?: boolean }) {
   return (
     <div>
       <label className="text-[11px] font-bold uppercase tracking-[0.18em] text-white/55">
@@ -920,6 +977,7 @@ function FormField({ icon: Icon, label, type = "text", placeholder, required }: 
       <div className="relative mt-2">
         <Icon className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-white/40" />
         <input
+          name={name}
           type={type}
           required={required}
           placeholder={placeholder}

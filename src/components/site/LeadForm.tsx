@@ -31,6 +31,27 @@ export function LeadForm({ compact = false, defaultInterest }: { compact?: boole
       return;
     }
     setErrors({});
+    
+    const data = {
+      Name: parsed.data.name,
+      Email: parsed.data.email,
+      Phone: parsed.data.phone,
+      "Course Interest": parsed.data.interest || "Not specified",
+      _subject: "New Career Guidance Booking - Fin-Envision (Contact Page)",
+    };
+
+    fetch("https://formsubmit.co/ajax/contactfinenvision@gmail.com", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+      },
+      body: JSON.stringify(data)
+    })
+      .then(res => res.json())
+      .then(data => console.log("Form submitted successfully:", data))
+      .catch(err => console.error("Error submitting form:", err));
+
     setSubmitted(true);
   }
 

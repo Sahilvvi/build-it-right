@@ -5,6 +5,7 @@ import { Menu, X, Phone, LogIn } from "lucide-react";
 import { navLinks, brand } from "@/data/site";
 const logoAsset = { url: "/finenvision-logo-light.png" };
 import { cn } from "@/lib/utils";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 
 
 export function Navbar() {
@@ -81,15 +82,27 @@ export function Navbar() {
               <Phone className="h-4 w-4" />
               <span className="hidden xl:inline">{brand.phone}</span>
             </a>
-            <a
-              href="https://web.classplusapp.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group hidden h-10 items-center gap-2 rounded-full bg-primary px-5 text-sm font-semibold tracking-wide text-primary-foreground shadow-elevated transition-all hover:bg-primary-glow md:inline-flex"
-            >
-              <LogIn className="h-4 w-4" />
-              Login
-            </a>
+            <TooltipProvider>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <a
+                    href="https://web.classplusapp.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group hidden h-10 items-center gap-2 rounded-full bg-primary px-5 text-sm font-semibold tracking-wide text-primary-foreground shadow-elevated transition-all hover:bg-primary-glow md:inline-flex"
+                  >
+                    <LogIn className="h-4 w-4" />
+                    Login
+                  </a>
+                </TooltipTrigger>
+                <TooltipContent className="bg-popover border border-border text-popover-foreground p-3 rounded-xl shadow-lg max-w-xs z-50">
+                  <p className="font-semibold text-xs text-primary">Classplus Login Portal</p>
+                  <p className="text-[11px] text-muted-foreground mt-1">
+                    Use Org Code: <strong className="font-mono text-foreground bg-accent/20 px-1 py-0.5 rounded font-bold">RJQBWG</strong>
+                  </p>
+                </TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
 
             <button
               aria-label="Toggle menu"
@@ -133,6 +146,9 @@ export function Navbar() {
                   >
                     <LogIn className="h-4 w-4" /> Login
                   </a>
+                  <div className="mt-1 px-3 text-[11px] text-muted-foreground text-center">
+                    Use Org Code: <strong className="font-mono text-primary font-semibold">RJQBWG</strong>
+                  </div>
 
                 </div>
               </div>

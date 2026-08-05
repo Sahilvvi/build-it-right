@@ -31,8 +31,6 @@ const cols = [
     title: "Support",
     items: [
       { l: "Contact Us", to: "/contact" },
-      { l: "Help Center", to: "/contact" },
-      { l: "Refund Policy", to: "/contact" },
     ],
   },
 ];
@@ -141,7 +139,6 @@ export function Footer() {
           <div className="flex flex-wrap gap-x-6 gap-y-2">
             <Link to="/contact" className="transition-colors hover:text-white">Privacy</Link>
             <Link to="/contact" className="transition-colors hover:text-white">Terms</Link>
-            <Link to="/contact" className="transition-colors hover:text-white">Refund Policy</Link>
             <Link to="/contact" className="transition-colors hover:text-white">Cookies</Link>
           </div>
         </div>

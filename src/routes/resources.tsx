@@ -35,6 +35,26 @@ const PLAYLIST_URLS: Record<string, string> = {
     "https://youtube.com/playlist?list=PLzfcxNTCNDhit5ehwq3Scrm3PqQPV-4OZ",
   "CFA Level 1 \u2013 Quants | Time Value of Money":
     "https://youtube.com/playlist?list=PLzfcxNTCNDhhp8HrFCBUBMjr33HPrfhEI",
+  "CFA Level 2 Pre-Requisite":
+    "https://www.youtube.com/watch?v=x3ydYkq4nZY&list=PLzfcxNTCNDhjDNbeQZ2hLcQK4ygnnLpAJ",
+  "CFA Level 2 \u2013 FSA | Intercorporate Investments":
+    "https://www.youtube.com/watch?v=JPc8B8G9SsM&list=PLzfcxNTCNDhjfE80oevHDImEYa6Ztq5oP",
+  "CFA Level 2 \u2013 Derivatives | Contingent Claims":
+    "https://www.youtube.com/watch?v=1Y05GmsoqKs&list=PLzfcxNTCNDhj9H5qy28MAHT-OQXGDNk6S",
+  "CFA Level 2 \u2013 Equity | Private Company Valuation":
+    "https://www.youtube.com/watch?v=XeQQywq8uog&list=PLzfcxNTCNDhhUot2hQahID8XxAzfXuWET",
+  "CFA Level 2 \u2013 Alternative Investments | Investments in Real Estate":
+    "https://www.youtube.com/watch?v=MzoBmDX1rf4&list=PLzfcxNTCNDhghWKcGlpWXiza3YPmOzFfB",
+  "Financial Modeling Demo Sessions":
+    "https://www.youtube.com/watch?v=L-VIKPHW0RU&list=PLzfcxNTCNDhjk0wLR_zEIQ_2OBcE8Rfd2",
+  "Company Analysis":
+    "https://www.youtube.com/watch?v=TtHxD0FssMY&list=PLzfcxNTCNDhiOdTpzGD3eGUmR5YfbHY9i",
+  "Basics of Stock Market":
+    "https://www.youtube.com/watch?v=crFZ_-R5ID0&list=PLzfcxNTCNDhjAhY8Id6Pwa64sYmH0srgM",
+  "Watch List Vs Warn List":
+    "https://www.youtube.com/watch?v=YLJnHgC6-a0&list=PLzfcxNTCNDhgWhTANBQYySR0ajgjcEP3y",
+  "Banking Series":
+    "https://www.youtube.com/watch?v=HC1nUT961CU&list=PLzfcxNTCNDhgTce59yBtGT2ZCz1pLtWAg",
 };
 
 const PLAYLIST_THUMBS: Record<string, string> = {
@@ -44,6 +64,26 @@ const PLAYLIST_THUMBS: Record<string, string> = {
     "https://i.ytimg.com/vi/db7v1Jli2j8/hqdefault.jpg",
   "CFA Level 1 \u2013 Quants | Time Value of Money":
     "https://i.ytimg.com/vi/oKhc21rQpuU/hqdefault.jpg",
+  "CFA Level 2 Pre-Requisite":
+    "https://i.ytimg.com/vi/x3ydYkq4nZY/hqdefault.jpg",
+  "CFA Level 2 \u2013 FSA | Intercorporate Investments":
+    "https://i.ytimg.com/vi/JPc8B8G9SsM/hqdefault.jpg",
+  "CFA Level 2 \u2013 Derivatives | Contingent Claims":
+    "https://i.ytimg.com/vi/1Y05GmsoqKs/hqdefault.jpg",
+  "CFA Level 2 \u2013 Equity | Private Company Valuation":
+    "https://i.ytimg.com/vi/XeQQywq8uog/hqdefault.jpg",
+  "CFA Level 2 \u2013 Alternative Investments | Investments in Real Estate":
+    "https://i.ytimg.com/vi/MzoBmDX1rf4/hqdefault.jpg",
+  "Financial Modeling Demo Sessions":
+    "https://i.ytimg.com/vi/L-VIKPHW0RU/hqdefault.jpg",
+  "Company Analysis":
+    "https://i.ytimg.com/vi/TtHxD0FssMY/hqdefault.jpg",
+  "Basics of Stock Market":
+    "https://i.ytimg.com/vi/crFZ_-R5ID0/hqdefault.jpg",
+  "Watch List Vs Warn List":
+    "https://i.ytimg.com/vi/YLJnHgC6-a0/hqdefault.jpg",
+  "Banking Series":
+    "https://i.ytimg.com/vi/HC1nUT961CU/hqdefault.jpg",
 };
 
 
@@ -473,24 +513,7 @@ function ResourcesPage() {
                 Curated drops, CFA tactics and career playbooks — straight to your inbox. No spam, ever.
               </p>
 
-              <form onSubmit={(e) => e.preventDefault()} className="mt-8 flex flex-col gap-3 sm:flex-row">
-                <input
-                  type="email"
-                  required
-                  placeholder="you@email.com"
-                  className="flex-1 rounded-full border border-white/20 bg-white/10 px-5 py-3 text-white placeholder:text-white/50 backdrop-blur outline-none transition focus:border-accent/60 focus:bg-white/15"
-                />
-                <button className="group/btn relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-full bg-accent px-6 py-3 text-sm font-semibold uppercase tracking-wider text-accent-foreground transition-transform hover:scale-[1.02]">
-                  <motion.span
-                    aria-hidden
-                    animate={{ x: ["-100%", "100%"] }}
-                    transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
-                    className="absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-transparent via-white/40 to-transparent"
-                  />
-                  <span className="relative">Subscribe</span>
-                  <ArrowRight className="relative h-4 w-4 transition-transform group-hover/btn:translate-x-1" />
-                </button>
-              </form>
+              <NewsletterForm />
             </div>
 
             <div className="relative mx-auto grid aspect-square w-full max-w-xs place-items-center">
@@ -530,5 +553,83 @@ function ResourcesPage() {
       />
 
     </SiteLayout>
+  );
+}
+
+function NewsletterForm() {
+  const [subscribed, setSubscribed] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setLoading(true);
+
+    const fd = new FormData(e.currentTarget);
+    const data = {
+      Email: fd.get("email"),
+      _subject: "New Newsletter Subscription - Fin-Envision (Resources Page)",
+    };
+
+    // Open YouTube channel in a new tab synchronously to prevent popup blockers
+    window.open("https://www.youtube.com/@financewithmanojrajgopal", "_blank", "noopener,noreferrer");
+
+    fetch("https://formsubmit.co/ajax/contactfinenvision@gmail.com", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+      },
+      body: JSON.stringify(data)
+    })
+      .then(res => res.json())
+      .then(data => {
+        console.log("Subscribed successfully:", data);
+        setSubscribed(true);
+      })
+      .catch(err => {
+        console.error("Error subscribing:", err);
+        setSubscribed(true);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
+
+  if (subscribed) {
+    return (
+      <motion.div
+        initial={{ opacity: 0, scale: 0.95 }}
+        animate={{ opacity: 1, scale: 1 }}
+        className="mt-8 text-sm font-semibold text-accent"
+      >
+        ✓ Thank you for subscribing! Check your inbox for updates.
+      </motion.div>
+    );
+  }
+
+  return (
+    <form onSubmit={onSubmit} className="mt-8 flex flex-col gap-3 sm:flex-row">
+      <input
+        type="email"
+        name="email"
+        required
+        placeholder="you@email.com"
+        className="flex-1 rounded-full border border-white/20 bg-white/10 px-5 py-3 text-white placeholder:text-white/50 backdrop-blur outline-none transition focus:border-accent/60 focus:bg-white/15"
+      />
+      <button 
+        type="submit"
+        disabled={loading}
+        className="group/btn relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-full bg-accent px-6 py-3 text-sm font-semibold uppercase tracking-wider text-accent-foreground transition-transform hover:scale-[1.02] disabled:opacity-50"
+      >
+        <motion.span
+          aria-hidden
+          animate={{ x: ["-100%", "100%"] }}
+          transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+          className="absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-transparent via-white/40 to-transparent"
+        />
+        <span className="relative">{loading ? "Subscribing..." : "Subscribe"}</span>
+        <ArrowRight className="relative h-4 w-4 transition-transform group-hover/btn:translate-x-1" />
+      </button>
+    </form>
   );
 }

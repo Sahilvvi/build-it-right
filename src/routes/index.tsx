@@ -1530,18 +1530,36 @@ function DownloadApp() {
                   </div>
                   <div className="mt-4 flex flex-wrap gap-3">
                     {[
-                      { label: "Android", Icon: Smartphone, color: "bg-gradient-to-br from-[#3DDC84] to-[#2bb46a] text-black" },
-                      { label: "iOS", Icon: Apple, color: "bg-gradient-to-br from-white to-slate-200 text-black" },
-                      { label: "Windows", Icon: MonitorPlay, color: "bg-gradient-to-br from-[#0078D6] to-[#005a9e] text-white" },
-                    ].map(({ label, Icon, color }, idx) => (
-                      <motion.button
+                      { 
+                        label: "Android", 
+                        Icon: Smartphone, 
+                        color: "bg-gradient-to-br from-[#3DDC84] to-[#2bb46a] text-black",
+                        href: "https://play.google.com/store/apps/details?id=co.sansa.arwir" 
+                      },
+                      { 
+                        label: "iOS", 
+                        Icon: Apple, 
+                        color: "bg-gradient-to-br from-white to-slate-200 text-black",
+                        href: "https://apps.apple.com/us/app/fin-envision-learning/id6745217545" 
+                      },
+                      { 
+                        label: "Windows", 
+                        Icon: MonitorPlay, 
+                        color: "bg-gradient-to-br from-[#0078D6] to-[#005a9e] text-white",
+                        href: "https://web.classplusapp.com" 
+                      },
+                    ].map(({ label, Icon, color, href }, idx) => (
+                      <motion.a
                         key={label}
+                        href={href}
+                        target="_blank"
+                        rel="noopener noreferrer"
                         initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }} transition={{ delay: 0.3 + idx * 0.08 }}
                         whileHover={{ y: -4, scale: 1.04 }}
                         whileTap={{ scale: 0.97 }}
                         aria-label={`Download for ${label}`}
-                        className="group relative flex items-center gap-3 overflow-hidden rounded-2xl border border-white/15 bg-white/[0.05] px-4 py-3 backdrop-blur transition-colors hover:border-accent/50"
+                        className="group relative flex items-center gap-3 overflow-hidden rounded-2xl border border-white/15 bg-white/[0.05] px-4 py-3 backdrop-blur transition-colors hover:border-accent/50 cursor-pointer"
                       >
                         <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/15 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
                         <span className={`relative grid h-10 w-10 place-items-center rounded-xl shadow-lg ${color}`}>
@@ -1551,16 +1569,41 @@ function DownloadApp() {
                           <div className="text-[9px] uppercase tracking-wider text-white/50">Get it on</div>
                           <div className="text-sm font-semibold text-white">{label}</div>
                         </div>
-                      </motion.button>
+                      </motion.a>
                     ))}
                   </div>
+
+                  {/* Laptop / PC / iPad Notice */}
+                  <motion.div
+                    initial={{ opacity: 0, y: 12 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.55 }}
+                    className="mt-6 rounded-2xl border border-white/10 bg-white/[0.03] p-4 backdrop-blur-sm relative overflow-hidden"
+                  >
+                    <div className="pointer-events-none absolute -right-8 -bottom-8 h-24 w-24 rounded-full bg-accent/5 blur-xl" />
+                    <div className="flex items-start gap-3">
+                      <div className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-accent/15 text-accent animate-pulse">
+                        <Sparkles className="h-4 w-4" />
+                      </div>
+                      <div>
+                        <div className="text-xs font-semibold text-white">Laptop / PC / iPad Users</div>
+                        <p className="mt-1.5 text-xs text-white/60 leading-relaxed">
+                          For video lectures, use the Windows link above and enter Org Code:{" "}
+                          <span className="inline-block font-mono bg-white/10 text-accent font-bold px-2 py-0.5 rounded border border-white/10 select-all tracking-wider ml-1">
+                            RJQBWG
+                          </span>
+                        </p>
+                      </div>
+                    </div>
+                  </motion.div>
                 </div>
 
                 {/* Mini stats */}
                 <div className="mt-10 flex flex-wrap gap-px overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03] backdrop-blur">
                   {[
-                    ["4.8★", "App rating"],
-                    ["50k+", "Downloads"],
+                    ["4.2★", "App rating"],
+                    ["500+", "Downloads"],
                     ["100%", "Offline ready"],
                   ].map(([v, l], i) => (
                     <motion.div
@@ -1717,14 +1760,7 @@ function CompaniesSection() {
       <div className="container-px relative mx-auto max-w-7xl">
         <FadeIn>
           <div className="text-center">
-            <span className="inline-flex items-center gap-2 rounded-full border border-accent/30 bg-accent/10 px-4 py-1.5 text-[10px] font-bold uppercase tracking-[0.28em] text-accent backdrop-blur">
-              <span className="relative flex h-1.5 w-1.5">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-75" />
-                <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-accent" />
-              </span>
-              Trusted hiring partners
-            </span>
-            <h2 className="mt-5 font-display text-4xl font-bold tracking-tight text-white md:text-5xl lg:text-6xl">
+            <h2 className="font-display text-4xl font-bold tracking-tight text-white md:text-5xl lg:text-6xl">
               Where our alumni{" "}
               <span className="relative inline-block">
                 <span className="bg-gradient-to-r from-accent via-accent to-accent/70 bg-clip-text text-transparent">
@@ -1734,9 +1770,6 @@ function CompaniesSection() {
               </span>
               .
             </h2>
-            <p className="mx-auto mt-4 max-w-xl text-sm text-white/65 md:text-base">
-              {hiringCompanies.length}+ active partners across investment banking, Big-4, fintech and tech.
-            </p>
           </div>
         </FadeIn>
 
