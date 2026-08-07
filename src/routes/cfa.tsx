@@ -746,7 +746,7 @@ function CFAPage() {
       {/* FAQ */}
       <FAQ
         eyebrow="FAQ"
-        title={<>CFA® program <span className="italic bg-gradient-to-r from-accent via-accent to-accent/60 bg-clip-text text-transparent">questions.</span></>}
+        title={<>CFA® program <span className="italic bg-gradient-to-r from-accent via-accent to-accent/60 bg-clip-text text-transparent pr-[0.15em] -mr-[0.15em]">questions.</span></>}
         description="Common questions about levels, eligibility, exam pattern and registration."
       />
 

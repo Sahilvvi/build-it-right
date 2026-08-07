@@ -318,7 +318,7 @@ function ContactPage() {
       {/* FAQ */}
       <FAQ
         eyebrow="FAQ"
-        title={<>Quick <span className="italic bg-gradient-to-r from-accent via-accent to-accent/60 bg-clip-text text-transparent">answers.</span></>}
+        title={<>Quick <span className="italic bg-gradient-to-r from-accent via-accent to-accent/60 bg-clip-text text-transparent pr-[0.15em] -mr-[0.15em]">answers.</span></>}
         description="The most common things people ask before reaching out."
       />
 

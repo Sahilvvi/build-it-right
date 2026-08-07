@@ -548,7 +548,7 @@ function ResourcesPage() {
       {/* FAQ */}
       <FAQ
         eyebrow="FAQ"
-        title={<>More about our <span className="italic bg-gradient-to-r from-accent via-accent to-accent/60 bg-clip-text text-transparent">resources.</span></>}
+        title={<>More about our <span className="italic bg-gradient-to-r from-accent via-accent to-accent/60 bg-clip-text text-transparent pr-[0.15em] -mr-[0.15em]">resources.</span></>}
         description="Common questions about our YouTube library, newsletter and how to use them in your CFA® / FRM prep."
       />
 

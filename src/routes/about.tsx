@@ -370,7 +370,7 @@ function AboutPage() {
       {/* FAQ */}
       <FAQ
         eyebrow="FAQ"
-        title={<>More about <span className="italic bg-gradient-to-r from-accent via-accent to-accent/60 bg-clip-text text-transparent">us.</span></>}
+        title={<>More about <span className="italic bg-gradient-to-r from-accent via-accent to-accent/60 bg-clip-text text-transparent pr-[0.15em] -mr-[0.15em]">us.</span></>}
         description="Frequently asked questions about Fin-Envision, our teaching style, and how we support every learner."
       />
 

@@ -237,7 +237,7 @@ function GradientHeading({ children, accent, dark = false }: { children: React.R
       }
     >
       {children}{" "}
-      <span className="italic bg-gradient-to-r from-accent via-accent to-accent/70 bg-clip-text text-transparent">
+      <span className="italic bg-gradient-to-r from-accent via-accent to-accent/70 bg-clip-text text-transparent pr-[0.15em] -mr-[0.15em]">
         {accent}
       </span>
     </motion.h2>
@@ -291,7 +291,7 @@ function Hero() {
 
                 <h1 className="mt-4 font-display text-5xl font-bold leading-[1.05] text-white md:text-6xl lg:text-[4.2rem]">
                   CFA<sup className="text-2xl text-accent">®</sup> Prep{" "}
-                  <span className="italic bg-gradient-to-r from-accent via-accent to-accent/70 bg-clip-text text-transparent">
+                  <span className="italic bg-gradient-to-r from-accent via-accent to-accent/70 bg-clip-text text-transparent pr-[0.15em] -mr-[0.15em]">
                     Program
                   </span>
                 </h1>
@@ -680,7 +680,7 @@ function PlanExam() {
               </div>
               <h3 className="mt-3 font-display text-2xl font-semibold text-white md:text-3xl">
                 Make the rest{" "}
-                <span className="italic bg-gradient-to-r from-accent via-accent to-accent/70 bg-clip-text text-transparent">
+                <span className="italic bg-gradient-to-r from-accent via-accent to-accent/70 bg-clip-text text-transparent pr-[0.15em] -mr-[0.15em]">
                   easier.
                 </span>
               </h3>
@@ -895,7 +895,7 @@ function LeadForm() {
           <EyebrowBadge dark>Talk to a counsellor</EyebrowBadge>
           <h2 className="mt-5 font-display text-4xl font-bold leading-tight text-white md:text-5xl lg:text-[3.4rem]">
             Your goals,{" "}
-            <span className="italic bg-gradient-to-r from-accent via-accent to-accent/70 bg-clip-text text-transparent">
+            <span className="italic bg-gradient-to-r from-accent via-accent to-accent/70 bg-clip-text text-transparent pr-[0.15em] -mr-[0.15em]">
               our plans.
             </span>
           </h2>

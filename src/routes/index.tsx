@@ -1114,7 +1114,7 @@ function YourJourney() {
             className="mt-6 font-display text-5xl font-bold tracking-tight md:text-6xl lg:text-[4rem] lg:leading-[1.02]"
           >
             Your{" "}
-            <span className="italic bg-gradient-to-r from-accent via-accent to-accent/70 bg-clip-text text-transparent">
+            <span className="italic bg-gradient-to-r from-accent via-accent to-accent/70 bg-clip-text text-transparent pr-[0.15em] -mr-[0.15em]">
               Journey
             </span>
           </motion.h2>

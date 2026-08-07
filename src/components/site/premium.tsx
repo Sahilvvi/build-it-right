@@ -116,7 +116,7 @@ export function EyebrowBadge({
 /* Reusable gradient italic span — drop into any heading */
 export function GradientAccent({ children }: { children: ReactNode }) {
   return (
-    <span className="italic bg-gradient-to-r from-accent via-accent to-accent/70 bg-clip-text text-transparent">
+    <span className="italic bg-gradient-to-r from-accent via-accent to-accent/70 bg-clip-text text-transparent pr-[0.2em] -mr-[0.2em]">
       {children}
     </span>
   );

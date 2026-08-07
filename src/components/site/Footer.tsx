@@ -20,7 +20,7 @@ const cols = [
     items: [
       { l: "Blog", to: "/resources" },
       { l: "Case Studies", to: "/resources" },
-      { l: "YouTube", to: "/resources" },
+      { l: "YouTube", to: "https://www.youtube.com/@financewithmanojrajgopal" },
     ],
   },
   {

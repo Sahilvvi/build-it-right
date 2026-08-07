@@ -32,7 +32,7 @@ export function FAQ({
   const heading = title ?? (
     <>
       Frequently<br />
-      <span className="italic bg-gradient-to-r from-accent via-accent to-accent/60 bg-clip-text text-transparent">
+      <span className="italic bg-gradient-to-r from-accent via-accent to-accent/60 bg-clip-text text-transparent pr-[0.15em] -mr-[0.15em]">
         asked
       </span>
       <span className="text-accent">.</span>
