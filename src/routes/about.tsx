@@ -59,7 +59,7 @@ const leadership = {
 
 const heroStats = [
   { value: 5000, suffix: "+", label: "Students trained" },
-  { value: 90, suffix: "%", label: "Success rate" },
+  { value: "80–90%", suffix: "", label: "Success rate", isStatic: true },
   { value: googleReviewsCount, suffix: "", label: "Google reviews" },
   { value: 8, suffix: "+ yrs", label: "Teaching experience" },
 ];
@@ -161,7 +161,7 @@ function AboutPage() {
                   <div className="relative overflow-hidden rounded-3xl border border-white/15 bg-white/10 p-5 backdrop-blur-md transition-all hover:border-accent/40 hover:bg-white/[0.14]">
                     <div className="pointer-events-none absolute -right-10 -top-10 h-32 w-32 rounded-full bg-accent/30 opacity-0 blur-3xl transition-opacity duration-500 hover:opacity-100" />
                     <div className="font-display text-4xl font-semibold text-white md:text-5xl">
-                      <Counter to={s.value} suffix={s.suffix} />
+                      {s.isStatic ? s.value : <Counter to={Number(s.value)} suffix={s.suffix} />}
                     </div>
                     <div className="mt-2 text-xs uppercase tracking-[0.18em] text-white/65">{s.label}</div>
                   </div>

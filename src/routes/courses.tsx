@@ -811,8 +811,10 @@ function Pricing() {
                     ))}
                   </ul>
 
-                  <Link
-                    to="/contact"
+                  <a
+                    href="https://wa.me/917304833625?text=Enquiry%20for%20CFA"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className={
                       "group/btn mt-7 inline-flex w-full items-center justify-center gap-2 rounded-full py-3 text-xs font-bold uppercase tracking-[0.18em] transition-all " +
                       (p.popular
@@ -821,7 +823,7 @@ function Pricing() {
                     }
                   >
                     Enroll Now <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover/btn:translate-x-0.5" />
-                  </Link>
+                  </a>
                 </div>
               </motion.div>
             ))}

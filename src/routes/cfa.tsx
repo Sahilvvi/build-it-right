@@ -342,26 +342,29 @@ function CFAPage() {
                     <span className="font-display text-5xl font-semibold text-white md:text-6xl">{data.pricing.offline}</span>
                   </div>
                   <div className="mt-5 flex flex-wrap gap-2">
-                    <button className="inline-flex items-center gap-2 rounded-full bg-accent px-4 py-2.5 text-sm font-semibold uppercase tracking-wider text-accent-foreground transition-transform hover:scale-[1.02]">
+                    <a
+                      href="https://wa.me/917304833625?text=Enquiry%20for%20CFA"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 rounded-full bg-accent px-4 py-2.5 text-sm font-semibold uppercase tracking-wider text-accent-foreground transition-transform hover:scale-[1.02]"
+                    >
                       Enroll <ArrowRight className="h-4 w-4" />
-                    </button>
+                    </a>
                   </div>
 
 
                   <div className="mt-6 grid grid-cols-2 gap-3 text-[11px]">
                     {[
-                      { icon: Clock, k: "Duration", v: data.meta.duration },
                       { icon: Eye, k: "Views", v: data.meta.views },
                       { icon: Languages, k: "Language", v: data.meta.language },
                       { icon: ShieldCheck, k: "Coverage", v: data.meta.coverage },
                       { icon: Calendar, k: "Validity", v: data.meta.validity },
-                      { icon: Truck, k: "Courier", v: data.meta.courier },
                     ].map((m) => (
                       <div key={m.k} className="rounded-xl border border-white/10 bg-white/5 p-3">
                         <div className="flex items-center gap-1.5 text-white/60">
                           <m.icon className="h-3 w-3" /> <span className="uppercase tracking-[0.16em]">{m.k}</span>
                         </div>
-                        <div className="mt-1 text-sm font-semibold text-white">{m.v}</div>
+                        <div className="mt-1 text-sm font-semibold text-white leading-normal py-0.5">{m.v}</div>
                       </div>
                     ))}
                   </div>

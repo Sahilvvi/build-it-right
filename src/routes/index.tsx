@@ -15,7 +15,7 @@ export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       { title: "Fin-Envision Learning — Learn What Finance Really Feels Like" },
-      { name: "description", content: "Fin-Envision Learning — leading CFA® classes in Mumbai. CFA® Level 1, 2, 3 and Financial Modeling, taught by Manoj Rajgopal, CFA®. 90% success rate, 1,500+ students trained." },
+      { name: "description", content: "Fin-Envision Learning — leading CFA® classes in Mumbai. CFA® Level 1, 2, 3 and Financial Modeling, taught by Manoj Rajgopal, CFA®. 80–90% success rate, 1,500+ students trained." },
       { property: "og:title", content: "Fin-Envision Learning — Learn What Finance Really Feels Like" },
       { property: "og:url", content: "/" },
     ],
