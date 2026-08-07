@@ -284,13 +284,15 @@ function Hero() {
               Explore Courses
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
             </Link>
-            <Link
-              to="/contact"
+            <a
+              href={`https://wa.me/${brand.whatsapp.replace(/\D/g, "")}?text=Enquiry%20for%20CFA`}
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/5 px-7 py-3.5 text-sm font-semibold text-white backdrop-blur transition hover:bg-white/15"
             >
               Talk to a mentor
               <ArrowUpRight className="h-4 w-4" />
-            </Link>
+            </a>
           </div>
         </motion.div>
 
@@ -1805,15 +1807,17 @@ function FinalCta() {
             </p>
           </div>
           <div className="flex flex-col gap-3 md:items-end">
-            <Link
-              to="/contact"
+            <a
+              href={`https://wa.me/${brand.whatsapp.replace(/\D/g, "")}?text=Enquiry%20for%20CFA`}
+              target="_blank"
+              rel="noopener noreferrer"
               className="group inline-flex items-center justify-center gap-2 rounded-full bg-accent pl-6 pr-2 py-2 text-sm font-bold uppercase tracking-[0.18em] text-accent-foreground shadow-elevated"
             >
               Book Free Guidance
               <span className="grid h-9 w-9 place-items-center rounded-full bg-white text-primary transition-transform group-hover:translate-x-0.5">
                 <ArrowRight className="h-4 w-4" />
               </span>
-            </Link>
+            </a>
             <a
               href={`https://wa.me/${brand.whatsapp.replace(/\D/g, "")}`}
               target="_blank" rel="noreferrer"

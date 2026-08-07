@@ -8,7 +8,7 @@ import {
   Sparkles, MessageSquare, ChevronDown,
 } from "lucide-react";
 import { SiteLayout } from "@/components/site/Layout";
-import { faqs, googleReviewsCount, googleRating } from "@/data/site";
+import { faqs, googleReviewsCount, googleRating, brand, courses } from "@/data/site";
 
 
 export const Route = createFileRoute("/courses")({
@@ -116,8 +116,18 @@ const HOURS_BY_TIER: Record<string, string> = {
 };
 
 function includesFor(tier: string): string[] {
-  const hours = HOURS_BY_TIER[tier];
-  return hours ? [PLAN_BASE[0], hours, ...PLAN_BASE.slice(1)] : PLAN_BASE;
+  const normalized = tier.toLowerCase();
+  let course;
+  if (normalized.includes("level 1")) {
+    course = courses.find((c) => c.slug === "cfa-level-1");
+  } else if (normalized.includes("level 2")) {
+    course = courses.find((c) => c.slug === "cfa-level-2");
+  } else if (normalized.includes("level 3")) {
+    course = courses.find((c) => c.slug === "cfa-level-3");
+  } else if (normalized.includes("modelling") || normalized.includes("modeling")) {
+    course = courses.find((c) => c.slug === "financial-modeling");
+  }
+  return course ? (course.highlights as string[]) : [];
 }
 
 const PLANS = {
@@ -1021,12 +1031,14 @@ function CourseFaqs() {
             <p className="mt-2 text-sm text-muted-foreground">
               Talk to a counsellor for a quick, no-pressure walkthrough.
             </p>
-            <Link
-              to="/contact"
+            <a
+              href={`https://wa.me/${brand.whatsapp.replace(/\D/g, "")}?text=Enquiry%20for%20CFA`}
+              target="_blank"
+              rel="noopener noreferrer"
               className="group/btn mt-4 inline-flex items-center gap-2 text-sm font-bold text-primary hover:text-accent"
             >
               Talk to a counsellor <ArrowRight className="h-4 w-4 transition-transform group-hover/btn:translate-x-0.5" />
-            </Link>
+            </a>
           </motion.div>
         </div>
 
