@@ -8,14 +8,14 @@ import {
   Sparkles, MessageSquare, ChevronDown,
 } from "lucide-react";
 import { SiteLayout } from "@/components/site/Layout";
-import { faqs } from "@/data/site";
+import { faqs, googleReviewsCount, googleRating } from "@/data/site";
 
 
 export const Route = createFileRoute("/courses")({
   head: () => ({
     meta: [
       { title: "CFA® Prep Program — Fin-Envision Learning" },
-      { name: "description", content: "Master the CFA® Program with India's most trusted prep — live mentors, 1,114+ Google reviews at 4.9★. Levels I, II, III with structured curriculum, mocks, doubt clinics and placement support." },
+      { name: "description", content: "Master the CFA® Program with India's most trusted prep — live mentors, 216+ Google reviews at 4.9★. Levels I, II, III with structured curriculum, mocks, doubt clinics and placement support." },
       { property: "og:title", content: "CFA® Prep Program — Fin-Envision Learning" },
       { property: "og:description", content: "Live cohort CFA® prep by practitioners. Levels I, II, III. Mocks, doubt clinics, placement support." },
       { property: "og:url", content: "/courses" },
@@ -122,10 +122,9 @@ function includesFor(tier: string): string[] {
 
 const PLANS = {
   "Offline (Classroom)": [
-    { tier: "CFA® Level 1", price: "₹36,000", note: "140+ hours · Live classroom", popular: true },
-    { tier: "CFA® Level 2", price: "₹40,000", note: "80+ hours · Live classroom", popular: false },
-    { tier: "CFA® Level 3", price: "₹25,000", note: "60+ hours · Live classroom", popular: false },
-    { tier: "Financial Modelling", price: "₹25,000", note: "Classroom programme · Internship opportunity", popular: false },
+    { tier: "CFA® Level 1", price: "₹36,000", note: "", popular: false },
+    { tier: "CFA® Level 2", price: "₹40,000", note: "", popular: false },
+    { tier: "Financial Modelling", price: "₹25,000", note: "", popular: false },
   ],
   Online: [
     { tier: "CFA® Level 1", price: "₹20,000", note: "140+ hours · Recorded lectures", popular: true },
@@ -275,8 +274,8 @@ function Hero() {
                   </div>
                   <div className="inline-flex items-center gap-2">
                     <Star className="h-4 w-4 fill-accent text-accent" />
-                    <span className="font-display text-base font-bold text-white">4.9</span>
-                    <span className="text-xs text-white/60">Google Reviews · 1,114 reviews</span>
+                    <span className="font-display text-base font-bold text-white">{googleRating}</span>
+                    <span className="text-xs text-white/60">Google Reviews · {googleReviewsCount} reviews</span>
                   </div>
                 </div>
 
@@ -797,9 +796,11 @@ function Pricing() {
                   <div className={"mt-4 font-display text-4xl font-bold " + (p.popular ? "text-white" : "text-primary")}>
                     {p.price}
                   </div>
-                  <div className={"mt-2 text-sm " + (p.popular ? "text-white/70" : "text-muted-foreground")}>
-                    {p.note}
-                  </div>
+                  {p.note && (
+                    <div className={"mt-2 text-sm " + (p.popular ? "text-white/70" : "text-muted-foreground")}>
+                      {p.note}
+                    </div>
+                  )}
 
                   <ul className={"mt-6 space-y-2.5 text-sm " + (p.popular ? "text-white/85" : "text-foreground/80")}>
                     {includesFor(p.tier).map((inc) => (

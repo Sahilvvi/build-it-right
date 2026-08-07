@@ -7,7 +7,7 @@ import { SiteLayout } from "@/components/site/Layout";
 import { FadeIn } from "@/components/site/primitives";
 import { CompaniesMarquee } from "@/components/site/Marquee";
 import { FAQ } from "@/components/site/FAQ";
-import { courses, testimonials, hiringCompanies, brand, faqs, stats, whyUs } from "@/data/site";
+import { courses, testimonials, hiringCompanies, brand, faqs, stats, whyUs, googleReviewsCount, googleRating } from "@/data/site";
 const FOUNDER_PHOTO = "/manoj-rajgopal.jpg";
 
 
@@ -273,7 +273,7 @@ function Hero() {
                 <Star key={i} className="h-4 w-4 fill-accent text-accent" />
               ))}
             </span>
-            <span className="text-sm text-white/75">216 Google reviews</span>
+            <span className="text-sm text-white/75">{googleReviewsCount} Google reviews</span>
           </div>
 
           <div className="mt-8 flex flex-wrap items-center gap-4">
@@ -764,13 +764,13 @@ function PlacementAnalytics() {
                 ))}
               </div>
               <div className="mt-3 font-display text-6xl font-bold leading-none bg-gradient-to-br from-primary to-accent bg-clip-text text-transparent">
-                <CountUp to={216} />
+                <CountUp to={googleReviewsCount} />
               </div>
               <div className="mt-2 text-sm font-semibold text-foreground">Google Reviews</div>
               <div className="mt-1 text-xs text-muted-foreground">Verified feedback from real students</div>
               <div className="mt-4 inline-flex items-center gap-2 rounded-full border border-border/60 bg-secondary/60 px-3 py-1 text-[11px] font-semibold text-foreground/80">
                 <span className="h-1.5 w-1.5 rounded-full bg-accent shadow-[0_0_6px_hsl(var(--accent))]" />
-                4.9 average rating
+                {googleRating} average rating
               </div>
             </div>
           </PremiumCard>

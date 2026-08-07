@@ -13,6 +13,9 @@ export const brand = {
 };
 
 
+export const googleReviewsCount = 216;
+export const googleRating = 4.9;
+
 export const navLinks = [
   { label: "Home", to: "/" },
   { label: "Courses", to: "/courses" },
@@ -25,7 +28,7 @@ export const navLinks = [
 export const stats = [
   { value: "80–90%", label: "Success rate" },
   { value: "5,000+", label: "Students trained" },
-  { value: "216", label: "Google reviews" },
+  { value: `${googleReviewsCount}`, label: "Google reviews" },
   { value: "8+ yrs", label: "Teaching experience" },
   { value: "1st", label: "Attempt focus" },
 ];

@@ -7,6 +7,7 @@ import { FadeIn, Stagger, StaggerItem, staggerItemVariants, Counter } from "@/co
 import { PremiumOrbs, AmbientDark, AmbientLight, EyebrowBadge, GradientAccent } from "@/components/site/premium";
 import { FAQ } from "@/components/site/FAQ";
 import { cn } from "@/lib/utils";
+import { googleReviewsCount } from "@/data/site";
 const FOUNDER_PHOTO = "/manoj-rajgopal.jpg";
 
 export const Route = createFileRoute("/about")({
@@ -59,7 +60,7 @@ const leadership = {
 const heroStats = [
   { value: 5000, suffix: "+", label: "Students trained" },
   { value: 90, suffix: "%", label: "Success rate" },
-  { value: 216, suffix: "", label: "Google reviews" },
+  { value: googleReviewsCount, suffix: "", label: "Google reviews" },
   { value: 8, suffix: "+ yrs", label: "Teaching experience" },
 ];
 
