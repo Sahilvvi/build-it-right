@@ -190,7 +190,7 @@ const comparisonRows = [
 ];
 
 const levelOrder: Level[] = ["L1", "L2", "L3"];
-const levelLabels: Record<Level, string> = { L1: "CFA® 1", L2: "CFA® 2", L3: "CFA® 3" };
+const levelLabels: Record<Level, string> = { L1: "CFA® L1", L2: "CFA® L2", L3: "CFA® L3" };
 const levelAccent: Record<Level, string> = {
   L1: "from-amber-500 to-orange-600",
   L2: "from-rose-500 to-pink-700",
@@ -280,11 +280,9 @@ function CFAPage() {
 
         <div className="container-px relative mx-auto max-w-7xl pb-24 pt-20 md:pt-28">
           <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="flex flex-wrap items-center gap-3 text-xs font-medium uppercase tracking-[0.2em] text-white/80">
-            {["Self-paced lectures", "One mentor", "Real-life examples"].map((t) => (
-              <span key={t} className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-3 py-1 backdrop-blur">
-                <Sparkles className="h-3 w-3 text-accent" /> {t}
-              </span>
-            ))}
+            <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-3 py-1 backdrop-blur">
+              <Sparkles className="h-3 w-3 text-accent" /> Learn CFA® with real life examples
+            </span>
           </motion.div>
 
           {/* Level toggle */}

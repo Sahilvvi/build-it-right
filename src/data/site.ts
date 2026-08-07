@@ -19,7 +19,7 @@ export const googleRating = 4.9;
 export const navLinks = [
   { label: "Home", to: "/" },
   { label: "Courses", to: "/courses" },
-  { label: "CFA®", to: "/cfa" },
+  { label: "CFA® Program Preparation", to: "/cfa" },
   { label: "About", to: "/about" },
   { label: "Resources", to: "/resources" },
   { label: "Contact", to: "/contact" },
