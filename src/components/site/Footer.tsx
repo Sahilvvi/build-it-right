@@ -13,16 +13,12 @@ const cols = [
     title: "Company",
     items: [
       { l: "About Us", to: "/about" },
-      { l: "Our Team", to: "/about" },
-      { l: "Careers", to: "/contact" },
-      { l: "Press & Media", to: "/about" },
     ],
   },
   {
     title: "Resources",
     items: [
       { l: "Blog", to: "/resources" },
-      { l: "Webinars", to: "/resources" },
       { l: "Case Studies", to: "/resources" },
       { l: "YouTube", to: "/resources" },
     ],
