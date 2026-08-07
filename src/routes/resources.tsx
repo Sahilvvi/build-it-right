@@ -12,7 +12,7 @@ export const Route = createFileRoute("/resources")({
   head: () => ({
     meta: [
       { title: "Resources — Learn Finance with Manoj Rajgopal | Fin-Envision Learning" },
-      { name: "description", content: "Free YouTube playlists on CFA® Level I & II, Financial Modelling, Stock Markets, Corporate Finance and Investment Banking — taught by Manoj Rajgopal, CFA." },
+      { name: "description", content: "Free YouTube playlists on CFA® Level I & II, Financial Modelling, Stock Markets, Corporate Finance and Investment Banking — taught by Manoj Rajgopal, CFA®." },
       { property: "og:title", content: "Resources — Finance Insights You Can Actually Use" },
       { property: "og:url", content: "/resources" },
     ],
@@ -25,25 +25,25 @@ import { resourcePlaylists } from "@/data/site";
 
 const YT_CHANNEL = "https://www.youtube.com/@financewithmanojrajgopal";
 
-type Category = "CFA Level I" | "CFA Level II" | "Financial Modelling" | "Stock Market" | "Banking" | "Professional";
+type Category = "CFA® Level I" | "CFA® Level II" | "Financial Modelling" | "Stock Market" | "Banking" | "Professional";
 type Video = { title: string; cat: Category; mins: number; tone: string; url: string; thumb?: string };
 
 const PLAYLIST_URLS: Record<string, string> = {
-  "CFA Level 1 \u2013 FSA \u2013 Financial Analysis Techniques (Ratios)":
+  "CFA® Level 1 \u2013 FSA \u2013 Financial Analysis Techniques (Ratios)":
     "https://youtube.com/playlist?list=PLzfcxNTCNDhgTM6tnbGmkZt7Lznt7h7Zs",
-  "CFA Level 1 \u2013 FSA | Income Statement":
+  "CFA® Level 1 \u2013 FSA | Income Statement":
     "https://youtube.com/playlist?list=PLzfcxNTCNDhit5ehwq3Scrm3PqQPV-4OZ",
-  "CFA Level 1 \u2013 Quants | Time Value of Money":
+  "CFA® Level 1 \u2013 Quants | Time Value of Money":
     "https://youtube.com/playlist?list=PLzfcxNTCNDhhp8HrFCBUBMjr33HPrfhEI",
-  "CFA Level 2 Pre-Requisite":
+  "CFA® Level 2 Pre-Requisite":
     "https://www.youtube.com/watch?v=x3ydYkq4nZY&list=PLzfcxNTCNDhjDNbeQZ2hLcQK4ygnnLpAJ",
-  "CFA Level 2 \u2013 FSA | Intercorporate Investments":
+  "CFA® Level 2 \u2013 FSA | Intercorporate Investments":
     "https://www.youtube.com/watch?v=JPc8B8G9SsM&list=PLzfcxNTCNDhjfE80oevHDImEYa6Ztq5oP",
-  "CFA Level 2 \u2013 Derivatives | Contingent Claims":
+  "CFA® Level 2 \u2013 Derivatives | Contingent Claims":
     "https://www.youtube.com/watch?v=1Y05GmsoqKs&list=PLzfcxNTCNDhj9H5qy28MAHT-OQXGDNk6S",
-  "CFA Level 2 \u2013 Equity | Private Company Valuation":
+  "CFA® Level 2 \u2013 Equity | Private Company Valuation":
     "https://www.youtube.com/watch?v=XeQQywq8uog&list=PLzfcxNTCNDhhUot2hQahID8XxAzfXuWET",
-  "CFA Level 2 \u2013 Alternative Investments | Investments in Real Estate":
+  "CFA® Level 2 \u2013 Alternative Investments | Investments in Real Estate":
     "https://www.youtube.com/watch?v=MzoBmDX1rf4&list=PLzfcxNTCNDhghWKcGlpWXiza3YPmOzFfB",
   "Financial Modeling Demo Sessions":
     "https://www.youtube.com/watch?v=L-VIKPHW0RU&list=PLzfcxNTCNDhjk0wLR_zEIQ_2OBcE8Rfd2",
@@ -58,21 +58,21 @@ const PLAYLIST_URLS: Record<string, string> = {
 };
 
 const PLAYLIST_THUMBS: Record<string, string> = {
-  "CFA Level 1 \u2013 FSA \u2013 Financial Analysis Techniques (Ratios)":
+  "CFA® Level 1 \u2013 FSA \u2013 Financial Analysis Techniques (Ratios)":
     "https://i.ytimg.com/vi/bdlLEeYEs5Q/hqdefault.jpg",
-  "CFA Level 1 \u2013 FSA | Income Statement":
+  "CFA® Level 1 \u2013 FSA | Income Statement":
     "https://i.ytimg.com/vi/db7v1Jli2j8/hqdefault.jpg",
-  "CFA Level 1 \u2013 Quants | Time Value of Money":
+  "CFA® Level 1 \u2013 Quants | Time Value of Money":
     "https://i.ytimg.com/vi/oKhc21rQpuU/hqdefault.jpg",
-  "CFA Level 2 Pre-Requisite":
+  "CFA® Level 2 Pre-Requisite":
     "https://i.ytimg.com/vi/x3ydYkq4nZY/hqdefault.jpg",
-  "CFA Level 2 \u2013 FSA | Intercorporate Investments":
+  "CFA® Level 2 \u2013 FSA | Intercorporate Investments":
     "https://i.ytimg.com/vi/JPc8B8G9SsM/hqdefault.jpg",
-  "CFA Level 2 \u2013 Derivatives | Contingent Claims":
+  "CFA® Level 2 \u2013 Derivatives | Contingent Claims":
     "https://i.ytimg.com/vi/1Y05GmsoqKs/hqdefault.jpg",
-  "CFA Level 2 \u2013 Equity | Private Company Valuation":
+  "CFA® Level 2 \u2013 Equity | Private Company Valuation":
     "https://i.ytimg.com/vi/XeQQywq8uog/hqdefault.jpg",
-  "CFA Level 2 \u2013 Alternative Investments | Investments in Real Estate":
+  "CFA® Level 2 \u2013 Alternative Investments | Investments in Real Estate":
     "https://i.ytimg.com/vi/MzoBmDX1rf4/hqdefault.jpg",
   "Financial Modeling Demo Sessions":
     "https://i.ytimg.com/vi/L-VIKPHW0RU/hqdefault.jpg",
@@ -88,8 +88,8 @@ const PLAYLIST_THUMBS: Record<string, string> = {
 
 
 const TONE_BY_CAT: Record<Category, string[]> = {
-  "CFA Level I": ["from-[#1a3a5c] to-[#2d5a8c]", "from-blue-700 to-indigo-900", "from-cyan-600 to-blue-800"],
-  "CFA Level II": ["from-indigo-600 to-violet-800", "from-fuchsia-600 to-purple-800", "from-violet-700 to-purple-900"],
+  "CFA® Level I": ["from-[#1a3a5c] to-[#2d5a8c]", "from-blue-700 to-indigo-900", "from-cyan-600 to-blue-800"],
+  "CFA® Level II": ["from-indigo-600 to-violet-800", "from-fuchsia-600 to-purple-800", "from-violet-700 to-purple-900"],
   "Financial Modelling": ["from-emerald-600 to-teal-800", "from-teal-500 to-emerald-700"],
   "Stock Market": ["from-amber-500 to-orange-700", "from-orange-500 to-rose-700"],
   "Banking": ["from-rose-600 to-red-800"],
@@ -97,8 +97,8 @@ const TONE_BY_CAT: Record<Category, string[]> = {
 };
 
 const CAT_MAP: Record<string, Category> = {
-  "CFA Level I": "CFA Level I",
-  "CFA Level II": "CFA Level II",
+  "CFA® Level I": "CFA® Level I",
+  "CFA® Level II": "CFA® Level II",
   "Financial Modelling": "Financial Modelling",
   "Stock Market": "Stock Market",
   "Banking & Industry Analysis": "Banking",
@@ -119,7 +119,7 @@ const videos: Video[] = resourcePlaylists.flatMap((group) => {
   }));
 });
 
-const tabs = ["All", "CFA Level I", "CFA Level II", "Financial Modelling", "Stock Market", "Banking", "Professional"] as const;
+const tabs = ["All", "CFA® Level I", "CFA® Level II", "Financial Modelling", "Stock Market", "Banking", "Professional"] as const;
 
 const stats = [
   { value: 20, suffix: "+", label: "Playlists" },
@@ -295,7 +295,7 @@ function ResourcesPage() {
                     >
                       <Play className="h-10 w-10 translate-x-0.5 fill-current" />
                     </motion.div>
-                    <div className="mt-6 font-display text-3xl font-semibold italic">CFA Level I</div>
+                    <div className="mt-6 font-display text-3xl font-semibold italic">CFA® Level I</div>
                     <div className="mt-2 text-xs uppercase tracking-[0.2em] text-white/70">Foundation series</div>
                   </div>
                 </div>
@@ -306,7 +306,7 @@ function ResourcesPage() {
             <div className="relative">
               <EyebrowBadge>Most-watched category</EyebrowBadge>
               <h2 className="mt-5 font-display text-4xl font-semibold leading-tight tracking-tight md:text-5xl">
-                CFA Level I <GradientAccent>with Manoj Sir</GradientAccent>
+                CFA® Level I <GradientAccent>with Manoj Sir</GradientAccent>
               </h2>
               <p className="mt-5 text-pretty text-muted-foreground md:text-lg">
                 Nine deep-dive playlists across Financial Statement Analysis, Quants, Economics, Equity Investments, Fixed Income and Corporate Finance — the exact concept-first approach used inside our classroom, made free on YouTube.
@@ -510,7 +510,7 @@ function ResourcesPage() {
                 One new explainer. <GradientAccent>Every Sunday.</GradientAccent>
               </h2>
               <p className="mt-5 max-w-xl text-white/75 md:text-lg">
-                Curated drops, CFA tactics and career playbooks — straight to your inbox. No spam, ever.
+                Curated drops, CFA® tactics and career playbooks — straight to your inbox. No spam, ever.
               </p>
 
               <NewsletterForm />
@@ -549,7 +549,7 @@ function ResourcesPage() {
       <FAQ
         eyebrow="FAQ"
         title={<>More about our <span className="italic bg-gradient-to-r from-accent via-accent to-accent/60 bg-clip-text text-transparent">resources.</span></>}
-        description="Common questions about our YouTube library, newsletter and how to use them in your CFA / FRM prep."
+        description="Common questions about our YouTube library, newsletter and how to use them in your CFA® / FRM prep."
       />
 
     </SiteLayout>

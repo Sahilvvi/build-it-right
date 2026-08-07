@@ -16,9 +16,9 @@ import { cn } from "@/lib/utils";
 export const Route = createFileRoute("/cfa")({
   head: () => ({
     meta: [
-      { title: "CFA Program — Level I, II & III Prep | Fin-Envision Learning" },
-      { name: "description", content: "Self-paced CFA Level I, II & III prep with one mentor, real-life examples, and 100% coverage in English + Hindi. Trusted by candidates worldwide." },
-      { property: "og:title", content: "CFA Program — Level I, II & III Prep" },
+      { title: "CFA® Program — Level I, II & III Prep | Fin-Envision Learning" },
+      { name: "description", content: "Self-paced CFA® Level I, II & III prep with one mentor, real-life examples, and 100% coverage in English + Hindi. Trusted by candidates worldwide." },
+      { property: "og:title", content: "CFA® Program — Level I, II & III Prep" },
       { property: "og:url", content: "/cfa" },
     ],
     links: [{ rel: "canonical", href: "/cfa" }],
@@ -47,7 +47,7 @@ const levels: Record<Level, LevelData> = {
     badge: "Level I",
     tagline: "Foundations · Tools · Ethics",
     description:
-      "Build a strong foundation in finance. Level I introduces candidates to core concepts, tools, and ethical standards — focused on understanding over application. Ideal for students, non-finance backgrounds, and early-stage professionals starting their CFA preparation.",
+      "Build a strong foundation in finance. Level I introduces candidates to core concepts, tools, and ethical standards — focused on understanding over application. Ideal for students, non-finance backgrounds, and early-stage professionals starting their CFA® preparation.",
     meta: { duration: "140+ hours (live)", views: "Unlimited", language: "English + Hindi", coverage: "100%", validity: "Until exam", courier: "As per location" },
     pricing: { offline: "₹36,000", online: "₹20,000" },
     weights: [
@@ -151,7 +151,7 @@ const levels: Record<Level, LevelData> = {
 
 // shared across all levels
 const careers = [
-  { icon: PieChart, t: "Portfolio Management", b: "Manage diversified portfolios to balance risk and return — CFA equips you with asset allocation and risk expertise." },
+  { icon: PieChart, t: "Portfolio Management", b: "Manage diversified portfolios to balance risk and return — CFA® equips you with asset allocation and risk expertise." },
   { icon: Search, t: "Research", b: "Analyse markets, industries and companies. Strengthens financial modelling and equity research skills." },
   { icon: Briefcase, t: "Consulting", b: "Strategic advice on planning and valuations — in-depth financial analysis and risk management." },
   { icon: ShieldCheck, t: "Risk Analysis", b: "Assess and mitigate risks for businesses and individuals using rigorous risk frameworks." },
@@ -164,10 +164,10 @@ const careers = [
 const importantDetails = [
   { icon: GraduationCap, t: "Eligibility Criteria", b: "Any one of: bachelor's degree (or equivalent), final-year student (within 23 months of graduation for Level I), 4,000 hours of professional work experience, or a combination of higher education and work experience totalling at least 4,000 hours." },
   { icon: FileText, t: "Exam Requirements", b: "A valid international passport, an approved calculator (Texas Instruments BA II Plus or HP 12C), and a confirmed exam appointment." },
-  { icon: Banknote, t: "Scholarships", b: "CFA Institute offers scholarship programs to eligible candidates that can significantly reduce registration fees. Availability, eligibility and deadlines vary by program." },
+  { icon: Banknote, t: "Scholarships", b: "CFA® Institute offers scholarship programs to eligible candidates that can significantly reduce registration fees. Availability, eligibility and deadlines vary by program." },
 
   { icon: MapPin, t: "Test Centers", b: "The exam is a computer-based test at authorised Prometric test centers worldwide. Availability depends on the selected exam window and location." },
-  { icon: Info, t: "Ethics & Professional Standards", b: "All candidates must comply with the CFA Institute Code of Ethics and Standards of Professional Conduct throughout their CFA Program journey." },
+  { icon: Info, t: "Ethics & Professional Standards", b: "All candidates must comply with the CFA® Institute Code of Ethics and Standards of Professional Conduct throughout their CFA® Program journey." },
 ];
 
 
@@ -190,7 +190,7 @@ const comparisonRows = [
 ];
 
 const levelOrder: Level[] = ["L1", "L2", "L3"];
-const levelLabels: Record<Level, string> = { L1: "CFA 1", L2: "CFA 2", L3: "CFA 3" };
+const levelLabels: Record<Level, string> = { L1: "CFA® 1", L2: "CFA® 2", L3: "CFA® 3" };
 const levelAccent: Record<Level, string> = {
   L1: "from-amber-500 to-orange-600",
   L2: "from-rose-500 to-pink-700",
@@ -318,7 +318,7 @@ function CFAPage() {
               <div>
                 <div className="text-sm uppercase tracking-[0.24em] text-accent">{data.tagline}</div>
                 <h1 className="mt-4 max-w-3xl text-balance font-display text-5xl font-semibold leading-[1.02] tracking-tight md:text-7xl">
-                  CFA <GradientAccent>{data.badge}</GradientAccent>
+                  CFA® <GradientAccent>{data.badge}</GradientAccent>
                 </h1>
                 <p className="mt-3 text-sm uppercase tracking-[0.24em] text-white/60">Chartered Financial Analyst</p>
                 <p className="mt-6 max-w-2xl text-pretty text-lg text-white/80">{data.description}</p>
@@ -443,7 +443,7 @@ function CFAPage() {
         <PremiumHeader
           eyebrow="Level comparison"
           title={<>All three levels, <GradientAccent>side by side.</GradientAccent></>}
-          description="A complete weight comparison across Levels I, II and III to help you plan your full CFA journey."
+          description="A complete weight comparison across Levels I, II and III to help you plan your full CFA® journey."
         />
 
         <FadeIn>
@@ -486,8 +486,8 @@ function CFAPage() {
           <PremiumHeader
             tone="dark"
             eyebrow="Career opportunities"
-            title={<>Job roles you can <GradientAccent>pursue</GradientAccent> with CFA.</>}
-            description="The CFA charter opens doors across investing, research, banking and risk — globally recognised, deeply respected."
+            title={<>Job roles you can <GradientAccent>pursue</GradientAccent> with CFA®.</>}
+            description="The CFA® charter opens doors across investing, research, banking and risk — globally recognised, deeply respected."
           />
 
           <Stagger className="mt-14 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
@@ -520,7 +520,7 @@ function CFAPage() {
         <AmbientDark />
         <FadeIn className="container-px relative mx-auto max-w-7xl">
           <div className="mb-10 flex flex-col items-start gap-5">
-            <EyebrowBadge tone="dark">Where CFA charterholders work</EyebrowBadge>
+            <EyebrowBadge tone="dark">Where CFA® charterholders work</EyebrowBadge>
             <h2 className="font-display text-3xl font-semibold tracking-tight text-white md:text-4xl">
               Trusted by leading organisations <GradientAccent>worldwide.</GradientAccent>
             </h2>
@@ -700,7 +700,7 @@ function CFAPage() {
               >
                 <div>
                   <div className="text-[10px] uppercase tracking-[0.2em] text-accent">Official source</div>
-                  <div className="mt-1 text-sm font-semibold text-white/90">CFA Institute dates & fees</div>
+                  <div className="mt-1 text-sm font-semibold text-white/90">CFA® Institute dates & fees</div>
                 </div>
                 <ArrowRight className="h-4 w-4 text-white/60 transition-transform group-hover:translate-x-1" />
               </a>
@@ -745,7 +745,7 @@ function CFAPage() {
       {/* FAQ */}
       <FAQ
         eyebrow="FAQ"
-        title={<>CFA program <span className="italic bg-gradient-to-r from-accent via-accent to-accent/60 bg-clip-text text-transparent">questions.</span></>}
+        title={<>CFA® program <span className="italic bg-gradient-to-r from-accent via-accent to-accent/60 bg-clip-text text-transparent">questions.</span></>}
         description="Common questions about levels, eligibility, exam pattern and registration."
       />
 

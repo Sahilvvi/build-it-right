@@ -15,7 +15,7 @@ export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       { title: "Fin-Envision Learning — Learn What Finance Really Feels Like" },
-      { name: "description", content: "Fin-Envision Learning — leading CFA classes in Mumbai. CFA Level 1, 2, 3 and Financial Modeling, taught by Manoj Rajgopal, CFA. 90% success rate, 1,500+ students trained." },
+      { name: "description", content: "Fin-Envision Learning — leading CFA® classes in Mumbai. CFA® Level 1, 2, 3 and Financial Modeling, taught by Manoj Rajgopal, CFA®. 90% success rate, 1,500+ students trained." },
       { property: "og:title", content: "Fin-Envision Learning — Learn What Finance Really Feels Like" },
       { property: "og:url", content: "/" },
     ],
@@ -251,11 +251,11 @@ function Hero() {
         >
           <div className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.22em] text-white/85 backdrop-blur">
             <Sparkles className="h-3.5 w-3.5 text-accent" />
-            CFA & Financial Modeling · Mumbai
+            CFA® & Financial Modeling · Mumbai
           </div>
 
           <h1 className="mt-5 font-display text-4xl font-semibold leading-[1.05] tracking-tight text-white md:text-6xl">
-            Your Path to CFA{" "}
+            Your Path to CFA®{" "}
             <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
               Success Starts Here.
             </span>
@@ -324,7 +324,7 @@ function Hero() {
 
 const COURSE_FILTERS = [
   { key: "all", label: "All Courses" },
-  { key: "cfa", label: "CFA Program" },
+  { key: "cfa", label: "CFA® Program" },
   { key: "financial-modeling", label: "Financial Modeling" },
 ] as const;
 
@@ -396,7 +396,7 @@ function CourseTabs() {
               financial skills
             </h2>
             <p className="mx-auto mt-5 max-w-2xl text-[15px] leading-relaxed text-muted-foreground">
-              Concept-first teaching. 100% institute curriculum solved in class. Taught by Manoj Rajgopal, CFA — every formula, every chart, every "why".
+              Concept-first teaching. 100% institute curriculum solved in class. Taught by Manoj Rajgopal, CFA® — every formula, every chart, every "why".
             </p>
           </div>
         </FadeIn>
@@ -697,10 +697,10 @@ function PlacementAnalytics() {
                   5,000+ Students Trained
                 </h3>
                 <p className="mt-3 text-sm leading-relaxed text-muted-foreground md:text-base">
-                  Across CFA Levels I, II, III and Financial Modelling — from first-year undergrads to working professionals switching into finance.
+                  Across CFA® Levels I, II, III and Financial Modelling — from first-year undergrads to working professionals switching into finance.
                 </p>
                 <div className="mt-5 flex flex-wrap gap-1.5">
-                  {["CFA L1", "CFA L2", "CFA L3", "Financial Modelling"].map((t) => (
+                  {["CFA® L1", "CFA® L2", "CFA® L3", "Financial Modelling"].map((t) => (
                     <span
                       key={t}
                       className="rounded-full border border-primary/20 bg-primary/10 px-2.5 py-1 text-[10px] font-semibold text-primary backdrop-blur"
@@ -864,7 +864,7 @@ function FounderSpotlight() {
     "Focuses on bridging the gap between academic learning and real-world finance.",
     "Dedicated to mentoring students for successful careers in finance through industry-oriented training and personalized guidance.",
   ];
-  const credentials = ["CFA Charterholder", "Investment Banking", "Financial Modeling", "Portfolio Strategy"];
+  const credentials = ["CFA® Charterholder", "Investment Banking", "Financial Modeling", "Portfolio Strategy"];
 
 
 
@@ -927,7 +927,7 @@ function FounderSpotlight() {
                 >
                   <img
                     src={FOUNDER_PHOTO}
-                    alt="Manoj Rajgopal, CFA — Founder & Lead Instructor at Fin-Envision Learning"
+                    alt="Manoj Rajgopal, CFA® — Founder & Lead Instructor at Fin-Envision Learning"
                     className="absolute inset-0 h-full w-full object-cover object-top transition-transform duration-700 group-hover:scale-[1.03]"
                     loading="lazy"
                     decoding="async"
@@ -938,7 +938,7 @@ function FounderSpotlight() {
                       Founder &amp; Lead Instructor
                     </span>
                     <h3 className="mt-3 font-display text-3xl font-bold leading-tight text-white md:text-4xl">
-                      Manoj Rajgopal, CFA
+                      Manoj Rajgopal, CFA®
                     </h3>
                   </div>
                 </motion.div>
@@ -1030,7 +1030,7 @@ function FounderSpotlight() {
 const JOURNEY_TRACKS = {
   Overall: [
     { icon: Rocket, badge: "Start", title: "Begin Your Journey", body: "Book a 20-min discovery call and map your goals to the right program." },
-    { icon: ClipboardList, badge: "Step 1", title: "Understand the Syllabus & Set Up", body: "Familiarize with CFA / FRM syllabus, exam structure, and your study setup." },
+    { icon: ClipboardList, badge: "Step 1", title: "Understand the Syllabus & Set Up", body: "Familiarize with CFA® / FRM syllabus, exam structure, and your study setup." },
     { icon: BookOpen, badge: "Step 2", title: "Start & Plan Your Journey", body: "Begin live classes, follow the Lecture Guide, and lock weekly targets." },
     { icon: Users, badge: "Step 3", title: "Engage with Mentors & Track Progress", body: "Connect with your mentor and track every milestone in the Performance Tracker." },
     { icon: Target, badge: "Step 4", title: "Mock Exams & Doubt Clinics", body: "Sharpen with full-length mocks and live weekly doubt clinics." },

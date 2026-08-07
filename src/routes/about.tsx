@@ -13,7 +13,7 @@ export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
       { title: "About — Learn Finance the Way the Industry Works | Fin-Envision Learning" },
-      { name: "description", content: "Fin-Envision offers certified programs in CFA® and Financial Modelling — 5,000+ students trained, 80–90% success rate, 8+ years of teaching experience, led by Manoj Rajgopal, CFA." },
+      { name: "description", content: "Fin-Envision offers certified programs in CFA® and Financial Modelling — 5,000+ students trained, 80–90% success rate, 8+ years of teaching experience, led by Manoj Rajgopal, CFA®." },
       { property: "og:title", content: "About — Learn Finance the Way the Industry Works" },
       { property: "og:description", content: "We don't just teach finance — we transform how you learn it." },
       { property: "og:url", content: "/about" },
@@ -37,7 +37,7 @@ const gallery = [
 ];
 
 const leadership = {
-  name: "Manoj Rajgopal, CFA",
+  name: "Manoj Rajgopal, CFA®",
   initials: "MR",
   role: "Founder & Lead Instructor",
   quote: "My ability to creatively simplify complicated concepts comes from genuinely caring about each student's journey — concept clarity always beats rote learning.",
@@ -50,7 +50,7 @@ const leadership = {
     "Focuses on bridging the gap between academic learning and real-world finance.",
     "Dedicated to mentoring students for successful careers in finance through industry-oriented training and personalized guidance.",
   ],
-  creds: ["CFA Charterholder", "Investment Banking", "Financial Modeling", "Portfolio Strategy"],
+  creds: ["CFA® Charterholder", "Investment Banking", "Financial Modeling", "Portfolio Strategy"],
 };
 
 
@@ -147,7 +147,7 @@ function AboutPage() {
             <FadeIn>
               <div className="text-xs font-bold uppercase tracking-[0.28em] text-accent">Who we are</div>
               <p className="mt-5 text-pretty text-lg leading-relaxed text-white/85 md:text-xl">
-                Fin-Envision is a leading training institute offering certified programs in Financial Modelling and CFA. As the name suggests, <span className="text-white">"Financial Envision"</span> is about giving a future perspective to your career — helping individuals realize their potential through mentoring and imparting skills.
+                Fin-Envision is a leading training institute offering certified programs in Financial Modelling and CFA®. As the name suggests, <span className="text-white">"Financial Envision"</span> is about giving a future perspective to your career — helping individuals realize their potential through mentoring and imparting skills.
               </p>
               <p className="mt-5 text-pretty text-base text-white/70 md:text-lg">
                 Formulated through years of teaching experience, our coaching methodology places utmost emphasis on problem solving and conceptual clarity. Every instructor is carefully selected for their blend of expertise and passion for teaching — the human touch and care for each candidate is the real hallmark of Fin-Envision.

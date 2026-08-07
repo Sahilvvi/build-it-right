@@ -17,7 +17,7 @@ export const Route = createFileRoute("/courses")({
       { title: "CFA® Prep Program — Fin-Envision Learning" },
       { name: "description", content: "Master the CFA® Program with India's most trusted prep — live mentors, 1,114+ Google reviews at 4.9★. Levels I, II, III with structured curriculum, mocks, doubt clinics and placement support." },
       { property: "og:title", content: "CFA® Prep Program — Fin-Envision Learning" },
-      { property: "og:description", content: "Live cohort CFA prep by practitioners. Levels I, II, III. Mocks, doubt clinics, placement support." },
+      { property: "og:description", content: "Live cohort CFA® prep by practitioners. Levels I, II, III. Mocks, doubt clinics, placement support." },
       { property: "og:url", content: "/courses" },
     ],
     links: [{ rel: "canonical", href: "/courses" }],
@@ -28,7 +28,7 @@ export const Route = createFileRoute("/courses")({
 /* ─────────── DATA (unchanged) ─────────── */
 
 const CHAPTER_NAV = [
-  { id: "about", label: "About CFA" },
+  { id: "about", label: "About CFA®" },
   { id: "level-1", label: "Level 1" },
   { id: "level-2", label: "Level 2" },
   { id: "level-3", label: "Level 3" },
@@ -61,7 +61,7 @@ const CURRICULUM = {
       { name: "Fixed Income", weight: "11–14%", body: "Bond markets, yield curves, credit risk, securitization and term-structure models." },
       { name: "Derivatives", weight: "5–8%", body: "Forwards, futures, options and swaps — pricing, hedging and applications." },
       { name: "Portfolio Management", weight: "8–12%", body: "Portfolio construction, modern portfolio theory, risk management and the investment policy statement." },
-      { name: "Ethical & Professional Standards", weight: "15–20%", body: "CFA Institute Code & Standards — applied to real-world scenarios that every charterholder faces." },
+      { name: "Ethical & Professional Standards", weight: "15–20%", body: "CFA® Institute Code & Standards — applied to real-world scenarios that every charterholder faces." },
     ],
   },
   "Level II": {
@@ -108,9 +108,9 @@ const PLAN_BASE = [
 ];
 
 const HOURS_BY_TIER: Record<string, string> = {
-  "CFA Level 1": "Live Classroom Interactive Sessions",
-  "CFA Level 2": "Live Classroom Interactive Sessions",
-  "CFA Level 3": "60+ hours of live teaching",
+  "CFA® Level 1": "Live Classroom Interactive Sessions",
+  "CFA® Level 2": "Live Classroom Interactive Sessions",
+  "CFA® Level 3": "60+ hours of live teaching",
   "Level 2 Online": "80+ hours of live teaching",
   "Level 3 Online": "60+ hours of live teaching",
 };
@@ -122,13 +122,13 @@ function includesFor(tier: string): string[] {
 
 const PLANS = {
   "Offline (Classroom)": [
-    { tier: "CFA Level 1", price: "₹36,000", note: "140+ hours · Live classroom", popular: true },
-    { tier: "CFA Level 2", price: "₹40,000", note: "80+ hours · Live classroom", popular: false },
-    { tier: "CFA Level 3", price: "₹25,000", note: "60+ hours · Live classroom", popular: false },
-    { tier: "Financial Modelling", price: "₹25,000", note: "Classroom programme · Internship included", popular: false },
+    { tier: "CFA® Level 1", price: "₹36,000", note: "140+ hours · Live classroom", popular: true },
+    { tier: "CFA® Level 2", price: "₹40,000", note: "80+ hours · Live classroom", popular: false },
+    { tier: "CFA® Level 3", price: "₹25,000", note: "60+ hours · Live classroom", popular: false },
+    { tier: "Financial Modelling", price: "₹25,000", note: "Classroom programme · Internship opportunity", popular: false },
   ],
   Online: [
-    { tier: "CFA Level 1", price: "₹20,000", note: "140+ hours · Recorded lectures", popular: true },
+    { tier: "CFA® Level 1", price: "₹20,000", note: "140+ hours · Recorded lectures", popular: true },
     { tier: "Level 2 Online", price: "₹25,000", note: "80+ hours · Recorded lectures", popular: false },
     { tier: "Level 3 Online", price: "₹25,000", note: "60+ hours · Recorded lectures", popular: false },
     { tier: "Financial Modelling", price: "₹20,000", note: "Online programme · Full project walkthrough", popular: false },
@@ -137,7 +137,7 @@ const PLANS = {
 
 
 const IMPORTANT_NOTES = [
-  "Earning the CFA Charter requires completing all three exams plus qualifying work experience.",
+  "Earning the CFA® Charter requires completing all three exams plus qualifying work experience.",
   "A valid international passport is mandatory for every CFA® exam candidate.",
   "Only TI BA II Plus (and Professional) and HP 12C (all models) calculators are permitted.",
   "Candidates must complete at least one Practical Skill Module (PSM) per level to receive results.",
@@ -270,8 +270,8 @@ function Hero() {
               <div>
                 <div className="flex flex-wrap items-center gap-5">
                   <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/[0.06] px-3 py-1.5">
-                    <span className="grid h-6 w-6 place-items-center rounded-full bg-accent text-[10px] font-bold text-accent-foreground">CFA</span>
-                    <span className="text-xs font-semibold tracking-wide text-white/90">CFA Institute</span>
+                    <span className="grid h-6 w-6 place-items-center rounded-full bg-accent text-[10px] font-bold text-accent-foreground">CFA®</span>
+                    <span className="text-xs font-semibold tracking-wide text-white/90">CFA® Institute</span>
                   </div>
                   <div className="inline-flex items-center gap-2">
                     <Star className="h-4 w-4 fill-accent text-accent" />
@@ -386,9 +386,9 @@ function AboutCFA() {
       <AmbientLight />
       <div className="container-px relative mx-auto max-w-7xl">
         <EyebrowBadge>The Credential</EyebrowBadge>
-        <GradientHeading accent="CFA Program?">What is the</GradientHeading>
+        <GradientHeading accent="CFA® Program?">What is the</GradientHeading>
         <p className="mt-6 max-w-3xl text-base leading-relaxed text-muted-foreground md:text-lg">
-          The Chartered Financial Analyst (CFA)® designation is a globally recognized credential in investment management. Awarded by CFA Institute, it develops skills in valuation, portfolio management, and ethics. Earning the Charter requires passing three exams (Levels I–III) and meeting qualifying work requirements.
+          The Chartered Financial Analyst (CFA®)® designation is a globally recognized credential in investment management. Awarded by CFA® Institute, it develops skills in valuation, portfolio management, and ethics. Earning the Charter requires passing three exams (Levels I–III) and meeting qualifying work requirements.
         </p>
 
         <div className="mt-14">
@@ -433,7 +433,7 @@ function Curriculum() {
         <EyebrowBadge>Syllabus</EyebrowBadge>
         <GradientHeading accent="Curriculum">CFA® Program</GradientHeading>
         <p className="mt-5 max-w-3xl text-base leading-relaxed text-muted-foreground md:text-lg">
-          Three exams — Levels I, II, and III — build from core tools to asset valuation and, finally, portfolio management and ethics. Syllabus evolves; weights may change by exam cycle. Always check CFA Institute.
+          Three exams — Levels I, II, and III — build from core tools to asset valuation and, finally, portfolio management and ethics. Syllabus evolves; weights may change by exam cycle. Always check CFA® Institute.
         </p>
 
         {/* Premium gradient-bordered level tabs */}
@@ -684,7 +684,7 @@ function PlanExam() {
               target="_blank" rel="noreferrer"
               className="inline-flex items-center justify-center gap-2 rounded-full bg-accent px-5 py-3 text-xs font-bold uppercase tracking-[0.18em] text-accent-foreground shadow-[0_18px_36px_-12px_hsl(var(--accent)/0.7)] transition-transform hover:scale-[1.03] md:justify-self-end"
             >
-              Check CFA Official Website <ArrowUpRight className="h-3.5 w-3.5" />
+              Check CFA® Official Website <ArrowUpRight className="h-3.5 w-3.5" />
             </a>
           </div>
         </motion.div>
@@ -887,7 +887,7 @@ function LeadForm() {
             </span>
           </h2>
           <p className="mt-5 max-w-md text-base text-white/70">
-            A 20-minute, no-pressure call to map your goal and the fastest route to your CFA Charter.
+            A 20-minute, no-pressure call to map your goal and the fastest route to your CFA® Charter.
           </p>
 
           <div className="mt-8 space-y-3 text-sm text-white/75">
