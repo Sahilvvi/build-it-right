@@ -1604,7 +1604,6 @@ function DownloadApp() {
                   {[
                     ["4.2★", "App rating"],
                     ["500+", "Downloads"],
-                    ["100%", "Offline ready"],
                   ].map(([v, l], i) => (
                     <motion.div
                       key={l}
