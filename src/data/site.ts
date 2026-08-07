@@ -228,14 +228,13 @@ export const courses: Course[] = [
     rating: 4.9,
     learners: 220,
     outcomes: [
-      "Portfolio management mastery",
+      "Portfolio management and Private Market Pathways",
       "Essay + item-set practice (11 essay sets · 11 item sets)",
       "Exam day strategy for the constructed-response sections",
       "Personalised mentoring through revision",
     ],
     highlights: [
       "Charterholder-led sessions",
-      "Past-paper walkthroughs",
       "Handwritten notes + LMS access",
       "Doubt-solving until exam day",
     ],
