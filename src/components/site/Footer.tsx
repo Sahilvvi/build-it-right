@@ -35,10 +35,10 @@ const cols = [
 
 
 const SOCIALS = [
-  { Icon: Linkedin, href: "#", label: "LinkedIn" },
+  { Icon: Linkedin, href: "https://www.linkedin.com/in/manojrajgopal?utm_source=share_via&utm_content=profile&utm_medium=member_android", label: "LinkedIn" },
   { Icon: Instagram, href: "#", label: "Instagram" },
   { Icon: Youtube, href: "https://www.youtube.com/@financewithmanojrajgopal", label: "YouTube" },
-  { Icon: MessageCircle, href: "#", label: "WhatsApp" },
+  { Icon: MessageCircle, href: "https://wa.me/917304833625?text=Enquiry%20for%20CFA", label: "WhatsApp" },
 ];
 
 export function Footer() {
