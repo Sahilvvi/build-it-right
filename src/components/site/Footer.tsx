@@ -36,7 +36,7 @@ const cols = [
 
 const SOCIALS = [
   { Icon: Linkedin, href: "https://www.linkedin.com/in/manojrajgopal?utm_source=share_via&utm_content=profile&utm_medium=member_android", label: "LinkedIn" },
-  { Icon: Instagram, href: "#", label: "Instagram" },
+  { Icon: Instagram, href: "https://www.instagram.com/finenvision.cfa?igsh=MWl0eDN4OXFjdWhucA==", label: "Instagram" },
   { Icon: Youtube, href: "https://www.youtube.com/@financewithmanojrajgopal", label: "YouTube" },
   { Icon: MessageCircle, href: "https://wa.me/917304833625?text=Enquiry%20for%20CFA", label: "WhatsApp" },
 ];
