@@ -28,11 +28,11 @@ function Home() {
   return (
     <SiteLayout>
       <Hero />
+      <FounderSpotlight />
       
       <WhyUs />
       <CourseTabs />
       <PlacementAnalytics />
-      <FounderSpotlight />
       <TestimonialsSection />
       
       <DownloadApp />
