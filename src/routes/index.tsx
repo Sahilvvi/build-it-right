@@ -2,12 +2,14 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion, AnimatePresence, useInView } from "framer-motion";
 import { useState, useRef, useEffect } from "react";
 import { cn } from "@/lib/utils";
-import { ArrowRight, ArrowUpRight, Quote, MonitorPlay, Sparkles, BookOpen, GraduationCap, Briefcase, Crown, Star, Rocket, ClipboardList, Users, Target, Trophy, ChevronLeft, ChevronRight, Play, BarChart3, MessageSquare, Apple, Smartphone } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Quote, MonitorPlay, Sparkles, BookOpen, GraduationCap, Briefcase, Crown, Star, Rocket, ClipboardList, Users, Target, Trophy, ChevronLeft, ChevronRight, Play, BarChart3, MessageSquare, Apple, Smartphone, RefreshCw, Calendar } from "lucide-react";
 import { SiteLayout } from "@/components/site/Layout";
 import { FadeIn } from "@/components/site/primitives";
 import { CompaniesMarquee } from "@/components/site/Marquee";
 import { FAQ } from "@/components/site/FAQ";
 import { courses, testimonials, hiringCompanies, brand, faqs, stats, whyUs, googleReviewsCount, googleRating } from "@/data/site";
+import { DemoVideos } from "@/components/site/DemoVideos";
+import { AmbientLight, EyebrowBadge, GradientAccent } from "@/components/site/premium";
 const FOUNDER_PHOTO = "/manoj-rajgopal.jpg";
 
 
@@ -29,6 +31,7 @@ function Home() {
     <SiteLayout>
       <Hero />
       <FounderSpotlight />
+      <DemoVideos />
       
       <WhyUs />
       <CourseTabs />
@@ -46,112 +49,133 @@ function Home() {
 /* ─────────────────────────  WHY US · 3 PILLARS  ───────────────────────── */
 
 function WhyUs() {
+  const features = [
+    {
+      icon: BarChart3,
+      text: "Practical teaching with Indian markets examples",
+      desc: "Learn concepts through real-time Indian stock market scenarios and case studies.",
+      color: "from-blue-500/20 to-indigo-500/20 text-blue-400",
+    },
+    {
+      icon: BookOpen,
+      text: "Handwritten notes for concept clarity with Indian examples",
+      desc: "Sir's handwritten notes simplifying complex regulatory and financial topics.",
+      color: "from-emerald-500/20 to-teal-500/20 text-emerald-400",
+    },
+    {
+      icon: RefreshCw,
+      text: "Regular revision sessions",
+      desc: "Periodic structured group revision classes to lock in key concepts and formulae.",
+      color: "from-violet-500/20 to-purple-500/20 text-violet-400",
+    },
+    {
+      icon: MonitorPlay,
+      text: "Recorded videos with unlimited views",
+      desc: "Never miss a class; rewatch any lecture anytime on our LMS portal.",
+      color: "from-rose-500/20 to-red-500/20 text-rose-400",
+    },
+    {
+      icon: ClipboardList,
+      text: "Minimum 2 tests per subject",
+      desc: "Topic-wise structured tests to evaluate your understanding at every step.",
+      color: "from-cyan-500/20 to-blue-500/20 text-cyan-400",
+    },
+    {
+      icon: Calendar,
+      text: "Dedicated study timetable",
+      desc: "Personalized study calendars tailored to fit your preparation window.",
+      color: "from-amber-500/20 to-orange-500/20 text-amber-400",
+    },
+    {
+      icon: MessageSquare,
+      text: "Personalised doubt solving sessions",
+      desc: "Get your doubts resolved directly by Manoj Sir and charterholders.",
+      color: "from-teal-500/20 to-emerald-500/20 text-teal-400",
+    },
+    {
+      icon: Trophy,
+      text: "6 Mock tests",
+      desc: "Full-length adaptive exams simulated to match the real exam-day difficulty.",
+      color: "from-yellow-500/20 to-amber-500/20 text-yellow-400",
+    },
+    {
+      icon: Briefcase,
+      text: "Career Guidance",
+      desc: "Resume preparation, mock interviews, and direct placement opportunities.",
+      color: "from-sky-500/20 to-blue-500/20 text-sky-400",
+    },
+    {
+      icon: GraduationCap,
+      text: "Exam Support Mentoring",
+      desc: "One-to-one mentoring to guide you through registration and exam strategy.",
+      color: "from-pink-500/20 to-rose-500/20 text-pink-400",
+    },
+  ];
+
   return (
-    <section className="relative overflow-hidden py-20 md:py-28">
-      {/* Ambient background */}
+    <section className="relative overflow-hidden py-24 md:py-32">
+      {/* Ambient backdrop grids */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 opacity-[0.18] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_60%,transparent_100%)]"
+        className="pointer-events-none absolute inset-0 opacity-[0.06] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)]"
         style={{
           backgroundImage:
             "linear-gradient(to right, hsl(var(--border)) 1px, transparent 1px), linear-gradient(to bottom, hsl(var(--border)) 1px, transparent 1px)",
-          backgroundSize: "56px 56px",
+          backgroundSize: "64px 64px",
         }}
       />
       <div
         aria-hidden
-        className="pointer-events-none absolute -left-40 top-1/4 h-[500px] w-[500px] rounded-full bg-primary/10 blur-[120px]"
+        className="pointer-events-none absolute -left-40 top-1/4 h-[600px] w-[600px] rounded-full bg-primary/10 blur-[130px]"
       />
       <div
         aria-hidden
-        className="pointer-events-none absolute -right-40 bottom-1/4 h-[500px] w-[500px] rounded-full bg-accent/10 blur-[120px]"
+        className="pointer-events-none absolute -right-40 bottom-1/4 h-[600px] w-[600px] rounded-full bg-accent/10 blur-[130px]"
       />
 
       <div className="relative mx-auto max-w-7xl px-6">
         <FadeIn>
-          <div className="mx-auto max-w-2xl text-center">
-            <div className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.22em] text-primary">
+          <div className="mx-auto max-w-3xl text-center">
+            <div className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-3.5 py-1.5 text-[11px] font-semibold uppercase tracking-[0.22em] text-primary">
               <span className="relative flex h-2 w-2">
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-75" />
                 <span className="relative inline-flex h-2 w-2 rounded-full bg-primary" />
               </span>
-              Why Fin-Envision
+              Learning Ecosystem
             </div>
-            <h2 className="mt-4 font-display text-3xl font-semibold tracking-tight md:text-5xl">
-              Three pillars that shape{" "}
-              <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-                every learner.
-              </span>
+            <h2 className="mt-6 font-display text-4xl font-semibold tracking-tight md:text-5xl lg:text-6xl leading-tight">
+              Why Fin-Envision
             </h2>
-            <p className="mt-3 text-muted-foreground">
-              A learning system built on depth, real-world practice, and{" "}
-              <span className="font-serif italic text-accent">personal guidance</span>.
+            <p className="mt-4 text-base text-muted-foreground md:text-lg">
+              given below
             </p>
           </div>
         </FadeIn>
 
-        <div className="mt-14 grid gap-6 md:grid-cols-3">
-          {whyUs.map((p, i) => {
-            const dashOffset = 40 + i * 40;
-            return (
-              <FadeIn key={p.title} delay={i * 0.1}>
-                <div className="group relative h-full rounded-2xl p-[1px] transition-all duration-500 hover:-translate-y-2">
-                  {/* Gradient border */}
-                  <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-primary/40 via-primary/10 to-accent/30 opacity-60 transition-opacity duration-500 group-hover:opacity-100" />
-                  {/* Sheen sweep */}
-                  <div className="pointer-events-none absolute inset-0 overflow-hidden rounded-2xl">
-                    <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/5 to-transparent transition-transform duration-1000 ease-in-out group-hover:translate-x-full" />
+        {/* Feature Grid */}
+        <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {features.map((f, i) => (
+            <FadeIn key={f.text} delay={i * 0.05}>
+              <div className="group relative h-full rounded-3xl p-[1px] transition-all duration-300 hover:-translate-y-1">
+                {/* Glow border effect */}
+                <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-white/10 via-transparent to-white/5 opacity-50 transition-opacity duration-300 group-hover:from-primary/30 group-hover:to-accent/30 group-hover:opacity-100" />
+                
+                <div className="relative flex h-full flex-col rounded-[23px] bg-card/60 p-6 backdrop-blur-xl border border-transparent">
+                  {/* Icon circle */}
+                  <div className={cn("flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br transition-all duration-300 group-hover:scale-105", f.color)}>
+                    <f.icon className="h-6 w-6" />
                   </div>
-
-                  <div className="relative flex h-full flex-col rounded-2xl bg-card/80 p-8 backdrop-blur-xl">
-                    <div className="relative mb-6">
-                      <div className="flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-br from-primary to-accent font-display text-sm font-bold text-primary-foreground shadow-lg shadow-primary/20">
-                        0{i + 1}
-                      </div>
-                      <svg
-                        aria-hidden
-                        className="absolute -left-1 -top-1 h-14 w-14 -rotate-90 opacity-50 transition-transform duration-700 group-hover:rotate-[270deg]"
-                        viewBox="0 0 56 56"
-                      >
-                        <circle
-                          cx="28"
-                          cy="28"
-                          r="26"
-                          fill="none"
-                          strokeWidth="1"
-                          className="stroke-primary"
-                          strokeDasharray="163"
-                          strokeDashoffset={dashOffset}
-                          strokeLinecap="round"
-                        />
-                      </svg>
-                    </div>
-
-                    <h3 className="mb-3 font-display text-xl font-semibold leading-tight text-foreground">
-                      {p.title}
-                    </h3>
-                    <p className="mb-6 flex-grow text-sm leading-relaxed text-muted-foreground">
-                      {p.body}
-                    </p>
-
-                    <div className="mb-5 h-px w-full bg-gradient-to-r from-primary/30 via-accent/20 to-transparent" />
-
-                    <ul className="space-y-3">
-                      {p.items?.map((it) => (
-                        <li key={it} className="flex items-start gap-3 text-sm text-foreground/85">
-                          <span
-                            className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-accent"
-                            style={{ boxShadow: "0 0 8px hsl(var(--accent) / 0.7)" }}
-                          />
-                          <span>{it}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
+                  
+                  <h3 className="mt-5 font-display text-base font-semibold leading-snug text-white transition-colors group-hover:text-primary">
+                    {f.text}
+                  </h3>
+                  <p className="mt-2.5 text-xs leading-relaxed text-muted-foreground flex-grow">
+                    {f.desc}
+                  </p>
                 </div>
-              </FadeIn>
-            );
-          })}
+              </div>
+            </FadeIn>
+          ))}
         </div>
       </div>
     </section>
@@ -694,7 +718,7 @@ function PlacementAnalytics() {
             <div className="grid gap-6 md:grid-cols-[auto_1fr] md:items-center">
               <Ring value={<CountUp to={5000} suffix="+" />} sub="students" label="Students trained" progress={0.9} />
               <div>
-                <div className="text-[11px] font-bold uppercase tracking-[0.28em] text-accent">Since 2017</div>
+                <div className="text-[11px] font-bold uppercase tracking-[0.28em] text-accent">Since 2018</div>
                 <h3 className="mt-2 font-display text-3xl font-semibold tracking-tight md:text-4xl">
                   5,000+ Students Trained
                 </h3>

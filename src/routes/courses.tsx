@@ -98,7 +98,7 @@ const CURRICULUM = {
 
 type Level = keyof typeof CURRICULUM;
 
-const PRICING_TABS = ["Offline (Classroom)", "Online"] as const;
+const PRICING_TABS = ["Offline (Classroom)", "Pre-recorded"] as const;
 
 const PLAN_BASE = [
   "Bilingual instruction — English + Hindi",
@@ -111,8 +111,8 @@ const HOURS_BY_TIER: Record<string, string> = {
   "CFA® Level 1": "Live Classroom Interactive Sessions",
   "CFA® Level 2": "Live Classroom Interactive Sessions",
   "CFA® Level 3": "60+ hours of live teaching",
-  "Level 2 Online": "80+ hours of live teaching",
-  "Level 3 Online": "60+ hours of live teaching",
+  "Level 2 Pre-recorded": "80+ hours of recorded lectures",
+  "Level 3 Pre-recorded": "60+ hours of recorded lectures",
 };
 
 function includesFor(tier: string): string[] {
@@ -136,11 +136,11 @@ const PLANS = {
     { tier: "CFA® Level 2", price: "₹40,000", note: "", popular: false },
     { tier: "Financial Modelling", price: "₹25,000", note: "", popular: false },
   ],
-  Online: [
+  "Pre-recorded": [
     { tier: "CFA® Level 1", price: "₹20,000", note: "140+ hours · Recorded lectures", popular: true },
-    { tier: "Level 2 Online", price: "₹25,000", note: "80+ hours · Recorded lectures", popular: false },
-    { tier: "Level 3 Online", price: "₹25,000", note: "60+ hours · Recorded lectures", popular: false },
-    { tier: "Financial Modelling", price: "₹20,000", note: "Online programme · Full project walkthrough", popular: false },
+    { tier: "Level 2 Pre-recorded", price: "₹25,000", note: "80+ hours · Recorded lectures", popular: false },
+    { tier: "Level 3 Pre-recorded", price: "₹25,000", note: "60+ hours · Recorded lectures", popular: false },
+    { tier: "Financial Modelling", price: "₹20,000", note: "Pre-recorded programme · Full project walkthrough", popular: false },
   ],
 } as const;
 
