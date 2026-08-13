@@ -53,71 +53,61 @@ function WhyUs() {
     {
       icon: BarChart3,
       text: "Practical teaching with Indian markets examples",
-      desc: "Learn concepts through real-time Indian stock market scenarios and case studies.",
-      color: "from-blue-500/20 to-indigo-500/20 text-blue-400",
+      color: "from-blue-500/20 to-indigo-500/20 text-blue-400 border-blue-500/10",
     },
     {
       icon: BookOpen,
       text: "Handwritten notes for concept clarity with Indian examples",
-      desc: "Sir's handwritten notes simplifying complex regulatory and financial topics.",
-      color: "from-emerald-500/20 to-teal-500/20 text-emerald-400",
+      color: "from-emerald-500/20 to-teal-500/20 text-emerald-400 border-emerald-500/10",
     },
     {
       icon: RefreshCw,
       text: "Regular revision sessions",
-      desc: "Periodic structured group revision classes to lock in key concepts and formulae.",
-      color: "from-violet-500/20 to-purple-500/20 text-violet-400",
+      color: "from-violet-500/20 to-purple-500/20 text-violet-400 border-violet-500/10",
     },
     {
       icon: MonitorPlay,
       text: "Recorded videos with unlimited views",
-      desc: "Never miss a class; rewatch any lecture anytime on our LMS portal.",
-      color: "from-rose-500/20 to-red-500/20 text-rose-400",
+      color: "from-rose-500/20 to-red-500/20 text-rose-400 border-rose-500/10",
     },
     {
       icon: ClipboardList,
       text: "Minimum 2 tests per subject",
-      desc: "Topic-wise structured tests to evaluate your understanding at every step.",
-      color: "from-cyan-500/20 to-blue-500/20 text-cyan-400",
+      color: "from-cyan-500/20 to-blue-500/20 text-cyan-400 border-cyan-500/10",
     },
     {
       icon: Calendar,
       text: "Dedicated study timetable",
-      desc: "Personalized study calendars tailored to fit your preparation window.",
-      color: "from-amber-500/20 to-orange-500/20 text-amber-400",
+      color: "from-amber-500/20 to-orange-500/20 text-amber-400 border-amber-500/10",
     },
     {
       icon: MessageSquare,
       text: "Personalised doubt solving sessions",
-      desc: "Get your doubts resolved directly by Manoj Sir and charterholders.",
-      color: "from-teal-500/20 to-emerald-500/20 text-teal-400",
+      color: "from-teal-500/20 to-emerald-500/20 text-teal-400 border-teal-500/10",
     },
     {
       icon: Trophy,
       text: "6 Mock tests",
-      desc: "Full-length adaptive exams simulated to match the real exam-day difficulty.",
-      color: "from-yellow-500/20 to-amber-500/20 text-yellow-400",
+      color: "from-yellow-500/20 to-amber-500/20 text-yellow-400 border-yellow-500/10",
     },
     {
       icon: Briefcase,
       text: "Career Guidance",
-      desc: "Resume preparation, mock interviews, and direct placement opportunities.",
-      color: "from-sky-500/20 to-blue-500/20 text-sky-400",
+      color: "from-sky-500/20 to-blue-500/20 text-sky-400 border-sky-500/10",
     },
     {
       icon: GraduationCap,
       text: "Exam Support Mentoring",
-      desc: "One-to-one mentoring to guide you through registration and exam strategy.",
-      color: "from-pink-500/20 to-rose-500/20 text-pink-400",
+      color: "from-pink-500/20 to-rose-500/20 text-pink-400 border-pink-500/10",
     },
   ];
 
   return (
-    <section className="relative overflow-hidden py-24 md:py-32">
+    <section className="relative overflow-hidden py-24 md:py-32 bg-[hsl(220_55%_4%)]">
       {/* Ambient backdrop grids */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 opacity-[0.06] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)]"
+        className="pointer-events-none absolute inset-0 opacity-[0.03] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)]"
         style={{
           backgroundImage:
             "linear-gradient(to right, hsl(var(--border)) 1px, transparent 1px), linear-gradient(to bottom, hsl(var(--border)) 1px, transparent 1px)",
@@ -134,48 +124,67 @@ function WhyUs() {
       />
 
       <div className="relative mx-auto max-w-7xl px-6">
-        <FadeIn>
-          <div className="mx-auto max-w-3xl text-center">
-            <div className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-3.5 py-1.5 text-[11px] font-semibold uppercase tracking-[0.22em] text-primary">
-              <span className="relative flex h-2 w-2">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-75" />
-                <span className="relative inline-flex h-2 w-2 rounded-full bg-primary" />
-              </span>
-              Learning Ecosystem
-            </div>
-            <h2 className="mt-6 font-display text-4xl font-semibold tracking-tight md:text-5xl lg:text-6xl leading-tight">
-              Why Fin-Envision
-            </h2>
-            <p className="mt-4 text-base text-muted-foreground md:text-lg">
-              given below
-            </p>
-          </div>
-        </FadeIn>
+        <div className="grid gap-12 lg:grid-cols-12 lg:items-start">
+          {/* Left Column: Title + Info Card */}
+          <div className="lg:col-span-4 lg:sticky lg:top-28">
+            <FadeIn>
+              <div className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-3.5 py-1.5 text-[11px] font-semibold uppercase tracking-[0.22em] text-primary">
+                <span className="relative flex h-2 w-2">
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-75" />
+                  <span className="relative inline-flex h-2 w-2 rounded-full bg-primary" />
+                </span>
+                Ecosystem
+              </div>
+              <h2 className="mt-5 font-display text-4xl font-semibold tracking-tight md:text-5xl leading-[1.1] text-white">
+                Why Fin-Envision
+              </h2>
+              <p className="mt-4 text-base text-muted-foreground">
+                given below
+              </p>
 
-        {/* Feature Grid */}
-        <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {features.map((f, i) => (
-            <FadeIn key={f.text} delay={i * 0.05}>
-              <div className="group relative h-full rounded-3xl p-[1px] transition-all duration-300 hover:-translate-y-1">
-                {/* Glow border effect */}
-                <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-white/10 via-transparent to-white/5 opacity-50 transition-opacity duration-300 group-hover:from-primary/30 group-hover:to-accent/30 group-hover:opacity-100" />
-                
-                <div className="relative flex h-full flex-col rounded-[23px] bg-card/60 p-6 backdrop-blur-xl border border-transparent">
-                  {/* Icon circle */}
-                  <div className={cn("flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br transition-all duration-300 group-hover:scale-105", f.color)}>
-                    <f.icon className="h-6 w-6" />
+              {/* A beautiful visual summary card */}
+              <div className="mt-8 relative overflow-hidden rounded-2xl border border-white/5 bg-gradient-to-br from-white/[0.03] to-white/[0.01] p-6 backdrop-blur">
+                <div className="absolute -right-12 -top-12 h-24 w-24 rounded-full bg-primary/25 blur-2xl" />
+                <div className="text-[10px] font-bold uppercase tracking-wider text-accent">Highlights</div>
+                <h4 className="mt-2 font-display text-lg font-semibold text-white">Proven Prep Ecosystem</h4>
+                <p className="mt-2 text-xs leading-relaxed text-muted-foreground">
+                  Our comprehensive, concept-first learning system is engineered for maximum first-attempt success.
+                </p>
+                <div className="mt-5 flex gap-4 border-t border-white/5 pt-4">
+                  <div>
+                    <div className="text-xl font-bold text-white">80-90%</div>
+                    <div className="text-[10px] text-muted-foreground">Passing Rate</div>
                   </div>
-                  
-                  <h3 className="mt-5 font-display text-base font-semibold leading-snug text-white transition-colors group-hover:text-primary">
-                    {f.text}
-                  </h3>
-                  <p className="mt-2.5 text-xs leading-relaxed text-muted-foreground flex-grow">
-                    {f.desc}
-                  </p>
+                  <div className="border-l border-white/5 pl-4">
+                    <div className="text-xl font-bold text-white">5,000+</div>
+                    <div className="text-[10px] text-muted-foreground">Students Trained</div>
+                  </div>
                 </div>
               </div>
             </FadeIn>
-          ))}
+          </div>
+
+          {/* Right Column: Grid of compact features */}
+          <div className="lg:col-span-8">
+            <div className="grid gap-4 sm:grid-cols-2">
+              {features.map((f, i) => (
+                <FadeIn key={f.text} delay={i * 0.04}>
+                  <div className="group relative rounded-2xl border border-white/5 bg-card/40 p-4 transition-all duration-300 hover:border-primary/30 hover:bg-white/[0.02] hover:-translate-y-0.5">
+                    <div className="flex items-center gap-4">
+                      {/* Icon */}
+                      <div className={cn("flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br border transition-transform duration-300 group-hover:scale-105", f.color)}>
+                        <f.icon className="h-5 w-5" />
+                      </div>
+                      {/* Text */}
+                      <span className="font-display text-sm font-medium leading-snug text-white/90 group-hover:text-white transition-colors">
+                        {f.text}
+                      </span>
+                    </div>
+                  </div>
+                </FadeIn>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </section>
