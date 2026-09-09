@@ -31,7 +31,8 @@ export function FAQ({
 
   const heading = title ?? (
     <>
-      Frequently<br />
+      Frequently
+      <br />
       <span className="italic bg-gradient-to-r from-accent via-accent to-accent/60 bg-clip-text text-transparent pr-[0.15em] -mr-[0.15em]">
         asked
       </span>
@@ -80,8 +81,12 @@ export function FAQ({
                         <MessageSquare className="h-5 w-5" />
                       </span>
                       <div>
-                        <div className="font-display text-base font-semibold text-white">{contactLabel}</div>
-                        <div className="text-[11px] uppercase tracking-wider text-white/50">{contactSubtitle}</div>
+                        <div className="font-display text-base font-semibold text-white">
+                          {contactLabel}
+                        </div>
+                        <div className="text-[11px] uppercase tracking-wider text-white/50">
+                          {contactSubtitle}
+                        </div>
                       </div>
                     </div>
                     <Link
@@ -139,7 +144,9 @@ export function FAQ({
                           <span
                             className={cn(
                               "block h-full w-full rounded-2xl",
-                              isOpen ? "bg-accent text-accent-foreground" : "bg-[hsl(220_55%_11%)] text-white/75",
+                              isOpen
+                                ? "bg-accent text-accent-foreground"
+                                : "bg-[hsl(220_55%_11%)] text-white/75",
                             )}
                           />
                         </span>
@@ -191,7 +198,9 @@ export function FAQ({
                               className="overflow-hidden"
                             >
                               <div className="mt-4 flex gap-3 border-l-2 border-accent/60 pl-4">
-                                <p className="text-sm leading-relaxed text-white/70 md:text-[15px]">{f.a}</p>
+                                <p className="text-sm leading-relaxed text-white/70 md:text-[15px]">
+                                  {f.a}
+                                </p>
                               </div>
                             </motion.div>
                           )}

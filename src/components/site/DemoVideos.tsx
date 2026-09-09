@@ -8,8 +8,21 @@ import { resourcePlaylists } from "@/data/site";
 
 const YT_CHANNEL = "https://www.youtube.com/@financewithmanojrajgopal";
 
-type Category = "CFA® Level I" | "CFA® Level II" | "Financial Modelling" | "Stock Market" | "Banking" | "Professional";
-type Video = { title: string; cat: Category; mins: number; tone: string; url: string; thumb?: string };
+type Category =
+  | "CFA® Level I"
+  | "CFA® Level II"
+  | "Financial Modelling"
+  | "Stock Market"
+  | "Banking"
+  | "Professional";
+type Video = {
+  title: string;
+  cat: Category;
+  mins: number;
+  tone: string;
+  url: string;
+  thumb?: string;
+};
 
 const PLAYLIST_URLS: Record<string, string> = {
   "CFA® Level 1 – FSA – Financial Analysis Techniques (Ratios)":
@@ -43,12 +56,9 @@ const PLAYLIST_URLS: Record<string, string> = {
 const PLAYLIST_THUMBS: Record<string, string> = {
   "CFA® Level 1 – FSA – Financial Analysis Techniques (Ratios)":
     "https://i.ytimg.com/vi/bdlLEeYEs5Q/hqdefault.jpg",
-  "CFA® Level 1 – FSA | Income Statement":
-    "https://i.ytimg.com/vi/db7v1Jli2j8/hqdefault.jpg",
-  "CFA® Level 1 – Quants | Time Value of Money":
-    "https://i.ytimg.com/vi/oKhc21rQpuU/hqdefault.jpg",
-  "CFA® Level 2 Pre-Requisite":
-    "https://i.ytimg.com/vi/x3ydYkq4nZY/hqdefault.jpg",
+  "CFA® Level 1 – FSA | Income Statement": "https://i.ytimg.com/vi/db7v1Jli2j8/hqdefault.jpg",
+  "CFA® Level 1 – Quants | Time Value of Money": "https://i.ytimg.com/vi/oKhc21rQpuU/hqdefault.jpg",
+  "CFA® Level 2 Pre-Requisite": "https://i.ytimg.com/vi/x3ydYkq4nZY/hqdefault.jpg",
   "CFA® Level 2 – FSA | Intercorporate Investments":
     "https://i.ytimg.com/vi/JPc8B8G9SsM/hqdefault.jpg",
   "CFA® Level 2 – Derivatives | Contingent Claims":
@@ -57,25 +67,28 @@ const PLAYLIST_THUMBS: Record<string, string> = {
     "https://i.ytimg.com/vi/XeQQywq8uog/hqdefault.jpg",
   "CFA® Level 2 – Alternative Investments | Investments in Real Estate":
     "https://i.ytimg.com/vi/MzoBmDX1rf4/hqdefault.jpg",
-  "Financial Modeling Demo Sessions":
-    "https://i.ytimg.com/vi/L-VIKPHW0RU/hqdefault.jpg",
-  "Company Analysis":
-    "https://i.ytimg.com/vi/TtHxD0FssMY/hqdefault.jpg",
-  "Basics of Stock Market":
-    "https://i.ytimg.com/vi/crFZ_-R5ID0/hqdefault.jpg",
-  "Watch List Vs Warn List":
-    "https://i.ytimg.com/vi/YLJnHgC6-a0/hqdefault.jpg",
-  "Banking Series":
-    "https://i.ytimg.com/vi/HC1nUT961CU/hqdefault.jpg",
+  "Financial Modeling Demo Sessions": "https://i.ytimg.com/vi/L-VIKPHW0RU/hqdefault.jpg",
+  "Company Analysis": "https://i.ytimg.com/vi/TtHxD0FssMY/hqdefault.jpg",
+  "Basics of Stock Market": "https://i.ytimg.com/vi/crFZ_-R5ID0/hqdefault.jpg",
+  "Watch List Vs Warn List": "https://i.ytimg.com/vi/YLJnHgC6-a0/hqdefault.jpg",
+  "Banking Series": "https://i.ytimg.com/vi/HC1nUT961CU/hqdefault.jpg",
 };
 
 const TONE_BY_CAT: Record<Category, string[]> = {
-  "CFA® Level I": ["from-[#1a3a5c] to-[#2d5a8c]", "from-blue-700 to-indigo-900", "from-cyan-600 to-blue-800"],
-  "CFA® Level II": ["from-indigo-600 to-violet-800", "from-fuchsia-600 to-purple-800", "from-violet-700 to-purple-900"],
+  "CFA® Level I": [
+    "from-[#1a3a5c] to-[#2d5a8c]",
+    "from-blue-700 to-indigo-900",
+    "from-cyan-600 to-blue-800",
+  ],
+  "CFA® Level II": [
+    "from-indigo-600 to-violet-800",
+    "from-fuchsia-600 to-purple-800",
+    "from-violet-700 to-purple-900",
+  ],
   "Financial Modelling": ["from-emerald-600 to-teal-800", "from-teal-500 to-emerald-700"],
   "Stock Market": ["from-amber-500 to-orange-700", "from-orange-500 to-rose-700"],
-  "Banking": ["from-rose-600 to-red-800"],
-  "Professional": ["from-slate-700 to-slate-900"],
+  Banking: ["from-rose-600 to-red-800"],
+  Professional: ["from-slate-700 to-slate-900"],
 };
 
 const CAT_MAP: Record<string, Category> = {
@@ -100,7 +113,15 @@ const videos: Video[] = resourcePlaylists.flatMap((group) => {
   }));
 });
 
-const tabs = ["All", "CFA® Level I", "CFA® Level II", "Financial Modelling", "Stock Market", "Banking", "Professional"] as const;
+const tabs = [
+  "All",
+  "CFA® Level I",
+  "CFA® Level II",
+  "Financial Modelling",
+  "Stock Market",
+  "Banking",
+  "Professional",
+] as const;
 const PAGE_SIZE = 3;
 
 export function DemoVideos() {
@@ -129,9 +150,6 @@ export function DemoVideos() {
                 Demo Videos. <GradientAccent>Every topic.</GradientAccent>
               </h2>
             </div>
-            <div className="rounded-full border border-border bg-card px-4 py-2 text-sm font-medium text-muted-foreground shadow-card">
-              <span className="font-display text-base font-semibold text-foreground">{filtered.length}</span> resources
-            </div>
           </div>
         </FadeIn>
 
@@ -140,10 +158,15 @@ export function DemoVideos() {
           {tabs.map((t) => (
             <button
               key={t}
-              onClick={() => { setActive(t); setPage(1); }}
+              onClick={() => {
+                setActive(t);
+                setPage(1);
+              }}
               className={cn(
                 "relative rounded-full px-4 py-2 text-sm font-semibold uppercase tracking-wider transition-colors",
-                active === t ? "text-primary-foreground" : "text-muted-foreground hover:text-foreground"
+                active === t
+                  ? "text-primary-foreground"
+                  : "text-muted-foreground hover:text-foreground",
               )}
             >
               {active === t && (
@@ -178,7 +201,12 @@ export function DemoVideos() {
                 transition={{ duration: 0.5, delay: (i % 9) * 0.04, ease: [0.16, 1, 0.3, 1] }}
                 className="group relative block cursor-pointer touch-manipulation overflow-hidden rounded-3xl border border-border bg-card shadow-card transition-all hover-lift hover:border-accent/40 hover:shadow-glow"
               >
-                <div className={cn("pointer-events-none relative aspect-video overflow-hidden bg-gradient-to-br", v.tone)}>
+                <div
+                  className={cn(
+                    "pointer-events-none relative aspect-video overflow-hidden bg-gradient-to-br",
+                    v.tone,
+                  )}
+                >
                   {v.thumb && (
                     <img
                       src={v.thumb}
@@ -212,7 +240,8 @@ export function DemoVideos() {
                     {v.title}
                   </h3>
                   <div className="mt-3 inline-flex items-center gap-1.5 text-xs font-semibold text-accent opacity-0 transition-opacity group-hover:opacity-100">
-                    Watch now <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
+                    Watch now{" "}
+                    <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
                   </div>
                 </div>
               </motion.a>
@@ -244,7 +273,7 @@ export function DemoVideos() {
                   "relative h-10 min-w-10 rounded-full px-3 text-sm font-semibold transition",
                   page === i + 1
                     ? "text-primary-foreground"
-                    : "border border-border bg-card text-muted-foreground hover:border-accent/40 hover:text-foreground"
+                    : "border border-border bg-card text-muted-foreground hover:border-accent/40 hover:text-foreground",
                 )}
               >
                 {page === i + 1 && (

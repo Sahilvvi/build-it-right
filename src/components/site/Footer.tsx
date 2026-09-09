@@ -1,19 +1,23 @@
 import { Link } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import {
-  Sparkles, Linkedin, Instagram, Youtube, MessageCircle, ArrowUpRight,
-  Mail, Phone, MapPin,
+  Sparkles,
+  Linkedin,
+  Instagram,
+  Youtube,
+  MessageCircle,
+  ArrowUpRight,
+  Mail,
+  Phone,
+  MapPin,
 } from "lucide-react";
 import { brand } from "@/data/site";
 const logoAsset = { url: "/finenvision-logo-light.png" };
 
-
 const cols = [
   {
     title: "Company",
-    items: [
-      { l: "About Us", to: "/about" },
-    ],
+    items: [{ l: "About Us", to: "/about" }],
   },
   {
     title: "Resources",
@@ -25,20 +29,27 @@ const cols = [
   },
   {
     title: "Support",
-    items: [
-      { l: "Contact Us", to: `https://wa.me/${brand.whatsapp.replace(/\D/g, "")}?text=Enquiry%20for%20CFA` },
-    ],
+    items: [{ l: "Contact Us", to: "/contact" }],
   },
 ];
 
-
-
-
 const SOCIALS = [
-  { Icon: Linkedin, href: "https://www.linkedin.com/in/manojrajgopal?utm_source=share_via&utm_content=profile&utm_medium=member_android", label: "LinkedIn" },
-  { Icon: Instagram, href: "https://www.instagram.com/finenvision.cfa?igsh=MWl0eDN4OXFjdWhucA==", label: "Instagram" },
+  {
+    Icon: Linkedin,
+    href: "https://www.linkedin.com/in/manojrajgopal?utm_source=share_via&utm_content=profile&utm_medium=member_android",
+    label: "LinkedIn",
+  },
+  {
+    Icon: Instagram,
+    href: "https://www.instagram.com/finenvision.cfa?igsh=MWl0eDN4OXFjdWhucA==",
+    label: "Instagram",
+  },
   { Icon: Youtube, href: "https://www.youtube.com/@financewithmanojrajgopal", label: "YouTube" },
-  { Icon: MessageCircle, href: "https://wa.me/917304833625?text=Enquiry%20for%20CFA", label: "WhatsApp" },
+  {
+    Icon: MessageCircle,
+    href: "https://wa.me/917304833625?text=Enquiry%20for%20CFA",
+    label: "WhatsApp",
+  },
 ];
 
 export function Footer() {
@@ -48,9 +59,6 @@ export function Footer() {
       <div className="pointer-events-none absolute inset-0 opacity-[0.06] [background-image:linear-gradient(hsl(var(--accent))_1px,transparent_1px),linear-gradient(90deg,hsl(var(--accent))_1px,transparent_1px)] [background-size:48px_48px]" />
       <div className="pointer-events-none absolute -left-40 -top-40 h-[480px] w-[480px] rounded-full bg-accent/10 blur-3xl" />
       <div className="pointer-events-none absolute -right-32 top-1/3 h-[420px] w-[420px] rounded-full bg-primary/40 blur-3xl" />
-
-
-
 
       {/* Main grid */}
       <div className="container-px relative mx-auto max-w-7xl pb-10 pt-20">
@@ -148,9 +156,15 @@ export function Footer() {
             © {new Date().getFullYear()} {brand.name}. Crafted with intent in Mumbai.
           </div>
           <div className="flex flex-wrap gap-x-6 gap-y-2">
-            <Link to="/contact" className="transition-colors hover:text-white">Privacy</Link>
-            <Link to="/contact" className="transition-colors hover:text-white">Terms</Link>
-            <Link to="/contact" className="transition-colors hover:text-white">Cookies</Link>
+            <Link to="/contact" className="transition-colors hover:text-white">
+              Privacy
+            </Link>
+            <Link to="/contact" className="transition-colors hover:text-white">
+              Terms
+            </Link>
+            <Link to="/contact" className="transition-colors hover:text-white">
+              Cookies
+            </Link>
           </div>
         </div>
       </div>

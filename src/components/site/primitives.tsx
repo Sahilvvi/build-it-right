@@ -97,7 +97,17 @@ export const staggerItemVariants = {
   show: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] as const } },
 };
 
-export function Counter({ to, suffix = "", prefix = "", duration = 1.6 }: { to: number; suffix?: string; prefix?: string; duration?: number }) {
+export function Counter({
+  to,
+  suffix = "",
+  prefix = "",
+  duration = 1.6,
+}: {
+  to: number;
+  suffix?: string;
+  prefix?: string;
+  duration?: number;
+}) {
   const ref = useRef<HTMLSpanElement>(null);
   const inView = useInView(ref, { once: true, margin: "-60px" });
   const mv = useMotionValue(0);
@@ -115,7 +125,12 @@ export function Counter({ to, suffix = "", prefix = "", duration = 1.6 }: { to: 
 
 export function GradientCard({ children, className }: { children: ReactNode; className?: string }) {
   return (
-    <div className={cn("group relative overflow-hidden rounded-3xl border border-border bg-card p-6 shadow-card transition-all hover-lift", className)}>
+    <div
+      className={cn(
+        "group relative overflow-hidden rounded-3xl border border-border bg-card p-6 shadow-card transition-all hover-lift",
+        className,
+      )}
+    >
       <div className="pointer-events-none absolute -right-16 -top-16 h-48 w-48 rounded-full bg-gradient-brand opacity-0 blur-3xl transition-opacity duration-500 group-hover:opacity-30" />
       {children}
     </div>

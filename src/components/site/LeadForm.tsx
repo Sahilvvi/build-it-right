@@ -11,7 +11,13 @@ const schema = z.object({
   interest: z.string().max(80).optional(),
 });
 
-export function LeadForm({ compact = false, defaultInterest }: { compact?: boolean; defaultInterest?: string }) {
+export function LeadForm({
+  compact = false,
+  defaultInterest,
+}: {
+  compact?: boolean;
+  defaultInterest?: string;
+}) {
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [submitted, setSubmitted] = useState(false);
 
@@ -31,7 +37,7 @@ export function LeadForm({ compact = false, defaultInterest }: { compact?: boole
       return;
     }
     setErrors({});
-    
+
     const data = {
       Name: parsed.data.name,
       Email: parsed.data.email,
@@ -44,13 +50,13 @@ export function LeadForm({ compact = false, defaultInterest }: { compact?: boole
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "Accept": "application/json"
+        Accept: "application/json",
       },
-      body: JSON.stringify(data)
+      body: JSON.stringify(data),
     })
-      .then(res => res.json())
-      .then(data => console.log("Form submitted successfully:", data))
-      .catch(err => console.error("Error submitting form:", err));
+      .then((res) => res.json())
+      .then((data) => console.log("Form submitted successfully:", data))
+      .catch((err) => console.error("Error submitting form:", err));
 
     setSubmitted(true);
   }
@@ -65,7 +71,9 @@ export function LeadForm({ compact = false, defaultInterest }: { compact?: boole
         <div className="mx-auto grid h-14 w-14 place-items-center rounded-full bg-gradient-brand text-primary-foreground shadow-glow">
           <CheckCircle2 className="h-6 w-6" />
         </div>
-        <h3 className="mt-4 font-display text-xl font-semibold">You're in. We'll reach out within 24h.</h3>
+        <h3 className="mt-4 font-display text-xl font-semibold">
+          You're in. We'll reach out within 24h.
+        </h3>
         <p className="mt-2 text-sm text-muted-foreground">
           Meanwhile, a personalised career roadmap is heading to your inbox.
         </p>
@@ -77,8 +85,20 @@ export function LeadForm({ compact = false, defaultInterest }: { compact?: boole
     <form onSubmit={onSubmit} className={compact ? "grid gap-3" : "grid gap-4"}>
       <Field name="name" label="Full name" placeholder="Aisha Verma" error={errors.name} />
       <div className="grid gap-4 md:grid-cols-2">
-        <Field name="email" label="Email" placeholder="aisha@email.com" type="email" error={errors.email} />
-        <Field name="phone" label="Phone" placeholder="+91 7304833625" type="tel" error={errors.phone} />
+        <Field
+          name="email"
+          label="Email"
+          placeholder="aisha@email.com"
+          type="email"
+          error={errors.email}
+        />
+        <Field
+          name="phone"
+          label="Phone"
+          placeholder="+91 7304833625"
+          type="tel"
+          error={errors.phone}
+        />
       </div>
       <div>
         <label className="mb-1.5 block text-xs font-medium uppercase tracking-wider text-muted-foreground">
@@ -91,7 +111,9 @@ export function LeadForm({ compact = false, defaultInterest }: { compact?: boole
         >
           <option value="">Pick a program (optional)</option>
           {courses.map((c) => (
-            <option key={c.slug} value={c.title}>{c.title}</option>
+            <option key={c.slug} value={c.title}>
+              {c.title}
+            </option>
           ))}
           <option value="Not sure yet">Not sure yet — guide me</option>
         </select>
@@ -111,11 +133,23 @@ export function LeadForm({ compact = false, defaultInterest }: { compact?: boole
 }
 
 function Field({
-  name, label, placeholder, type = "text", error,
-}: { name: string; label: string; placeholder: string; type?: string; error?: string }) {
+  name,
+  label,
+  placeholder,
+  type = "text",
+  error,
+}: {
+  name: string;
+  label: string;
+  placeholder: string;
+  type?: string;
+  error?: string;
+}) {
   return (
     <div>
-      <label className="mb-1.5 block text-xs font-medium uppercase tracking-wider text-muted-foreground">{label}</label>
+      <label className="mb-1.5 block text-xs font-medium uppercase tracking-wider text-muted-foreground">
+        {label}
+      </label>
       <input
         name={name}
         type={type}

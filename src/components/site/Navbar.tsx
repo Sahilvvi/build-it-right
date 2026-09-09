@@ -7,7 +7,6 @@ const logoAsset = { url: "/finenvision-logo-light.png" };
 import { cn } from "@/lib/utils";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 
-
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
@@ -98,7 +97,10 @@ export function Navbar() {
                 <TooltipContent className="bg-popover border border-border text-popover-foreground p-3 rounded-xl shadow-lg max-w-xs z-50">
                   <p className="font-semibold text-xs text-primary">Classplus Login Portal</p>
                   <p className="text-[11px] text-muted-foreground mt-1">
-                    Use Org Code: <strong className="font-mono text-foreground bg-accent/20 px-1 py-0.5 rounded font-bold">RJQBWG</strong>
+                    Use Org Code:{" "}
+                    <strong className="font-mono text-foreground bg-accent/20 px-1 py-0.5 rounded font-bold">
+                      RJQBWG
+                    </strong>
                   </p>
                 </TooltipContent>
               </Tooltip>
@@ -113,7 +115,6 @@ export function Navbar() {
             </button>
           </div>
         </div>
-
 
         <AnimatePresence>
           {open && (
@@ -147,9 +148,9 @@ export function Navbar() {
                     <LogIn className="h-4 w-4" /> Login
                   </a>
                   <div className="mt-1 px-3 text-[11px] text-muted-foreground text-center">
-                    Use Org Code: <strong className="font-mono text-primary font-semibold">RJQBWG</strong>
+                    Use Org Code:{" "}
+                    <strong className="font-mono text-primary font-semibold">RJQBWG</strong>
                   </div>
-
                 </div>
               </div>
             </motion.div>

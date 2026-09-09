@@ -5,13 +5,12 @@ export const brand = {
   shortName: "Fin-Envision",
   tagline: "Your Path to CFA® Success Starts Here",
   description:
-    "Fin-Envision is amongst the leading CFA® classes in Mumbai, offering certified programs in CFA® and Financial Modeling. Our concept-focused, practical approach helps students realise their potential and build a future in finance.",
+    "Fin-Envision is amongst the leading CFA® classes in Mumbai, offering coaching for CFA® Program and Financial Modeling. Our concept-focused, practical approach helps students realise their potential and build a future in finance.",
   email: "contactfinenvision@gmail.com",
   phone: "+91 7304833625",
   whatsapp: "+91 7304833625",
   address: "Thane, Mumbai, Maharashtra, India",
 };
-
 
 export const googleReviewsCount = 216;
 export const googleRating = 4.9;
@@ -26,7 +25,7 @@ export const navLinks = [
 ];
 
 export const stats = [
-  { value: "80–90%", label: "Success rate" },
+  { value: "~80–90%", label: "Success rate" },
   { value: "5,000+", label: "Students trained" },
   { value: `${googleReviewsCount}`, label: "Google reviews" },
   { value: "8+ yrs", label: "Teaching experience" },
@@ -57,11 +56,7 @@ export const whyUs = [
   {
     title: "Dedicated Mentorship",
     body: "Learning doesn't end after the lecture. Receive continuous guidance through doubt-solving sessions, personalized mentoring, exam strategies, and career advice to help you stay on track and achieve your goals.",
-    items: [
-      "Personalised Doubt solving sessions",
-      "Career Guidance",
-      "Exam Support & Mentoring",
-    ],
+    items: ["Personalised Doubt solving sessions", "Career Guidance", "Exam Support & Mentoring"],
   },
 ];
 
@@ -86,7 +81,7 @@ export const aboutContent = {
     "Founder and Lead Instructor of Fin-Envision Learning.",
     "Cleared all three levels of the CFA®\u00AE Program in the first attempt.",
     "Worked with reputed organizations such as CRISIL and JHP, gaining valuable industry exposure.",
-    "Has successfully trained over 5,000 students across Mumbai.",
+    "Has successfully trained over 5,000 students across the globe.",
     "Known for simplifying complex financial concepts into easy-to-understand, practical lessons.",
     "Focuses on bridging the gap between academic learning and real-world finance.",
     "Dedicated to mentoring students for successful careers in finance through industry-oriented training and personalized guidance.",
@@ -119,17 +114,11 @@ export const resourcePlaylists: PlaylistCategory[] = [
   },
   {
     category: "Financial Modelling",
-    playlists: [
-      "Financial Modeling Demo Sessions",
-      "Company Analysis",
-    ],
+    playlists: ["Financial Modeling Demo Sessions", "Company Analysis"],
   },
   {
     category: "Stock Market",
-    playlists: [
-      "Basics of Stock Market",
-      "Watch List Vs Warn List",
-    ],
+    playlists: ["Basics of Stock Market", "Watch List Vs Warn List"],
   },
   {
     category: "Banking & Industry Analysis",
@@ -152,8 +141,18 @@ export const tickerItems = [
 
 export const categories = [
   { slug: "cfa", title: "CFA® Program", count: 3, hue: "from-blue-500 to-indigo-500" },
-  { slug: "financial-modeling", title: "Financial Modeling", count: 1, hue: "from-indigo-500 to-violet-500" },
-  { slug: "resources", title: "Self-study Resources", count: 4, hue: "from-amber-500 to-orange-500" },
+  {
+    slug: "financial-modeling",
+    title: "Financial Modeling",
+    count: 1,
+    hue: "from-indigo-500 to-violet-500",
+  },
+  {
+    slug: "resources",
+    title: "Self-study Resources",
+    count: 4,
+    hue: "from-amber-500 to-orange-500",
+  },
 ];
 
 export type Course = {
@@ -162,7 +161,7 @@ export type Course = {
   category: string;
   duration: string;
   level: "Beginner" | "Intermediate" | "Advanced";
-  format: "Live cohort" | "Self-paced" | "Hybrid";
+  format: "Live cohort" | "Self-paced" | "Hybrid" | "Online Pre-recorded";
   price: string;
   outcomes: string[];
   highlights: string[];
@@ -214,7 +213,7 @@ export const courses: Course[] = [
       "Mock papers, subject tests and doubt clinics",
     ],
     highlights: [
-      "Taught by Manoj Rajgopal, CFA®",
+      "Taught by Manoj Rajgopal, CFA",
       "Concept-first teaching with real market examples",
       "Recorded lectures for unlimited revision",
       "One-to-one subject-wise doubt support",
@@ -226,7 +225,7 @@ export const courses: Course[] = [
     category: "cfa",
     duration: "Classroom + Pre-recorded",
     level: "Advanced",
-    format: "Hybrid",
+    format: "Online Pre-recorded",
     price: "₹25,000 pre-recorded",
     rating: 4.9,
     learners: 220,
@@ -244,7 +243,7 @@ export const courses: Course[] = [
   },
   {
     slug: "financial-modeling",
-    title: "Financial Modeling Certificate Programme (Holistic Finance)",
+    title: "Holistic Finance (Equity Research and Financial Modeling) Program",
     category: "financial-modeling",
     duration: "15 weeks · 100+ hrs",
     level: "Intermediate",
@@ -252,7 +251,7 @@ export const courses: Course[] = [
     price: "₹25,000 classroom / ₹20,000 pre-recorded",
     rating: 4.8,
     learners: 600,
-    badge: "Internship opportunity",
+    badge: "Internship Opportunity",
     outcomes: [
       "Build a full 3-statement model on a listed company",
       "Income Statement, Balance Sheet & Cashflow modelling",
@@ -263,16 +262,25 @@ export const courses: Course[] = [
       "30 hrs concept learning + 5 hrs Excel & Advanced Excel",
       "50 hrs project learning + 20 hrs presentation",
       "Internship opportunity at the end of the course",
-      "Real case studies (e.g. Relaxo) — fictitious + actual companies",
+      "Real case studies (Relaxo Footwears Ltd, Dr Lal Pathlabs Ltd and more) — fictitious + actual companies",
       "2 projects with podium presentation",
     ],
   },
 ];
 
 export const courseHighlights = [
-  { title: "Understanding Formulae", body: "Understand every formula from scratch instead of mugging it up." },
-  { title: "Focus on WHY", body: "Focusing on why helps you acquire knowledge and actually apply it." },
-  { title: "Practical Examples", body: "Practical, real-world examples to sharpen problem-solving." },
+  {
+    title: "Understanding Formulae",
+    body: "Understand every formula from scratch instead of mugging it up.",
+  },
+  {
+    title: "Focus on WHY",
+    body: "Focusing on why helps you acquire knowledge and actually apply it.",
+  },
+  {
+    title: "Practical Examples",
+    body: "Practical, real-world examples to sharpen problem-solving.",
+  },
   { title: "Subject-Wise Tests", body: "Regular subject-wise tests through the program." },
   { title: "Batch Size", body: "Capped at 35 students per batch for focused learning." },
   { title: "Online Videos", body: "Recorded videos of every topic available in the LMS." },
@@ -314,7 +322,8 @@ export const cfaExamPattern = {
   },
   level3: {
     when: "Conducted 2 times a year — February and August",
-    format: "Each session has a mix of item sets and essay sets — 11 essay sets and 11 item sets in total, 12 points each.",
+    format:
+      "Each session has a mix of item sets and essay sets — 11 essay sets and 11 item sets in total, 12 points each.",
     sessions: [
       "Constructed-response (essay) sets test written analysis",
       "Item sets test applied portfolio management decisions",
@@ -322,7 +331,6 @@ export const cfaExamPattern = {
     results: "Results released within 10 weeks · No negative marking",
   },
 };
-
 
 export const testimonials = [
   {
@@ -363,25 +371,60 @@ export const testimonials = [
 ];
 
 export const hiringCompanies = [
-  "JP Morgan", "CRISIL", "Morgan Stanley", "KPMG", "Barclays", "HSBC",
-  "Mirae Asset Capital Markets", "NSE Indices Ltd", "PL Capital",
-  "Caprize Investment Managers", "Negen Capital Services Pvt Ltd",
-  "Philip Capital", "Motilal Oswal",
+  "JP Morgan",
+  "CRISIL",
+  "Morgan Stanley",
+  "KPMG",
+  "Barclays",
+  "HSBC",
+  "Mirae Asset Capital Markets",
+  "NSE Indices Ltd",
+  "PL Capital",
+  "Caprize Investment Managers",
+  "Negen Capital Services Pvt Ltd",
+  "Philip Capital",
+  "Motilal Oswal",
 ];
 
 export const journey = [
-  { step: "01", title: "Enquire", body: "Tell us your goal — CFA® level, Financial Modeling, or career switch." },
-  { step: "02", title: "Counselling", body: "Speak with our team to map the right batch and study plan." },
-  { step: "03", title: "Classroom + Online", body: "Learn concepts first, then apply with curriculum questions and mocks." },
-  { step: "04", title: "Practice & mocks", body: "Subject tests, mock exams, handwritten notes and doubt clinics." },
-  { step: "05", title: "Clear the exam", body: "Walk into the exam prepared — and step into a finance career." },
+  {
+    step: "01",
+    title: "Enquire",
+    body: "Tell us your goal — CFA® level, Financial Modeling, or career switch.",
+  },
+  {
+    step: "02",
+    title: "Counselling",
+    body: "Speak with our team to map the right batch and study plan.",
+  },
+  {
+    step: "03",
+    title: "Classroom + Online",
+    body: "Learn concepts first, then apply with curriculum questions and mocks.",
+  },
+  {
+    step: "04",
+    title: "Practice & mocks",
+    body: "Subject tests, mock exams, handwritten notes and doubt clinics.",
+  },
+  {
+    step: "05",
+    title: "Clear the exam",
+    body: "Walk into the exam prepared — and step into a finance career.",
+  },
 ];
 
 export const values = [
   { title: "Concept Focused", body: "Learning the concept, not just mugging up formulas." },
-  { title: "Practical Learning", body: "CFA® concepts taught with real-world practical application." },
+  {
+    title: "Practical Learning",
+    body: "CFA® concepts taught with real-world practical application.",
+  },
   { title: "Student Support", body: "Ongoing doubt-solving and mentor access through the course." },
-  { title: "Full Curriculum", body: "100% of the institute curriculum questions are solved in class." },
+  {
+    title: "Full Curriculum",
+    body: "100% of the institute curriculum questions are solved in class.",
+  },
 ];
 
 export const faqs = [
@@ -417,14 +460,31 @@ export const faqs = [
 
 export const resources = [
   { type: "Video", title: "Understanding Income Statement — FSA — CFA® L1", reads: "44 min" },
-  { type: "Video", title: "Financial Analysis Techniques (Ratios) — FSA — CFA® L1", reads: "3-part series" },
-  { type: "Video", title: "Working Capital & Liquidity — Corporate Issuers — CFA® L1", reads: "1h 07m" },
+  {
+    type: "Video",
+    title: "Financial Analysis Techniques (Ratios) — FSA — CFA® L1",
+    reads: "3-part series",
+  },
+  {
+    type: "Video",
+    title: "Working Capital & Liquidity — Corporate Issuers — CFA® L1",
+    reads: "1h 07m",
+  },
   { type: "Video", title: "Intercorporate Investments — FSA — CFA® L2 (4 parts)", reads: "Series" },
-  { type: "Video", title: "Valuation of Contingent Claims — Derivatives — CFA® L2", reads: "3 lectures" },
+  {
+    type: "Video",
+    title: "Valuation of Contingent Claims — Derivatives — CFA® L2",
+    reads: "3 lectures",
+  },
   { type: "Video", title: "Financial Modeling — Relaxo case study", reads: "Full walkthrough" },
 ];
 
-export const resourceCategories = ["CFA® Level 1", "CFA® Level 2", "CFA® Level 3", "Financial Modeling"];
+export const resourceCategories = [
+  "CFA® Level 1",
+  "CFA® Level 2",
+  "CFA® Level 3",
+  "Financial Modeling",
+];
 
 export const services = [
   { title: "Classroom Coaching", body: "In-person CFA® & Financial Modeling classes in Mumbai." },

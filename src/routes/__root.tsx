@@ -14,7 +14,6 @@ const faviconAsset = { url: "/finenvision-icon.png" };
 const ogAsset = { url: "/finenvision-logo.png" };
 import { reportLovableError } from "../lib/lovable-error-reporting";
 
-
 function NotFoundComponent() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
@@ -81,11 +80,19 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title: "Fin-Envision Learning — Master Financial Modelling & Crack the CFA®" },
-      { name: "description", content: "Fin-Envision is a leading finance training institute helping students master financial modelling and crack the CFA® with clarity and confidence." },
+      {
+        name: "description",
+        content:
+          "Fin-Envision is a leading finance training institute helping students master financial modelling and crack the CFA® with clarity and confidence.",
+      },
       { property: "og:site_name", content: "Fin-Envision Learning" },
       { property: "og:type", content: "website" },
       { property: "og:title", content: "Fin-Envision Learning — Finance training. CFA® mastery." },
-      { property: "og:description", content: "Bridge theory and real-world application with practitioner-led finance & CFA® programs." },
+      {
+        property: "og:description",
+        content:
+          "Bridge theory and real-world application with practitioner-led finance & CFA® programs.",
+      },
       { property: "og:image", content: ogAsset.url },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:image", content: ogAsset.url },
@@ -116,7 +123,6 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         }),
       },
     ],
-
   }),
   shellComponent: RootShell,
   component: RootComponent,

@@ -2,23 +2,64 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion, AnimatePresence, useInView } from "framer-motion";
 import { useState, useRef, useEffect } from "react";
 import { cn } from "@/lib/utils";
-import { ArrowRight, ArrowUpRight, Quote, MonitorPlay, Sparkles, BookOpen, GraduationCap, Briefcase, Crown, Star, Rocket, ClipboardList, Users, Target, Trophy, ChevronLeft, ChevronRight, Play, BarChart3, MessageSquare, Apple, Smartphone, RefreshCw, Calendar } from "lucide-react";
+import {
+  ArrowRight,
+  ArrowUpRight,
+  Quote,
+  MonitorPlay,
+  Sparkles,
+  BookOpen,
+  GraduationCap,
+  Briefcase,
+  Crown,
+  Star,
+  Rocket,
+  ClipboardList,
+  Users,
+  Target,
+  Trophy,
+  ChevronLeft,
+  ChevronRight,
+  Play,
+  BarChart3,
+  MessageSquare,
+  Apple,
+  Smartphone,
+  RefreshCw,
+  Calendar,
+} from "lucide-react";
 import { SiteLayout } from "@/components/site/Layout";
 import { FadeIn } from "@/components/site/primitives";
 import { CompaniesMarquee } from "@/components/site/Marquee";
 import { FAQ } from "@/components/site/FAQ";
-import { courses, testimonials, hiringCompanies, brand, faqs, stats, whyUs, googleReviewsCount, googleRating } from "@/data/site";
+import {
+  courses,
+  testimonials,
+  hiringCompanies,
+  brand,
+  faqs,
+  stats,
+  whyUs,
+  googleReviewsCount,
+  googleRating,
+} from "@/data/site";
 import { DemoVideos } from "@/components/site/DemoVideos";
 import { AmbientLight, EyebrowBadge, GradientAccent } from "@/components/site/premium";
 const FOUNDER_PHOTO = "/manoj-rajgopal.jpg";
-
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       { title: "Fin-Envision Learning — Learn What Finance Really Feels Like" },
-      { name: "description", content: "Fin-Envision Learning — leading CFA® classes in Mumbai. CFA® Level 1, 2, 3 and Financial Modeling, taught by Manoj Rajgopal, CFA®. 80–90% success rate, 1,500+ students trained." },
-      { property: "og:title", content: "Fin-Envision Learning — Learn What Finance Really Feels Like" },
+      {
+        name: "description",
+        content:
+          "Fin-Envision Learning — leading CFA® classes in Mumbai. CFA® Level 1, 2, 3 and Financial Modeling, taught by Manoj Rajgopal, CFA. ~80–90% success rate, 1,500+ students trained.",
+      },
+      {
+        property: "og:title",
+        content: "Fin-Envision Learning — Learn What Finance Really Feels Like",
+      },
       { property: "og:url", content: "/" },
     ],
     links: [{ rel: "canonical", href: "/" }],
@@ -32,12 +73,12 @@ function Home() {
       <Hero />
       <FounderSpotlight />
       <DemoVideos />
-      
+
       <WhyUs />
       <CourseTabs />
       <PlacementAnalytics />
       <TestimonialsSection />
-      
+
       <DownloadApp />
       <CompaniesSection />
       <FAQ />
@@ -136,23 +177,25 @@ function WhyUs() {
                 Ecosystem
               </div>
               <h2 className="mt-5 font-display text-4xl font-semibold tracking-tight md:text-5xl leading-[1.1] text-white">
-                Why Fin-Envision
+                Why Fin-Envision ?
               </h2>
-              <p className="mt-4 text-base text-muted-foreground">
-                given below
-              </p>
 
               {/* A beautiful visual summary card */}
               <div className="mt-8 relative overflow-hidden rounded-2xl border border-white/5 bg-gradient-to-br from-white/[0.03] to-white/[0.01] p-6 backdrop-blur">
                 <div className="absolute -right-12 -top-12 h-24 w-24 rounded-full bg-primary/25 blur-2xl" />
-                <div className="text-[10px] font-bold uppercase tracking-wider text-accent">Highlights</div>
-                <h4 className="mt-2 font-display text-lg font-semibold text-white">Proven Prep Ecosystem</h4>
+                <div className="text-[10px] font-bold uppercase tracking-wider text-accent">
+                  Highlights
+                </div>
+                <h4 className="mt-2 font-display text-lg font-semibold text-white">
+                  Proven Prep Ecosystem
+                </h4>
                 <p className="mt-2 text-xs leading-relaxed text-muted-foreground">
-                  Our comprehensive, concept-first learning system is engineered for maximum first-attempt success.
+                  Our comprehensive, concept-first learning system is engineered for maximum
+                  first-attempt success.
                 </p>
                 <div className="mt-5 flex gap-4 border-t border-white/5 pt-4">
                   <div>
-                    <div className="text-xl font-bold text-white">80-90%</div>
+                    <div className="text-xl font-bold text-white">~80-90%</div>
                     <div className="text-[10px] text-muted-foreground">Passing Rate</div>
                   </div>
                   <div className="border-l border-white/5 pl-4">
@@ -172,7 +215,12 @@ function WhyUs() {
                   <div className="group relative rounded-2xl border border-white/5 bg-card/40 p-4 transition-all duration-300 hover:border-primary/30 hover:bg-white/[0.02] hover:-translate-y-0.5">
                     <div className="flex items-center gap-4">
                       {/* Icon */}
-                      <div className={cn("flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br border transition-transform duration-300 group-hover:scale-105", f.color)}>
+                      <div
+                        className={cn(
+                          "flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br border transition-transform duration-300 group-hover:scale-105",
+                          f.color,
+                        )}
+                      >
                         <f.icon className="h-5 w-5" />
                       </div>
                       {/* Text */}
@@ -194,7 +242,7 @@ function WhyUs() {
 /* ─────────────────────────  HERO  ───────────────────────── */
 
 const HERO_STATS = [
-  { icon: Rocket, value: "80–90%", label: "Success rate" },
+  { icon: Rocket, value: "~80–90%", label: "Success rate" },
   { icon: GraduationCap, value: "5,000+", label: "Students trained" },
   { icon: Target, value: "Affordable", label: "Transparent pricing" },
   { icon: Briefcase, value: "Placement", label: "Support & guidance" },
@@ -210,7 +258,11 @@ function HeroEnquiryForm() {
     )}%0AEmail: ${encodeURIComponent(form.email.trim().slice(0, 120))}%0APhone: ${encodeURIComponent(
       form.phone.trim().slice(0, 20),
     )}%0ACourse: ${encodeURIComponent(form.course.trim().slice(0, 300))}`;
-    window.open(`https://wa.me/${brand.whatsapp.replace(/\D/g, "")}?text=${text}`, "_blank", "noopener");
+    window.open(
+      `https://wa.me/${brand.whatsapp.replace(/\D/g, "")}?text=${text}`,
+      "_blank",
+      "noopener",
+    );
   };
 
   const field =
@@ -226,25 +278,44 @@ function HeroEnquiryForm() {
     >
       <div className="pointer-events-none absolute inset-x-6 -top-px h-px bg-gradient-to-r from-transparent via-white/50 to-transparent" />
       <p className="mb-1 font-display text-lg font-semibold text-white">Enquire now</p>
-      <p className="mb-5 text-xs text-white/65">Get batch dates, fees and a free counselling call.</p>
+      <p className="mb-5 text-xs text-white/65">
+        Get batch dates, fees and a free counselling call.
+      </p>
 
       <div className="space-y-3">
         <input
-          required maxLength={100} className={field} placeholder="Name"
-          value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })}
+          required
+          maxLength={100}
+          className={field}
+          placeholder="Name"
+          value={form.name}
+          onChange={(e) => setForm({ ...form, name: e.target.value })}
         />
         <input
-          required type="email" maxLength={120} className={field} placeholder="Email"
-          value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })}
+          required
+          type="email"
+          maxLength={120}
+          className={field}
+          placeholder="Email"
+          value={form.email}
+          onChange={(e) => setForm({ ...form, email: e.target.value })}
         />
         <input
-          required type="tel" maxLength={20} className={field} placeholder="Phone number"
-          value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })}
+          required
+          type="tel"
+          maxLength={20}
+          className={field}
+          placeholder="Phone number"
+          value={form.phone}
+          onChange={(e) => setForm({ ...form, phone: e.target.value })}
         />
         <textarea
-          rows={3} maxLength={300} className={cn(field, "resize-none")}
+          rows={3}
+          maxLength={300}
+          className={cn(field, "resize-none")}
           placeholder="Which course are you looking for?"
-          value={form.course} onChange={(e) => setForm({ ...form, course: e.target.value })}
+          value={form.course}
+          onChange={(e) => setForm({ ...form, course: e.target.value })}
         />
       </div>
 
@@ -262,7 +333,10 @@ function HeroEnquiryForm() {
 function Hero() {
   return (
     <section className="relative w-full overflow-hidden bg-black pb-24 pt-28 md:pb-32 md:pt-36">
-      <div aria-hidden className="absolute inset-0 bg-[radial-gradient(ellipse_at_20%_20%,hsl(var(--primary)/0.28),transparent_60%),radial-gradient(ellipse_at_85%_70%,hsl(var(--accent)/0.22),transparent_60%)]" />
+      <div
+        aria-hidden
+        className="absolute inset-0 bg-[radial-gradient(ellipse_at_20%_20%,hsl(var(--primary)/0.28),transparent_60%),radial-gradient(ellipse_at_85%_70%,hsl(var(--accent)/0.22),transparent_60%)]"
+      />
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0 opacity-[0.12]"
@@ -273,8 +347,14 @@ function Hero() {
           maskImage: "radial-gradient(ellipse at center, black 30%, transparent 80%)",
         }}
       />
-      <div aria-hidden className="absolute -left-32 top-1/4 h-[520px] w-[520px] rounded-full bg-primary/25 blur-[140px]" />
-      <div aria-hidden className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-b from-transparent to-background" />
+      <div
+        aria-hidden
+        className="absolute -left-32 top-1/4 h-[520px] w-[520px] rounded-full bg-primary/25 blur-[140px]"
+      />
+      <div
+        aria-hidden
+        className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-b from-transparent to-background"
+      />
 
       <div className="relative mx-auto grid max-w-7xl items-center gap-12 px-6 lg:grid-cols-[1.1fr_0.9fr]">
         <motion.div
@@ -295,8 +375,8 @@ function Hero() {
           </h1>
 
           <p className="mt-5 max-w-lg text-base text-white/75 md:text-lg">
-            Your future is secured with our proven track record — concept-first teaching,
-            complete curriculum coverage and mentorship until exam day.
+            Your future is secured with our proven track record — concept-first teaching, complete
+            curriculum coverage and mentorship until exam day.
           </p>
 
           <div className="mt-6 inline-flex items-center gap-3 rounded-full border border-white/15 bg-white/10 px-4 py-2 backdrop-blur">
@@ -404,7 +484,7 @@ const COURSE_THEMES = [
 ] as const;
 
 function CourseTabs() {
-  const [active, setActive] = useState<typeof COURSE_FILTERS[number]["key"]>("all");
+  const [active, setActive] = useState<(typeof COURSE_FILTERS)[number]["key"]>("all");
   const list = active === "all" ? courses : courses.filter((c) => c.category === active);
 
   return (
@@ -425,13 +505,19 @@ function CourseTabs() {
             <h2 className="mt-5 text-balance font-display text-4xl font-semibold leading-[1.05] tracking-tight md:text-5xl lg:text-[3.5rem]">
               Courses designed for{" "}
               <span className="relative inline-block">
-                <span className="relative z-10 bg-gradient-to-r from-primary via-[#4f7edb] to-accent bg-clip-text text-transparent">real-world</span>
-                <span aria-hidden className="absolute inset-x-0 bottom-1.5 -z-0 h-3 -skew-x-6 bg-accent/25" />
+                <span className="relative z-10 bg-gradient-to-r from-primary via-[#4f7edb] to-accent bg-clip-text text-transparent">
+                  real-world
+                </span>
+                <span
+                  aria-hidden
+                  className="absolute inset-x-0 bottom-1.5 -z-0 h-3 -skew-x-6 bg-accent/25"
+                />
               </span>{" "}
               financial skills
             </h2>
             <p className="mx-auto mt-5 max-w-2xl text-[15px] leading-relaxed text-muted-foreground">
-              Concept-first teaching. 100% institute curriculum solved in class. Taught by Manoj Rajgopal, CFA® — every formula, every chart, every "why".
+              Concept-first teaching. 100% institute curriculum solved in class. Taught by Manoj
+              Rajgopal, CFA — every formula, every chart, every "why".
             </p>
           </div>
         </FadeIn>
@@ -454,7 +540,9 @@ function CourseTabs() {
                       transition={{ type: "spring", stiffness: 380, damping: 32 }}
                     />
                   )}
-                  <span className={`relative z-10 ${isActive ? "text-background" : "text-foreground/70 hover:text-foreground"}`}>
+                  <span
+                    className={`relative z-10 ${isActive ? "text-background" : "text-foreground/70 hover:text-foreground"}`}
+                  >
                     {f.label}
                   </span>
                 </button>
@@ -482,12 +570,28 @@ function CourseTabs() {
                   className="group relative flex h-full flex-col overflow-hidden rounded-[1.75rem] border border-border/70 bg-card p-7 shadow-soft transition-all duration-500 hover:shadow-elevated"
                 >
                   {/* gradient border glow on hover */}
-                  <div aria-hidden className={`pointer-events-none absolute -inset-[1px] rounded-[1.75rem] bg-gradient-to-br ${t.accent} opacity-0 transition-opacity duration-500 group-hover:opacity-60`} style={{ WebkitMask: "linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0)", WebkitMaskComposite: "xor", maskComposite: "exclude", padding: "1px" }} />
+                  <div
+                    aria-hidden
+                    className={`pointer-events-none absolute -inset-[1px] rounded-[1.75rem] bg-gradient-to-br ${t.accent} opacity-0 transition-opacity duration-500 group-hover:opacity-60`}
+                    style={{
+                      WebkitMask:
+                        "linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0)",
+                      WebkitMaskComposite: "xor",
+                      maskComposite: "exclude",
+                      padding: "1px",
+                    }}
+                  />
                   {/* corner glow */}
-                  <div aria-hidden className={`pointer-events-none absolute -right-20 -top-20 h-56 w-56 rounded-full bg-gradient-to-br ${t.accent} opacity-0 blur-3xl transition-opacity duration-700 group-hover:opacity-25`} />
+                  <div
+                    aria-hidden
+                    className={`pointer-events-none absolute -right-20 -top-20 h-56 w-56 rounded-full bg-gradient-to-br ${t.accent} opacity-0 blur-3xl transition-opacity duration-700 group-hover:opacity-25`}
+                  />
 
                   {/* Index number watermark */}
-                  <span aria-hidden className="pointer-events-none absolute -right-2 top-2 font-display text-[7rem] font-black leading-none tracking-tighter text-foreground/[0.04] transition-transform duration-700 group-hover:scale-110 group-hover:text-foreground/[0.06]">
+                  <span
+                    aria-hidden
+                    className="pointer-events-none absolute -right-2 top-2 font-display text-[7rem] font-black leading-none tracking-tighter text-foreground/[0.04] transition-transform duration-700 group-hover:scale-110 group-hover:text-foreground/[0.06]"
+                  >
                     {String(i + 1).padStart(2, "0")}
                   </span>
 
@@ -503,17 +607,24 @@ function CourseTabs() {
                       className={`relative grid h-14 w-14 place-items-center rounded-2xl bg-gradient-to-br ${t.accent} text-white ${t.glow}`}
                     >
                       <Icon className="h-6 w-6" strokeWidth={2.2} />
-                      <span aria-hidden className="absolute inset-0 rounded-2xl ring-1 ring-inset ring-white/30" />
+                      <span
+                        aria-hidden
+                        className="absolute inset-0 rounded-2xl ring-1 ring-inset ring-white/30"
+                      />
                     </motion.div>
                     {c.badge && (
-                      <span className={`inline-flex max-w-[55%] rounded-full px-3 py-1.5 text-right text-[10px] font-bold uppercase leading-tight tracking-[0.14em] ${t.chip} shadow-soft`}>
+                      <span
+                        className={`inline-flex max-w-[55%] rounded-full px-3 py-1.5 text-right text-[10px] font-bold uppercase leading-tight tracking-[0.14em] ${t.chip} shadow-soft`}
+                      >
                         {c.badge}
                       </span>
                     )}
                   </div>
 
                   {/* Eyebrow + title */}
-                  <p className={`relative mt-7 inline-flex items-center gap-1.5 text-[10.5px] font-bold uppercase tracking-[0.22em] ${t.soft.replace("bg-", "text-").split(" ")[1]}`}>
+                  <p
+                    className={`relative mt-7 inline-flex items-center gap-1.5 text-[10.5px] font-bold uppercase tracking-[0.22em] ${t.soft.replace("bg-", "text-").split(" ")[1]}`}
+                  >
                     {t.eyebrow}
                   </p>
                   <h3 className="relative mt-2 font-display text-[1.5rem] font-semibold leading-[1.15] tracking-tight text-foreground">
@@ -522,7 +633,9 @@ function CourseTabs() {
 
                   {/* Meta */}
                   <div className="relative mt-4 flex flex-wrap items-center gap-2">
-                    <span className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] font-semibold ${t.soft}`}>
+                    <span
+                      className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] font-semibold ${t.soft}`}
+                    >
                       <MonitorPlay className="h-3 w-3" />
                       {c.format}
                     </span>
@@ -545,7 +658,9 @@ function CourseTabs() {
                         className="flex items-start gap-2 text-[12.5px] leading-snug text-foreground/75 opacity-70 transition-all duration-500 group-hover:opacity-100"
                         style={{ transitionDelay: `${hi * 70}ms` }}
                       >
-                        <span className={`mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-gradient-to-br ${t.accent}`} />
+                        <span
+                          className={`mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-gradient-to-br ${t.accent}`}
+                        />
                         <span className="line-clamp-1">{h}</span>
                       </li>
                     ))}
@@ -554,7 +669,9 @@ function CourseTabs() {
                   {/* Footer: price + CTA */}
                   <div className="relative mt-auto flex items-end justify-between gap-3 pt-7">
                     <div>
-                      <div className="text-[10.5px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">Fees</div>
+                      <div className="text-[10.5px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+                        Fees
+                      </div>
                       <div className="mt-0.5 font-display text-[15px] font-bold leading-tight text-foreground">
                         {c.price}
                       </div>
@@ -588,13 +705,21 @@ function CourseTabs() {
   );
 }
 
-
-
 /* ─────────────────  PLACEMENT ANALYTICS  ───────────────── */
 
 const PLACEMENT_BARS = [12, 22, 35, 48, 62, 78, 92];
 
-function CountUp({ to, suffix = "", prefix = "", duration = 1.6 }: { to: number; suffix?: string; prefix?: string; duration?: number }) {
+function CountUp({
+  to,
+  suffix = "",
+  prefix = "",
+  duration = 1.6,
+}: {
+  to: number;
+  suffix?: string;
+  prefix?: string;
+  duration?: number;
+}) {
   const [val, setVal] = useState(0);
   const ref = useRef<HTMLSpanElement>(null);
   const inView = useInView(ref, { once: true, margin: "-60px" });
@@ -611,19 +736,48 @@ function CountUp({ to, suffix = "", prefix = "", duration = 1.6 }: { to: number;
     raf = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(raf);
   }, [inView, to, duration]);
-  return <span ref={ref}>{prefix}{val.toLocaleString()}{suffix}</span>;
+  return (
+    <span ref={ref}>
+      {prefix}
+      {val.toLocaleString()}
+      {suffix}
+    </span>
+  );
 }
 
-function Ring({ value, label, sub, progress = 0.82 }: { value: React.ReactNode; label: string; sub?: string; progress?: number }) {
+function Ring({
+  value,
+  label,
+  sub,
+  progress = 0.82,
+}: {
+  value: React.ReactNode;
+  label: string;
+  sub?: string;
+  progress?: number;
+}) {
   const C = 2 * Math.PI * 52;
   return (
     <div className="relative mx-auto grid h-36 w-36 place-items-center">
       <div className="absolute inset-2 rounded-full bg-[radial-gradient(circle,hsl(var(--primary)/0.22),transparent_70%)] blur-xl" />
       <svg viewBox="0 0 120 120" className="absolute inset-0 -rotate-90">
-        <circle cx="60" cy="60" r="52" stroke="hsl(var(--border))" strokeOpacity="0.35" strokeWidth="6" fill="none" />
+        <circle
+          cx="60"
+          cy="60"
+          r="52"
+          stroke="hsl(var(--border))"
+          strokeOpacity="0.35"
+          strokeWidth="6"
+          fill="none"
+        />
         <motion.circle
-          cx="60" cy="60" r="52" fill="none"
-          stroke="url(#ringGrad)" strokeWidth="6" strokeLinecap="round"
+          cx="60"
+          cy="60"
+          r="52"
+          fill="none"
+          stroke="url(#ringGrad)"
+          strokeWidth="6"
+          strokeLinecap="round"
           strokeDasharray={C}
           initial={{ strokeDashoffset: C }}
           whileInView={{ strokeDashoffset: C * (1 - progress) }}
@@ -639,15 +793,29 @@ function Ring({ value, label, sub, progress = 0.82 }: { value: React.ReactNode; 
         </defs>
       </svg>
       <div className="relative text-center">
-        <div className="font-display text-[1.6rem] font-bold leading-none bg-gradient-to-br from-primary to-accent bg-clip-text text-transparent">{value}</div>
-        {sub && <div className="mt-1 text-[10px] font-semibold uppercase tracking-[0.2em] text-muted-foreground">{sub}</div>}
+        <div className="font-display text-[1.6rem] font-bold leading-none bg-gradient-to-br from-primary to-accent bg-clip-text text-transparent">
+          {value}
+        </div>
+        {sub && (
+          <div className="mt-1 text-[10px] font-semibold uppercase tracking-[0.2em] text-muted-foreground">
+            {sub}
+          </div>
+        )}
       </div>
       <span className="sr-only">{label}</span>
     </div>
   );
 }
 
-function PremiumCard({ children, delay = 0, className = "" }: { children: React.ReactNode; delay?: number; className?: string }) {
+function PremiumCard({
+  children,
+  delay = 0,
+  className = "",
+}: {
+  children: React.ReactNode;
+  delay?: number;
+  className?: string;
+}) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 28 }}
@@ -660,7 +828,7 @@ function PremiumCard({ children, delay = 0, className = "" }: { children: React.
         "bg-gradient-to-br from-primary/40 via-border/40 to-accent/30",
         "shadow-[0_10px_40px_-15px_hsl(var(--primary)/0.35)]",
         "transition-shadow hover:shadow-[0_18px_60px_-15px_hsl(var(--primary)/0.55)]",
-        className
+        className,
       )}
     >
       <div className="relative h-full rounded-[27px] bg-card/95 p-7 backdrop-blur-xl">
@@ -698,25 +866,32 @@ function PlacementAnalytics() {
       <div className="container-px relative mx-auto max-w-7xl">
         <FadeIn>
           <motion.div
-            initial={{ opacity: 0, y: -8 }} whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }} transition={{ duration: 0.6 }}
+            initial={{ opacity: 0, y: -8 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
             className="mx-auto flex w-fit items-center gap-3 rounded-full border border-border/60 bg-card/60 px-4 py-1.5 backdrop-blur"
           >
             <span className="relative flex h-2 w-2">
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-70" />
               <span className="relative inline-flex h-2 w-2 rounded-full bg-accent" />
             </span>
-            <p className="text-[11px] font-bold uppercase tracking-[0.32em] text-accent">Numbers That Matter</p>
+            <p className="text-[11px] font-bold uppercase tracking-[0.32em] text-accent">
+              Numbers That Matter
+            </p>
           </motion.div>
 
           <h2 className="mx-auto mt-6 max-w-4xl text-center text-balance font-display text-4xl font-semibold tracking-tight md:text-5xl lg:text-[3.6rem] lg:leading-[1.05]">
             <CountUp to={5000} suffix="+" /> Learners{" "}
-            <span className="bg-gradient-to-r from-primary via-primary to-accent bg-clip-text text-transparent">Trained.</span>
+            <span className="bg-gradient-to-r from-primary via-primary to-accent bg-clip-text text-transparent">
+              Trained.
+            </span>
             <br className="hidden md:block" />{" "}
             <span className="italic text-accent">Results That Speak.</span>
           </h2>
           <p className="mx-auto mt-6 max-w-2xl text-center text-base text-muted-foreground md:text-lg">
-            Eight years of teaching, thousands of success stories, and a track record built on first-attempt clears.
+            Eight years of teaching, thousands of success stories, and a track record built on
+            first-attempt clears.
           </p>
         </FadeIn>
 
@@ -725,14 +900,22 @@ function PlacementAnalytics() {
           {/* HERO — Students Trained */}
           <PremiumCard className="lg:col-span-2">
             <div className="grid gap-6 md:grid-cols-[auto_1fr] md:items-center">
-              <Ring value={<CountUp to={5000} suffix="+" />} sub="students" label="Students trained" progress={0.9} />
+              <Ring
+                value={<CountUp to={5000} suffix="+" />}
+                sub="students"
+                label="Students trained"
+                progress={0.9}
+              />
               <div>
-                <div className="text-[11px] font-bold uppercase tracking-[0.28em] text-accent">Since 2018</div>
+                <div className="text-[11px] font-bold uppercase tracking-[0.28em] text-accent">
+                  Since 2018
+                </div>
                 <h3 className="mt-2 font-display text-3xl font-semibold tracking-tight md:text-4xl">
                   5,000+ Students Trained
                 </h3>
                 <p className="mt-3 text-sm leading-relaxed text-muted-foreground md:text-base">
-                  Across CFA® Levels I, II, III and Financial Modelling — from first-year undergrads to working professionals switching into finance.
+                  Across CFA® Levels I, II, III and Financial Modelling — from first-year undergrads
+                  to working professionals switching into finance.
                 </p>
                 <div className="mt-5 flex flex-wrap gap-1.5">
                   {["CFA® L1", "CFA® L2", "CFA® L3", "Financial Modelling"].map((t) => (
@@ -758,7 +941,9 @@ function PlacementAnalytics() {
                 <span className="text-accent">–90%</span>
               </div>
               <div className="mt-3 text-sm font-semibold text-foreground">Success Rate</div>
-              <div className="mt-1 text-xs text-muted-foreground">Consistent pass rates across cohorts</div>
+              <div className="mt-1 text-xs text-muted-foreground">
+                Consistent pass rates across cohorts
+              </div>
 
               <svg viewBox="0 0 200 70" className="mt-6 h-20 w-full overflow-visible">
                 <defs>
@@ -773,14 +958,22 @@ function PlacementAnalytics() {
                 </defs>
                 <motion.path
                   d="M0 40 L33 34 L66 30 L100 22 L133 18 L166 12 L200 8 L200 70 L0 70 Z"
-                  fill="url(#successFill)" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }}
-                  viewport={{ once: true }} transition={{ delay: 0.6, duration: 0.8 }}
+                  fill="url(#successFill)"
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.6, duration: 0.8 }}
                 />
                 <motion.path
                   d="M0 40 L33 34 L66 30 L100 22 L133 18 L166 12 L200 8"
-                  fill="none" stroke="url(#successStroke)" strokeWidth="2.5" strokeLinecap="round"
-                  initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }}
-                  viewport={{ once: true }} transition={{ duration: 1.4, ease: "easeOut" }}
+                  fill="none"
+                  stroke="url(#successStroke)"
+                  strokeWidth="2.5"
+                  strokeLinecap="round"
+                  initial={{ pathLength: 0 }}
+                  whileInView={{ pathLength: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 1.4, ease: "easeOut" }}
                   style={{ filter: "drop-shadow(0 2px 6px hsl(var(--accent)/0.45))" }}
                 />
               </svg>
@@ -802,7 +995,9 @@ function PlacementAnalytics() {
                 <CountUp to={googleReviewsCount} />
               </div>
               <div className="mt-2 text-sm font-semibold text-foreground">Google Reviews</div>
-              <div className="mt-1 text-xs text-muted-foreground">Verified feedback from real students</div>
+              <div className="mt-1 text-xs text-muted-foreground">
+                Verified feedback from real students
+              </div>
               <div className="mt-4 inline-flex items-center gap-2 rounded-full border border-border/60 bg-secondary/60 px-3 py-1 text-[11px] font-semibold text-foreground/80">
                 <span className="h-1.5 w-1.5 rounded-full bg-accent shadow-[0_0_6px_hsl(var(--accent))]" />
                 {googleRating} average rating
@@ -813,13 +1008,28 @@ function PlacementAnalytics() {
           {/* Teaching Experience */}
           <PremiumCard delay={0.2}>
             <div className="flex h-full flex-col items-center justify-center text-center">
-              <Ring value={<CountUp to={8} suffix="+" />} sub="years" label="Teaching experience" progress={0.8} />
-              <h3 className="mt-6 font-display text-lg font-semibold tracking-tight">Teaching Experience</h3>
-              <p className="mt-1 text-xs text-muted-foreground">Refined over 8+ years in the classroom</p>
+              <Ring
+                value={<CountUp to={8} suffix="+" />}
+                sub="years"
+                label="Teaching experience"
+                progress={0.8}
+              />
+              <h3 className="mt-6 font-display text-lg font-semibold tracking-tight">
+                Teaching Experience
+              </h3>
+              <p className="mt-1 text-xs text-muted-foreground">
+                Refined over 8+ years in the classroom
+              </p>
               <div className="mt-4 grid w-full grid-cols-3 gap-1.5 text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">
-                <span className="rounded-md border border-border/60 bg-secondary/60 py-1.5">Live</span>
-                <span className="rounded-md border border-border/60 bg-secondary/60 py-1.5">Recorded</span>
-                <span className="rounded-md border border-border/60 bg-secondary/60 py-1.5">1:1</span>
+                <span className="rounded-md border border-border/60 bg-secondary/60 py-1.5">
+                  Live
+                </span>
+                <span className="rounded-md border border-border/60 bg-secondary/60 py-1.5">
+                  Recorded
+                </span>
+                <span className="rounded-md border border-border/60 bg-secondary/60 py-1.5">
+                  1:1
+                </span>
               </div>
             </div>
           </PremiumCard>
@@ -829,13 +1039,14 @@ function PlacementAnalytics() {
             <div className="flex h-full flex-col items-center justify-center text-center">
               <div className="relative">
                 <div className="font-display text-[6rem] font-bold leading-none bg-gradient-to-br from-primary to-accent bg-clip-text text-transparent">
-                  1
-                  <span className="align-super text-3xl">st</span>
+                  1<span className="align-super text-3xl">st</span>
                 </div>
                 <div className="pointer-events-none absolute inset-0 -z-10 blur-2xl bg-primary/20" />
               </div>
               <div className="mt-2 text-sm font-semibold text-foreground">Attempt Focus</div>
-              <div className="mt-1 text-xs text-muted-foreground">Structured to clear on the very first try</div>
+              <div className="mt-1 text-xs text-muted-foreground">
+                Structured to clear on the very first try
+              </div>
               <div className="mt-4 inline-flex items-center gap-2 rounded-full border border-accent/30 bg-accent/10 px-3 py-1 text-[11px] font-semibold text-accent">
                 <Trophy className="h-3.5 w-3.5" />
                 First-attempt mindset
@@ -847,8 +1058,6 @@ function PlacementAnalytics() {
     </section>
   );
 }
-
-
 
 /* ─────────────────  TESTIMONIALS (quote cards)  ───────────────── */
 
@@ -894,14 +1103,17 @@ function FounderSpotlight() {
     "Founder and Lead Instructor of Fin-Envision Learning.",
     "Cleared all three levels of the CFA® Program in the first attempt.",
     "Worked with reputed organizations such as CRISIL and JHP, gaining valuable industry exposure.",
-    "Has successfully trained over 5,000 students across Mumbai.",
+    "Has successfully trained over 5,000 students across the globe.",
     "Known for simplifying complex financial concepts into easy-to-understand, practical lessons.",
     "Focuses on bridging the gap between academic learning and real-world finance.",
     "Dedicated to mentoring students for successful careers in finance through industry-oriented training and personalized guidance.",
   ];
-  const credentials = ["CFA® Charterholder", "Investment Banking", "Financial Modeling", "Portfolio Strategy"];
-
-
+  const credentials = [
+    "CFA® Charterholder",
+    "Investment Banking",
+    "Financial Modeling",
+    "Portfolio Strategy",
+  ];
 
   return (
     <section className="relative overflow-hidden bg-background py-24 md:py-32">
@@ -923,19 +1135,22 @@ function FounderSpotlight() {
       <div className="container-px relative mx-auto max-w-7xl">
         <FadeIn>
           <motion.div
-            initial={{ opacity: 0, y: -8 }} whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }} transition={{ duration: 0.6 }}
+            initial={{ opacity: 0, y: -8 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
             className="flex w-fit items-center gap-3 rounded-full border border-border/60 bg-card/60 px-4 py-1.5 backdrop-blur"
           >
             <span className="relative flex h-2 w-2">
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-70" />
               <span className="relative inline-flex h-2 w-2 rounded-full bg-accent" />
             </span>
-            <p className="text-[11px] font-bold uppercase tracking-[0.32em] text-accent">Lead Instructor</p>
+            <p className="text-[11px] font-bold uppercase tracking-[0.32em] text-accent">
+              Lead Instructor
+            </p>
           </motion.div>
           <h2 className="mt-6 max-w-4xl font-display text-4xl font-semibold tracking-tight md:text-5xl lg:text-[3.6rem] lg:leading-[1.05]">
-            At the helm of{" "}
-            <span className="bg-gradient-to-r from-primary via-primary to-accent bg-clip-text text-transparent">Fin-Envision.</span>
+            Lead Instructor
           </h2>
         </FadeIn>
 
@@ -956,13 +1171,15 @@ function FounderSpotlight() {
               {/* Left — Portrait + stats */}
               <div className="lg:sticky lg:top-28">
                 <motion.div
-                  initial={{ opacity: 0, scale: 0.96 }} whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }} transition={{ duration: 0.7 }}
+                  initial={{ opacity: 0, scale: 0.96 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.7 }}
                   className="group relative aspect-[4/5] overflow-hidden rounded-[2rem] bg-gradient-to-br from-primary/20 to-accent/10 shadow-elevated"
                 >
                   <img
                     src={FOUNDER_PHOTO}
-                    alt="Manoj Rajgopal, CFA® — Founder & Lead Instructor at Fin-Envision Learning"
+                    alt="Manoj Rajgopal, CFA — Founder & Lead Instructor at Fin-Envision Learning"
                     className="absolute inset-0 h-full w-full object-cover object-top transition-transform duration-700 group-hover:scale-[1.03]"
                     loading="lazy"
                     decoding="async"
@@ -973,7 +1190,7 @@ function FounderSpotlight() {
                       Founder &amp; Lead Instructor
                     </span>
                     <h3 className="mt-3 font-display text-3xl font-bold leading-tight text-white md:text-4xl">
-                      Manoj Rajgopal, CFA®
+                      Manoj Rajgopal, CFA
                     </h3>
                   </div>
                 </motion.div>
@@ -986,7 +1203,8 @@ function FounderSpotlight() {
                   ].map(([v, l], i) => (
                     <motion.div
                       key={l}
-                      initial={{ opacity: 0, y: 14 }} whileInView={{ opacity: 1, y: 0 }}
+                      initial={{ opacity: 0, y: 14 }}
+                      whileInView={{ opacity: 1, y: 0 }}
                       viewport={{ once: true }}
                       transition={{ duration: 0.5, delay: 0.15 + i * 0.08 }}
                       whileHover={{ y: -4 }}
@@ -994,8 +1212,12 @@ function FounderSpotlight() {
                     >
                       <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-primary/30 to-accent/20 opacity-60 transition-opacity group-hover:opacity-100" />
                       <div className="relative rounded-[15px] bg-card/95 px-3 py-4 text-center backdrop-blur">
-                        <div className="font-display text-xl font-bold bg-gradient-to-br from-primary to-accent bg-clip-text text-transparent">{v}</div>
-                        <div className="mt-1 text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">{l}</div>
+                        <div className="font-display text-xl font-bold bg-gradient-to-br from-primary to-accent bg-clip-text text-transparent">
+                          {v}
+                        </div>
+                        <div className="mt-1 text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">
+                          {l}
+                        </div>
                       </div>
                     </motion.div>
                   ))}
@@ -1005,8 +1227,10 @@ function FounderSpotlight() {
               {/* Right — Credentials + journey */}
               <div className="flex flex-col gap-8">
                 <motion.div
-                  initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }} transition={{ duration: 0.6 }}
+                  initial={{ opacity: 0, y: 12 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6 }}
                 >
                   <div className="flex items-center gap-3">
                     <span className="grid h-10 w-10 place-items-center rounded-full bg-gradient-to-br from-accent/30 to-accent/10 text-accent shadow-[inset_0_0_0_1px_hsl(var(--accent)/0.3)]">
@@ -1020,7 +1244,8 @@ function FounderSpotlight() {
                     {credentials.map((c, i) => (
                       <motion.span
                         key={c}
-                        initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }}
+                        initial={{ opacity: 0, scale: 0.9 }}
+                        whileInView={{ opacity: 1, scale: 1 }}
                         viewport={{ once: true }}
                         transition={{ delay: 0.1 + i * 0.06, duration: 0.4 }}
                         className="rounded-full border border-border bg-card px-3 py-1.5 text-xs font-medium shadow-card transition-all hover:border-accent/50 hover:text-accent"
@@ -1034,7 +1259,9 @@ function FounderSpotlight() {
                 <div className="h-px w-full bg-gradient-to-r from-primary/30 via-accent/20 to-transparent" />
 
                 <div>
-                  <div className="text-xs font-bold uppercase tracking-[0.24em] text-accent">Manoj Sir's Journey</div>
+                  <div className="text-xs font-bold uppercase tracking-[0.24em] text-accent">
+                    Manoj Sir's Journey
+                  </div>
                   <ul className="mt-5 space-y-3">
                     {journey.map((w, i) => (
                       <motion.li
@@ -1064,28 +1291,118 @@ function FounderSpotlight() {
 
 const JOURNEY_TRACKS = {
   Overall: [
-    { icon: Rocket, badge: "Start", title: "Begin Your Journey", body: "Book a 20-min discovery call and map your goals to the right program." },
-    { icon: ClipboardList, badge: "Step 1", title: "Understand the Syllabus & Set Up", body: "Familiarize with CFA® / FRM syllabus, exam structure, and your study setup." },
-    { icon: BookOpen, badge: "Step 2", title: "Start & Plan Your Journey", body: "Begin live classes, follow the Lecture Guide, and lock weekly targets." },
-    { icon: Users, badge: "Step 3", title: "Engage with Mentors & Track Progress", body: "Connect with your mentor and track every milestone in the Performance Tracker." },
-    { icon: Target, badge: "Step 4", title: "Mock Exams & Doubt Clinics", body: "Sharpen with full-length mocks and live weekly doubt clinics." },
-    { icon: Trophy, badge: "Outcome", title: "Clear, Get Placed, Lead", body: "Pass the exam, walk into placement support, and grow with the alumni network." },
+    {
+      icon: Rocket,
+      badge: "Start",
+      title: "Begin Your Journey",
+      body: "Book a 20-min discovery call and map your goals to the right program.",
+    },
+    {
+      icon: ClipboardList,
+      badge: "Step 1",
+      title: "Understand the Syllabus & Set Up",
+      body: "Familiarize with CFA® / FRM syllabus, exam structure, and your study setup.",
+    },
+    {
+      icon: BookOpen,
+      badge: "Step 2",
+      title: "Start & Plan Your Journey",
+      body: "Begin live classes, follow the Lecture Guide, and lock weekly targets.",
+    },
+    {
+      icon: Users,
+      badge: "Step 3",
+      title: "Engage with Mentors & Track Progress",
+      body: "Connect with your mentor and track every milestone in the Performance Tracker.",
+    },
+    {
+      icon: Target,
+      badge: "Step 4",
+      title: "Mock Exams & Doubt Clinics",
+      body: "Sharpen with full-length mocks and live weekly doubt clinics.",
+    },
+    {
+      icon: Trophy,
+      badge: "Outcome",
+      title: "Clear, Get Placed, Lead",
+      body: "Pass the exam, walk into placement support, and grow with the alumni network.",
+    },
   ],
   Class: [
-    { icon: Rocket, badge: "Start", title: "Cohort Kickoff", body: "Meet your batch, instructors, and set learning rituals together." },
-    { icon: ClipboardList, badge: "Step 1", title: "Weekly Modules", body: "Bite-sized lessons, practice sets, and concept maps every week." },
-    { icon: BookOpen, badge: "Step 2", title: "Live Doubt Clinics", body: "Resolve concepts with mentors in interactive small-group sessions." },
-    { icon: Users, badge: "Step 3", title: "Peer Study Pods", body: "3-5 person pods for accountability, revisions, and mock interviews." },
-    { icon: Target, badge: "Step 4", title: "Assessments", body: "Topic mocks + adaptive QBank to know exactly where you stand." },
-    { icon: Trophy, badge: "Outcome", title: "Cohort Demo Day", body: "Showcase capstone work to a hiring panel — recruiters in the room." },
+    {
+      icon: Rocket,
+      badge: "Start",
+      title: "Cohort Kickoff",
+      body: "Meet your batch, instructors, and set learning rituals together.",
+    },
+    {
+      icon: ClipboardList,
+      badge: "Step 1",
+      title: "Weekly Modules",
+      body: "Bite-sized lessons, practice sets, and concept maps every week.",
+    },
+    {
+      icon: BookOpen,
+      badge: "Step 2",
+      title: "Live Doubt Clinics",
+      body: "Resolve concepts with mentors in interactive small-group sessions.",
+    },
+    {
+      icon: Users,
+      badge: "Step 3",
+      title: "Peer Study Pods",
+      body: "3-5 person pods for accountability, revisions, and mock interviews.",
+    },
+    {
+      icon: Target,
+      badge: "Step 4",
+      title: "Assessments",
+      body: "Topic mocks + adaptive QBank to know exactly where you stand.",
+    },
+    {
+      icon: Trophy,
+      badge: "Outcome",
+      title: "Cohort Demo Day",
+      body: "Showcase capstone work to a hiring panel — recruiters in the room.",
+    },
   ],
   Institute: [
-    { icon: Rocket, badge: "Start", title: "Campus Onboarding", body: "Custom rollout plan for your college or corporate batch." },
-    { icon: ClipboardList, badge: "Step 1", title: "Curriculum Mapping", body: "Align with academic calendar, internal credits, and learning outcomes." },
-    { icon: BookOpen, badge: "Step 2", title: "Faculty Co-Teach", body: "Joint sessions with your in-house faculty and our practitioner mentors." },
-    { icon: Users, badge: "Step 3", title: "Mentor Pool Access", body: "Students get 1:1 access to industry mentors across finance and AI." },
-    { icon: Target, badge: "Step 4", title: "Internal Mocks", body: "Custom assessments aligned to placement-season skill demands." },
-    { icon: Trophy, badge: "Outcome", title: "Placement Drive", body: "Curated hiring drives with our 180+ partner network." },
+    {
+      icon: Rocket,
+      badge: "Start",
+      title: "Campus Onboarding",
+      body: "Custom rollout plan for your college or corporate batch.",
+    },
+    {
+      icon: ClipboardList,
+      badge: "Step 1",
+      title: "Curriculum Mapping",
+      body: "Align with academic calendar, internal credits, and learning outcomes.",
+    },
+    {
+      icon: BookOpen,
+      badge: "Step 2",
+      title: "Faculty Co-Teach",
+      body: "Joint sessions with your in-house faculty and our practitioner mentors.",
+    },
+    {
+      icon: Users,
+      badge: "Step 3",
+      title: "Mentor Pool Access",
+      body: "Students get 1:1 access to industry mentors across finance and AI.",
+    },
+    {
+      icon: Target,
+      badge: "Step 4",
+      title: "Internal Mocks",
+      body: "Custom assessments aligned to placement-season skill demands.",
+    },
+    {
+      icon: Trophy,
+      badge: "Outcome",
+      title: "Placement Drive",
+      body: "Curated hiring drives with our 180+ partner network.",
+    },
   ],
 } as const;
 
@@ -1101,7 +1418,6 @@ function YourJourney() {
     setTab(t);
     setStart(0);
   };
-
 
   return (
     <section className="relative overflow-hidden bg-[hsl(220_50%_9%)] py-24 text-primary-foreground md:py-32">
@@ -1131,8 +1447,10 @@ function YourJourney() {
       <div className="container-px relative mx-auto max-w-7xl">
         <div className="text-center">
           <motion.span
-            initial={{ opacity: 0, y: -8 }} whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }} transition={{ duration: 0.5 }}
+            initial={{ opacity: 0, y: -8 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
             className="inline-flex items-center gap-2 rounded-full border border-accent/30 bg-accent/10 px-4 py-1.5 text-[11px] font-bold uppercase tracking-[0.28em] text-accent backdrop-blur"
           >
             <span className="relative flex h-1.5 w-1.5">
@@ -1142,8 +1460,10 @@ function YourJourney() {
             Our Programs
           </motion.span>
           <motion.h2
-            initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }} transition={{ duration: 0.7, delay: 0.1 }}
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7, delay: 0.1 }}
             className="mt-6 font-display text-5xl font-bold tracking-tight md:text-6xl lg:text-[4rem] lg:leading-[1.02]"
           >
             Your{" "}
@@ -1152,13 +1472,16 @@ function YourJourney() {
             </span>
           </motion.h2>
           <p className="mx-auto mt-5 max-w-xl text-base text-white/65 md:text-lg">
-            Follow our proven roadmap designed to transform you from beginner to finance professional.
+            Follow our proven roadmap designed to transform you from beginner to finance
+            professional.
           </p>
 
           {/* Segmented tabs */}
           <motion.div
-            initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.2 }}
+            initial={{ opacity: 0, y: 12 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2 }}
             className="relative mt-10 inline-flex overflow-hidden rounded-full p-[1px]"
           >
             <span className="absolute inset-0 rounded-full bg-gradient-to-r from-accent/40 via-white/10 to-primary/40" />
@@ -1178,7 +1501,12 @@ function YourJourney() {
                         transition={{ type: "spring", stiffness: 380, damping: 32 }}
                       />
                     )}
-                    <span className={cn("relative z-10 transition-colors", isActive ? "text-accent-foreground" : "text-white/65 hover:text-white")}>
+                    <span
+                      className={cn(
+                        "relative z-10 transition-colors",
+                        isActive ? "text-accent-foreground" : "text-white/65 hover:text-white",
+                      )}
+                    >
                       {t}
                     </span>
                   </button>
@@ -1193,10 +1521,14 @@ function YourJourney() {
           {/* ── Left: vertical milestone rail ── */}
           <div className="relative">
             {/* vertical track */}
-            <div className="absolute left-7 top-4 bottom-4 w-px bg-gradient-to-b from-transparent via-white/15 to-transparent" aria-hidden />
+            <div
+              className="absolute left-7 top-4 bottom-4 w-px bg-gradient-to-b from-transparent via-white/15 to-transparent"
+              aria-hidden
+            />
             <motion.div
               key={tab + "-rail"}
-              initial={{ scaleY: 0 }} animate={{ scaleY: 1 }}
+              initial={{ scaleY: 0 }}
+              animate={{ scaleY: 1 }}
               transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
               style={{ transformOrigin: "top" }}
               className="absolute left-7 top-4 bottom-4 w-[2px] rounded-full bg-gradient-to-b from-accent via-accent/70 to-transparent shadow-[0_0_14px_hsl(var(--accent)/0.7)]"
@@ -1211,30 +1543,43 @@ function YourJourney() {
                   <li key={tab + "-rail-" + stp.title}>
                     <motion.button
                       onClick={() => setStart(i)}
-                      initial={{ opacity: 0, x: -16 }} whileInView={{ opacity: 1, x: 0 }}
-                      viewport={{ once: true }} transition={{ duration: 0.4, delay: i * 0.06 }}
+                      initial={{ opacity: 0, x: -16 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.4, delay: i * 0.06 }}
                       whileHover={{ x: 4 }}
                       className={cn(
                         "group relative flex w-full items-center gap-4 rounded-2xl border px-4 py-3.5 text-left backdrop-blur transition-all",
                         isActive
                           ? "border-accent/40 bg-gradient-to-r from-accent/15 via-accent/[0.06] to-transparent shadow-[0_12px_40px_-18px_hsl(var(--accent)/0.7)]"
-                          : "border-white/8 bg-white/[0.02] hover:border-white/20 hover:bg-white/[0.05]"
+                          : "border-white/8 bg-white/[0.02] hover:border-white/20 hover:bg-white/[0.05]",
                       )}
                     >
                       {/* Node */}
                       <span className="relative grid h-10 w-10 shrink-0 place-items-center">
-                        <span className={cn(
-                          "absolute inset-0 rounded-full p-[1.5px] transition-all",
-                          isActive
-                            ? "bg-gradient-to-br from-accent via-accent/70 to-primary/60"
-                            : "bg-gradient-to-br from-white/20 to-white/5 group-hover:from-accent/40"
-                        )}>
-                          <span className={cn(
-                            "block h-full w-full rounded-full",
-                            isActive ? "bg-accent text-accent-foreground" : "bg-[#0a1a35] text-white/75"
-                          )} />
+                        <span
+                          className={cn(
+                            "absolute inset-0 rounded-full p-[1.5px] transition-all",
+                            isActive
+                              ? "bg-gradient-to-br from-accent via-accent/70 to-primary/60"
+                              : "bg-gradient-to-br from-white/20 to-white/5 group-hover:from-accent/40",
+                          )}
+                        >
+                          <span
+                            className={cn(
+                              "block h-full w-full rounded-full",
+                              isActive
+                                ? "bg-accent text-accent-foreground"
+                                : "bg-[#0a1a35] text-white/75",
+                            )}
+                          />
                         </span>
-                        <Icon className={cn("relative h-4.5 w-4.5", isActive ? "text-accent-foreground" : "text-white/75")} />
+                        <Icon
+                          className={cn(
+                            "relative h-4.5 w-4.5",
+                            isActive ? "text-accent-foreground" : "text-white/75",
+                          )}
+                        />
                         {isActive && (
                           <motion.span
                             aria-hidden
@@ -1248,28 +1593,37 @@ function YourJourney() {
                       {/* Label */}
                       <div className="min-w-0 flex-1">
                         <div className="flex items-center gap-2">
-                          <span className={cn(
-                            "rounded-full px-2 py-0.5 text-[9px] font-bold uppercase tracking-[0.18em]",
-                            isActive ? "bg-accent/25 text-accent" : "bg-white/8 text-white/55"
-                          )}>
+                          <span
+                            className={cn(
+                              "rounded-full px-2 py-0.5 text-[9px] font-bold uppercase tracking-[0.18em]",
+                              isActive ? "bg-accent/25 text-accent" : "bg-white/8 text-white/55",
+                            )}
+                          >
                             {stp.badge}
                           </span>
                           <span className="font-mono text-[10px] text-white/35">
-                            {String(i + 1).padStart(2, "0")} / {String(steps.length).padStart(2, "0")}
+                            {String(i + 1).padStart(2, "0")} /{" "}
+                            {String(steps.length).padStart(2, "0")}
                           </span>
                         </div>
-                        <div className={cn(
-                          "mt-1 truncate font-display text-sm font-semibold transition-colors md:text-[15px]",
-                          isActive ? "text-white" : "text-white/75 group-hover:text-white"
-                        )}>
+                        <div
+                          className={cn(
+                            "mt-1 truncate font-display text-sm font-semibold transition-colors md:text-[15px]",
+                            isActive ? "text-white" : "text-white/75 group-hover:text-white",
+                          )}
+                        >
                           {stp.title}
                         </div>
                       </div>
 
-                      <ChevronRight className={cn(
-                        "h-4 w-4 shrink-0 transition-all",
-                        isActive ? "translate-x-0.5 text-accent" : "text-white/30 group-hover:translate-x-1 group-hover:text-white/70"
-                      )} />
+                      <ChevronRight
+                        className={cn(
+                          "h-4 w-4 shrink-0 transition-all",
+                          isActive
+                            ? "translate-x-0.5 text-accent"
+                            : "text-white/30 group-hover:translate-x-1 group-hover:text-white/70",
+                        )}
+                      />
                     </motion.button>
                   </li>
                 );
@@ -1423,7 +1777,8 @@ function DownloadApp() {
         {/* Header */}
         <div className="text-center">
           <motion.span
-            initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             className="inline-flex items-center gap-2 rounded-full border border-accent/30 bg-accent/10 px-4 py-1.5 text-[10px] font-bold uppercase tracking-[0.28em] text-accent backdrop-blur"
           >
@@ -1434,17 +1789,23 @@ function DownloadApp() {
             On every device
           </motion.span>
           <motion.h2
-            initial={{ opacity: 0, y: 14 }} whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }} transition={{ duration: 0.6 }}
+            initial={{ opacity: 0, y: 14 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
             className="mt-5 font-display text-4xl font-bold tracking-tight md:text-6xl lg:text-7xl"
           >
             Download{" "}
             <span className="relative inline-block">
-              <span className="bg-gradient-to-r from-accent via-accent to-accent/70 bg-clip-text text-transparent">Our App</span>
+              <span className="bg-gradient-to-r from-accent via-accent to-accent/70 bg-clip-text text-transparent">
+                Our App
+              </span>
               <motion.span
                 aria-hidden
-                initial={{ scaleX: 0 }} whileInView={{ scaleX: 1 }}
-                viewport={{ once: true }} transition={{ duration: 0.9, delay: 0.4 }}
+                initial={{ scaleX: 0 }}
+                whileInView={{ scaleX: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.9, delay: 0.4 }}
                 className="absolute -bottom-1 left-0 h-[3px] w-full origin-left rounded-full bg-gradient-to-r from-accent to-transparent"
               />
             </span>
@@ -1463,8 +1824,10 @@ function DownloadApp() {
               <motion.button
                 key={f.title}
                 onClick={() => setActive(i)}
-                initial={{ opacity: 0, y: 18 }} whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }} transition={{ duration: 0.5, delay: i * 0.08 }}
+                initial={{ opacity: 0, y: 18 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: i * 0.08 }}
                 whileHover={{ y: -5 }}
                 className="group relative"
               >
@@ -1509,7 +1872,8 @@ function DownloadApp() {
                   </div>
                   {isActive && (
                     <motion.span
-                      initial={{ opacity: 0 }} animate={{ opacity: 1 }}
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
                       className="pointer-events-none absolute left-1/2 top-full hidden h-12 w-px -translate-x-1/2 bg-gradient-to-b from-accent/60 to-transparent lg:block"
                     />
                   )}
@@ -1521,8 +1885,10 @@ function DownloadApp() {
 
         {/* Main card */}
         <motion.div
-          initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }} transition={{ duration: 0.7, delay: 0.2 }}
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7, delay: 0.2 }}
           className="relative mt-16 overflow-hidden rounded-[2.5rem] p-px"
         >
           {/* Gradient border */}
@@ -1542,7 +1908,8 @@ function DownloadApp() {
               {/* Left — copy */}
               <div>
                 <motion.span
-                  initial={{ opacity: 0, x: -10 }} whileInView={{ opacity: 1, x: 0 }}
+                  initial={{ opacity: 0, x: -10 }}
+                  whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   className="inline-flex items-center gap-2 rounded-full border border-accent/40 bg-accent/15 px-4 py-1.5 text-[11px] font-bold uppercase tracking-[0.24em] text-accent shadow-[0_8px_24px_-8px_hsl(var(--accent)/0.6)]"
                 >
@@ -1550,13 +1917,15 @@ function DownloadApp() {
                   {APP_FEATURES[active].title}
                 </motion.span>
                 <h3 className="mt-6 font-display text-4xl font-bold leading-[1.05] text-white md:text-5xl lg:text-[3.5rem]">
-                  Learn Anywhere,<br />
+                  Learn Anywhere,
+                  <br />
                   <span className="bg-gradient-to-r from-accent via-accent to-accent/60 bg-clip-text text-transparent">
                     Anytime
                   </span>
                 </h3>
                 <p className="mt-5 max-w-md text-base leading-relaxed text-white/70">
-                  Pick up exactly where you left off — across mobile, tablet and desktop. Offline lectures, sync'd notes, mock tests on the go.
+                  Pick up exactly where you left off — across mobile, tablet and desktop. Offline
+                  lectures, sync'd notes, mock tests on the go.
                 </p>
 
                 <div className="mt-8">
@@ -1565,23 +1934,23 @@ function DownloadApp() {
                   </div>
                   <div className="mt-4 flex flex-wrap gap-3">
                     {[
-                      { 
-                        label: "Android", 
-                        Icon: Smartphone, 
+                      {
+                        label: "Android",
+                        Icon: Smartphone,
                         color: "bg-gradient-to-br from-[#3DDC84] to-[#2bb46a] text-black",
-                        href: "https://play.google.com/store/apps/details?id=co.sansa.arwir" 
+                        href: "https://play.google.com/store/apps/details?id=co.sansa.arwir",
                       },
-                      { 
-                        label: "iOS", 
-                        Icon: Apple, 
+                      {
+                        label: "iOS",
+                        Icon: Apple,
                         color: "bg-gradient-to-br from-white to-slate-200 text-black",
-                        href: "https://apps.apple.com/us/app/fin-envision-learning/id6745217545" 
+                        href: "https://apps.apple.com/us/app/fin-envision-learning/id6745217545",
                       },
-                      { 
-                        label: "Windows", 
-                        Icon: MonitorPlay, 
+                      {
+                        label: "Windows",
+                        Icon: MonitorPlay,
                         color: "bg-gradient-to-br from-[#0078D6] to-[#005a9e] text-white",
-                        href: "https://web.classplusapp.com" 
+                        href: "https://web.classplusapp.com",
                       },
                     ].map(({ label, Icon, color, href }, idx) => (
                       <motion.a
@@ -1589,19 +1958,25 @@ function DownloadApp() {
                         href={href}
                         target="_blank"
                         rel="noopener noreferrer"
-                        initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }} transition={{ delay: 0.3 + idx * 0.08 }}
+                        initial={{ opacity: 0, y: 12 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: 0.3 + idx * 0.08 }}
                         whileHover={{ y: -4, scale: 1.04 }}
                         whileTap={{ scale: 0.97 }}
                         aria-label={`Download for ${label}`}
                         className="group relative flex items-center gap-3 overflow-hidden rounded-2xl border border-white/15 bg-white/[0.05] px-4 py-3 backdrop-blur transition-colors hover:border-accent/50 cursor-pointer"
                       >
                         <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/15 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
-                        <span className={`relative grid h-10 w-10 place-items-center rounded-xl shadow-lg ${color}`}>
+                        <span
+                          className={`relative grid h-10 w-10 place-items-center rounded-xl shadow-lg ${color}`}
+                        >
                           <Icon className="h-5 w-5" />
                         </span>
                         <div className="relative text-left">
-                          <div className="text-[9px] uppercase tracking-wider text-white/50">Get it on</div>
+                          <div className="text-[9px] uppercase tracking-wider text-white/50">
+                            Get it on
+                          </div>
                           <div className="text-sm font-semibold text-white">{label}</div>
                         </div>
                       </motion.a>
@@ -1622,7 +1997,9 @@ function DownloadApp() {
                         <Sparkles className="h-4 w-4" />
                       </div>
                       <div>
-                        <div className="text-xs font-semibold text-white">Laptop / PC / iPad Users</div>
+                        <div className="text-xs font-semibold text-white">
+                          Laptop / PC / iPad Users
+                        </div>
                         <p className="mt-1.5 text-xs text-white/60 leading-relaxed">
                           For video lectures, use the Windows link above and enter Org Code:{" "}
                           <span className="inline-block font-mono bg-white/10 text-accent font-bold px-2 py-0.5 rounded border border-white/10 select-all tracking-wider ml-1">
@@ -1642,12 +2019,18 @@ function DownloadApp() {
                   ].map(([v, l], i) => (
                     <motion.div
                       key={l}
-                      initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }} transition={{ delay: 0.4 + i * 0.1 }}
+                      initial={{ opacity: 0, y: 10 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: 0.4 + i * 0.1 }}
                       className="flex-1 bg-[hsl(220_55%_12%)] px-5 py-4"
                     >
-                      <div className="font-display text-2xl font-bold text-accent md:text-3xl">{v}</div>
-                      <div className="mt-1 text-[10px] font-semibold uppercase tracking-wider text-white/55">{l}</div>
+                      <div className="font-display text-2xl font-bold text-accent md:text-3xl">
+                        {v}
+                      </div>
+                      <div className="mt-1 text-[10px] font-semibold uppercase tracking-wider text-white/55">
+                        {l}
+                      </div>
                     </motion.div>
                   ))}
                 </div>
@@ -1662,7 +2045,8 @@ function DownloadApp() {
                 <motion.div
                   initial={{ opacity: 0, y: 30, rotate: -6 }}
                   whileInView={{ opacity: 1, y: 0, rotate: -8 }}
-                  viewport={{ once: true }} transition={{ duration: 0.8, delay: 0.3 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.8, delay: 0.3 }}
                   className="absolute left-2 top-4 h-[280px] w-[210px] rounded-2xl border-[6px] border-white/95 bg-gradient-to-br from-white to-slate-100 shadow-[0_30px_80px_-20px_rgba(0,0,0,0.6)] md:h-[320px] md:w-[240px]"
                 >
                   <div className="flex h-full flex-col gap-2 p-3">
@@ -1670,8 +2054,10 @@ function DownloadApp() {
                     {Array.from({ length: 7 }).map((_, i) => (
                       <motion.div
                         key={i}
-                        initial={{ width: 0 }} whileInView={{ width: i % 2 ? "70%" : "100%" }}
-                        viewport={{ once: true }} transition={{ delay: 0.6 + i * 0.06 }}
+                        initial={{ width: 0 }}
+                        whileInView={{ width: i % 2 ? "70%" : "100%" }}
+                        viewport={{ once: true }}
+                        transition={{ delay: 0.6 + i * 0.06 }}
                         className="h-1.5 rounded-full bg-slate-200"
                       />
                     ))}
@@ -1682,7 +2068,8 @@ function DownloadApp() {
                 <motion.div
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }} transition={{ duration: 0.9, delay: 0.15 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.9, delay: 0.15 }}
                   className="absolute left-1/2 top-12 w-[380px] -translate-x-1/2 md:w-[480px]"
                 >
                   <div className="rounded-t-2xl border-[8px] border-slate-900 bg-white shadow-[0_30px_80px_-20px_rgba(0,0,0,0.7)]">
@@ -1724,7 +2111,8 @@ function DownloadApp() {
                 <motion.div
                   initial={{ opacity: 0, y: 40, rotate: 6 }}
                   whileInView={{ opacity: 1, y: 0, rotate: 4 }}
-                  viewport={{ once: true }} transition={{ duration: 0.9, delay: 0.45 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.9, delay: 0.45 }}
                   className="absolute right-0 top-2 h-[320px] w-[160px] overflow-hidden rounded-[2rem] border-[6px] border-slate-900 bg-gradient-to-br from-white to-slate-50 shadow-[0_30px_80px_-15px_rgba(0,0,0,0.7)] md:h-[360px] md:w-[180px]"
                 >
                   <div className="absolute left-1/2 top-1.5 z-10 h-1.5 w-14 -translate-x-1/2 rounded-full bg-slate-900" />
@@ -1754,7 +2142,8 @@ function DownloadApp() {
                 <motion.div
                   initial={{ opacity: 0, scale: 0.8 }}
                   whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.7 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: 0.7 }}
                   className="absolute bottom-2 left-2 z-10"
                 >
                   <motion.div
@@ -1778,8 +2167,6 @@ function DownloadApp() {
   );
 }
 
-
-
 /* ─────────────────  COMPANIES  ───────────────── */
 
 function CompaniesSection() {
@@ -1800,7 +2187,10 @@ function CompaniesSection() {
                 <span className="bg-gradient-to-r from-accent via-accent to-accent/70 bg-clip-text text-transparent">
                   go to work
                 </span>
-                <span aria-hidden className="absolute -bottom-1 left-0 h-[3px] w-full rounded-full bg-gradient-to-r from-accent to-transparent" />
+                <span
+                  aria-hidden
+                  className="absolute -bottom-1 left-0 h-[3px] w-full rounded-full bg-gradient-to-r from-accent to-transparent"
+                />
               </span>
               .
             </h2>
@@ -1812,14 +2202,12 @@ function CompaniesSection() {
           <CompaniesMarquee speed="55s" />
           <CompaniesMarquee reverse speed="45s" />
         </div>
-
       </div>
     </section>
   );
 }
 
 /* FAQ section now lives in @/components/site/FAQ */
-
 
 /* ─────────────────  FINAL CTA  ───────────────── */
 
@@ -1830,9 +2218,12 @@ function FinalCta() {
         <div className="pointer-events-none absolute -right-24 -top-24 h-80 w-80 rounded-full bg-accent/30 blur-3xl" />
         <div className="relative grid gap-8 md:grid-cols-[1.4fr_1fr] md:items-center">
           <div>
-            <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-accent">Ready when you are</p>
+            <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-accent">
+              Ready when you are
+            </p>
             <h2 className="mt-3 font-display text-4xl font-semibold leading-tight text-white md:text-5xl">
-              Talk to a counsellor.<br />
+              Talk to a counsellor.
+              <br />
               Walk away with a roadmap.
             </h2>
             <p className="mt-4 max-w-md text-white/75">
@@ -1853,7 +2244,8 @@ function FinalCta() {
             </a>
             <a
               href={`https://wa.me/${brand.whatsapp.replace(/\D/g, "")}`}
-              target="_blank" rel="noreferrer"
+              target="_blank"
+              rel="noreferrer"
               className="inline-flex items-center justify-center gap-2 rounded-full border border-white/25 bg-white/5 px-5 py-3 text-sm font-semibold text-white backdrop-blur hover:bg-white/10"
             >
               Chat on WhatsApp

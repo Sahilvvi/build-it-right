@@ -1,12 +1,33 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import {
-  Mail, Phone, MapPin, MessageCircle, ArrowRight, Sparkles,
-  Send, UserCheck, CalendarCheck, Rocket, Quote,
+  Mail,
+  Phone,
+  MapPin,
+  MessageCircle,
+  ArrowRight,
+  Sparkles,
+  Send,
+  UserCheck,
+  CalendarCheck,
+  Rocket,
+  Quote,
 } from "lucide-react";
 import { SiteLayout } from "@/components/site/Layout";
-import { FadeIn, Stagger, StaggerItem, staggerItemVariants, Counter } from "@/components/site/primitives";
-import { PremiumOrbs, AmbientDark, AmbientLight, EyebrowBadge, GradientAccent } from "@/components/site/premium";
+import {
+  FadeIn,
+  Stagger,
+  StaggerItem,
+  staggerItemVariants,
+  Counter,
+} from "@/components/site/primitives";
+import {
+  PremiumOrbs,
+  AmbientDark,
+  AmbientLight,
+  EyebrowBadge,
+  GradientAccent,
+} from "@/components/site/premium";
 import { LeadForm } from "@/components/site/LeadForm";
 import { FAQ } from "@/components/site/FAQ";
 import { brand } from "@/data/site";
@@ -16,7 +37,10 @@ export const Route = createFileRoute("/contact")({
   head: () => ({
     meta: [
       { title: "Contact — Fin-Envision Learning" },
-      { name: "description", content: "Talk to our team. WhatsApp, email, phone or visit us in Mumbai." },
+      {
+        name: "description",
+        content: "Talk to our team. WhatsApp, email, phone or visit us in Mumbai.",
+      },
       { property: "og:title", content: "Contact — Fin-Envision Learning" },
       { property: "og:url", content: "/contact" },
     ],
@@ -44,10 +68,34 @@ function ConicRing({ size = "h-14 w-14" }: { size?: string }) {
 
 function ContactPage() {
   const quick = [
-    { icon: MessageCircle, label: "WhatsApp", value: brand.whatsapp, href: `https://wa.me/${brand.whatsapp.replace(/\D/g, "")}`, tone: "from-emerald-500 to-teal-700" },
-    { icon: Phone, label: "Call us", value: brand.phone, href: `tel:${brand.phone.replace(/\s/g, "")}`, tone: "from-amber-500 to-orange-600" },
-    { icon: Mail, label: "Email", value: brand.email, href: `mailto:${brand.email}`, tone: "from-rose-500 to-pink-700" },
-    { icon: MapPin, label: "Visit", value: "Thane, Mumbai", href: "https://maps.app.goo.gl/3ira5ZEkf5i5YPGA9", tone: "from-indigo-600 to-violet-800" },
+    {
+      icon: MessageCircle,
+      label: "WhatsApp",
+      value: brand.whatsapp,
+      href: `https://wa.me/${brand.whatsapp.replace(/\D/g, "")}`,
+      tone: "from-emerald-500 to-teal-700",
+    },
+    {
+      icon: Phone,
+      label: "Call us",
+      value: brand.phone,
+      href: `tel:${brand.phone.replace(/\s/g, "")}`,
+      tone: "from-amber-500 to-orange-600",
+    },
+    {
+      icon: Mail,
+      label: "Email",
+      value: brand.email,
+      href: `mailto:${brand.email}`,
+      tone: "from-rose-500 to-pink-700",
+    },
+    {
+      icon: MapPin,
+      label: "Visit",
+      value: "Thane, Mumbai",
+      href: "https://maps.app.goo.gl/3ira5ZEkf5i5YPGA9",
+      tone: "from-indigo-600 to-violet-800",
+    },
   ];
 
   return (
@@ -75,7 +123,8 @@ function ContactPage() {
                 transition={{ duration: 0.8, delay: 0.25 }}
                 className="mt-6 max-w-2xl text-pretty text-lg text-white/75 md:text-xl"
               >
-                Usually within an hour during working hours. Pick your channel — WhatsApp is fastest, email is best for detailed questions.
+                Usually within an hour during working hours. Pick your channel — WhatsApp is
+                fastest, email is best for detailed questions.
               </motion.p>
 
               <motion.div
@@ -86,7 +135,8 @@ function ContactPage() {
               >
                 <a
                   href={`https://wa.me/${brand.whatsapp.replace(/\D/g, "")}`}
-                  target="_blank" rel="noreferrer"
+                  target="_blank"
+                  rel="noreferrer"
                   className="group/btn relative inline-flex items-center gap-2 overflow-hidden rounded-full bg-accent px-6 py-3 text-sm font-semibold uppercase tracking-wider text-accent-foreground transition-transform hover:scale-[1.02]"
                 >
                   <motion.span
@@ -98,7 +148,10 @@ function ContactPage() {
                   <span className="relative">WhatsApp us</span>
                   <ArrowRight className="relative h-4 w-4 transition-transform group-hover/btn:translate-x-1" />
                 </a>
-                <a href="#form" className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-6 py-3 text-sm font-semibold uppercase tracking-wider text-white backdrop-blur transition-all hover:scale-[1.02] hover:border-accent/40 hover:bg-white/20">
+                <a
+                  href="#form"
+                  className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-6 py-3 text-sm font-semibold uppercase tracking-wider text-white backdrop-blur transition-all hover:scale-[1.02] hover:border-accent/40 hover:bg-white/20"
+                >
                   Send a message
                 </a>
                 <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-white/80 backdrop-blur">
@@ -128,15 +181,18 @@ function ContactPage() {
                   background:
                     "conic-gradient(from 0deg, hsl(var(--accent)/0.6), transparent 30%, hsl(var(--primary)/0.6) 60%, transparent 90%, hsl(var(--accent)/0.6))",
                   mask: "radial-gradient(farthest-side, transparent calc(100% - 2px), #000 0)",
-                  WebkitMask: "radial-gradient(farthest-side, transparent calc(100% - 2px), #000 0)",
+                  WebkitMask:
+                    "radial-gradient(farthest-side, transparent calc(100% - 2px), #000 0)",
                 }}
               />
               <div className="relative rounded-[2rem] border border-white/15 bg-white/10 p-6 backdrop-blur-md">
-                <div className="text-[10px] uppercase tracking-[0.24em] text-accent">Support pulse</div>
+                <div className="text-[10px] uppercase tracking-[0.24em] text-accent">
+                  Support pulse
+                </div>
                 <div className="mt-5 grid grid-cols-2 gap-3">
                   {[
                     { v: 1, sfx: " day", lbl: "Avg reply", pfx: "≤ " },
-                    
+
                     { v: 7, sfx: " days", lbl: "Open weekly" },
                   ].map((s, i) => (
                     <motion.div
@@ -149,7 +205,9 @@ function ContactPage() {
                       <div className="font-display text-3xl font-semibold text-white">
                         <Counter to={s.v} suffix={s.sfx} prefix={s.pfx} />
                       </div>
-                      <div className="mt-1 text-[10px] uppercase tracking-[0.18em] text-white/65">{s.lbl}</div>
+                      <div className="mt-1 text-[10px] uppercase tracking-[0.18em] text-white/65">
+                        {s.lbl}
+                      </div>
                     </motion.div>
                   ))}
                 </div>
@@ -184,7 +242,8 @@ function ContactPage() {
                     background:
                       "conic-gradient(from 0deg, hsl(var(--accent)/0.6), transparent 30%, hsl(var(--primary)/0.6) 60%, transparent 90%, hsl(var(--accent)/0.6))",
                     mask: "radial-gradient(farthest-side, transparent calc(100% - 2px), #000 0)",
-                    WebkitMask: "radial-gradient(farthest-side, transparent calc(100% - 2px), #000 0)",
+                    WebkitMask:
+                      "radial-gradient(farthest-side, transparent calc(100% - 2px), #000 0)",
                   }}
                 />
                 <div className="relative rounded-[2rem] border border-border bg-card p-7 shadow-elevated md:p-10">
@@ -192,8 +251,12 @@ function ContactPage() {
                   <h2 className="mt-5 font-display text-3xl font-semibold leading-tight md:text-4xl">
                     Tell us a bit <GradientAccent>about you.</GradientAccent>
                   </h2>
-                  <p className="mt-3 text-sm text-muted-foreground">We'll come back with a personalised next step.</p>
-                  <div className="mt-8"><LeadForm /></div>
+                  <p className="mt-3 text-sm text-muted-foreground">
+                    We'll come back with a personalised next step.
+                  </p>
+                  <div className="mt-8">
+                    <LeadForm />
+                  </div>
                 </div>
               </div>
             </FadeIn>
@@ -211,21 +274,34 @@ function ContactPage() {
                   >
                     <Tag
                       href={q.href}
-                      {...(q.href?.startsWith("http") ? { target: "_blank", rel: "noreferrer" } : {})}
+                      {...(q.href?.startsWith("http")
+                        ? { target: "_blank", rel: "noreferrer" }
+                        : {})}
                       className="group relative flex items-center gap-4 overflow-hidden rounded-3xl border border-border bg-card p-5 shadow-card transition-all hover-lift"
                     >
                       <div className="pointer-events-none absolute -right-12 -top-12 h-40 w-40 rounded-full bg-accent/20 opacity-0 blur-3xl transition-opacity duration-500 group-hover:opacity-100" />
                       <div className="relative grid h-14 w-14 shrink-0 place-items-center">
                         <ConicRing size="h-14 w-14" />
-                        <div className={cn("relative grid h-12 w-12 place-items-center rounded-full bg-gradient-to-br text-white shadow-glow", q.tone)}>
+                        <div
+                          className={cn(
+                            "relative grid h-12 w-12 place-items-center rounded-full bg-gradient-to-br text-white shadow-glow",
+                            q.tone,
+                          )}
+                        >
                           <q.icon className="h-5 w-5" />
                         </div>
                       </div>
                       <div className="min-w-0 flex-1">
-                        <div className="text-[10px] font-bold uppercase tracking-[0.22em] text-accent">{q.label}</div>
-                        <div className="mt-1 truncate font-display text-base font-semibold">{q.value}</div>
+                        <div className="text-[10px] font-bold uppercase tracking-[0.22em] text-accent">
+                          {q.label}
+                        </div>
+                        <div className="mt-1 truncate font-display text-base font-semibold">
+                          {q.value}
+                        </div>
                       </div>
-                      {q.href && <ArrowRight className="h-4 w-4 text-muted-foreground transition-transform group-hover:translate-x-1 group-hover:text-accent" />}
+                      {q.href && (
+                        <ArrowRight className="h-4 w-4 text-muted-foreground transition-transform group-hover:translate-x-1 group-hover:text-accent" />
+                      )}
                     </Tag>
                   </motion.div>
                 );
@@ -286,10 +362,30 @@ function ContactPage() {
             <div className="pointer-events-none absolute left-0 right-0 top-10 hidden h-px bg-gradient-to-r from-transparent via-accent/40 to-transparent md:block" />
             <Stagger className="grid gap-6 md:grid-cols-4">
               {[
-                { icon: Send, badge: "Step 1", title: "You reach out", body: "Drop a message via WhatsApp, email, the lead form or a quick call." },
-                { icon: UserCheck, badge: "Step 2", title: "We listen", body: "A counsellor maps your goals, background and timeline in a 20-min chat." },
-                { icon: CalendarCheck, badge: "Step 3", title: "Tailored plan", body: "Course recommendation, fee plan, batch options and demo lecture access." },
-                { icon: Rocket, badge: "Step 4", title: "You start", body: "Onboarded into a live batch with mentor, study group and resources." },
+                {
+                  icon: Send,
+                  badge: "Step 1",
+                  title: "You reach out",
+                  body: "Drop a message via WhatsApp, email, the lead form or a quick call.",
+                },
+                {
+                  icon: UserCheck,
+                  badge: "Step 2",
+                  title: "We listen",
+                  body: "A counsellor maps your goals, background and timeline in a 20-min chat.",
+                },
+                {
+                  icon: CalendarCheck,
+                  badge: "Step 3",
+                  title: "Tailored plan",
+                  body: "Course recommendation, fee plan, batch options and demo lecture access.",
+                },
+                {
+                  icon: Rocket,
+                  badge: "Step 4",
+                  title: "You start",
+                  body: "Onboarded into a live batch with mentor, study group and resources.",
+                },
               ].map((step, i) => (
                 <StaggerItem key={step.title} variants={staggerItemVariants}>
                   <div className="group relative h-full overflow-hidden rounded-3xl border border-white/15 bg-white/5 p-6 backdrop-blur-md transition-all hover:-translate-y-1 hover:border-accent/40 hover:bg-white/10">
@@ -301,11 +397,17 @@ function ContactPage() {
                           <step.icon className="h-5 w-5" />
                         </div>
                       </div>
-                      <span className="rounded-full border border-white/20 bg-white/10 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.22em] text-white/80">{step.badge}</span>
+                      <span className="rounded-full border border-white/20 bg-white/10 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.22em] text-white/80">
+                        {step.badge}
+                      </span>
                     </div>
-                    <h3 className="mt-5 font-display text-xl font-semibold text-white">{step.title}</h3>
+                    <h3 className="mt-5 font-display text-xl font-semibold text-white">
+                      {step.title}
+                    </h3>
                     <p className="mt-2 text-sm text-white/70">{step.body}</p>
-                    <div className="mt-5 font-display text-3xl font-bold text-white/15">0{i + 1}</div>
+                    <div className="mt-5 font-display text-3xl font-bold text-white/15">
+                      0{i + 1}
+                    </div>
                   </div>
                 </StaggerItem>
               ))}
@@ -314,14 +416,19 @@ function ContactPage() {
         </div>
       </section>
 
-
       {/* FAQ */}
       <FAQ
         eyebrow="FAQ"
-        title={<>Quick <span className="italic bg-gradient-to-r from-accent via-accent to-accent/60 bg-clip-text text-transparent pr-[0.15em] -mr-[0.15em]">answers.</span></>}
+        title={
+          <>
+            Quick{" "}
+            <span className="italic bg-gradient-to-r from-accent via-accent to-accent/60 bg-clip-text text-transparent pr-[0.15em] -mr-[0.15em]">
+              answers.
+            </span>
+          </>
+        }
         description="The most common things people ask before reaching out."
       />
-
     </SiteLayout>
   );
 }
