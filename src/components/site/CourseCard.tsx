@@ -23,12 +23,23 @@ export function CourseCard({ course }: { course: Course }) {
         )}
       </div>
 
-      <h3 className="mt-5 font-display text-xl font-semibold leading-tight tracking-tight">{course.title}</h3>
+      <h3 className="mt-5 font-display text-xl font-semibold leading-tight tracking-tight">
+        {course.title}
+      </h3>
 
       <div className="mt-3 flex flex-wrap items-center gap-3 text-xs text-muted-foreground">
-        <span className="inline-flex items-center gap-1"><Clock className="h-3.5 w-3.5" />{course.duration}</span>
-        <span className="inline-flex items-center gap-1"><Users className="h-3.5 w-3.5" />{course.learners.toLocaleString()} learners</span>
-        <span className="inline-flex items-center gap-1"><Star className="h-3.5 w-3.5 fill-accent text-accent" />{course.rating}</span>
+        <span className="inline-flex items-center gap-1">
+          <Clock className="h-3.5 w-3.5" />
+          {course.duration}
+        </span>
+        <span className="inline-flex items-center gap-1">
+          <Users className="h-3.5 w-3.5" />
+          {course.learners.toLocaleString()} learners
+        </span>
+        <span className="inline-flex items-center gap-1">
+          <Star className="h-3.5 w-3.5 fill-accent text-accent" />
+          {course.rating}
+        </span>
       </div>
 
       <ul className="mt-5 grid gap-2 text-sm">
@@ -42,7 +53,9 @@ export function CourseCard({ course }: { course: Course }) {
 
       <div className="mt-auto flex items-end justify-between pt-6">
         <div>
-          <div className="text-[11px] uppercase tracking-wider text-muted-foreground">Starts from</div>
+          <div className="text-[11px] uppercase tracking-wider text-muted-foreground">
+            Starts from
+          </div>
           <div className="font-display text-2xl font-semibold">{course.price}</div>
         </div>
         <Link

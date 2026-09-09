@@ -1,10 +1,25 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowRight, Play, Youtube, Sparkles, Clock, Search, ChevronLeft, ChevronRight } from "lucide-react";
+import {
+  ArrowRight,
+  Play,
+  Youtube,
+  Sparkles,
+  Clock,
+  Search,
+  ChevronLeft,
+  ChevronRight,
+} from "lucide-react";
 import { SiteLayout } from "@/components/site/Layout";
 import { FadeIn, Counter } from "@/components/site/primitives";
-import { PremiumOrbs, AmbientDark, AmbientLight, EyebrowBadge, GradientAccent } from "@/components/site/premium";
+import {
+  PremiumOrbs,
+  AmbientDark,
+  AmbientLight,
+  EyebrowBadge,
+  GradientAccent,
+} from "@/components/site/premium";
 import { FAQ } from "@/components/site/FAQ";
 import { cn } from "@/lib/utils";
 
@@ -12,7 +27,11 @@ export const Route = createFileRoute("/resources")({
   head: () => ({
     meta: [
       { title: "Resources — Learn Finance with Manoj Rajgopal | Fin-Envision Learning" },
-      { name: "description", content: "Free YouTube playlists on CFA® Level I & II, Financial Modelling, Stock Markets, Corporate Finance and Investment Banking — taught by Manoj Rajgopal, CFA®." },
+      {
+        name: "description",
+        content:
+          "Free YouTube playlists on CFA® Level I & II, Financial Modelling, Stock Markets, Corporate Finance and Investment Banking — taught by Manoj Rajgopal, CFA.",
+      },
       { property: "og:title", content: "Resources — Finance Insights You Can Actually Use" },
       { property: "og:url", content: "/resources" },
     ],
@@ -25,8 +44,21 @@ import { resourcePlaylists } from "@/data/site";
 
 const YT_CHANNEL = "https://www.youtube.com/@financewithmanojrajgopal";
 
-type Category = "CFA® Level I" | "CFA® Level II" | "Financial Modelling" | "Stock Market" | "Banking" | "Professional";
-type Video = { title: string; cat: Category; mins: number; tone: string; url: string; thumb?: string };
+type Category =
+  | "CFA® Level I"
+  | "CFA® Level II"
+  | "Financial Modelling"
+  | "Stock Market"
+  | "Banking"
+  | "Professional";
+type Video = {
+  title: string;
+  cat: Category;
+  mins: number;
+  tone: string;
+  url: string;
+  thumb?: string;
+};
 
 const PLAYLIST_URLS: Record<string, string> = {
   "CFA® Level 1 \u2013 FSA \u2013 Financial Analysis Techniques (Ratios)":
@@ -60,12 +92,10 @@ const PLAYLIST_URLS: Record<string, string> = {
 const PLAYLIST_THUMBS: Record<string, string> = {
   "CFA® Level 1 \u2013 FSA \u2013 Financial Analysis Techniques (Ratios)":
     "https://i.ytimg.com/vi/bdlLEeYEs5Q/hqdefault.jpg",
-  "CFA® Level 1 \u2013 FSA | Income Statement":
-    "https://i.ytimg.com/vi/db7v1Jli2j8/hqdefault.jpg",
+  "CFA® Level 1 \u2013 FSA | Income Statement": "https://i.ytimg.com/vi/db7v1Jli2j8/hqdefault.jpg",
   "CFA® Level 1 \u2013 Quants | Time Value of Money":
     "https://i.ytimg.com/vi/oKhc21rQpuU/hqdefault.jpg",
-  "CFA® Level 2 Pre-Requisite":
-    "https://i.ytimg.com/vi/x3ydYkq4nZY/hqdefault.jpg",
+  "CFA® Level 2 Pre-Requisite": "https://i.ytimg.com/vi/x3ydYkq4nZY/hqdefault.jpg",
   "CFA® Level 2 \u2013 FSA | Intercorporate Investments":
     "https://i.ytimg.com/vi/JPc8B8G9SsM/hqdefault.jpg",
   "CFA® Level 2 \u2013 Derivatives | Contingent Claims":
@@ -74,26 +104,28 @@ const PLAYLIST_THUMBS: Record<string, string> = {
     "https://i.ytimg.com/vi/XeQQywq8uog/hqdefault.jpg",
   "CFA® Level 2 \u2013 Alternative Investments | Investments in Real Estate":
     "https://i.ytimg.com/vi/MzoBmDX1rf4/hqdefault.jpg",
-  "Financial Modeling Demo Sessions":
-    "https://i.ytimg.com/vi/L-VIKPHW0RU/hqdefault.jpg",
-  "Company Analysis":
-    "https://i.ytimg.com/vi/TtHxD0FssMY/hqdefault.jpg",
-  "Basics of Stock Market":
-    "https://i.ytimg.com/vi/crFZ_-R5ID0/hqdefault.jpg",
-  "Watch List Vs Warn List":
-    "https://i.ytimg.com/vi/YLJnHgC6-a0/hqdefault.jpg",
-  "Banking Series":
-    "https://i.ytimg.com/vi/HC1nUT961CU/hqdefault.jpg",
+  "Financial Modeling Demo Sessions": "https://i.ytimg.com/vi/L-VIKPHW0RU/hqdefault.jpg",
+  "Company Analysis": "https://i.ytimg.com/vi/TtHxD0FssMY/hqdefault.jpg",
+  "Basics of Stock Market": "https://i.ytimg.com/vi/crFZ_-R5ID0/hqdefault.jpg",
+  "Watch List Vs Warn List": "https://i.ytimg.com/vi/YLJnHgC6-a0/hqdefault.jpg",
+  "Banking Series": "https://i.ytimg.com/vi/HC1nUT961CU/hqdefault.jpg",
 };
 
-
 const TONE_BY_CAT: Record<Category, string[]> = {
-  "CFA® Level I": ["from-[#1a3a5c] to-[#2d5a8c]", "from-blue-700 to-indigo-900", "from-cyan-600 to-blue-800"],
-  "CFA® Level II": ["from-indigo-600 to-violet-800", "from-fuchsia-600 to-purple-800", "from-violet-700 to-purple-900"],
+  "CFA® Level I": [
+    "from-[#1a3a5c] to-[#2d5a8c]",
+    "from-blue-700 to-indigo-900",
+    "from-cyan-600 to-blue-800",
+  ],
+  "CFA® Level II": [
+    "from-indigo-600 to-violet-800",
+    "from-fuchsia-600 to-purple-800",
+    "from-violet-700 to-purple-900",
+  ],
   "Financial Modelling": ["from-emerald-600 to-teal-800", "from-teal-500 to-emerald-700"],
   "Stock Market": ["from-amber-500 to-orange-700", "from-orange-500 to-rose-700"],
-  "Banking": ["from-rose-600 to-red-800"],
-  "Professional": ["from-slate-700 to-slate-900"],
+  Banking: ["from-rose-600 to-red-800"],
+  Professional: ["from-slate-700 to-slate-900"],
 };
 
 const CAT_MAP: Record<string, Category> = {
@@ -115,11 +147,18 @@ const videos: Video[] = resourcePlaylists.flatMap((group) => {
     tone: tones[i % tones.length],
     url: PLAYLIST_URLS[title] ?? YT_CHANNEL,
     thumb: PLAYLIST_THUMBS[title],
-
   }));
 });
 
-const tabs = ["All", "CFA® Level I", "CFA® Level II", "Financial Modelling", "Stock Market", "Banking", "Professional"] as const;
+const tabs = [
+  "All",
+  "CFA® Level I",
+  "CFA® Level II",
+  "Financial Modelling",
+  "Stock Market",
+  "Banking",
+  "Professional",
+] as const;
 
 const stats = [
   { value: 20, suffix: "+", label: "Playlists" },
@@ -132,10 +171,17 @@ const PAGE_SIZE = 3;
 
 /* Premium section heading */
 function PremiumHeader({
-  eyebrow, title, description, tone = "light", align = "left",
+  eyebrow,
+  title,
+  description,
+  tone = "light",
+  align = "left",
 }: {
-  eyebrow: string; title: React.ReactNode; description?: string;
-  tone?: "light" | "dark"; align?: "left" | "center";
+  eyebrow: string;
+  title: React.ReactNode;
+  description?: string;
+  tone?: "light" | "dark";
+  align?: "left" | "center";
 }) {
   return (
     <div className={cn("flex flex-col gap-5", align === "center" && "items-center text-center")}>
@@ -148,7 +194,7 @@ function PremiumHeader({
         className={cn(
           "font-display text-4xl font-semibold leading-[1.05] tracking-tight md:text-5xl lg:text-6xl",
           tone === "dark" ? "text-white" : "text-foreground",
-          align === "center" && "max-w-3xl"
+          align === "center" && "max-w-3xl",
         )}
       >
         {title}
@@ -161,7 +207,7 @@ function PremiumHeader({
           transition={{ duration: 0.6, delay: 0.1 }}
           className={cn(
             "max-w-2xl text-pretty text-base md:text-lg",
-            tone === "dark" ? "text-white/70" : "text-muted-foreground"
+            tone === "dark" ? "text-white/70" : "text-muted-foreground",
           )}
         >
           {description}
@@ -170,7 +216,6 @@ function PremiumHeader({
     </div>
   );
 }
-
 
 // ─────────────────────────────── component ───────────────────────────────
 function ResourcesPage() {
@@ -211,7 +256,9 @@ function ResourcesPage() {
             transition={{ duration: 0.8, delay: 0.25 }}
             className="mt-6 max-w-2xl text-pretty text-lg text-white/75 md:text-xl"
           >
-            Access our complete library of finance playlists covering CFA®, Financial Modelling, Stock Markets, Corporate Finance, Investment Banking, and more. All resources are available free on YouTube and are designed to help you learn at your own pace.
+            Access our complete library of finance playlists covering CFA®, Financial Modelling,
+            Stock Markets, Corporate Finance, Investment Banking, and more. All resources are
+            available free on YouTube and are designed to help you learn at your own pace.
           </motion.p>
 
           {/* search + stats */}
@@ -226,13 +273,17 @@ function ResourcesPage() {
                   background:
                     "conic-gradient(from 0deg, hsl(var(--accent)/0.7), transparent 30%, hsl(var(--primary)/0.6) 60%, transparent 90%, hsl(var(--accent)/0.7))",
                   mask: "radial-gradient(farthest-side, transparent calc(100% - 2px), #000 0)",
-                  WebkitMask: "radial-gradient(farthest-side, transparent calc(100% - 2px), #000 0)",
+                  WebkitMask:
+                    "radial-gradient(farthest-side, transparent calc(100% - 2px), #000 0)",
                 }}
               />
               <Search className="pointer-events-none absolute left-5 top-1/2 z-10 h-5 w-5 -translate-y-1/2 text-white/50" />
               <input
                 value={query}
-                onChange={(e) => { setQuery(e.target.value); setPage(1); }}
+                onChange={(e) => {
+                  setQuery(e.target.value);
+                  setPage(1);
+                }}
                 placeholder="Search resources, topics, episodes…"
                 className="relative w-full rounded-full border border-white/20 bg-[hsl(220_55%_12%)] py-4 pl-14 pr-6 text-white placeholder:text-white/50 outline-none transition focus:border-accent/60"
               />
@@ -249,7 +300,9 @@ function ResourcesPage() {
                   <div className="font-display text-xl font-semibold text-white md:text-2xl">
                     <Counter to={s.value} suffix={s.suffix} />
                   </div>
-                  <div className="mt-1 text-[10px] uppercase tracking-[0.18em] text-white/65">{s.label}</div>
+                  <div className="mt-1 text-[10px] uppercase tracking-[0.18em] text-white/65">
+                    {s.label}
+                  </div>
                 </motion.div>
               ))}
             </div>
@@ -275,7 +328,8 @@ function ResourcesPage() {
                   background:
                     "conic-gradient(from 0deg, hsl(var(--accent)/0.6), transparent 30%, hsl(var(--primary)/0.6) 60%, transparent 90%, hsl(var(--accent)/0.6))",
                   mask: "radial-gradient(farthest-side, transparent calc(100% - 3px), #000 0)",
-                  WebkitMask: "radial-gradient(farthest-side, transparent calc(100% - 3px), #000 0)",
+                  WebkitMask:
+                    "radial-gradient(farthest-side, transparent calc(100% - 3px), #000 0)",
                 }}
               />
               <div className="relative aspect-square overflow-hidden rounded-3xl bg-gradient-to-br from-[#1a3a5c] via-[#21426b] to-[#0f2a44]">
@@ -295,11 +349,17 @@ function ResourcesPage() {
                     >
                       <Play className="h-10 w-10 translate-x-0.5 fill-current" />
                     </motion.div>
-                    <div className="mt-6 font-display text-3xl font-semibold italic">CFA® Level I</div>
-                    <div className="mt-2 text-xs uppercase tracking-[0.2em] text-white/70">Foundation series</div>
+                    <div className="mt-6 font-display text-3xl font-semibold italic">
+                      CFA® Level I
+                    </div>
+                    <div className="mt-2 text-xs uppercase tracking-[0.2em] text-white/70">
+                      Foundation series
+                    </div>
                   </div>
                 </div>
-                <span className="absolute left-4 top-4 rounded-full bg-white/15 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-white backdrop-blur">Most-watched category</span>
+                <span className="absolute left-4 top-4 rounded-full bg-white/15 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-white backdrop-blur">
+                  Most-watched category
+                </span>
               </div>
             </div>
 
@@ -309,7 +369,9 @@ function ResourcesPage() {
                 CFA® Level I <GradientAccent>with Manoj Sir</GradientAccent>
               </h2>
               <p className="mt-5 text-pretty text-muted-foreground md:text-lg">
-                Nine deep-dive playlists across Financial Statement Analysis, Quants, Economics, Equity Investments, Fixed Income and Corporate Finance — the exact concept-first approach used inside our classroom, made free on YouTube.
+                Nine deep-dive playlists across Financial Statement Analysis, Quants, Economics,
+                Equity Investments, Fixed Income and Corporate Finance — the exact concept-first
+                approach used inside our classroom, made free on YouTube.
               </p>
 
               <div className="mt-8 flex flex-wrap items-center gap-3">
@@ -328,14 +390,25 @@ function ResourcesPage() {
                   <Youtube className="relative h-4 w-4" />
                   <span className="relative">Check YouTube playlist</span>
                 </a>
-                <a href={YT_CHANNEL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-6 py-3 text-sm font-semibold transition-all hover:scale-[1.02] hover:border-accent/40 hover:text-accent">
-                  Browse all <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                <a
+                  href={YT_CHANNEL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-6 py-3 text-sm font-semibold transition-all hover:scale-[1.02] hover:border-accent/40 hover:text-accent"
+                >
+                  Browse all{" "}
+                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                 </a>
               </div>
 
               <div className="mt-8 flex flex-wrap gap-2">
                 {["9 playlists", "Concept-first", "Free on YouTube"].map((p) => (
-                  <span key={p} className="rounded-full border border-border bg-background/60 px-3 py-1.5 text-xs font-medium text-muted-foreground">{p}</span>
+                  <span
+                    key={p}
+                    className="rounded-full border border-border bg-background/60 px-3 py-1.5 text-xs font-medium text-muted-foreground"
+                  >
+                    {p}
+                  </span>
                 ))}
               </div>
             </div>
@@ -356,7 +429,10 @@ function ResourcesPage() {
                 </h2>
               </div>
               <div className="rounded-full border border-border bg-card px-4 py-2 text-sm font-medium text-muted-foreground shadow-card">
-                <span className="font-display text-base font-semibold text-foreground">{filtered.length}</span> resources
+                <span className="font-display text-base font-semibold text-foreground">
+                  {filtered.length}
+                </span>{" "}
+                resources
               </div>
             </div>
           </FadeIn>
@@ -366,10 +442,15 @@ function ResourcesPage() {
             {tabs.map((t) => (
               <button
                 key={t}
-                onClick={() => { setActive(t); setPage(1); }}
+                onClick={() => {
+                  setActive(t);
+                  setPage(1);
+                }}
                 className={cn(
                   "relative rounded-full px-4 py-2 text-sm font-semibold uppercase tracking-wider transition-colors",
-                  active === t ? "text-primary-foreground" : "text-muted-foreground hover:text-foreground"
+                  active === t
+                    ? "text-primary-foreground"
+                    : "text-muted-foreground hover:text-foreground",
                 )}
               >
                 {active === t && (
@@ -405,7 +486,12 @@ function ResourcesPage() {
                   transition={{ duration: 0.5, delay: (i % 9) * 0.04, ease: [0.16, 1, 0.3, 1] }}
                   className="group relative block cursor-pointer touch-manipulation overflow-hidden rounded-3xl border border-border bg-card shadow-card transition-all hover-lift hover:border-accent/40 hover:shadow-glow"
                 >
-                  <div className={cn("pointer-events-none relative aspect-video overflow-hidden bg-gradient-to-br", v.tone)}>
+                  <div
+                    className={cn(
+                      "pointer-events-none relative aspect-video overflow-hidden bg-gradient-to-br",
+                      v.tone,
+                    )}
+                  >
                     {v.thumb && (
                       <img
                         src={v.thumb}
@@ -439,7 +525,8 @@ function ResourcesPage() {
                       {v.title}
                     </h3>
                     <div className="mt-3 inline-flex items-center gap-1.5 text-xs font-semibold text-accent opacity-0 transition-opacity group-hover:opacity-100">
-                      Watch now <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
+                      Watch now{" "}
+                      <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
                     </div>
                   </div>
                 </motion.a>
@@ -471,7 +558,7 @@ function ResourcesPage() {
                     "relative h-10 min-w-10 rounded-full px-3 text-sm font-semibold transition",
                     page === i + 1
                       ? "text-primary-foreground"
-                      : "border border-border bg-card text-muted-foreground hover:border-accent/40 hover:text-foreground"
+                      : "border border-border bg-card text-muted-foreground hover:border-accent/40 hover:text-foreground",
                   )}
                 >
                   {page === i + 1 && (
@@ -510,7 +597,8 @@ function ResourcesPage() {
                 One new explainer. <GradientAccent>Every Sunday.</GradientAccent>
               </h2>
               <p className="mt-5 max-w-xl text-white/75 md:text-lg">
-                Curated drops, CFA® tactics and career playbooks — straight to your inbox. No spam, ever.
+                Curated drops, CFA® tactics and career playbooks — straight to your inbox. No spam,
+                ever.
               </p>
 
               <NewsletterForm />
@@ -526,7 +614,8 @@ function ResourcesPage() {
                   background:
                     "conic-gradient(from 0deg, transparent 0deg, hsl(var(--accent)/0.5) 80deg, transparent 160deg, hsl(var(--primary)/0.5) 240deg, transparent 320deg)",
                   mask: "radial-gradient(farthest-side, transparent calc(100% - 3px), #000 0)",
-                  WebkitMask: "radial-gradient(farthest-side, transparent calc(100% - 3px), #000 0)",
+                  WebkitMask:
+                    "radial-gradient(farthest-side, transparent calc(100% - 3px), #000 0)",
                 }}
               />
               <motion.div
@@ -537,7 +626,9 @@ function ResourcesPage() {
                 <div className="text-center text-white">
                   <Youtube className="mx-auto h-16 w-16 text-accent" />
                   <div className="mt-4 font-display text-3xl font-semibold">@FinEnvision</div>
-                  <div className="mt-1 text-xs uppercase tracking-[0.2em] text-white/70">Subscribe on YouTube</div>
+                  <div className="mt-1 text-xs uppercase tracking-[0.2em] text-white/70">
+                    Subscribe on YouTube
+                  </div>
                 </div>
               </motion.div>
             </div>
@@ -548,10 +639,16 @@ function ResourcesPage() {
       {/* FAQ */}
       <FAQ
         eyebrow="FAQ"
-        title={<>More about our <span className="italic bg-gradient-to-r from-accent via-accent to-accent/60 bg-clip-text text-transparent pr-[0.15em] -mr-[0.15em]">resources.</span></>}
+        title={
+          <>
+            More about our{" "}
+            <span className="italic bg-gradient-to-r from-accent via-accent to-accent/60 bg-clip-text text-transparent pr-[0.15em] -mr-[0.15em]">
+              resources.
+            </span>
+          </>
+        }
         description="Common questions about our YouTube library, newsletter and how to use them in your CFA® / FRM prep."
       />
-
     </SiteLayout>
   );
 }
@@ -571,22 +668,26 @@ function NewsletterForm() {
     };
 
     // Open YouTube channel in a new tab synchronously to prevent popup blockers
-    window.open("https://www.youtube.com/@financewithmanojrajgopal", "_blank", "noopener,noreferrer");
+    window.open(
+      "https://www.youtube.com/@financewithmanojrajgopal",
+      "_blank",
+      "noopener,noreferrer",
+    );
 
     fetch("https://formsubmit.co/ajax/contactfinenvision@gmail.com", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "Accept": "application/json"
+        Accept: "application/json",
       },
-      body: JSON.stringify(data)
+      body: JSON.stringify(data),
     })
-      .then(res => res.json())
-      .then(data => {
+      .then((res) => res.json())
+      .then((data) => {
         console.log("Subscribed successfully:", data);
         setSubscribed(true);
       })
-      .catch(err => {
+      .catch((err) => {
         console.error("Error subscribing:", err);
         setSubscribed(true);
       })
@@ -616,7 +717,7 @@ function NewsletterForm() {
         placeholder="you@email.com"
         className="flex-1 rounded-full border border-white/20 bg-white/10 px-5 py-3 text-white placeholder:text-white/50 backdrop-blur outline-none transition focus:border-accent/60 focus:bg-white/15"
       />
-      <button 
+      <button
         type="submit"
         disabled={loading}
         className="group/btn relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-full bg-accent px-6 py-3 text-sm font-semibold uppercase tracking-wider text-accent-foreground transition-transform hover:scale-[1.02] disabled:opacity-50"

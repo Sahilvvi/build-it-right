@@ -3,8 +3,20 @@ import { motion } from "framer-motion";
 
 import { ArrowRight, Users, Target, Compass } from "lucide-react";
 import { SiteLayout } from "@/components/site/Layout";
-import { FadeIn, Stagger, StaggerItem, staggerItemVariants, Counter } from "@/components/site/primitives";
-import { PremiumOrbs, AmbientDark, AmbientLight, EyebrowBadge, GradientAccent } from "@/components/site/premium";
+import {
+  FadeIn,
+  Stagger,
+  StaggerItem,
+  staggerItemVariants,
+  Counter,
+} from "@/components/site/primitives";
+import {
+  PremiumOrbs,
+  AmbientDark,
+  AmbientLight,
+  EyebrowBadge,
+  GradientAccent,
+} from "@/components/site/premium";
 import { FAQ } from "@/components/site/FAQ";
 import { cn } from "@/lib/utils";
 import { googleReviewsCount } from "@/data/site";
@@ -14,9 +26,16 @@ export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
       { title: "About — Learn Finance the Way the Industry Works | Fin-Envision Learning" },
-      { name: "description", content: "Fin-Envision offers certified programs in CFA® and Financial Modelling — 5,000+ students trained, 80–90% success rate, 8+ years of teaching experience, led by Manoj Rajgopal, CFA®." },
+      {
+        name: "description",
+        content:
+          "Fin-Envision offers certified programs in CFA® and Financial Modelling — 5,000+ students trained, ~80–90% success rate, 8+ years of teaching experience, led by Manoj Rajgopal, CFA.",
+      },
       { property: "og:title", content: "About — Learn Finance the Way the Industry Works" },
-      { property: "og:description", content: "We don't just teach finance — we transform how you learn it." },
+      {
+        property: "og:description",
+        content: "We don't just teach finance — we transform how you learn it.",
+      },
       { property: "og:url", content: "/about" },
     ],
     links: [{ rel: "canonical", href: "/about" }],
@@ -38,15 +57,16 @@ const gallery = [
 ];
 
 const leadership = {
-  name: "Manoj Rajgopal, CFA®",
+  name: "Manoj Rajgopal, CFA",
   initials: "MR",
   role: "Founder & Lead Instructor",
-  quote: "My ability to creatively simplify complicated concepts comes from genuinely caring about each student's journey — concept clarity always beats rote learning.",
+  quote:
+    "My ability to creatively simplify complicated concepts comes from genuinely caring about each student's journey — concept clarity always beats rote learning.",
   work: [
     "Founder and Lead Instructor of Fin-Envision Learning.",
     "Cleared all three levels of the CFA® Program in the first attempt.",
     "Worked with reputed organizations such as CRISIL and JHP, gaining valuable industry exposure.",
-    "Has successfully trained over 5,000 students across Mumbai.",
+    "Has successfully trained over 5,000 students across the globe.",
     "Known for simplifying complex financial concepts into easy-to-understand, practical lessons.",
     "Focuses on bridging the gap between academic learning and real-world finance.",
     "Dedicated to mentoring students for successful careers in finance through industry-oriented training and personalized guidance.",
@@ -54,22 +74,26 @@ const leadership = {
   creds: ["CFA® Charterholder", "Investment Banking", "Financial Modeling", "Portfolio Strategy"],
 };
 
-
-
-
 const heroStats = [
   { value: 5000, suffix: "+", label: "Students trained" },
-  { value: "80–90%", suffix: "", label: "Success rate", isStatic: true },
+  { value: "~80–90%", suffix: "", label: "Success rate", isStatic: true },
   { value: googleReviewsCount, suffix: "", label: "Google reviews" },
   { value: 8, suffix: "+ yrs", label: "Teaching experience" },
 ];
 
 /* Premium section heading — homepage signature with ping-dot eyebrow */
 function PremiumHeader({
-  eyebrow, title, description, tone = "light", align = "left",
+  eyebrow,
+  title,
+  description,
+  tone = "light",
+  align = "left",
 }: {
-  eyebrow: string; title: React.ReactNode; description?: string;
-  tone?: "light" | "dark"; align?: "left" | "center";
+  eyebrow: string;
+  title: React.ReactNode;
+  description?: string;
+  tone?: "light" | "dark";
+  align?: "left" | "center";
 }) {
   return (
     <div className={cn("flex flex-col gap-5", align === "center" && "items-center text-center")}>
@@ -82,7 +106,7 @@ function PremiumHeader({
         className={cn(
           "font-display text-4xl font-semibold leading-[1.05] tracking-tight md:text-5xl lg:text-6xl",
           tone === "dark" ? "text-white" : "text-foreground",
-          align === "center" && "max-w-3xl"
+          align === "center" && "max-w-3xl",
         )}
       >
         {title}
@@ -95,7 +119,7 @@ function PremiumHeader({
           transition={{ duration: 0.6, delay: 0.1 }}
           className={cn(
             "max-w-2xl text-pretty text-base md:text-lg",
-            tone === "dark" ? "text-white/70" : "text-muted-foreground"
+            tone === "dark" ? "text-white/70" : "text-muted-foreground",
           )}
         >
           {description}
@@ -125,8 +149,6 @@ function ConicRing({ size = "h-14 w-14" }: { size?: string }) {
 
 // ─────────────────────────────── component ───────────────────────────────
 function AboutPage() {
-
-
   return (
     <SiteLayout>
       {/* HERO */}
@@ -146,12 +168,21 @@ function AboutPage() {
 
           <div className="mt-14 grid gap-10 lg:grid-cols-[1.1fr_1fr] lg:items-end">
             <FadeIn>
-              <div className="text-xs font-bold uppercase tracking-[0.28em] text-accent">Who we are</div>
+              <div className="text-xs font-bold uppercase tracking-[0.28em] text-accent">
+                Who we are
+              </div>
               <p className="mt-5 text-pretty text-lg leading-relaxed text-white/85 md:text-xl">
-                Fin-Envision is a leading training institute offering certified programs in Financial Modelling and CFA®. As the name suggests, <span className="text-white">"Financial Envision"</span> is about giving a future perspective to your career — helping individuals realize their potential through mentoring and imparting skills.
+                Fin-Envision is a leading training institute offering certified programs in
+                Financial Modelling and CFA®. As the name suggests,{" "}
+                <span className="text-white">"Financial Envision"</span> is about giving a future
+                perspective to your career — helping individuals realize their potential through
+                mentoring and imparting skills.
               </p>
               <p className="mt-5 text-pretty text-base text-white/70 md:text-lg">
-                Formulated through years of teaching experience, our coaching methodology places utmost emphasis on problem solving and conceptual clarity. Every instructor is carefully selected for their blend of expertise and passion for teaching — the human touch and care for each candidate is the real hallmark of Fin-Envision.
+                Formulated through years of teaching experience, our coaching methodology places
+                utmost emphasis on problem solving and conceptual clarity. Every instructor is
+                carefully selected for their blend of expertise and passion for teaching — the human
+                touch and care for each candidate is the real hallmark of Fin-Envision.
               </p>
             </FadeIn>
 
@@ -163,7 +194,9 @@ function AboutPage() {
                     <div className="font-display text-4xl font-semibold text-white md:text-5xl">
                       {s.isStatic ? s.value : <Counter to={Number(s.value)} suffix={s.suffix} />}
                     </div>
-                    <div className="mt-2 text-xs uppercase tracking-[0.18em] text-white/65">{s.label}</div>
+                    <div className="mt-2 text-xs uppercase tracking-[0.18em] text-white/65">
+                      {s.label}
+                    </div>
                   </div>
                 </StaggerItem>
               ))}
@@ -216,9 +249,13 @@ function AboutPage() {
               className="group relative overflow-hidden rounded-3xl border border-border bg-card p-8 shadow-elevated transition-all hover:-translate-y-1 hover:border-accent/40"
             >
               <div className={cn("absolute inset-x-0 top-0 h-1.5 bg-gradient-to-r", card.tone)} />
-              <div className="text-xs font-bold uppercase tracking-[0.24em] text-accent">{card.label}</div>
+              <div className="text-xs font-bold uppercase tracking-[0.24em] text-accent">
+                {card.label}
+              </div>
               {card.body && (
-                <p className="mt-5 text-pretty text-lg leading-relaxed text-foreground/80">{card.body}</p>
+                <p className="mt-5 text-pretty text-lg leading-relaxed text-foreground/80">
+                  {card.body}
+                </p>
               )}
               {card.values && (
                 <ul className="mt-5 space-y-3">
@@ -235,15 +272,11 @@ function AboutPage() {
         </div>
       </section>
 
-
       {/* FOUNDER SPOTLIGHT */}
       <section className="relative overflow-hidden bg-background py-24 md:py-32">
         <AmbientLight />
         <div className="container-px relative mx-auto max-w-7xl">
-          <PremiumHeader
-            eyebrow="Lead Instructor"
-            title={<>At the helm of <GradientAccent>Fin-Envision.</GradientAccent></>}
-          />
+          <PremiumHeader eyebrow="Lead Instructor" title={<>Lead Instructor</>} />
 
           <div className="mt-14 grid gap-10 lg:grid-cols-[1fr_1.3fr] lg:items-start">
             <FadeIn>
@@ -258,7 +291,8 @@ function AboutPage() {
                     background:
                       "conic-gradient(from 0deg, hsl(var(--accent)/0.6), transparent 30%, hsl(var(--primary)/0.6) 60%, transparent 90%, hsl(var(--accent)/0.6))",
                     mask: "radial-gradient(farthest-side, transparent calc(100% - 3px), #000 0)",
-                    WebkitMask: "radial-gradient(farthest-side, transparent calc(100% - 3px), #000 0)",
+                    WebkitMask:
+                      "radial-gradient(farthest-side, transparent calc(100% - 3px), #000 0)",
                   }}
                 />
                 <div className="relative aspect-[4/5] overflow-hidden rounded-[2.5rem] bg-gradient-to-br from-[#1a3a5c] via-[#21426b] to-[#0f2a44] shadow-elevated">
@@ -272,7 +306,9 @@ function AboutPage() {
                   <div className="absolute inset-x-0 bottom-0 h-2/5 bg-gradient-to-t from-[#0b1f33] via-[#0b1f33]/70 to-transparent" />
                   <div className="absolute inset-x-0 bottom-0 p-7 text-white">
                     <div className="font-display text-3xl font-semibold">{leadership.name}</div>
-                    <div className="mt-1 text-sm uppercase tracking-[0.2em] text-white/70">Founder</div>
+                    <div className="mt-1 text-sm uppercase tracking-[0.2em] text-white/70">
+                      Founder
+                    </div>
                   </div>
                 </div>
               </div>
@@ -281,7 +317,9 @@ function AboutPage() {
             <FadeIn delay={0.1}>
               <div className="flex flex-col gap-8">
                 <div>
-                  <div className="text-xs font-bold uppercase tracking-[0.24em] text-accent">Academic Credentials</div>
+                  <div className="text-xs font-bold uppercase tracking-[0.24em] text-accent">
+                    Academic Credentials
+                  </div>
                   <div className="mt-4 flex flex-wrap gap-2">
                     {leadership.creds.map((c, i) => (
                       <motion.span
@@ -301,7 +339,9 @@ function AboutPage() {
                 <div className="h-px w-full bg-gradient-to-r from-primary/30 via-accent/20 to-transparent" />
 
                 <div>
-                  <div className="text-xs font-bold uppercase tracking-[0.24em] text-accent">Manoj Sir's Journey</div>
+                  <div className="text-xs font-bold uppercase tracking-[0.24em] text-accent">
+                    Manoj Sir's Journey
+                  </div>
                   <ul className="mt-5 space-y-3">
                     {leadership.work.map((w, i) => (
                       <motion.li
@@ -324,7 +364,6 @@ function AboutPage() {
         </div>
       </section>
 
-
       {/* LEADERSHIP PILLARS */}
       <section className="container-px mx-auto max-w-7xl py-24 md:py-32">
         <div className="relative overflow-hidden rounded-[2.5rem] border border-border bg-navy-gradient p-10 text-primary-foreground md:p-16">
@@ -336,15 +375,28 @@ function AboutPage() {
                 Driven by <GradientAccent>purpose.</GradientAccent>
               </h2>
               <p className="mt-5 text-white/75 md:text-lg">
-                Our leadership brings deep expertise in finance and education — shaping a mission focused on student success.
+                Our leadership brings deep expertise in finance and education — shaping a mission
+                focused on student success.
               </p>
             </FadeIn>
 
             <Stagger className="grid gap-4">
               {[
-                { icon: Target, t: "Driven by purpose", b: "Deep expertise in finance and education, shaping a mission focused on student success." },
-                { icon: Compass, t: "Vision in action", b: "We listen to your goals and recommend the course that truly fits — no fluff, no hard sell." },
-                { icon: Users, t: "Active involvement", b: "They mentor teams, interact with students, and stay engaged in daily progress — while keeping the long-term vision in focus." },
+                {
+                  icon: Target,
+                  t: "Driven by purpose",
+                  b: "Deep expertise in finance and education, shaping a mission focused on student success.",
+                },
+                {
+                  icon: Compass,
+                  t: "Vision in action",
+                  b: "We listen to your goals and recommend the course that truly fits — no fluff, no hard sell.",
+                },
+                {
+                  icon: Users,
+                  t: "Active involvement",
+                  b: "They mentor teams, interact with students, and stay engaged in daily progress — while keeping the long-term vision in focus.",
+                },
               ].map((x) => (
                 <StaggerItem key={x.t} variants={staggerItemVariants}>
                   <div className="group flex gap-5 rounded-2xl border border-white/15 bg-white/5 p-5 backdrop-blur transition-all hover:-translate-y-0.5 hover:border-accent/40 hover:bg-white/10">
@@ -366,14 +418,19 @@ function AboutPage() {
         </div>
       </section>
 
-
       {/* FAQ */}
       <FAQ
         eyebrow="FAQ"
-        title={<>More about <span className="italic bg-gradient-to-r from-accent via-accent to-accent/60 bg-clip-text text-transparent pr-[0.15em] -mr-[0.15em]">us.</span></>}
+        title={
+          <>
+            More about{" "}
+            <span className="italic bg-gradient-to-r from-accent via-accent to-accent/60 bg-clip-text text-transparent pr-[0.15em] -mr-[0.15em]">
+              us.
+            </span>
+          </>
+        }
         description="Frequently asked questions about Fin-Envision, our teaching style, and how we support every learner."
       />
-
     </SiteLayout>
   );
 }

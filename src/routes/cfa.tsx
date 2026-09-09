@@ -2,9 +2,32 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion, AnimatePresence } from "framer-motion";
 import { useMemo, useState } from "react";
 import {
-  ArrowRight, Sparkles, Clock, Eye, Languages, ShieldCheck, Truck, Download,
-  BookOpen, Briefcase, LineChart, Search, Building2, Wallet, PieChart, Landmark, Banknote,
-  FileText, ListChecks, Award, Calendar, Tag, Info, GraduationCap, MapPin, CheckCircle2,
+  ArrowRight,
+  Sparkles,
+  Clock,
+  Eye,
+  Languages,
+  ShieldCheck,
+  Truck,
+  Download,
+  BookOpen,
+  Briefcase,
+  LineChart,
+  Search,
+  Building2,
+  Wallet,
+  PieChart,
+  Landmark,
+  Banknote,
+  FileText,
+  ListChecks,
+  Award,
+  Calendar,
+  Tag,
+  Info,
+  GraduationCap,
+  MapPin,
+  CheckCircle2,
 } from "lucide-react";
 import { SiteLayout } from "@/components/site/Layout";
 import { FadeIn, Stagger, StaggerItem, staggerItemVariants } from "@/components/site/primitives";
@@ -17,7 +40,11 @@ export const Route = createFileRoute("/cfa")({
   head: () => ({
     meta: [
       { title: "CFA® Program — Level I, II & III Prep | Fin-Envision Learning" },
-      { name: "description", content: "Self-paced CFA® Level I, II & III prep with one mentor, real-life examples, and 100% coverage in English + Hindi. Trusted by candidates worldwide." },
+      {
+        name: "description",
+        content:
+          "Self-paced CFA® Level I, II & III prep with one mentor, real-life examples, and 100% coverage in English + Hindi. Trusted by candidates worldwide.",
+      },
       { property: "og:title", content: "CFA® Program — Level I, II & III Prep" },
       { property: "og:url", content: "/cfa" },
     ],
@@ -33,7 +60,14 @@ type LevelData = {
   badge: string;
   tagline: string;
   description: string;
-  meta: { duration: string; views: string; language: string; coverage: string; validity: string; courier: string };
+  meta: {
+    duration: string;
+    views: string;
+    language: string;
+    coverage: string;
+    validity: string;
+    courier: string;
+  };
   pricing: { offline: string; online: string };
   weights: { subject: string; range: string }[];
   exam: { format: string[]; question: string[]; key: string[] };
@@ -48,7 +82,14 @@ const levels: Record<Level, LevelData> = {
     tagline: "Foundations · Tools · Ethics",
     description:
       "Build a strong foundation in finance. Level I introduces candidates to core concepts, tools, and ethical standards — focused on understanding over application. Ideal for students, non-finance backgrounds, and early-stage professionals starting their CFA® preparation.",
-    meta: { duration: "140+ hours (live)", views: "Unlimited", language: "English + Hindi", coverage: "100%", validity: "Until exam", courier: "As per location" },
+    meta: {
+      duration: "140+ hours (live)",
+      views: "Unlimited",
+      language: "English + Hindi",
+      coverage: "100%",
+      validity: "Until exam",
+      courier: "As per location",
+    },
     pricing: { offline: "₹36,000", online: "₹20,000" },
     weights: [
       { subject: "Ethics", range: "15 – 20%" },
@@ -63,9 +104,21 @@ const levels: Record<Level, LevelData> = {
       { subject: "Alt Investments", range: "7 – 10%" },
     ],
     exam: {
-      format: ["180 multiple-choice questions in two sessions of 2h 15m each", "Optional break between sessions", "90 questions per session within the time limit"],
-      question: ["3 answer choices (A, B, C)", "Sentence-completion and direct questions", "Tests analytical thinking & application"],
-      key: ["Average pass rate: 41% (2016 – 2025)", "No penalty for incorrect answers", "Results within 5 – 7 weeks"],
+      format: [
+        "180 multiple-choice questions in two sessions of 2h 15m each",
+        "Optional break between sessions",
+        "90 questions per session within the time limit",
+      ],
+      question: [
+        "3 answer choices (A, B, C)",
+        "Sentence-completion and direct questions",
+        "Tests analytical thinking & application",
+      ],
+      key: [
+        "Average pass rate: 41% (2016 – 2025)",
+        "No penalty for incorrect answers",
+        "Results within 5 – 7 weeks",
+      ],
     },
     deadlines: [
       { window: "August 2026", date: "18 – 24 Aug 2026" },
@@ -73,7 +126,11 @@ const levels: Record<Level, LevelData> = {
       { window: "February 2027", date: "22 – 28 Feb 2027" },
       { window: "May 2027", date: "11 – 17 May 2027" },
     ],
-    registration: { window: "11 Feb – 11 Aug 2026", earlyBird: "11 Feb – 15 Apr 2026", final: "16 Apr – 11 Aug 2026" },
+    registration: {
+      window: "11 Feb – 11 Aug 2026",
+      earlyBird: "11 Feb – 15 Apr 2026",
+      final: "16 Apr – 11 Aug 2026",
+    },
     fees: {
       early: { inr: "$1,140", note: "Best value for early planners" },
       standard: { inr: "$1,490", note: "Standard pricing applies" },
@@ -84,7 +141,14 @@ const levels: Record<Level, LevelData> = {
     tagline: "Application · Valuation · Analysis",
     description:
       "Shift from understanding to application. Level II asks you to apply Level I concepts to exam-style scenarios — particularly in valuation, financial statement analysis, and asset classes. The most analytical and application-driven stage of the program.",
-    meta: { duration: "80+ hours (live)", views: "Unlimited", language: "English + Hindi", coverage: "100%", validity: "Until exam", courier: "As per location" },
+    meta: {
+      duration: "80+ hours (live)",
+      views: "Unlimited",
+      language: "English + Hindi",
+      coverage: "100%",
+      validity: "Until exam",
+      courier: "As per location",
+    },
     pricing: { offline: "₹40,000", online: "₹25,000" },
     weights: [
       { subject: "Ethics", range: "10 – 15%" },
@@ -99,16 +163,32 @@ const levels: Record<Level, LevelData> = {
       { subject: "Alt Investments", range: "5 – 10%" },
     ],
     exam: {
-      format: ["22 item sets (vignettes with accompanying questions)", "Two sessions of 2h 12m each", "Optional break between sessions"],
-      question: ["Vignette-supported multiple-choice questions", "Tests critical thinking & applied knowledge", "Three answer choices: A, B, C"],
-      key: ["Average pass rate: 46% (2016 – 2025)", "No negative marking — attempt every question", "Results within 5 – 7 weeks"],
+      format: [
+        "22 item sets (vignettes with accompanying questions)",
+        "Two sessions of 2h 12m each",
+        "Optional break between sessions",
+      ],
+      question: [
+        "Vignette-supported multiple-choice questions",
+        "Tests critical thinking & applied knowledge",
+        "Three answer choices: A, B, C",
+      ],
+      key: [
+        "Average pass rate: 46% (2016 – 2025)",
+        "No negative marking — attempt every question",
+        "Results within 5 – 7 weeks",
+      ],
     },
     deadlines: [
       { window: "August 2026", date: "25 – 29 Aug 2026" },
       { window: "November 2026", date: "18 – 22 Nov 2026" },
       { window: "May 2027", date: "18 – 22 May 2027" },
     ],
-    registration: { window: "11 Feb – 11 Aug 2026", earlyBird: "11 Feb – 15 Apr 2026", final: "16 Apr – 11 Aug 2026" },
+    registration: {
+      window: "11 Feb – 11 Aug 2026",
+      earlyBird: "11 Feb – 15 Apr 2026",
+      final: "16 Apr – 11 Aug 2026",
+    },
     fees: {
       early: { inr: "$1,140", note: "Best value for early planners" },
       standard: { inr: "$1,490", note: "Standard pricing applies" },
@@ -119,7 +199,14 @@ const levels: Record<Level, LevelData> = {
     tagline: "Portfolio · Wealth · Strategy",
     description:
       "The final stage focuses on portfolio management, wealth planning and strategic decision-making. In addition to item sets, Level III includes essay-based questions that ask you to clearly articulate investment decisions and reasoning.",
-    meta: { duration: "60+ hours (live)", views: "Unlimited", language: "English + Hindi", coverage: "100%", validity: "Until exam", courier: "As per location" },
+    meta: {
+      duration: "60+ hours (live)",
+      views: "Unlimited",
+      language: "English + Hindi",
+      coverage: "100%",
+      validity: "Until exam",
+      courier: "As per location",
+    },
     pricing: { offline: "₹25,000", online: "₹25,000" },
     weights: [
       { subject: "Asset Allocation", range: "15 – 20%" },
@@ -132,16 +219,32 @@ const levels: Record<Level, LevelData> = {
       { subject: "Private Wealth Pathway", range: "30 – 35%" },
     ],
     exam: {
-      format: ["Mix of item sets and essay (constructed response) sets", "Two sessions of 2h 12m each", "Distribution: 6 item + 5 essay, or 5 item + 6 essay"],
-      question: ["Vignette-supported essay & multiple-choice", "Each set worth 12 points", "Tests advanced portfolio & wealth concepts"],
-      key: ["Average pass rate: 51% (2016 – 2025)", "No penalty for incorrect answers", "Results in 6 – 8 weeks (essay grading)"],
+      format: [
+        "Mix of item sets and essay (constructed response) sets",
+        "Two sessions of 2h 12m each",
+        "Distribution: 6 item + 5 essay, or 5 item + 6 essay",
+      ],
+      question: [
+        "Vignette-supported essay & multiple-choice",
+        "Each set worth 12 points",
+        "Tests advanced portfolio & wealth concepts",
+      ],
+      key: [
+        "Average pass rate: 51% (2016 – 2025)",
+        "No penalty for incorrect answers",
+        "Results in 6 – 8 weeks (essay grading)",
+      ],
     },
     deadlines: [
       { window: "August 2026", date: "13 – 17 Aug 2026" },
       { window: "February 2027", date: "18 – 21 Feb 2027" },
       { window: "August 2027", date: "11 – 14 Aug 2027" },
     ],
-    registration: { window: "5 May – 5 Nov 2026", earlyBird: "5 May – 7 Jul 2026", final: "8 Jul – 5 Nov 2026" },
+    registration: {
+      window: "5 May – 5 Nov 2026",
+      earlyBird: "5 May – 7 Jul 2026",
+      final: "8 Jul – 5 Nov 2026",
+    },
     fees: {
       early: { inr: "$1,240", note: "Best value for early planners" },
       standard: { inr: "$1,590", note: "Standard pricing applies" },
@@ -151,25 +254,76 @@ const levels: Record<Level, LevelData> = {
 
 // shared across all levels
 const careers = [
-  { icon: PieChart, t: "Portfolio Management", b: "Manage diversified portfolios to balance risk and return — CFA® equips you with asset allocation and risk expertise." },
-  { icon: Search, t: "Research", b: "Analyse markets, industries and companies. Strengthens financial modelling and equity research skills." },
-  { icon: Briefcase, t: "Consulting", b: "Strategic advice on planning and valuations — in-depth financial analysis and risk management." },
-  { icon: ShieldCheck, t: "Risk Analysis", b: "Assess and mitigate risks for businesses and individuals using rigorous risk frameworks." },
-  { icon: LineChart, t: "Asset Management", b: "Oversee institutional or individual investments — sharpened investment strategy & performance evaluation." },
-  { icon: Wallet, t: "Private Wealth Mgmt", b: "Customised plans for high-net-worth clients aligned to risk tolerance and life goals." },
-  { icon: Building2, t: "Commercial Banking", b: "Credit analysis and financial solutions for businesses — corporate finance expertise." },
-  { icon: Landmark, t: "Investment Banking", b: "Mergers, acquisitions and capital raising — modelling, valuation and deal structuring." },
+  {
+    icon: PieChart,
+    t: "Portfolio Management",
+    b: "Manage diversified portfolios to balance risk and return — CFA® equips you with asset allocation and risk expertise.",
+  },
+  {
+    icon: Search,
+    t: "Research",
+    b: "Analyse markets, industries and companies. Strengthens financial modelling and equity research skills.",
+  },
+  {
+    icon: Briefcase,
+    t: "Consulting",
+    b: "Strategic advice on planning and valuations — in-depth financial analysis and risk management.",
+  },
+  {
+    icon: ShieldCheck,
+    t: "Risk Analysis",
+    b: "Assess and mitigate risks for businesses and individuals using rigorous risk frameworks.",
+  },
+  {
+    icon: LineChart,
+    t: "Asset Management",
+    b: "Oversee institutional or individual investments — sharpened investment strategy & performance evaluation.",
+  },
+  {
+    icon: Wallet,
+    t: "Private Wealth Mgmt",
+    b: "Customised plans for high-net-worth clients aligned to risk tolerance and life goals.",
+  },
+  {
+    icon: Building2,
+    t: "Commercial Banking",
+    b: "Credit analysis and financial solutions for businesses — corporate finance expertise.",
+  },
+  {
+    icon: Landmark,
+    t: "Investment Banking",
+    b: "Mergers, acquisitions and capital raising — modelling, valuation and deal structuring.",
+  },
 ];
 
 const importantDetails = [
-  { icon: GraduationCap, t: "Eligibility Criteria", b: "Any one of: bachelor's degree (or equivalent), final-year student (within 23 months of graduation for Level I), 4,000 hours of professional work experience, or a combination of higher education and work experience totalling at least 4,000 hours." },
-  { icon: FileText, t: "Exam Requirements", b: "A valid international passport, an approved calculator (Texas Instruments BA II Plus or HP 12C), and a confirmed exam appointment." },
-  { icon: Banknote, t: "Scholarships", b: "CFA® Institute offers scholarship programs to eligible candidates that can significantly reduce registration fees. Availability, eligibility and deadlines vary by program." },
+  {
+    icon: GraduationCap,
+    t: "Eligibility Criteria",
+    b: "Any one of: bachelor's degree (or equivalent), final-year student (within 23 months of graduation for Level I), 4,000 hours of professional work experience, or a combination of higher education and work experience totalling at least 4,000 hours.",
+  },
+  {
+    icon: FileText,
+    t: "Exam Requirements",
+    b: "A valid international passport, an approved calculator (Texas Instruments BA II Plus or HP 12C), and a confirmed exam appointment.",
+  },
+  {
+    icon: Banknote,
+    t: "Scholarships",
+    b: "CFA® Institute offers scholarship programs to eligible candidates that can significantly reduce registration fees. Availability, eligibility and deadlines vary by program.",
+  },
 
-  { icon: MapPin, t: "Test Centers", b: "The exam is a computer-based test at authorised Prometric test centers worldwide. Availability depends on the selected exam window and location." },
-  { icon: Info, t: "Ethics & Professional Standards", b: "All candidates must comply with the CFA® Institute Code of Ethics and Standards of Professional Conduct throughout their CFA® Program journey." },
+  {
+    icon: MapPin,
+    t: "Test Centers",
+    b: "The exam is a computer-based test at authorised Prometric test centers worldwide. Availability depends on the selected exam window and location.",
+  },
+  {
+    icon: Info,
+    t: "Ethics & Professional Standards",
+    b: "All candidates must comply with the CFA® Institute Code of Ethics and Standards of Professional Conduct throughout their CFA® Program journey.",
+  },
 ];
-
 
 const comparisonRows = [
   { subject: "Ethics", l1: "15 – 20%", l2: "10 – 15%", l3: "—" },
@@ -222,7 +376,7 @@ function PremiumHeader({
         className={cn(
           "font-display text-4xl font-semibold leading-[1.05] tracking-tight md:text-5xl lg:text-6xl",
           tone === "dark" ? "text-white" : "text-foreground",
-          align === "center" && "max-w-3xl"
+          align === "center" && "max-w-3xl",
         )}
       >
         {title}
@@ -235,7 +389,7 @@ function PremiumHeader({
           transition={{ duration: 0.6, delay: 0.1 }}
           className={cn(
             "max-w-2xl text-pretty text-base md:text-lg",
-            tone === "dark" ? "text-white/70" : "text-muted-foreground"
+            tone === "dark" ? "text-white/70" : "text-muted-foreground",
           )}
         >
           {description}
@@ -269,7 +423,7 @@ function CFAPage() {
   const data = levels[level];
   const maxWeight = useMemo(
     () => Math.max(...data.weights.map((w) => parseInt(w.range.split("–")[1] || w.range))),
-    [data]
+    [data],
   );
 
   return (
@@ -279,7 +433,12 @@ function CFAPage() {
         <PremiumOrbs />
 
         <div className="container-px relative mx-auto max-w-7xl pb-24 pt-20 md:pt-28">
-          <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="flex flex-wrap items-center gap-3 text-xs font-medium uppercase tracking-[0.2em] text-white/80">
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="flex flex-wrap items-center gap-3 text-xs font-medium uppercase tracking-[0.2em] text-white/80"
+          >
             <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-3 py-1 backdrop-blur">
               <Sparkles className="h-3 w-3 text-accent" /> Learn CFA® with real life examples
             </span>
@@ -293,11 +452,15 @@ function CFAPage() {
                 onClick={() => setLevel(l)}
                 className={cn(
                   "relative rounded-full px-5 py-2 text-sm font-semibold uppercase tracking-wider transition-colors",
-                  level === l ? "text-foreground" : "text-white/70 hover:text-white"
+                  level === l ? "text-foreground" : "text-white/70 hover:text-white",
                 )}
               >
                 {level === l && (
-                  <motion.span layoutId="cfa-pill" className="absolute inset-0 rounded-full bg-accent shadow-glow" transition={{ type: "spring", duration: 0.5 }} />
+                  <motion.span
+                    layoutId="cfa-pill"
+                    className="absolute inset-0 rounded-full bg-accent shadow-glow"
+                    transition={{ type: "spring", duration: 0.5 }}
+                  />
                 )}
                 <span className="relative">{levelLabels[l]}</span>
               </button>
@@ -314,12 +477,18 @@ function CFAPage() {
               className="mt-8 grid gap-12 lg:grid-cols-[1.4fr_1fr] lg:items-end"
             >
               <div>
-                <div className="text-sm uppercase tracking-[0.24em] text-accent">{data.tagline}</div>
+                <div className="text-sm uppercase tracking-[0.24em] text-accent">
+                  {data.tagline}
+                </div>
                 <h1 className="mt-4 max-w-3xl text-balance font-display text-5xl font-semibold leading-[1.02] tracking-tight md:text-7xl">
                   CFA® <GradientAccent>{data.badge}</GradientAccent>
                 </h1>
-                <p className="mt-3 text-sm uppercase tracking-[0.24em] text-white/60">Chartered Financial Analyst</p>
-                <p className="mt-6 max-w-2xl text-pretty text-lg text-white/80">{data.description}</p>
+                <p className="mt-3 text-sm uppercase tracking-[0.24em] text-white/60">
+                  Chartered Financial Analyst
+                </p>
+                <p className="mt-6 max-w-2xl text-pretty text-lg text-white/80">
+                  {data.description}
+                </p>
               </div>
 
               {/* Pricing card with rotating conic ring */}
@@ -333,13 +502,18 @@ function CFAPage() {
                     background:
                       "conic-gradient(from 0deg, hsl(var(--accent)/0.6), transparent 30%, hsl(var(--primary)/0.6) 60%, transparent 90%, hsl(var(--accent)/0.6))",
                     mask: "radial-gradient(farthest-side, transparent calc(100% - 2px), #000 0)",
-                    WebkitMask: "radial-gradient(farthest-side, transparent calc(100% - 2px), #000 0)",
+                    WebkitMask:
+                      "radial-gradient(farthest-side, transparent calc(100% - 2px), #000 0)",
                   }}
                 />
                 <div className="relative rounded-[2rem] border border-white/15 bg-white/10 p-6 backdrop-blur-md">
-                  <div className="text-[10px] uppercase tracking-[0.24em] text-accent">Enroll now</div>
+                  <div className="text-[10px] uppercase tracking-[0.24em] text-accent">
+                    Enroll now
+                  </div>
                   <div className="mt-3 flex items-baseline gap-3">
-                    <span className="font-display text-5xl font-semibold text-white md:text-6xl">{data.pricing.offline}</span>
+                    <span className="font-display text-5xl font-semibold text-white md:text-6xl">
+                      {data.pricing.offline}
+                    </span>
                   </div>
                   <div className="mt-5 flex flex-wrap gap-2">
                     <a
@@ -352,7 +526,6 @@ function CFAPage() {
                     </a>
                   </div>
 
-
                   <div className="mt-6 grid grid-cols-2 gap-3 text-[11px]">
                     {[
                       { icon: Eye, k: "Views", v: data.meta.views },
@@ -362,9 +535,12 @@ function CFAPage() {
                     ].map((m) => (
                       <div key={m.k} className="rounded-xl border border-white/10 bg-white/5 p-3">
                         <div className="flex items-center gap-1.5 text-white/60">
-                          <m.icon className="h-3 w-3" /> <span className="uppercase tracking-[0.16em]">{m.k}</span>
+                          <m.icon className="h-3 w-3" />{" "}
+                          <span className="uppercase tracking-[0.16em]">{m.k}</span>
                         </div>
-                        <div className="mt-1 text-sm font-semibold text-white leading-normal py-0.5">{m.v}</div>
+                        <div className="mt-1 text-sm font-semibold text-white leading-normal py-0.5">
+                          {m.v}
+                        </div>
                       </div>
                     ))}
                   </div>
@@ -379,7 +555,11 @@ function CFAPage() {
       <section className="relative container-px mx-auto max-w-7xl py-24 md:py-32">
         <PremiumHeader
           eyebrow="Syllabus & weights"
-          title={<>Subject weightage — <GradientAccent>{levelLabels[level]}</GradientAccent></>}
+          title={
+            <>
+              Subject weightage — <GradientAccent>{levelLabels[level]}</GradientAccent>
+            </>
+          }
           description="Understand exam weightage across all subjects so you can prioritise your prep correctly."
         />
 
@@ -415,11 +595,20 @@ function CFAPage() {
                         </div>
                       </div>
                       <div>
-                        <div className="text-[10px] uppercase tracking-[0.18em] text-muted-foreground">Subject</div>
-                        <div className="mt-0.5 font-display text-base font-semibold leading-tight">{w.subject}</div>
+                        <div className="text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
+                          Subject
+                        </div>
+                        <div className="mt-0.5 font-display text-base font-semibold leading-tight">
+                          {w.subject}
+                        </div>
                       </div>
                     </div>
-                    <span className={cn("rounded-full bg-gradient-to-br px-3 py-1 text-xs font-bold text-white shadow", levelAccent[level])}>
+                    <span
+                      className={cn(
+                        "rounded-full bg-gradient-to-br px-3 py-1 text-xs font-bold text-white shadow",
+                        levelAccent[level],
+                      )}
+                    >
                       {w.range}
                     </span>
                   </div>
@@ -443,7 +632,11 @@ function CFAPage() {
       <section className="container-px mx-auto max-w-7xl pb-24 md:pb-32">
         <PremiumHeader
           eyebrow="Level comparison"
-          title={<>All three levels, <GradientAccent>side by side.</GradientAccent></>}
+          title={
+            <>
+              All three levels, <GradientAccent>side by side.</GradientAccent>
+            </>
+          }
           description="A complete weight comparison across Levels I, II and III to help you plan your full CFA® journey."
         />
 
@@ -465,18 +658,32 @@ function CFAPage() {
                   transition={{ duration: 0.35, delay: Math.min(i * 0.02, 0.3) }}
                   className={cn(
                     "grid grid-cols-4 items-center px-6 py-3.5 text-sm transition-colors hover:bg-secondary/40",
-                    i % 2 === 1 && "bg-secondary/20"
+                    i % 2 === 1 && "bg-secondary/20",
                   )}
                 >
                   <div className="font-medium">{r.subject}</div>
-                  <div className={cn("text-center", level === "L1" && "font-semibold text-primary")}>{r.l1}</div>
-                  <div className={cn("text-center", level === "L2" && "font-semibold text-primary")}>{r.l2}</div>
-                  <div className={cn("text-center", level === "L3" && "font-semibold text-primary")}>{r.l3}</div>
+                  <div
+                    className={cn("text-center", level === "L1" && "font-semibold text-primary")}
+                  >
+                    {r.l1}
+                  </div>
+                  <div
+                    className={cn("text-center", level === "L2" && "font-semibold text-primary")}
+                  >
+                    {r.l2}
+                  </div>
+                  <div
+                    className={cn("text-center", level === "L3" && "font-semibold text-primary")}
+                  >
+                    {r.l3}
+                  </div>
                 </motion.div>
               ))}
             </div>
           </div>
-          <p className="mt-3 text-xs text-muted-foreground">* Ethics and Derivatives in Level III are included in broader curriculum modules.</p>
+          <p className="mt-3 text-xs text-muted-foreground">
+            * Ethics and Derivatives in Level III are included in broader curriculum modules.
+          </p>
         </FadeIn>
       </section>
 
@@ -487,7 +694,11 @@ function CFAPage() {
           <PremiumHeader
             tone="dark"
             eyebrow="Career opportunities"
-            title={<>Job roles you can <GradientAccent>pursue</GradientAccent> with CFA®.</>}
+            title={
+              <>
+                Job roles you can <GradientAccent>pursue</GradientAccent> with CFA®.
+              </>
+            }
             description="The CFA® charter opens doors across investing, research, banking and risk — globally recognised, deeply respected."
           />
 
@@ -536,7 +747,11 @@ function CFAPage() {
       <section className="container-px mx-auto max-w-7xl py-24 md:py-32">
         <PremiumHeader
           eyebrow="Exam structure"
-          title={<>Format & requirements — <GradientAccent>{levelLabels[level]}</GradientAccent></>}
+          title={
+            <>
+              Format & requirements — <GradientAccent>{levelLabels[level]}</GradientAccent>
+            </>
+          }
           description="Know the format before you sit. Each level has a distinct rhythm — plan your stamina accordingly."
         />
 
@@ -550,9 +765,27 @@ function CFAPage() {
             className="mt-14 grid gap-5 md:grid-cols-3"
           >
             {[
-              { icon: ListChecks, t: "Exam Format", items: data.exam.format, accent: "from-amber-500 to-orange-600", num: "01" },
-              { icon: FileText, t: "Question Format", items: data.exam.question, accent: "from-rose-500 to-pink-700", num: "02" },
-              { icon: Award, t: "Key Details", items: data.exam.key, accent: "from-indigo-600 to-violet-800", num: "03" },
+              {
+                icon: ListChecks,
+                t: "Exam Format",
+                items: data.exam.format,
+                accent: "from-amber-500 to-orange-600",
+                num: "01",
+              },
+              {
+                icon: FileText,
+                t: "Question Format",
+                items: data.exam.question,
+                accent: "from-rose-500 to-pink-700",
+                num: "02",
+              },
+              {
+                icon: Award,
+                t: "Key Details",
+                items: data.exam.key,
+                accent: "from-indigo-600 to-violet-800",
+                num: "03",
+              },
             ].map((b, i) => (
               <motion.div
                 key={b.t}
@@ -566,17 +799,30 @@ function CFAPage() {
                 <div className="flex items-center justify-between gap-3">
                   <div className="relative grid h-14 w-14 place-items-center">
                     <ConicRing size="h-14 w-14" />
-                    <div className={cn("relative grid h-12 w-12 place-items-center rounded-full bg-gradient-to-br text-white shadow-glow", b.accent)}>
+                    <div
+                      className={cn(
+                        "relative grid h-12 w-12 place-items-center rounded-full bg-gradient-to-br text-white shadow-glow",
+                        b.accent,
+                      )}
+                    >
                       <b.icon className="h-5 w-5" />
                     </div>
                   </div>
-                  <span className="font-display text-2xl font-bold text-muted-foreground/30">{b.num}</span>
+                  <span className="font-display text-2xl font-bold text-muted-foreground/30">
+                    {b.num}
+                  </span>
                 </div>
                 <h3 className="mt-5 font-display text-xl font-semibold">{b.t}</h3>
                 <ul className="mt-4 space-y-3 text-sm text-muted-foreground">
                   {b.items.map((it) => (
                     <li key={it} className="flex gap-2.5">
-                      <CheckCircle2 className={cn("mt-0.5 h-4 w-4 shrink-0 bg-gradient-to-br bg-clip-text text-transparent", b.accent)} style={{ color: "hsl(var(--accent))" }} />
+                      <CheckCircle2
+                        className={cn(
+                          "mt-0.5 h-4 w-4 shrink-0 bg-gradient-to-br bg-clip-text text-transparent",
+                          b.accent,
+                        )}
+                        style={{ color: "hsl(var(--accent))" }}
+                      />
                       <span>{it}</span>
                     </li>
                   ))}
@@ -591,7 +837,11 @@ function CFAPage() {
       <section className="container-px mx-auto max-w-7xl pb-24 md:pb-32">
         <PremiumHeader
           eyebrow="Deadlines & fees"
-          title={<>Registration windows for <GradientAccent>2026–2027.</GradientAccent></>}
+          title={
+            <>
+              Registration windows for <GradientAccent>2026–2027.</GradientAccent>
+            </>
+          }
           description="Plan early — the earlier you register, the more you save."
         />
 
@@ -608,7 +858,9 @@ function CFAPage() {
             <div className="relative overflow-hidden rounded-[2rem] border border-border bg-card p-8 shadow-elevated md:p-10">
               <div className="pointer-events-none absolute -right-24 -top-24 h-56 w-56 rounded-full bg-accent/15 blur-3xl" />
               <EyebrowBadge>Exam windows</EyebrowBadge>
-              <h3 className="mt-4 font-display text-2xl font-semibold md:text-3xl">Pick your sitting.</h3>
+              <h3 className="mt-4 font-display text-2xl font-semibold md:text-3xl">
+                Pick your sitting.
+              </h3>
 
               <div className="relative mt-8">
                 <motion.div
@@ -631,15 +883,24 @@ function CFAPage() {
                     >
                       <div className="relative grid h-10 w-10 shrink-0 place-items-center">
                         <ConicRing size="h-10 w-10" />
-                        <div className={cn("relative grid h-9 w-9 place-items-center rounded-full bg-gradient-to-br text-white shadow-glow", levelAccent[level])}>
+                        <div
+                          className={cn(
+                            "relative grid h-9 w-9 place-items-center rounded-full bg-gradient-to-br text-white shadow-glow",
+                            levelAccent[level],
+                          )}
+                        >
                           <Calendar className="h-4 w-4" />
                         </div>
                       </div>
                       <div className="flex-1 rounded-2xl border border-border bg-background p-4 transition-colors hover:border-accent/50">
-                        <div className="text-[10px] uppercase tracking-[0.18em] text-muted-foreground">Exam window</div>
+                        <div className="text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
+                          Exam window
+                        </div>
                         <div className="mt-1 flex items-center justify-between gap-3">
                           <span className="font-display text-base font-semibold">{d.window}</span>
-                          <span className="rounded-full bg-secondary px-3 py-1 text-xs font-medium">{d.date}</span>
+                          <span className="rounded-full bg-secondary px-3 py-1 text-xs font-medium">
+                            {d.date}
+                          </span>
                         </div>
                       </div>
                     </motion.div>
@@ -653,7 +914,10 @@ function CFAPage() {
                   { k: "Early bird", v: data.registration.earlyBird },
                   { k: "Final", v: data.registration.final },
                 ].map((p) => (
-                  <div key={p.k} className="rounded-2xl border border-dashed border-border bg-background p-4">
+                  <div
+                    key={p.k}
+                    className="rounded-2xl border border-dashed border-border bg-background p-4"
+                  >
                     <div className="text-[10px] uppercase tracking-[0.2em] text-accent">{p.k}</div>
                     <div className="mt-1 text-sm font-semibold">{p.v}</div>
                   </div>
@@ -674,7 +938,9 @@ function CFAPage() {
                 <span className="relative inline-flex items-center gap-1.5 rounded-full bg-accent px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.16em] text-accent-foreground">
                   <Sparkles className="h-3 w-3" /> Most picked
                 </span>
-                <div className="relative mt-4 text-xs uppercase tracking-[0.2em] text-white/70">Early bird registration</div>
+                <div className="relative mt-4 text-xs uppercase tracking-[0.2em] text-white/70">
+                  Early bird registration
+                </div>
                 <div className="relative mt-3 flex items-baseline gap-3">
                   <span className="font-display text-4xl font-semibold">{data.fees.early.inr}</span>
                 </div>
@@ -684,9 +950,13 @@ function CFAPage() {
               </div>
 
               <div className="rounded-3xl border border-border bg-card p-7 shadow-card transition-all hover-lift">
-                <div className="text-xs uppercase tracking-[0.2em] text-muted-foreground">Standard registration</div>
+                <div className="text-xs uppercase tracking-[0.2em] text-muted-foreground">
+                  Standard registration
+                </div>
                 <div className="mt-3 flex items-baseline gap-3">
-                  <span className="font-display text-4xl font-semibold">{data.fees.standard.inr}</span>
+                  <span className="font-display text-4xl font-semibold">
+                    {data.fees.standard.inr}
+                  </span>
                 </div>
                 <p className="mt-3 flex items-center gap-2 text-sm text-muted-foreground">
                   <Info className="h-4 w-4" /> {data.fees.standard.note}
@@ -700,8 +970,12 @@ function CFAPage() {
                 className="group flex items-center justify-between rounded-2xl border border-white/10 bg-white/5 p-4 transition-colors hover:border-accent/40 hover:bg-white/[0.07]"
               >
                 <div>
-                  <div className="text-[10px] uppercase tracking-[0.2em] text-accent">Official source</div>
-                  <div className="mt-1 text-sm font-semibold text-white/90">CFA® Institute dates & fees</div>
+                  <div className="text-[10px] uppercase tracking-[0.2em] text-accent">
+                    Official source
+                  </div>
+                  <div className="mt-1 text-sm font-semibold text-white/90">
+                    CFA® Institute dates & fees
+                  </div>
                 </div>
                 <ArrowRight className="h-4 w-4 text-white/60 transition-transform group-hover:translate-x-1" />
               </a>
@@ -714,14 +988,21 @@ function CFAPage() {
       <section className="container-px mx-auto max-w-7xl pb-24 md:pb-32">
         <PremiumHeader
           eyebrow="Important details"
-          title={<>Everything else you should <GradientAccent>know.</GradientAccent></>}
+          title={
+            <>
+              Everything else you should <GradientAccent>know.</GradientAccent>
+            </>
+          }
           description="Quick access to essential course information so you're not chasing answers later."
         />
 
         <Stagger className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {importantDetails.map((d) => (
             <StaggerItem key={d.t} variants={staggerItemVariants}>
-              <a href="#" className="group relative flex h-full items-start gap-4 overflow-hidden rounded-3xl border border-border bg-card p-6 shadow-card transition-all hover-lift">
+              <a
+                href="#"
+                className="group relative flex h-full items-start gap-4 overflow-hidden rounded-3xl border border-border bg-card p-6 shadow-card transition-all hover-lift"
+              >
                 <div className="pointer-events-none absolute -right-12 -top-12 h-40 w-40 rounded-full bg-accent/20 opacity-0 blur-3xl transition-opacity duration-500 group-hover:opacity-100" />
                 <div className="relative grid h-14 w-14 shrink-0 place-items-center">
                   <ConicRing size="h-14 w-14" />
@@ -742,14 +1023,19 @@ function CFAPage() {
         </Stagger>
       </section>
 
-
       {/* FAQ */}
       <FAQ
         eyebrow="FAQ"
-        title={<>CFA® program <span className="italic bg-gradient-to-r from-accent via-accent to-accent/60 bg-clip-text text-transparent pr-[0.15em] -mr-[0.15em]">questions.</span></>}
+        title={
+          <>
+            CFA® program{" "}
+            <span className="italic bg-gradient-to-r from-accent via-accent to-accent/60 bg-clip-text text-transparent pr-[0.15em] -mr-[0.15em]">
+              questions.
+            </span>
+          </>
+        }
         description="Common questions about levels, eligibility, exam pattern and registration."
       />
-
     </SiteLayout>
   );
 }

@@ -7,8 +7,18 @@ export function FloatingContact() {
   const [open, setOpen] = useState(false);
 
   const actions = [
-    { icon: MessageCircle, label: "WhatsApp", href: `https://wa.me/${brand.whatsapp.replace(/\D/g, "")}`, color: "bg-emerald-500" },
-    { icon: Phone, label: "Call us", href: `tel:${brand.phone.replace(/\s/g, "")}`, color: "bg-blue-500" },
+    {
+      icon: MessageCircle,
+      label: "WhatsApp",
+      href: `https://wa.me/${brand.whatsapp.replace(/\D/g, "")}`,
+      color: "bg-emerald-500",
+    },
+    {
+      icon: Phone,
+      label: "Call us",
+      href: `tel:${brand.phone.replace(/\s/g, "")}`,
+      color: "bg-blue-500",
+    },
     { icon: Mail, label: "Email", href: `mailto:${brand.email}`, color: "bg-indigo-500" },
   ];
 
@@ -31,7 +41,9 @@ export function FloatingContact() {
               <span className="rounded-full bg-foreground px-3 py-1.5 text-xs font-medium text-background opacity-0 transition-opacity group-hover:opacity-100">
                 {a.label}
               </span>
-              <span className={`grid h-12 w-12 place-items-center rounded-full ${a.color} text-white shadow-elevated`}>
+              <span
+                className={`grid h-12 w-12 place-items-center rounded-full ${a.color} text-white shadow-elevated`}
+              >
                 <a.icon className="h-5 w-5" />
               </span>
             </motion.a>

@@ -17,7 +17,12 @@ export function PageHero({
   className?: string;
 }) {
   return (
-    <section className={cn("relative overflow-hidden bg-[hsl(220_55%_12%)] text-primary-foreground", className)}>
+    <section
+      className={cn(
+        "relative overflow-hidden bg-[hsl(220_55%_12%)] text-primary-foreground",
+        className,
+      )}
+    >
       <PremiumOrbs />
 
       <div className="container-px relative mx-auto max-w-7xl pb-24 pt-16 md:pt-24">
