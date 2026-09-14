@@ -97,6 +97,9 @@ export const resourcePlaylists: PlaylistCategory[] = [
   {
     category: "CFA® Level I",
     playlists: [
+      "CFA® Level 1 \u2013 Equity Investments | Market Organisation & Structure",
+      "CFA® Level 1 \u2013 Corporate Issuers | Working Capital & Liquidity",
+      "CFA® Level 1 \u2013 Corporate Issuers | Capital Investments & NPV",
       "CFA® Level 1 \u2013 FSA \u2013 Financial Analysis Techniques (Ratios)",
       "CFA® Level 1 \u2013 FSA | Income Statement",
       "CFA® Level 1 \u2013 Quants | Time Value of Money",

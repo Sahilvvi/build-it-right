@@ -398,7 +398,7 @@ function Hero() {
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
             </Link>
             <a
-              href={`https://wa.me/${brand.whatsapp.replace(/\D/g, "")}?text=Enquiry%20for%20CFA`}
+              href={`https://wa.me/${brand.whatsapp.replace(/\D/g, "")}?text=Hello%20Team%20Fin%20Envision%2C%20I%20have%20a%20few%20queries%20regarding%20the%20courses!`}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/5 px-7 py-3.5 text-sm font-semibold text-white backdrop-blur transition hover:bg-white/15"
@@ -2232,7 +2232,7 @@ function FinalCta() {
           </div>
           <div className="flex flex-col gap-3 md:items-end">
             <a
-              href={`https://wa.me/${brand.whatsapp.replace(/\D/g, "")}?text=Enquiry%20for%20CFA`}
+              href={`https://wa.me/${brand.whatsapp.replace(/\D/g, "")}?text=Hello%20Team%20Fin%20Envision%2C%20I%20have%20a%20few%20queries%20regarding%20the%20courses!`}
               target="_blank"
               rel="noopener noreferrer"
               className="group inline-flex items-center justify-center gap-2 rounded-full bg-accent pl-6 pr-2 py-2 text-sm font-bold uppercase tracking-[0.18em] text-accent-foreground shadow-elevated"
@@ -2243,7 +2243,7 @@ function FinalCta() {
               </span>
             </a>
             <a
-              href={`https://wa.me/${brand.whatsapp.replace(/\D/g, "")}`}
+              href={`https://wa.me/${brand.whatsapp.replace(/\D/g, "")}?text=Hello%20Team%20Fin%20Envision%2C%20I%20have%20a%20few%20queries%20regarding%20the%20courses!`}
               target="_blank"
               rel="noreferrer"
               className="inline-flex items-center justify-center gap-2 rounded-full border border-white/25 bg-white/5 px-5 py-3 text-sm font-semibold text-white backdrop-blur hover:bg-white/10"

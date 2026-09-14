@@ -61,6 +61,12 @@ type Video = {
 };
 
 const PLAYLIST_URLS: Record<string, string> = {
+  "CFA® Level 1 \u2013 Equity Investments | Market Organisation & Structure":
+    "https://www.youtube.com/watch?v=CnR0HI9EmxE&list=PLzfcxNTCNDhjiT4HSTUb7cy6MOovaZitt",
+  "CFA® Level 1 \u2013 Corporate Issuers | Working Capital & Liquidity":
+    "https://www.youtube.com/watch?v=IgYURK0pNko&list=PLzfcxNTCNDhioOisOTCZ-bh_ZoktfJAcG",
+  "CFA® Level 1 \u2013 Corporate Issuers | Capital Investments & NPV":
+    "https://www.youtube.com/watch?v=mlfKe3ANSpE&list=PLzfcxNTCNDhjTQJ08aX990KeDTbOFCH40",
   "CFA® Level 1 \u2013 FSA \u2013 Financial Analysis Techniques (Ratios)":
     "https://youtube.com/playlist?list=PLzfcxNTCNDhgTM6tnbGmkZt7Lznt7h7Zs",
   "CFA® Level 1 \u2013 FSA | Income Statement":
@@ -90,6 +96,12 @@ const PLAYLIST_URLS: Record<string, string> = {
 };
 
 const PLAYLIST_THUMBS: Record<string, string> = {
+  "CFA® Level 1 \u2013 Equity Investments | Market Organisation & Structure":
+    "https://i.ytimg.com/vi/CnR0HI9EmxE/hqdefault.jpg",
+  "CFA® Level 1 \u2013 Corporate Issuers | Working Capital & Liquidity":
+    "https://i.ytimg.com/vi/IgYURK0pNko/hqdefault.jpg",
+  "CFA® Level 1 \u2013 Corporate Issuers | Capital Investments & NPV":
+    "https://i.ytimg.com/vi/mlfKe3ANSpE/hqdefault.jpg",
   "CFA® Level 1 \u2013 FSA \u2013 Financial Analysis Techniques (Ratios)":
     "https://i.ytimg.com/vi/bdlLEeYEs5Q/hqdefault.jpg",
   "CFA® Level 1 \u2013 FSA | Income Statement": "https://i.ytimg.com/vi/db7v1Jli2j8/hqdefault.jpg",
@@ -428,12 +440,6 @@ function ResourcesPage() {
                   Every video. <GradientAccent>Every topic.</GradientAccent>
                 </h2>
               </div>
-              <div className="rounded-full border border-border bg-card px-4 py-2 text-sm font-medium text-muted-foreground shadow-card">
-                <span className="font-display text-base font-semibold text-foreground">
-                  {filtered.length}
-                </span>{" "}
-                resources
-              </div>
             </div>
           </FadeIn>
 
@@ -456,7 +462,7 @@ function ResourcesPage() {
                 {active === t && (
                   <motion.span
                     layoutId="resources-tab"
-                    className="absolute inset-0 rounded-full bg-foreground shadow-glow"
+                    className="absolute inset-0 rounded-full bg-primary shadow-glow"
                     transition={{ type: "spring", duration: 0.5 }}
                   />
                 )}

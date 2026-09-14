@@ -25,6 +25,12 @@ type Video = {
 };
 
 const PLAYLIST_URLS: Record<string, string> = {
+  "CFA® Level 1 – Equity Investments | Market Organisation & Structure":
+    "https://www.youtube.com/watch?v=CnR0HI9EmxE&list=PLzfcxNTCNDhjiT4HSTUb7cy6MOovaZitt",
+  "CFA® Level 1 – Corporate Issuers | Working Capital & Liquidity":
+    "https://www.youtube.com/watch?v=IgYURK0pNko&list=PLzfcxNTCNDhioOisOTCZ-bh_ZoktfJAcG",
+  "CFA® Level 1 – Corporate Issuers | Capital Investments & NPV":
+    "https://www.youtube.com/watch?v=mlfKe3ANSpE&list=PLzfcxNTCNDhjTQJ08aX990KeDTbOFCH40",
   "CFA® Level 1 – FSA – Financial Analysis Techniques (Ratios)":
     "https://youtube.com/playlist?list=PLzfcxNTCNDhgTM6tnbGmkZt7Lznt7h7Zs",
   "CFA® Level 1 – FSA | Income Statement":
@@ -54,6 +60,12 @@ const PLAYLIST_URLS: Record<string, string> = {
 };
 
 const PLAYLIST_THUMBS: Record<string, string> = {
+  "CFA® Level 1 – Equity Investments | Market Organisation & Structure":
+    "https://i.ytimg.com/vi/CnR0HI9EmxE/hqdefault.jpg",
+  "CFA® Level 1 – Corporate Issuers | Working Capital & Liquidity":
+    "https://i.ytimg.com/vi/IgYURK0pNko/hqdefault.jpg",
+  "CFA® Level 1 – Corporate Issuers | Capital Investments & NPV":
+    "https://i.ytimg.com/vi/mlfKe3ANSpE/hqdefault.jpg",
   "CFA® Level 1 – FSA – Financial Analysis Techniques (Ratios)":
     "https://i.ytimg.com/vi/bdlLEeYEs5Q/hqdefault.jpg",
   "CFA® Level 1 – FSA | Income Statement": "https://i.ytimg.com/vi/db7v1Jli2j8/hqdefault.jpg",

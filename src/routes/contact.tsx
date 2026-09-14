@@ -72,7 +72,7 @@ function ContactPage() {
       icon: MessageCircle,
       label: "WhatsApp",
       value: brand.whatsapp,
-      href: `https://wa.me/${brand.whatsapp.replace(/\D/g, "")}`,
+      href: `https://wa.me/${brand.whatsapp.replace(/\D/g, "")}?text=Hello%20Team%20Fin%20Envision%2C%20I%20have%20a%20few%20queries%20regarding%20the%20courses!`,
       tone: "from-emerald-500 to-teal-700",
     },
     {
@@ -134,7 +134,7 @@ function ContactPage() {
                 className="mt-8 flex flex-wrap items-center gap-3"
               >
                 <a
-                  href={`https://wa.me/${brand.whatsapp.replace(/\D/g, "")}`}
+                  href={`https://wa.me/${brand.whatsapp.replace(/\D/g, "")}?text=Hello%20Team%20Fin%20Envision%2C%20I%20have%20a%20few%20queries%20regarding%20the%20courses!`}
                   target="_blank"
                   rel="noreferrer"
                   className="group/btn relative inline-flex items-center gap-2 overflow-hidden rounded-full bg-accent px-6 py-3 text-sm font-semibold uppercase tracking-wider text-accent-foreground transition-transform hover:scale-[1.02]"

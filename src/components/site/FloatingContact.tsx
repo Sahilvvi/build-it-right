@@ -10,7 +10,7 @@ export function FloatingContact() {
     {
       icon: MessageCircle,
       label: "WhatsApp",
-      href: `https://wa.me/${brand.whatsapp.replace(/\D/g, "")}`,
+      href: `https://wa.me/${brand.whatsapp.replace(/\D/g, "")}?text=Hello%20Team%20Fin%20Envision%2C%20I%20have%20a%20few%20queries%20regarding%20the%20courses!`,
       color: "bg-emerald-500",
     },
     {
