@@ -517,7 +517,7 @@ function CFAPage() {
                   </div>
                   <div className="mt-5 flex flex-wrap gap-2">
                     <a
-                      href="https://wa.me/917304833625?text=Enquiry%20for%20CFA"
+                      href="https://wa.me/917304833625?text=Hello%20Team%20Fin%20Envision%2C%20I%20have%20a%20few%20queries%20regarding%20the%20courses!"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="inline-flex items-center gap-2 rounded-full bg-accent px-4 py-2.5 text-sm font-semibold uppercase tracking-wider text-accent-foreground transition-transform hover:scale-[1.02]"

@@ -47,7 +47,7 @@ const SOCIALS = [
   { Icon: Youtube, href: "https://www.youtube.com/@financewithmanojrajgopal", label: "YouTube" },
   {
     Icon: MessageCircle,
-    href: "https://wa.me/917304833625?text=Enquiry%20for%20CFA",
+    href: "https://wa.me/917304833625?text=Hello%20Team%20Fin%20Envision%2C%20I%20have%20a%20few%20queries%20regarding%20the%20courses!",
     label: "WhatsApp",
   },
 ];

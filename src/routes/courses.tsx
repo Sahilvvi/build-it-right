@@ -1061,7 +1061,7 @@ function Pricing() {
                   </ul>
 
                   <a
-                    href="https://wa.me/917304833625?text=Enquiry%20for%20CFA"
+                    href="https://wa.me/917304833625?text=Hello%20Team%20Fin%20Envision%2C%20I%20have%20a%20few%20queries%20regarding%20the%20courses!"
                     target="_blank"
                     rel="noopener noreferrer"
                     className={
@@ -1318,7 +1318,7 @@ function CourseFaqs() {
               Talk to a counsellor for a quick, no-pressure walkthrough.
             </p>
             <a
-              href={`https://wa.me/${brand.whatsapp.replace(/\D/g, "")}?text=Enquiry%20for%20CFA`}
+              href={`https://wa.me/${brand.whatsapp.replace(/\D/g, "")}?text=Hello%20Team%20Fin%20Envision%2C%20I%20have%20a%20few%20queries%20regarding%20the%20courses!`}
               target="_blank"
               rel="noopener noreferrer"
               className="group/btn mt-4 inline-flex items-center gap-2 text-sm font-bold text-primary hover:text-accent"
