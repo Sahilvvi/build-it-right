@@ -362,12 +362,7 @@ function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7 }}
         >
-          <div className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.22em] text-white/85 backdrop-blur">
-            <Sparkles className="h-3.5 w-3.5 text-accent" />
-            CFA® & Financial Modeling · Mumbai
-          </div>
-
-          <h1 className="mt-5 font-display text-4xl font-semibold leading-[1.05] tracking-tight text-white md:text-6xl">
+          <h1 className="font-display text-4xl font-semibold leading-[1.05] tracking-tight text-white md:text-6xl">
             Your Path to CFA®{" "}
             <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
               Success Starts Here.
