@@ -340,3 +340,82 @@
   box-shadow: 0 0 35px -5px hsl(var(--primary) / 0.45);
 }
 
+/* =======================================================
+   ADMIN PORTAL THEME & LIGHT SCOPE ISOLATION
+   Guarantees that all inputs, textareas, typography, cards,
+   and controls in the Admin area display crisp dark slate
+   text instead of inheriting the public site's white text.
+   ======================================================= */
+
+body.admin-body-override {
+  background-color: #f8fafc !important;
+  background-image: none !important;
+  color: #0f172a !important;
+}
+
+.admin-scope,
+[data-admin-portal="true"],
+.admin-scope-container {
+  --background: #f8fafc;
+  --foreground: #0f172a;
+  --card: #ffffff;
+  --card-foreground: #0f172a;
+  --popover: #ffffff;
+  --popover-foreground: #0f172a;
+  --primary: #2563eb;
+  --primary-foreground: #ffffff;
+  --secondary: #f1f5f9;
+  --secondary-foreground: #0f172a;
+  --muted: #f1f5f9;
+  --muted-foreground: #64748b;
+  --border: #e2e8f0;
+  --input: #cbd5e1;
+  --ring: #2563eb;
+
+  color: #0f172a !important;
+}
+
+/* Ensure all form controls inside admin render with crisp dark text */
+.admin-scope input,
+.admin-scope textarea,
+.admin-scope select,
+[data-admin-portal="true"] input,
+[data-admin-portal="true"] textarea,
+[data-admin-portal="true"] select {
+  color: #0f172a !important;
+  background-color: #ffffff;
+}
+
+.admin-scope input::placeholder,
+.admin-scope textarea::placeholder,
+[data-admin-portal="true"] input::placeholder,
+[data-admin-portal="true"] textarea::placeholder {
+  color: #94a3b8 !important;
+  opacity: 1;
+}
+
+.admin-scope select option,
+[data-admin-portal="true"] select option {
+  color: #0f172a !important;
+  background-color: #ffffff !important;
+}
+
+/* Ensure headings and paragraphs inside admin are dark slate unless explicitly styled */
+.admin-scope h1:not([class*="text-white"]):not([class*="text-blue-"]):not([class*="text-emerald-"]),
+.admin-scope h2:not([class*="text-white"]):not([class*="text-blue-"]):not([class*="text-emerald-"]),
+.admin-scope h3:not([class*="text-white"]):not([class*="text-blue-"]):not([class*="text-emerald-"]),
+.admin-scope h4:not([class*="text-white"]):not([class*="text-blue-"]):not([class*="text-emerald-"]),
+.admin-scope p:not([class*="text-"]),
+.admin-scope span:not([class*="text-"]),
+.admin-scope label:not([class*="text-"]),
+[data-admin-portal="true"] h1:not([class*="text-white"]):not([class*="text-blue-"]):not([class*="text-emerald-"]),
+[data-admin-portal="true"] h2:not([class*="text-white"]):not([class*="text-blue-"]):not([class*="text-emerald-"]),
+[data-admin-portal="true"] h3:not([class*="text-white"]):not([class*="text-blue-"]):not([class*="text-emerald-"]),
+[data-admin-portal="true"] h4:not([class*="text-white"]):not([class*="text-blue-"]):not([class*="text-emerald-"]),
+[data-admin-portal="true"] p:not([class*="text-"]),
+[data-admin-portal="true"] span:not([class*="text-"]),
+[data-admin-portal="true"] label:not([class*="text-"]) {
+  color: #0f172a;
+}
+
+

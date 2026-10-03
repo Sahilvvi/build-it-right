@@ -99,11 +99,18 @@ export function AdminLayout({ children }: AdminLayoutProps) {
     navigate({ to: "/admin-login" });
   };
 
+  useEffect(() => {
+    document.body.classList.add("admin-body-override");
+    return () => {
+      document.body.classList.remove("admin-body-override");
+    };
+  }, []);
+
   const currentPath = location.pathname;
 
   if (!currentUser) {
     return (
-      <div className="min-h-screen bg-slate-50 flex items-center justify-center p-4">
+      <div className="admin-scope min-h-screen bg-slate-50 flex items-center justify-center p-4" data-admin-portal="true">
         <div className="text-center p-8 bg-white rounded-2xl border border-slate-200 shadow-sm max-w-sm w-full">
           <div className="w-12 h-12 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center mx-auto mb-3">
             <ShieldCheck className="w-6 h-6" />
@@ -125,7 +132,10 @@ export function AdminLayout({ children }: AdminLayoutProps) {
   }
 
   return (
-    <div className="min-h-screen bg-[#f8fafc] font-sans text-slate-900 flex flex-col md:flex-row antialiased selection:bg-blue-600 selection:text-white">
+    <div
+      className="admin-scope min-h-screen bg-[#f8fafc] font-sans text-slate-900 flex flex-col md:flex-row antialiased selection:bg-blue-600 selection:text-white"
+      data-admin-portal="true"
+    >
       {/* Mobile Top Header */}
       <header className="md:hidden flex items-center justify-between bg-white border-b border-slate-200 px-4 py-3 sticky top-0 z-40">
         <div className="flex items-center gap-3">

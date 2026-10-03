@@ -1,5 +1,5 @@
 import { createFileRoute, useNavigate, Link } from "@tanstack/react-router";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   Lock,
   Mail,
@@ -24,6 +24,13 @@ function AdminLoginPage() {
   const [forgotModal, setForgotModal] = useState(false);
   const [forgotSent, setForgotSent] = useState(false);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    document.body.classList.add("admin-body-override");
+    return () => {
+      document.body.classList.remove("admin-body-override");
+    };
+  }, []);
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
@@ -70,7 +77,10 @@ function AdminLoginPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#f8fafc] flex flex-col justify-center py-12 sm:px-6 lg:px-8 font-sans antialiased selection:bg-blue-600 selection:text-white">
+    <div
+      className="admin-scope min-h-screen bg-[#f8fafc] flex flex-col justify-center py-12 sm:px-6 lg:px-8 font-sans antialiased selection:bg-blue-600 selection:text-white"
+      data-admin-portal="true"
+    >
       <div className="sm:mx-auto sm:w-full sm:max-w-md text-center">
         <Link to="/" className="inline-flex items-center gap-2.5 mb-6 group">
           <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-600 via-blue-600 to-indigo-700 flex items-center justify-center text-white font-bold text-sm shadow-xs ring-1 ring-blue-700/20 group-hover:scale-105 transition-transform">
