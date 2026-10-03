@@ -175,7 +175,7 @@ export function Footer() {
             <Link to="/contact" className="transition-colors hover:text-white">
               Cookies
             </Link>
-            <Link to="/admin" className="transition-colors text-white/40 hover:text-white">
+            <Link to="/admin-login" className="transition-colors text-white/40 hover:text-white">
               Staff Portal
             </Link>
           </div>

@@ -309,7 +309,7 @@ export interface AdminStoreData {
 }
 
 const STORAGE_KEY = "finenvision_admin_store_v2";
-const AUTH_KEY = "finenvision_current_admin_user";
+const AUTH_KEY = "finenvision_staff_session_v3";
 
 // Seed data
 const initialData: AdminStoreData = {
@@ -1037,7 +1037,11 @@ export function deleteCourseItem(slug: string): void {
 export function getCurrentAdmin(): AdminUser | null {
   if (typeof window === "undefined") return null;
   try {
-    const raw = localStorage.getItem(AUTH_KEY);
+    // Purge legacy auto-login keys from earlier releases if present
+    localStorage.removeItem("finenvision_current_admin_user");
+    localStorage.removeItem("finenvision_current_admin");
+
+    const raw = sessionStorage.getItem(AUTH_KEY) || localStorage.getItem(AUTH_KEY);
     if (!raw) {
       return null;
     }
@@ -1050,8 +1054,12 @@ export function getCurrentAdmin(): AdminUser | null {
 export function setCurrentAdmin(user: AdminUser | null): void {
   if (typeof window === "undefined") return;
   if (!user) {
+    sessionStorage.removeItem(AUTH_KEY);
     localStorage.removeItem(AUTH_KEY);
+    localStorage.removeItem("finenvision_current_admin_user");
+    localStorage.removeItem("finenvision_current_admin");
   } else {
+    sessionStorage.setItem(AUTH_KEY, JSON.stringify(user));
     localStorage.setItem(AUTH_KEY, JSON.stringify(user));
   }
 }

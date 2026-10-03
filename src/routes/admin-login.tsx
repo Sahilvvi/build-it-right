@@ -1,5 +1,5 @@
 import { createFileRoute, useNavigate, Link } from "@tanstack/react-router";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import {
   Lock,
   Mail,
@@ -9,10 +9,8 @@ import {
   AlertCircle,
   Eye,
   EyeOff,
-  UserCheck,
-  LogOut,
 } from "lucide-react";
-import { getCurrentAdmin, setCurrentAdmin, getAdminStore, type AdminUser } from "@/lib/admin-store";
+import { setCurrentAdmin, getAdminStore } from "@/lib/admin-store";
 
 export const Route = createFileRoute("/admin-login")({
   component: AdminLoginPage,
@@ -25,15 +23,7 @@ function AdminLoginPage() {
   const [error, setError] = useState("");
   const [forgotModal, setForgotModal] = useState(false);
   const [forgotSent, setForgotSent] = useState(false);
-  const [activeSession, setActiveSession] = useState<AdminUser | null>(null);
   const navigate = useNavigate();
-
-  useEffect(() => {
-    const current = getCurrentAdmin();
-    if (current) {
-      setActiveSession(current);
-    }
-  }, []);
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
@@ -79,13 +69,6 @@ function AdminLoginPage() {
     navigate({ to: "/admin" });
   };
 
-  const handleSignOutActive = () => {
-    setCurrentAdmin(null);
-    setActiveSession(null);
-    setEmail("");
-    setPassword("");
-  };
-
   return (
     <div className="min-h-screen bg-[#f8fafc] flex flex-col justify-center py-12 sm:px-6 lg:px-8 font-sans antialiased selection:bg-blue-600 selection:text-white">
       <div className="sm:mx-auto sm:w-full sm:max-w-md text-center">
@@ -109,34 +92,6 @@ function AdminLoginPage() {
       </div>
 
       <div className="mt-7 sm:mx-auto sm:w-full sm:max-w-md px-4 sm:px-0">
-        {/* Active Session Notice if already signed in */}
-        {activeSession && (
-          <div className="mb-4 p-3.5 rounded-xl bg-blue-50/70 border border-blue-200/80 text-xs text-blue-900 flex items-center justify-between shadow-2xs">
-            <div className="flex items-center gap-2 truncate mr-2">
-              <UserCheck className="w-4 h-4 text-blue-600 shrink-0" />
-              <span className="truncate">
-                Signed in as <strong className="font-semibold">{activeSession.name}</strong>
-              </span>
-            </div>
-            <div className="flex items-center gap-2 shrink-0">
-              <Link
-                to="/admin"
-                className="px-2.5 py-1 bg-blue-600 text-white rounded-lg text-[11px] font-semibold hover:bg-blue-700 transition-colors"
-              >
-                Dashboard
-              </Link>
-              <button
-                type="button"
-                onClick={handleSignOutActive}
-                className="p-1 text-slate-500 hover:text-rose-600 transition-colors"
-                title="Sign out of this session"
-              >
-                <LogOut className="w-3.5 h-3.5" />
-              </button>
-            </div>
-          </div>
-        )}
-
         <div className="bg-white py-8 px-6 sm:px-10 shadow-[0_4px_24px_rgba(0,0,0,0.03)] border border-slate-200/80 rounded-2xl relative overflow-hidden">
           {error && (
             <div className="mb-5 p-3 rounded-xl bg-rose-50 border border-rose-200 text-xs text-rose-700 flex items-center gap-2">

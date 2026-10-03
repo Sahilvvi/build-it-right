@@ -101,6 +101,29 @@ export function AdminLayout({ children }: AdminLayoutProps) {
 
   const currentPath = location.pathname;
 
+  if (!currentUser) {
+    return (
+      <div className="min-h-screen bg-slate-50 flex items-center justify-center p-4">
+        <div className="text-center p-8 bg-white rounded-2xl border border-slate-200 shadow-sm max-w-sm w-full">
+          <div className="w-12 h-12 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center mx-auto mb-3">
+            <ShieldCheck className="w-6 h-6" />
+          </div>
+          <h2 className="text-base font-bold text-slate-800">Administrator Access Required</h2>
+          <p className="text-xs text-slate-500 mt-1.5 mb-5">
+            You must be signed in with authorized staff credentials to access the admin portal.
+          </p>
+          <Link
+            to="/admin-login"
+            className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 bg-blue-600 text-white rounded-xl text-xs font-semibold hover:bg-blue-700 shadow-xs"
+          >
+            <span>Proceed to Sign In</span>
+            <ChevronRight className="w-3.5 h-3.5" />
+          </Link>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-[#f8fafc] font-sans text-slate-900 flex flex-col md:flex-row antialiased selection:bg-blue-600 selection:text-white">
       {/* Mobile Top Header */}
