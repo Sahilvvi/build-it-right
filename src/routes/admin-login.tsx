@@ -1,42 +1,89 @@
 import { createFileRoute, useNavigate, Link } from "@tanstack/react-router";
-import { useState } from "react";
-import { Lock, Mail, ArrowRight, ShieldCheck, CheckCircle2, AlertCircle } from "lucide-react";
-import { getCurrentAdmin, setCurrentAdmin, getAdminStore } from "@/lib/admin-store";
+import { useState, useEffect } from "react";
+import {
+  Lock,
+  Mail,
+  ArrowRight,
+  ShieldCheck,
+  CheckCircle2,
+  AlertCircle,
+  Eye,
+  EyeOff,
+  UserCheck,
+  LogOut,
+} from "lucide-react";
+import { getCurrentAdmin, setCurrentAdmin, getAdminStore, type AdminUser } from "@/lib/admin-store";
 
 export const Route = createFileRoute("/admin-login")({
   component: AdminLoginPage,
 });
 
 function AdminLoginPage() {
-  const [email, setEmail] = useState("manoj@finenvision.com");
-  const [password, setPassword] = useState("admin123");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
   const [forgotModal, setForgotModal] = useState(false);
   const [forgotSent, setForgotSent] = useState(false);
+  const [activeSession, setActiveSession] = useState<AdminUser | null>(null);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const current = getCurrentAdmin();
+    if (current) {
+      setActiveSession(current);
+    }
+  }, []);
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
 
-    const store = getAdminStore();
-    const user = store.users.find(
-      (u) => u.email.toLowerCase() === email.trim().toLowerCase() && u.status === "active",
-    );
+    const trimmedEmail = email.trim().toLowerCase();
+    const trimmedPass = password.trim();
 
-    if (!user) {
-      setError("Invalid email address or deactivated account.");
+    if (!trimmedEmail) {
+      setError("Please enter your admin work email address.");
       return;
     }
 
-    if (!password) {
+    if (!trimmedPass) {
       setError("Please enter your password.");
       return;
     }
 
-    // Success
-    setCurrentAdmin(user);
+    const store = getAdminStore();
+    const user = store.users.find(
+      (u) => u.email.toLowerCase() === trimmedEmail && u.status === "active",
+    );
+
+    if (!user) {
+      setError("Invalid admin work email address or account is deactivated.");
+      return;
+    }
+
+    const expectedPassword = user.password || "admin123";
+    if (trimmedPass !== expectedPassword) {
+      setError("Incorrect password. Please verify your credentials and try again.");
+      return;
+    }
+
+    // Success: update lastLogin in store
+    const updatedUsers = store.users.map((u) =>
+      u.id === user.id ? { ...u, lastLogin: new Date().toISOString() } : u,
+    );
+    store.users = updatedUsers;
+
+    const sessionUser = { ...user, lastLogin: new Date().toISOString() };
+    setCurrentAdmin(sessionUser);
     navigate({ to: "/admin" });
+  };
+
+  const handleSignOutActive = () => {
+    setCurrentAdmin(null);
+    setActiveSession(null);
+    setEmail("");
+    setPassword("");
   };
 
   return (
@@ -57,11 +104,39 @@ function AdminLoginPage() {
         </Link>
         <h2 className="text-2xl font-bold tracking-tight text-slate-900">Administrator Access</h2>
         <p className="mt-1.5 text-xs text-slate-500">
-          Secure portal to manage student inquiries, batch schedules, and site content.
+          Enter your authorized administrator credentials to manage courses, content, and inquiries.
         </p>
       </div>
 
       <div className="mt-7 sm:mx-auto sm:w-full sm:max-w-md px-4 sm:px-0">
+        {/* Active Session Notice if already signed in */}
+        {activeSession && (
+          <div className="mb-4 p-3.5 rounded-xl bg-blue-50/70 border border-blue-200/80 text-xs text-blue-900 flex items-center justify-between shadow-2xs">
+            <div className="flex items-center gap-2 truncate mr-2">
+              <UserCheck className="w-4 h-4 text-blue-600 shrink-0" />
+              <span className="truncate">
+                Signed in as <strong className="font-semibold">{activeSession.name}</strong>
+              </span>
+            </div>
+            <div className="flex items-center gap-2 shrink-0">
+              <Link
+                to="/admin"
+                className="px-2.5 py-1 bg-blue-600 text-white rounded-lg text-[11px] font-semibold hover:bg-blue-700 transition-colors"
+              >
+                Dashboard
+              </Link>
+              <button
+                type="button"
+                onClick={handleSignOutActive}
+                className="p-1 text-slate-500 hover:text-rose-600 transition-colors"
+                title="Sign out of this session"
+              >
+                <LogOut className="w-3.5 h-3.5" />
+              </button>
+            </div>
+          </div>
+        )}
+
         <div className="bg-white py-8 px-6 sm:px-10 shadow-[0_4px_24px_rgba(0,0,0,0.03)] border border-slate-200/80 rounded-2xl relative overflow-hidden">
           {error && (
             <div className="mb-5 p-3 rounded-xl bg-rose-50 border border-rose-200 text-xs text-rose-700 flex items-center gap-2">
@@ -79,10 +154,11 @@ function AdminLoginPage() {
                 <input
                   type="email"
                   required
+                  autoFocus
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full pl-9 pr-3.5 py-2.5 text-xs border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-600/20 focus:border-blue-600 bg-white font-medium"
-                  placeholder="admin@finenvision.com"
+                  className="w-full pl-9 pr-3.5 py-2.5 text-xs border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-600/20 focus:border-blue-600 bg-white font-medium placeholder:text-slate-400"
+                  placeholder="name@finenvision.com"
                 />
                 <Mail className="w-4 h-4 text-slate-400 absolute left-3 top-3" />
               </div>
@@ -101,21 +177,29 @@ function AdminLoginPage() {
               </div>
               <div className="relative">
                 <input
-                  type="password"
+                  type={showPassword ? "text" : "password"}
                   required
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="w-full pl-9 pr-3.5 py-2.5 text-xs border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-600/20 focus:border-blue-600 bg-white"
-                  placeholder="••••••••••••"
+                  className="w-full pl-9 pr-10 py-2.5 text-xs border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-600/20 focus:border-blue-600 bg-white placeholder:text-slate-400"
+                  placeholder="Enter administrator password"
                 />
                 <Lock className="w-4 h-4 text-slate-400 absolute left-3 top-3" />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-3 top-3 text-slate-400 hover:text-slate-600 transition-colors"
+                  aria-label={showPassword ? "Hide password" : "Show password"}
+                >
+                  {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                </button>
               </div>
             </div>
 
             <div className="pt-2">
               <button
                 type="submit"
-                className="w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-semibold text-xs shadow-xs hover:shadow-sm transition-all"
+                className="w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-semibold text-xs shadow-xs hover:shadow-sm transition-all cursor-pointer"
               >
                 <span>Sign in to Dashboard</span>
                 <ArrowRight className="w-3.5 h-3.5" />
@@ -126,22 +210,12 @@ function AdminLoginPage() {
           <div className="mt-6 pt-5 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-500">
             <span className="flex items-center gap-1.5 text-slate-600 font-medium">
               <ShieldCheck className="w-3.5 h-3.5 text-blue-600" />
-              End-to-End Role Protected
+              Role-Based Access Control
             </span>
             <Link to="/" className="text-blue-600 hover:underline font-semibold">
               Return to Website
             </Link>
           </div>
-        </div>
-
-        {/* Credentials Callout Card */}
-        <div className="mt-4 p-3 rounded-xl bg-white border border-slate-200/80 shadow-2xs text-center">
-          <p className="text-[11px] text-slate-500">
-            Pre-loaded with Lead Instructor credentials:{" "}
-            <code className="font-bold text-slate-800 bg-slate-100 px-1 py-0.5 rounded">
-              manoj@finenvision.com
-            </code>
-          </p>
         </div>
       </div>
 
@@ -170,7 +244,7 @@ function AdminLoginPage() {
                 <button
                   type="button"
                   onClick={() => setForgotSent(true)}
-                  className="w-full py-2.5 bg-blue-600 text-white rounded-xl text-xs font-semibold hover:bg-blue-700 shadow-xs"
+                  className="w-full py-2.5 bg-blue-600 text-white rounded-xl text-xs font-semibold hover:bg-blue-700 shadow-xs cursor-pointer"
                 >
                   Send Recovery Link
                 </button>
@@ -182,7 +256,7 @@ function AdminLoginPage() {
                 setForgotModal(false);
                 setForgotSent(false);
               }}
-              className="mt-4 w-full py-2 border border-slate-200 text-slate-600 rounded-xl text-xs font-medium hover:bg-slate-50"
+              className="mt-4 w-full py-2 border border-slate-200 text-slate-600 rounded-xl text-xs font-medium hover:bg-slate-50 cursor-pointer"
             >
               Close
             </button>

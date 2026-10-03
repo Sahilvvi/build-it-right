@@ -106,6 +106,7 @@ export interface AdminUser {
   role: "super_admin" | "admin";
   status: "active" | "inactive";
   lastLogin?: string;
+  password?: string;
 }
 
 export interface SmtpSettings {
@@ -785,6 +786,7 @@ const initialData: AdminStoreData = {
       email: "manoj@finenvision.com",
       role: "super_admin",
       status: "active",
+      password: "admin123",
       lastLogin: "2026-10-02T00:10:00Z",
     },
     {
@@ -793,6 +795,7 @@ const initialData: AdminStoreData = {
       email: "contactfinenvision@gmail.com",
       role: "admin",
       status: "active",
+      password: "admin123",
       lastLogin: "2026-10-01T18:45:00Z",
     },
   ],
@@ -842,10 +845,16 @@ export function getAdminStore(): AdminStoreData {
       return initialData;
     }
     const parsed = JSON.parse(raw);
+    const existingUsers = Array.isArray(parsed.users) ? parsed.users : initialData.users;
+    const mergedUsers = existingUsers.map((u: AdminUser) => ({
+      ...u,
+      password: u.password || "admin123",
+    }));
     // Deep merge missing keys if schema was updated
     return {
       ...initialData,
       ...parsed,
+      users: mergedUsers,
       visuals: { ...initialData.visuals, ...(parsed.visuals || {}) },
       identity: { ...initialData.identity, ...(parsed.identity || {}) },
       homeContent: {
@@ -1026,16 +1035,15 @@ export function deleteCourseItem(slug: string): void {
 
 // Auth Helper
 export function getCurrentAdmin(): AdminUser | null {
-  if (typeof window === "undefined") return initialData.users[0];
+  if (typeof window === "undefined") return null;
   try {
     const raw = localStorage.getItem(AUTH_KEY);
     if (!raw) {
-      localStorage.setItem(AUTH_KEY, JSON.stringify(initialData.users[0]));
-      return initialData.users[0];
+      return null;
     }
     return JSON.parse(raw);
   } catch {
-    return initialData.users[0];
+    return null;
   }
 }
 

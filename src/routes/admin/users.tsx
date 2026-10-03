@@ -95,16 +95,38 @@ export function AdminUsersPage() {
 
   const handleChangePassword = (e: React.FormEvent) => {
     e.preventDefault();
+    if (!currentAdmin) {
+      setPasswordNotice("No active admin session found.");
+      return;
+    }
+    const currentActiveUser = store.users.find((u) => u.id === currentAdmin.id);
+    const expected = currentActiveUser?.password || "admin123";
+    if (passForm.currentPass !== expected) {
+      setPasswordNotice("Current password does not match records.");
+      return;
+    }
     if (passForm.newPass !== passForm.confirmPass) {
       setPasswordNotice("New passwords do not match.");
       return;
     }
+    if (passForm.newPass.length < 6) {
+      setPasswordNotice("New password must be at least 6 characters.");
+      return;
+    }
+
+    const updated = store.users.map((u) =>
+      u.id === currentAdmin.id ? { ...u, password: passForm.newPass } : u,
+    );
+    saveAdminStore(
+      { ...store, users: updated },
+      { action: "Updated Password", target: currentAdmin.name },
+    );
     setPasswordNotice("Password updated successfully.");
     setTimeout(() => {
       setIsPasswordModalOpen(false);
       setPasswordNotice("");
       setPassForm({ currentPass: "", newPass: "", confirmPass: "" });
-    }, 1500);
+    }, 1200);
   };
 
   return (
