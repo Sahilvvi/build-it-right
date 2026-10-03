@@ -38,12 +38,38 @@ export function LeadForm({
     }
     setErrors({});
 
+    const searchParams =
+      typeof window !== "undefined" ? new URLSearchParams(window.location.search) : null;
+    const utmSource = searchParams?.get("utm_source") || "website_direct";
+    const utmMedium = searchParams?.get("utm_medium") || undefined;
+    const utmCampaign = searchParams?.get("utm_campaign") || undefined;
+    const utmTerm = searchParams?.get("utm_term") || undefined;
+    const utmContent = searchParams?.get("utm_content") || undefined;
+
+    // Save directly into Fin-Envision CRM Store
+    import("@/lib/admin-store").then(({ addLead }) => {
+      addLead({
+        name: parsed.data.name,
+        email: parsed.data.email,
+        phone: parsed.data.phone,
+        courseInterest: parsed.data.interest || "Chartered Financial Analyst (CFA®) Level 1",
+        leadStage: "Inquiry",
+        city: "Mumbai",
+        sourcePage: typeof window !== "undefined" ? window.location.pathname : "/contact",
+        utmSource,
+        utmMedium,
+        utmCampaign,
+        utmTerm,
+        utmContent,
+      });
+    });
+
     const data = {
       Name: parsed.data.name,
       Email: parsed.data.email,
       Phone: parsed.data.phone,
       "Course Interest": parsed.data.interest || "Not specified",
-      _subject: "New Career Guidance Booking - Fin-Envision (Contact Page)",
+      _subject: "New Career Guidance Booking - Fin-Envision",
     };
 
     fetch("https://formsubmit.co/ajax/contactfinenvision@gmail.com", {
@@ -120,13 +146,13 @@ export function LeadForm({
       </div>
       <button
         type="submit"
-        className="group mt-2 inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-brand px-5 py-3.5 text-sm font-semibold text-primary-foreground shadow-glow transition-transform hover:-translate-y-0.5"
+        className="btn-sheen group mt-2 inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-brand px-5 py-3.5 text-sm font-bold text-primary-foreground shadow-glow transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_15px_35px_-5px_hsl(var(--accent)/0.6)]"
       >
-        Book free career guidance
-        <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+        <span>Book Free Career Guidance Call</span>
+        <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
       </button>
-      <p className="text-center text-[11px] text-muted-foreground">
-        No spam. We respect your time and inbox.
+      <p className="text-center text-[11px] text-muted-foreground flex items-center justify-center gap-1.5">
+        <span>No spam. 100% confidential counseling with expert mentors.</span>
       </p>
     </form>
   );

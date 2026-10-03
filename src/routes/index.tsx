@@ -7,7 +7,8 @@ import {
   ArrowUpRight,
   Quote,
   MonitorPlay,
-  Sparkles,
+  Award,
+  Laptop,
   BookOpen,
   GraduationCap,
   Briefcase,
@@ -27,6 +28,8 @@ import {
   Smartphone,
   RefreshCw,
   Calendar,
+  ShieldCheck,
+  CheckCircle2,
 } from "lucide-react";
 import { SiteLayout } from "@/components/site/Layout";
 import { FadeIn } from "@/components/site/primitives";
@@ -43,6 +46,7 @@ import {
   googleReviewsCount,
   googleRating,
 } from "@/data/site";
+import { useAdminStore, addLead } from "@/lib/admin-store";
 import { DemoVideos } from "@/components/site/DemoVideos";
 import { AmbientLight, EyebrowBadge, GradientAccent } from "@/components/site/premium";
 const FOUNDER_PHOTO = "/manoj-rajgopal.jpg";
@@ -89,59 +93,69 @@ function Home() {
 
 /* ─────────────────────────  WHY US · 3 PILLARS  ───────────────────────── */
 
+const WHY_US_ICONS = [
+  { icon: BarChart3, color: "from-blue-500/20 to-indigo-500/20 text-blue-400 border-blue-500/10" },
+  {
+    icon: BookOpen,
+    color: "from-emerald-500/20 to-teal-500/20 text-emerald-400 border-emerald-500/10",
+  },
+  {
+    icon: RefreshCw,
+    color: "from-violet-500/20 to-purple-500/20 text-violet-400 border-violet-500/10",
+  },
+  { icon: MonitorPlay, color: "from-rose-500/20 to-red-500/20 text-rose-400 border-rose-500/10" },
+  {
+    icon: ClipboardList,
+    color: "from-cyan-500/20 to-blue-500/20 text-cyan-400 border-cyan-500/10",
+  },
+  {
+    icon: Calendar,
+    color: "from-amber-500/20 to-orange-500/20 text-amber-400 border-amber-500/10",
+  },
+  {
+    icon: MessageSquare,
+    color: "from-teal-500/20 to-emerald-500/20 text-teal-400 border-teal-500/10",
+  },
+  {
+    icon: Trophy,
+    color: "from-yellow-500/20 to-amber-500/20 text-yellow-400 border-yellow-500/10",
+  },
+  { icon: Briefcase, color: "from-sky-500/20 to-blue-500/20 text-sky-400 border-sky-500/10" },
+  {
+    icon: GraduationCap,
+    color: "from-pink-500/20 to-rose-500/20 text-pink-400 border-pink-500/10",
+  },
+];
+
 function WhyUs() {
-  const features = [
-    {
-      icon: BarChart3,
-      text: "Practical teaching with Indian markets examples",
-      color: "from-blue-500/20 to-indigo-500/20 text-blue-400 border-blue-500/10",
-    },
-    {
-      icon: BookOpen,
-      text: "Handwritten notes for concept clarity with Indian examples",
-      color: "from-emerald-500/20 to-teal-500/20 text-emerald-400 border-emerald-500/10",
-    },
-    {
-      icon: RefreshCw,
-      text: "Regular revision sessions",
-      color: "from-violet-500/20 to-purple-500/20 text-violet-400 border-violet-500/10",
-    },
-    {
-      icon: MonitorPlay,
-      text: "Recorded videos with unlimited views",
-      color: "from-rose-500/20 to-red-500/20 text-rose-400 border-rose-500/10",
-    },
-    {
-      icon: ClipboardList,
-      text: "Minimum 2 tests per subject",
-      color: "from-cyan-500/20 to-blue-500/20 text-cyan-400 border-cyan-500/10",
-    },
-    {
-      icon: Calendar,
-      text: "Dedicated study timetable",
-      color: "from-amber-500/20 to-orange-500/20 text-amber-400 border-amber-500/10",
-    },
-    {
-      icon: MessageSquare,
-      text: "Personalised doubt solving sessions",
-      color: "from-teal-500/20 to-emerald-500/20 text-teal-400 border-teal-500/10",
-    },
-    {
-      icon: Trophy,
-      text: "6 Mock tests",
-      color: "from-yellow-500/20 to-amber-500/20 text-yellow-400 border-yellow-500/10",
-    },
-    {
-      icon: Briefcase,
-      text: "Career Guidance",
-      color: "from-sky-500/20 to-blue-500/20 text-sky-400 border-sky-500/10",
-    },
-    {
-      icon: GraduationCap,
-      text: "Exam Support Mentoring",
-      color: "from-pink-500/20 to-rose-500/20 text-pink-400 border-pink-500/10",
-    },
-  ];
+  const store = useAdminStore();
+  const badge = store.homeContent?.whyUsBadge || "Ecosystem";
+  const headline = store.homeContent?.whyUsHeadline || "Why Fin-Envision ?";
+  const cardTitle = store.homeContent?.whyUsCardTitle || "Proven Prep Ecosystem";
+  const cardDesc =
+    store.homeContent?.whyUsCardDesc ||
+    "Our comprehensive, concept-first learning system is engineered for maximum first-attempt success.";
+  const featuresList =
+    store.homeContent?.whyUsFeatures && store.homeContent.whyUsFeatures.length > 0
+      ? store.homeContent.whyUsFeatures
+      : [
+          "Practical teaching with Indian markets examples",
+          "Handwritten notes for concept clarity with Indian examples",
+          "Regular revision sessions",
+          "Recorded videos with unlimited views",
+          "Minimum 2 tests per subject",
+          "Dedicated study timetable",
+          "Personalised doubt solving sessions",
+          "6 Mock tests",
+          "Career Guidance",
+          "Exam Support Mentoring",
+        ];
+
+  const features = featuresList.map((text, idx) => ({
+    text,
+    icon: WHY_US_ICONS[idx % WHY_US_ICONS.length].icon,
+    color: WHY_US_ICONS[idx % WHY_US_ICONS.length].color,
+  }));
 
   return (
     <section className="relative overflow-hidden py-24 md:py-32 bg-[hsl(220_55%_4%)]">
@@ -174,10 +188,10 @@ function WhyUs() {
                   <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-75" />
                   <span className="relative inline-flex h-2 w-2 rounded-full bg-primary" />
                 </span>
-                Ecosystem
+                {badge}
               </div>
               <h2 className="mt-5 font-display text-4xl font-semibold tracking-tight md:text-5xl leading-[1.1] text-white">
-                Why Fin-Envision ?
+                {headline}
               </h2>
 
               {/* A beautiful visual summary card */}
@@ -186,13 +200,8 @@ function WhyUs() {
                 <div className="text-[10px] font-bold uppercase tracking-wider text-accent">
                   Highlights
                 </div>
-                <h4 className="mt-2 font-display text-lg font-semibold text-white">
-                  Proven Prep Ecosystem
-                </h4>
-                <p className="mt-2 text-xs leading-relaxed text-muted-foreground">
-                  Our comprehensive, concept-first learning system is engineered for maximum
-                  first-attempt success.
-                </p>
+                <h4 className="mt-2 font-display text-lg font-semibold text-white">{cardTitle}</h4>
+                <p className="mt-2 text-xs leading-relaxed text-muted-foreground">{cardDesc}</p>
                 <div className="mt-5 flex gap-4 border-t border-white/5 pt-4">
                   <div>
                     <div className="text-xl font-bold text-white">~80-90%</div>
@@ -253,20 +262,36 @@ function HeroEnquiryForm() {
 
   const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    try {
+      addLead({
+        name: form.name.trim() || "Website Visitor",
+        email: form.email.trim() || "no-email@finenvision.com",
+        phone: form.phone.trim() || "-",
+        courseInterest: form.course.trim() || "Chartered Financial Analyst (CFA®) Level 1",
+        city: "Mumbai",
+        leadStage: "Inquiry",
+        sourcePage: "/",
+        utmSource: "homepage_hero_form",
+        utmMedium: "organic_website",
+      });
+    } catch (err) {
+      console.error("Error storing lead from hero form:", err);
+    }
+
     const text = `Hi Fin-Envision, I'd like to enquire.%0AName: ${encodeURIComponent(
       form.name.trim().slice(0, 100),
     )}%0AEmail: ${encodeURIComponent(form.email.trim().slice(0, 120))}%0APhone: ${encodeURIComponent(
       form.phone.trim().slice(0, 20),
     )}%0ACourse: ${encodeURIComponent(form.course.trim().slice(0, 300))}`;
     window.open(
-      `https://wa.me/${brand.whatsapp.replace(/\D/g, "")}?text=${text}`,
+      `https://wa.me/${(brand.whatsapp || "917304833625").replace(/\D/g, "")}?text=${text}`,
       "_blank",
       "noopener",
     );
   };
 
   const field =
-    "w-full rounded-xl border border-white/15 bg-white/10 px-4 py-3 text-sm text-white placeholder:text-white/55 outline-none transition focus:border-primary/60 focus:bg-white/15 focus:ring-2 focus:ring-primary/30";
+    "w-full rounded-xl border border-white/15 bg-black/40 px-4 py-3 text-sm text-white placeholder:text-white/45 outline-none transition-all duration-200 focus:border-accent/80 focus:bg-black/60 focus:ring-2 focus:ring-accent/25";
 
   return (
     <motion.form
@@ -274,12 +299,24 @@ function HeroEnquiryForm() {
       initial={{ opacity: 0, y: 24 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.7, delay: 0.25 }}
-      className="relative w-full max-w-md rounded-3xl border border-white/15 bg-white/10 p-6 shadow-[0_40px_100px_-40px_rgba(0,0,0,0.9)] backdrop-blur-2xl md:p-7"
+      className="relative w-full max-w-md rounded-3xl border border-white/20 bg-gradient-to-b from-white/[0.12] via-white/[0.06] to-white/[0.02] p-6 shadow-[0_30px_90px_-20px_rgba(0,109,218,0.35)] backdrop-blur-2xl md:p-8"
     >
-      <div className="pointer-events-none absolute inset-x-6 -top-px h-px bg-gradient-to-r from-transparent via-white/50 to-transparent" />
-      <p className="mb-1 font-display text-lg font-semibold text-white">Enquire now</p>
-      <p className="mb-5 text-xs text-white/65">
-        Get batch dates, fees and a free counselling call.
+      <div className="pointer-events-none absolute inset-x-8 -top-px h-px bg-gradient-to-r from-transparent via-accent/80 to-transparent" />
+      <div className="pointer-events-none absolute -right-16 -top-16 h-36 w-36 rounded-full bg-accent/20 blur-3xl" />
+
+      <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-accent/40 bg-accent/15 px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-accent backdrop-blur-md">
+        <span className="relative flex h-2 w-2">
+          <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-75" />
+          <span className="relative inline-flex h-2 w-2 rounded-full bg-accent" />
+        </span>
+        Admissions Open • 2025–2026
+      </div>
+
+      <p className="font-display text-2xl font-bold tracking-tight text-white">
+        Book Free Counseling
+      </p>
+      <p className="mb-5 mt-1 text-xs leading-relaxed text-white/70">
+        Get batch timetable, fee breakdowns, and 1:1 strategy with Manoj Sir.
       </p>
 
       <div className="space-y-3">
@@ -287,7 +324,7 @@ function HeroEnquiryForm() {
           required
           maxLength={100}
           className={field}
-          placeholder="Name"
+          placeholder="Your Full Name"
           value={form.name}
           onChange={(e) => setForm({ ...form, name: e.target.value })}
         />
@@ -296,7 +333,7 @@ function HeroEnquiryForm() {
           type="email"
           maxLength={120}
           className={field}
-          placeholder="Email"
+          placeholder="Email Address"
           value={form.email}
           onChange={(e) => setForm({ ...form, email: e.target.value })}
         />
@@ -305,7 +342,7 @@ function HeroEnquiryForm() {
           type="tel"
           maxLength={20}
           className={field}
-          placeholder="Phone number"
+          placeholder="WhatsApp / Phone Number"
           value={form.phone}
           onChange={(e) => setForm({ ...form, phone: e.target.value })}
         />
@@ -313,7 +350,7 @@ function HeroEnquiryForm() {
           rows={3}
           maxLength={300}
           className={cn(field, "resize-none")}
-          placeholder="Which course are you looking for?"
+          placeholder="Interested Course (CFA L1, L2, L3, Financial Modeling)..."
           value={form.course}
           onChange={(e) => setForm({ ...form, course: e.target.value })}
         />
@@ -321,85 +358,140 @@ function HeroEnquiryForm() {
 
       <button
         type="submit"
-        className="group mt-5 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-primary to-accent px-5 py-3.5 text-sm font-semibold text-primary-foreground shadow-lg shadow-primary/25 transition hover:shadow-xl hover:shadow-primary/35"
+        className="btn-sheen group mt-5 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-primary via-[#0080ff] to-accent px-5 py-4 text-sm font-bold text-white shadow-[0_10px_30px_rgba(0,109,218,0.4)] transition-all duration-300 hover:scale-[1.01] hover:shadow-[0_15px_40px_rgba(194,236,56,0.3)]"
       >
-        Enquire Now
-        <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+        <span>Enquire Now — Get Free Demo & Syllabus</span>
+        <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
       </button>
+
+      <p className="mt-3.5 flex items-center justify-center gap-1.5 text-center text-[11px] text-white/55">
+        <ShieldCheck className="h-3.5 w-3.5 text-emerald-400 shrink-0" />
+        <span>100% Privacy Protected • Instant WhatsApp / Call Response</span>
+      </p>
     </motion.form>
   );
 }
 
 function Hero() {
+  const store = useAdminStore();
+  const heroContent = store.homeContent;
+  const headline = heroContent?.heroHeadline || "Your Path to CFA® Success Starts Here.";
+  const subheadline =
+    heroContent?.heroSubheadline ||
+    "Your future is secured with our proven track record — concept-first teaching, complete curriculum coverage and mentorship until exam day.";
+  const primaryText = heroContent?.ctaPrimaryText || "Explore Courses";
+  const primaryLink = heroContent?.ctaPrimaryLink || "/courses";
+  const secondaryText = heroContent?.ctaSecondaryText || "Talk to a mentor";
+  const secondaryLink =
+    heroContent?.ctaSecondaryLink ||
+    `https://wa.me/${(brand.whatsapp || "917304833625").replace(/\D/g, "")}?text=Hello%20Team%20Fin%20Envision%2C%20I%20have%20a%20few%20queries%20regarding%20the%20courses!`;
+
   return (
     <section className="relative w-full overflow-hidden bg-black pb-24 pt-28 md:pb-32 md:pt-36">
+      {/* Ambient luminous glow mesh */}
       <div
         aria-hidden
-        className="absolute inset-0 bg-[radial-gradient(ellipse_at_20%_20%,hsl(var(--primary)/0.28),transparent_60%),radial-gradient(ellipse_at_85%_70%,hsl(var(--accent)/0.22),transparent_60%)]"
+        className="absolute inset-0 bg-[radial-gradient(ellipse_at_20%_20%,rgba(0,109,218,0.32),transparent_60%),radial-gradient(ellipse_at_85%_70%,rgba(194,236,56,0.18),transparent_60%)]"
       />
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 opacity-[0.12]"
+        className="pointer-events-none absolute inset-0 opacity-[0.14]"
         style={{
           backgroundImage:
-            "linear-gradient(to right, rgba(255,255,255,0.25) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.25) 1px, transparent 1px)",
+            "linear-gradient(to right, rgba(255,255,255,0.2) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.2) 1px, transparent 1px)",
           backgroundSize: "64px 64px",
           maskImage: "radial-gradient(ellipse at center, black 30%, transparent 80%)",
         }}
       />
       <div
         aria-hidden
-        className="absolute -left-32 top-1/4 h-[520px] w-[520px] rounded-full bg-primary/25 blur-[140px]"
+        className="absolute -left-32 top-1/4 h-[560px] w-[560px] rounded-full bg-primary/25 blur-[150px] pointer-events-none"
+      />
+      <div
+        aria-hidden
+        className="absolute -right-32 bottom-1/4 h-[560px] w-[560px] rounded-full bg-accent/15 blur-[150px] pointer-events-none"
       />
       <div
         aria-hidden
         className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-b from-transparent to-background"
       />
 
-      <div className="relative mx-auto grid max-w-7xl items-center gap-12 px-6 lg:grid-cols-[1.1fr_0.9fr]">
+      <div className="relative mx-auto grid max-w-7xl items-center gap-12 px-6 lg:grid-cols-[1.15fr_0.85fr]">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7 }}
         >
-          <h1 className="font-display text-4xl font-semibold leading-[1.05] tracking-tight text-white md:text-6xl">
-            Your Path to CFA®{" "}
-            <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-              Success Starts Here.
+          {/* Eyebrow badge */}
+          <div className="mb-6 inline-flex items-center gap-2.5 rounded-full border border-white/15 bg-white/[0.08] px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-white backdrop-blur-xl shadow-soft">
+            <Award className="h-3.5 w-3.5 text-accent" />
+            <span className="bg-gradient-to-r from-white via-white to-white/80 bg-clip-text">
+              PREMIER CFA® ACADEMY • MUMBAI & LIVE ONLINE
             </span>
+          </div>
+
+          <h1 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-[3.9rem] font-bold leading-[1.06] tracking-[-0.03em] text-white">
+            Your Path to{" "}
+            <span className="relative inline-block">
+              <span className="relative z-10 bg-gradient-to-r from-accent via-[#e6ff80] to-accent bg-clip-text text-transparent">
+                CFA® Success
+              </span>
+              <span className="absolute -bottom-1.5 inset-x-0 h-3 bg-accent/20 blur-sm -skew-x-6" />
+            </span>{" "}
+            Starts Here.
           </h1>
 
-          <p className="mt-5 max-w-lg text-base text-white/75 md:text-lg">
-            Your future is secured with our proven track record — concept-first teaching, complete
-            curriculum coverage and mentorship until exam day.
+          <p className="mt-5 max-w-xl text-base text-slate-300 font-normal leading-relaxed md:text-lg">
+            {subheadline}
           </p>
 
-          <div className="mt-6 inline-flex items-center gap-3 rounded-full border border-white/15 bg-white/10 px-4 py-2 backdrop-blur">
-            <span className="text-sm font-semibold text-white">Excellent</span>
-            <span className="flex items-center gap-0.5">
-              {[0, 1, 2, 3, 4].map((i) => (
-                <Star key={i} className="h-4 w-4 fill-accent text-accent" />
-              ))}
-            </span>
-            <span className="text-sm text-white/75">{googleReviewsCount} Google reviews</span>
+          {/* Social Proof with Avatars and Clearance Rate */}
+          <div className="mt-7 flex flex-wrap items-center gap-3">
+            <div className="inline-flex items-center gap-3 rounded-full border border-white/15 bg-white/[0.08] py-1.5 pl-2 pr-4 backdrop-blur-xl shadow-soft">
+              <div className="flex -space-x-2">
+                <div className="flex h-7 w-7 items-center justify-center rounded-full bg-gradient-to-br from-blue-600 to-indigo-800 text-[10px] font-bold text-white ring-2 ring-black">
+                  MR
+                </div>
+                <div className="flex h-7 w-7 items-center justify-center rounded-full bg-gradient-to-br from-emerald-600 to-teal-800 text-[10px] font-bold text-white ring-2 ring-black">
+                  VK
+                </div>
+                <div className="flex h-7 w-7 items-center justify-center rounded-full bg-gradient-to-br from-amber-600 to-orange-800 text-[10px] font-bold text-white ring-2 ring-black">
+                  SD
+                </div>
+              </div>
+              <div className="flex items-center gap-1.5 text-xs text-white">
+                <span className="flex items-center">
+                  {[0, 1, 2, 3, 4].map((i) => (
+                    <Star key={i} className="h-3 w-3 fill-accent text-accent" />
+                  ))}
+                </span>
+                <span className="font-bold text-white">4.9/5</span>
+                <span className="text-white/60">({googleReviewsCount}+ Verified Reviews)</span>
+              </div>
+            </div>
+
+            <div className="inline-flex items-center gap-1.5 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3.5 py-1.5 text-xs font-semibold text-emerald-400 backdrop-blur-md">
+              <CheckCircle2 className="h-3.5 w-3.5" />
+              <span>~80-90% Pass Rate</span>
+            </div>
           </div>
 
           <div className="mt-8 flex flex-wrap items-center gap-4">
             <Link
-              to="/courses"
-              className="group inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-primary to-accent px-7 py-3.5 text-sm font-semibold text-primary-foreground shadow-lg shadow-primary/25 transition hover:shadow-xl hover:shadow-primary/35"
+              to={primaryLink}
+              className="btn-sheen group inline-flex items-center gap-2.5 rounded-full bg-gradient-to-r from-primary via-[#0080ff] to-primary px-8 py-4 text-sm font-bold text-white shadow-[0_10px_35px_-8px_rgba(0,109,218,0.7)] transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_15px_40px_-5px_rgba(0,109,218,0.9)]"
             >
-              Explore Courses
-              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+              <span>{primaryText}</span>
+              <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
             </Link>
             <a
-              href={`https://wa.me/${brand.whatsapp.replace(/\D/g, "")}?text=Hello%20Team%20Fin%20Envision%2C%20I%20have%20a%20few%20queries%20regarding%20the%20courses!`}
+              href={secondaryLink}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/5 px-7 py-3.5 text-sm font-semibold text-white backdrop-blur transition hover:bg-white/15"
+              className="group inline-flex items-center gap-2.5 rounded-full border border-white/20 bg-white/[0.05] px-7 py-4 text-sm font-semibold text-white backdrop-blur-xl transition-all duration-300 hover:bg-white/[0.12] hover:border-white/35 hover:scale-[1.02]"
             >
-              Talk to a mentor
-              <ArrowUpRight className="h-4 w-4" />
+              <span>{secondaryText}</span>
+              <ArrowUpRight className="h-4 w-4 text-white/70 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
             </a>
           </div>
         </motion.div>
@@ -410,18 +502,25 @@ function Hero() {
       </div>
 
       {/* Stats strip */}
-      <div className="relative mx-auto mt-14 max-w-6xl px-6">
+      <div className="relative mx-auto mt-16 max-w-6xl px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.4 }}
-          className="grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-white/15 bg-white/10 backdrop-blur-2xl md:grid-cols-4"
+          className="grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-4"
         >
           {HERO_STATS.map(({ icon: Icon, value, label }) => (
-            <div key={label} className="flex flex-col items-center gap-2 px-5 py-6 text-center">
-              <Icon className="h-5 w-5 text-accent" />
-              <p className="font-display text-lg font-semibold text-white">{value}</p>
-              <p className="text-xs text-white/65">{label}</p>
+            <div
+              key={label}
+              className="glass-card-hover group relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.04] p-5 text-center backdrop-blur-xl shadow-lg transition-all duration-300 hover:border-accent/40"
+            >
+              <div className="mx-auto flex h-10 w-10 items-center justify-center rounded-xl bg-accent/10 text-accent transition-transform duration-300 group-hover:scale-110 group-hover:bg-accent/20">
+                <Icon className="h-5 w-5" />
+              </div>
+              <p className="mt-3 font-display text-xl font-bold tracking-tight text-white md:text-2xl">
+                {value}
+              </p>
+              <p className="mt-1 text-xs font-medium text-white/65">{label}</p>
             </div>
           ))}
         </motion.div>
@@ -479,8 +578,10 @@ const COURSE_THEMES = [
 ] as const;
 
 function CourseTabs() {
+  const store = useAdminStore();
   const [active, setActive] = useState<(typeof COURSE_FILTERS)[number]["key"]>("all");
-  const list = active === "all" ? courses : courses.filter((c) => c.category === active);
+  const allCourses = store.courses && store.courses.length > 0 ? store.courses : courses;
+  const list = active === "all" ? allCourses : allCourses.filter((c) => c.category === active);
 
   return (
     <section className="relative overflow-hidden py-24 md:py-32">
@@ -494,7 +595,7 @@ function CourseTabs() {
         <FadeIn>
           <div className="mx-auto max-w-4xl text-center">
             <span className="inline-flex items-center gap-2 rounded-full border border-border/60 bg-secondary/40 px-3.5 py-1.5 text-[11px] font-semibold uppercase tracking-[0.2em] text-foreground/70 backdrop-blur">
-              <Sparkles className="h-3.5 w-3.5 text-accent" />
+              <Award className="h-3.5 w-3.5 text-accent" />
               Our Programmes
             </span>
             <h2 className="mt-5 text-balance font-display text-4xl font-semibold leading-[1.05] tracking-tight md:text-5xl lg:text-[3.5rem]">
@@ -839,6 +940,18 @@ function PremiumCard({
 }
 
 function PlacementAnalytics() {
+  const store = useAdminStore();
+  const placement = store.homeContent?.placementSection || {
+    badge: "Numbers That Matter",
+    headline: "5,000+ Learners Trained. Results That Speak.",
+    subheadline:
+      "Eight years of teaching, thousands of success stories, and a track record built on first-attempt clears.",
+    studentsCount: 5000,
+    studentsSuffix: "+",
+    successRateMin: 80,
+    successRateMax: 90,
+  };
+
   return (
     <section className="relative overflow-hidden bg-gradient-to-b from-secondary/30 via-background to-secondary/40 py-24 md:py-32">
       {/* ambient glow */}
@@ -872,12 +985,12 @@ function PlacementAnalytics() {
               <span className="relative inline-flex h-2 w-2 rounded-full bg-accent" />
             </span>
             <p className="text-[11px] font-bold uppercase tracking-[0.32em] text-accent">
-              Numbers That Matter
+              {placement.badge}
             </p>
           </motion.div>
 
           <h2 className="mx-auto mt-6 max-w-4xl text-center text-balance font-display text-4xl font-semibold tracking-tight md:text-5xl lg:text-[3.6rem] lg:leading-[1.05]">
-            <CountUp to={5000} suffix="+" /> Learners{" "}
+            <CountUp to={placement.studentsCount} suffix={placement.studentsSuffix} /> Learners{" "}
             <span className="bg-gradient-to-r from-primary via-primary to-accent bg-clip-text text-transparent">
               Trained.
             </span>
@@ -885,8 +998,7 @@ function PlacementAnalytics() {
             <span className="italic text-accent">Results That Speak.</span>
           </h2>
           <p className="mx-auto mt-6 max-w-2xl text-center text-base text-muted-foreground md:text-lg">
-            Eight years of teaching, thousands of success stories, and a track record built on
-            first-attempt clears.
+            {placement.subheadline}
           </p>
         </FadeIn>
 
@@ -896,7 +1008,7 @@ function PlacementAnalytics() {
           <PremiumCard className="lg:col-span-2">
             <div className="grid gap-6 md:grid-cols-[auto_1fr] md:items-center">
               <Ring
-                value={<CountUp to={5000} suffix="+" />}
+                value={<CountUp to={placement.studentsCount} suffix={placement.studentsSuffix} />}
                 sub="students"
                 label="Students trained"
                 progress={0.9}
@@ -906,7 +1018,7 @@ function PlacementAnalytics() {
                   Since 2018
                 </div>
                 <h3 className="mt-2 font-display text-3xl font-semibold tracking-tight md:text-4xl">
-                  5,000+ Students Trained
+                  {placement.studentsCount.toLocaleString()}+ Students Trained
                 </h3>
                 <p className="mt-3 text-sm leading-relaxed text-muted-foreground md:text-base">
                   Across CFA® Levels I, II, III and Financial Modelling — from first-year undergrads
@@ -931,9 +1043,9 @@ function PlacementAnalytics() {
             <div className="flex h-full flex-col items-center justify-center text-center">
               <div className="font-display text-6xl font-bold leading-none">
                 <span className="bg-gradient-to-br from-primary to-accent bg-clip-text text-transparent">
-                  <CountUp to={80} />
+                  <CountUp to={placement.successRateMin} />
                 </span>
-                <span className="text-accent">–90%</span>
+                <span className="text-accent">–{placement.successRateMax}%</span>
               </div>
               <div className="mt-3 text-sm font-semibold text-foreground">Success Rate</div>
               <div className="mt-1 text-xs text-muted-foreground">
@@ -1057,6 +1169,16 @@ function PlacementAnalytics() {
 /* ─────────────────  TESTIMONIALS (quote cards)  ───────────────── */
 
 function TestimonialsSection() {
+  const store = useAdminStore();
+  const allTestimonials =
+    store.testimonials && store.testimonials.length > 0
+      ? store.testimonials.map((t) => ({
+          name: t.name,
+          role: t.role + (t.cfaLevel ? ` · ${t.cfaLevel}` : ""),
+          quote: t.content,
+        }))
+      : testimonials;
+
   return (
     <section className="container-px mx-auto max-w-7xl py-24 md:py-32">
       <FadeIn>
@@ -1069,7 +1191,7 @@ function TestimonialsSection() {
         <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-24 bg-gradient-to-r from-background to-transparent" />
         <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-24 bg-gradient-to-l from-background to-transparent" />
         <div className="flex w-max gap-6 animate-marquee">
-          {[...testimonials, ...testimonials].map((t, i) => (
+          {[...allTestimonials, ...allTestimonials].map((t, i) => (
             <article
               key={i}
               className="flex w-[360px] flex-col rounded-3xl border border-border bg-card p-7 shadow-soft md:w-[440px]"
@@ -1078,7 +1200,7 @@ function TestimonialsSection() {
               <p className="mt-5 text-[15px] leading-relaxed text-foreground/85">"{t.quote}"</p>
               <div className="mt-6 border-t border-border pt-5">
                 <div className="text-[11px] font-bold uppercase tracking-[0.18em] text-muted-foreground">
-                  Batch · {2018 + (i % 6)}
+                  Batch · {2020 + (i % 6)}
                 </div>
                 <div className="mt-1 font-display text-xl font-semibold">{t.name}</div>
                 <div className="text-xs text-muted-foreground">{t.role}</div>
@@ -1094,21 +1216,33 @@ function TestimonialsSection() {
 /* ─────────────────  FOUNDER SPOTLIGHT  ───────────────── */
 
 function FounderSpotlight() {
-  const journey = [
-    "Founder and Lead Instructor of Fin-Envision Learning.",
-    "Cleared all three levels of the CFA® Program in the first attempt.",
-    "Worked with reputed organizations such as CRISIL and JHP, gaining valuable industry exposure.",
-    "Has successfully trained over 5,000 students across the globe.",
-    "Known for simplifying complex financial concepts into easy-to-understand, practical lessons.",
-    "Focuses on bridging the gap between academic learning and real-world finance.",
-    "Dedicated to mentoring students for successful careers in finance through industry-oriented training and personalized guidance.",
-  ];
-  const credentials = [
-    "CFA® Charterholder",
-    "Investment Banking",
-    "Financial Modeling",
-    "Portfolio Strategy",
-  ];
+  const store = useAdminStore();
+  const spotlight = store.homeContent?.founderSpotlight;
+  const founderPhoto = store.visuals?.founderPhotoUrl || spotlight?.founderPhoto || FOUNDER_PHOTO;
+  const founderName = spotlight?.founderName || "Manoj Rajgopal, CFA";
+  const founderTitle = spotlight?.founderTitle || "Founder & Lead Instructor";
+  const eyebrow = spotlight?.eyebrow || "Lead Instructor";
+  const headline = spotlight?.headline || "Lead Instructor";
+  const experienceYears = spotlight?.experienceYears || "8+";
+  const studentsTrained = spotlight?.studentsTrained || "5,000+";
+  const attemptFocus = spotlight?.attemptFocus || "1st";
+  const credentials = spotlight?.credentials ||
+    store.aboutContent?.leadership?.creds || [
+      "CFA® Charterholder",
+      "Investment Banking",
+      "Financial Modeling",
+      "Portfolio Strategy",
+    ];
+  const journey = spotlight?.journey ||
+    store.aboutContent?.leadership?.work || [
+      "Founder and Lead Instructor of Fin-Envision Learning.",
+      "Cleared all three levels of the CFA® Program in the first attempt.",
+      "Worked with reputed organizations such as CRISIL and JHP, gaining valuable industry exposure.",
+      "Has successfully trained over 5,000 students across the globe.",
+      "Known for simplifying complex financial concepts into easy-to-understand, practical lessons.",
+      "Focuses on bridging the gap between academic learning and real-world finance.",
+      "Dedicated to mentoring students for successful careers in finance through industry-oriented training and personalized guidance.",
+    ];
 
   return (
     <section className="relative overflow-hidden bg-background py-24 md:py-32">
@@ -1141,11 +1275,11 @@ function FounderSpotlight() {
               <span className="relative inline-flex h-2 w-2 rounded-full bg-accent" />
             </span>
             <p className="text-[11px] font-bold uppercase tracking-[0.32em] text-accent">
-              Lead Instructor
+              {eyebrow}
             </p>
           </motion.div>
           <h2 className="mt-6 max-w-4xl font-display text-4xl font-semibold tracking-tight md:text-5xl lg:text-[3.6rem] lg:leading-[1.05]">
-            Lead Instructor
+            {headline}
           </h2>
         </FadeIn>
 
@@ -1173,8 +1307,8 @@ function FounderSpotlight() {
                   className="group relative aspect-[4/5] overflow-hidden rounded-[2rem] bg-gradient-to-br from-primary/20 to-accent/10 shadow-elevated"
                 >
                   <img
-                    src={FOUNDER_PHOTO}
-                    alt="Manoj Rajgopal, CFA — Founder & Lead Instructor at Fin-Envision Learning"
+                    src={founderPhoto}
+                    alt={`${founderName} — ${founderTitle} at Fin-Envision Learning`}
                     className="absolute inset-0 h-full w-full object-cover object-top transition-transform duration-700 group-hover:scale-[1.03]"
                     loading="lazy"
                     decoding="async"
@@ -1182,19 +1316,19 @@ function FounderSpotlight() {
                   <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent" />
                   <div className="absolute inset-x-0 bottom-0 p-6">
                     <span className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.24em] text-white/90 backdrop-blur">
-                      Founder &amp; Lead Instructor
+                      {founderTitle}
                     </span>
                     <h3 className="mt-3 font-display text-3xl font-bold leading-tight text-white md:text-4xl">
-                      Manoj Rajgopal, CFA
+                      {founderName}
                     </h3>
                   </div>
                 </motion.div>
 
                 <div className="mt-5 grid grid-cols-3 gap-3">
                   {[
-                    ["8+", "Years teaching"],
-                    ["5,000+", "Students"],
-                    ["1st", "Attempt"],
+                    [experienceYears, "Years teaching"],
+                    [studentsTrained, "Students"],
+                    [attemptFocus, "Attempt"],
                   ].map(([v, l], i) => (
                     <motion.div
                       key={l}
@@ -1384,7 +1518,7 @@ const JOURNEY_TRACKS = {
       icon: Users,
       badge: "Step 3",
       title: "Mentor Pool Access",
-      body: "Students get 1:1 access to industry mentors across finance and AI.",
+      body: "Students get 1:1 access to industry mentors across finance, investment banking, and equity research.",
     },
     {
       icon: Target,
@@ -1747,6 +1881,20 @@ const APP_FEATURES = [
 ];
 
 function DownloadApp() {
+  const store = useAdminStore();
+  const app = store.homeContent?.appSection;
+  const appBadge = app?.badge || "On every device";
+  const appHeadline = app?.headline || "Learn Anywhere, Anytime";
+  const appSubheadline =
+    app?.subheadline ||
+    "Pick up exactly where you left off — across mobile, tablet and desktop. Offline lectures, sync'd notes, mock tests on the go.";
+  const orgCode = app?.orgCode || "RJQBWG";
+  const androidUrl =
+    app?.androidUrl || "https://play.google.com/store/apps/details?id=co.sansa.arwir";
+  const iosUrl = app?.iosUrl || "https://apps.apple.com/us/app/fin-envision-learning/id6745217545";
+  const windowsUrl = app?.windowsUrl || "https://web.classplusapp.com";
+  const ratingText = app?.ratingText || "4.2★ App rating";
+
   const [active, setActive] = useState(3);
   const ActiveIcon = APP_FEATURES[active].icon;
 
@@ -1781,7 +1929,7 @@ function DownloadApp() {
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-75" />
               <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-accent" />
             </span>
-            On every device
+            {appBadge}
           </motion.span>
           <motion.h2
             initial={{ opacity: 0, y: 14 }}
@@ -1805,9 +1953,7 @@ function DownloadApp() {
               />
             </span>
           </motion.h2>
-          <p className="mx-auto mt-5 max-w-md text-base text-white/65">
-            Access your courses on any device — anywhere, anytime.
-          </p>
+          <p className="mx-auto mt-5 max-w-md text-base text-white/65">{appSubheadline}</p>
         </div>
 
         {/* Feature pills */}
@@ -1912,15 +2058,10 @@ function DownloadApp() {
                   {APP_FEATURES[active].title}
                 </motion.span>
                 <h3 className="mt-6 font-display text-4xl font-bold leading-[1.05] text-white md:text-5xl lg:text-[3.5rem]">
-                  Learn Anywhere,
-                  <br />
-                  <span className="bg-gradient-to-r from-accent via-accent to-accent/60 bg-clip-text text-transparent">
-                    Anytime
-                  </span>
+                  {appHeadline}
                 </h3>
                 <p className="mt-5 max-w-md text-base leading-relaxed text-white/70">
-                  Pick up exactly where you left off — across mobile, tablet and desktop. Offline
-                  lectures, sync'd notes, mock tests on the go.
+                  {appSubheadline}
                 </p>
 
                 <div className="mt-8">
@@ -1933,19 +2074,19 @@ function DownloadApp() {
                         label: "Android",
                         Icon: Smartphone,
                         color: "bg-gradient-to-br from-[#3DDC84] to-[#2bb46a] text-black",
-                        href: "https://play.google.com/store/apps/details?id=co.sansa.arwir",
+                        href: androidUrl,
                       },
                       {
                         label: "iOS",
                         Icon: Apple,
                         color: "bg-gradient-to-br from-white to-slate-200 text-black",
-                        href: "https://apps.apple.com/us/app/fin-envision-learning/id6745217545",
+                        href: iosUrl,
                       },
                       {
                         label: "Windows",
                         Icon: MonitorPlay,
                         color: "bg-gradient-to-br from-[#0078D6] to-[#005a9e] text-white",
-                        href: "https://web.classplusapp.com",
+                        href: windowsUrl,
                       },
                     ].map(({ label, Icon, color, href }, idx) => (
                       <motion.a
@@ -1988,8 +2129,8 @@ function DownloadApp() {
                   >
                     <div className="pointer-events-none absolute -right-8 -bottom-8 h-24 w-24 rounded-full bg-accent/5 blur-xl" />
                     <div className="flex items-start gap-3">
-                      <div className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-accent/15 text-accent animate-pulse">
-                        <Sparkles className="h-4 w-4" />
+                      <div className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-accent/15 text-accent">
+                        <Laptop className="h-4 w-4" />
                       </div>
                       <div>
                         <div className="text-xs font-semibold text-white">
@@ -1998,7 +2139,7 @@ function DownloadApp() {
                         <p className="mt-1.5 text-xs text-white/60 leading-relaxed">
                           For video lectures, use the Windows link above and enter Org Code:{" "}
                           <span className="inline-block font-mono bg-white/10 text-accent font-bold px-2 py-0.5 rounded border border-white/10 select-all tracking-wider ml-1">
-                            RJQBWG
+                            {orgCode}
                           </span>
                         </p>
                       </div>
@@ -2009,7 +2150,8 @@ function DownloadApp() {
                 {/* Mini stats */}
                 <div className="mt-10 flex flex-wrap gap-px overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03] backdrop-blur">
                   {[
-                    ["4.2★", "App rating"],
+                    [ratingText, "Rating"],
+                    ["500+", "Downloads"],
                     ["500+", "Downloads"],
                   ].map(([v, l], i) => (
                     <motion.div
@@ -2165,6 +2307,9 @@ function DownloadApp() {
 /* ─────────────────  COMPANIES  ───────────────── */
 
 function CompaniesSection() {
+  const store = useAdminStore();
+  const headline = store.homeContent?.companiesSection?.headline || "Where our alumni go to work.";
+
   return (
     <section className="relative overflow-hidden border-y border-white/5 bg-[hsl(220_60%_10%)] py-24 text-primary-foreground md:py-28">
       {/* Ambient backdrop */}
@@ -2177,17 +2322,7 @@ function CompaniesSection() {
         <FadeIn>
           <div className="text-center">
             <h2 className="font-display text-4xl font-bold tracking-tight text-white md:text-5xl lg:text-6xl">
-              Where our alumni{" "}
-              <span className="relative inline-block">
-                <span className="bg-gradient-to-r from-accent via-accent to-accent/70 bg-clip-text text-transparent">
-                  go to work
-                </span>
-                <span
-                  aria-hidden
-                  className="absolute -bottom-1 left-0 h-[3px] w-full rounded-full bg-gradient-to-r from-accent to-transparent"
-                />
-              </span>
-              .
+              {headline}
             </h2>
           </div>
         </FadeIn>
@@ -2207,6 +2342,16 @@ function CompaniesSection() {
 /* ─────────────────  FINAL CTA  ───────────────── */
 
 function FinalCta() {
+  const store = useAdminStore();
+  const finalCta = store.homeContent?.finalCta;
+  const eyebrow = finalCta?.eyebrow || "Ready when you are";
+  const headline = finalCta?.headline || "Talk to a counsellor.\nWalk away with a roadmap.";
+  const subheadline =
+    finalCta?.subheadline ||
+    "A 20-minute, no-pressure call to map your goal and the fastest route there.";
+  const primaryButtonText = finalCta?.primaryButtonText || "Book Free Guidance";
+  const secondaryButtonText = finalCta?.secondaryButtonText || "Chat on WhatsApp";
+
   return (
     <section className="container-px mx-auto max-w-7xl pb-12 pt-4 md:pb-16">
       <div className="relative overflow-hidden rounded-[2.5rem] bg-navy-gradient p-10 text-primary-foreground shadow-elevated md:p-16">
@@ -2214,36 +2359,32 @@ function FinalCta() {
         <div className="relative grid gap-8 md:grid-cols-[1.4fr_1fr] md:items-center">
           <div>
             <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-accent">
-              Ready when you are
+              {eyebrow}
             </p>
-            <h2 className="mt-3 font-display text-4xl font-semibold leading-tight text-white md:text-5xl">
-              Talk to a counsellor.
-              <br />
-              Walk away with a roadmap.
+            <h2 className="mt-3 font-display text-4xl font-semibold leading-tight text-white md:text-5xl whitespace-pre-line">
+              {headline}
             </h2>
-            <p className="mt-4 max-w-md text-white/75">
-              A 20-minute, no-pressure call to map your goal and the fastest route there.
-            </p>
+            <p className="mt-4 max-w-md text-white/75">{subheadline}</p>
           </div>
           <div className="flex flex-col gap-3 md:items-end">
             <a
-              href={`https://wa.me/${brand.whatsapp.replace(/\D/g, "")}?text=Hello%20Team%20Fin%20Envision%2C%20I%20have%20a%20few%20queries%20regarding%20the%20courses!`}
+              href={`https://wa.me/${(store.identity?.whatsapp || brand.whatsapp || "917304833625").replace(/\D/g, "")}?text=Hello%20Team%20Fin%20Envision%2C%20I%20have%20a%20few%20queries%20regarding%20the%20courses!`}
               target="_blank"
               rel="noopener noreferrer"
               className="group inline-flex items-center justify-center gap-2 rounded-full bg-accent pl-6 pr-2 py-2 text-sm font-bold uppercase tracking-[0.18em] text-accent-foreground shadow-elevated"
             >
-              Book Free Guidance
+              {primaryButtonText}
               <span className="grid h-9 w-9 place-items-center rounded-full bg-white text-primary transition-transform group-hover:translate-x-0.5">
                 <ArrowRight className="h-4 w-4" />
               </span>
             </a>
             <a
-              href={`https://wa.me/${brand.whatsapp.replace(/\D/g, "")}?text=Hello%20Team%20Fin%20Envision%2C%20I%20have%20a%20few%20queries%20regarding%20the%20courses!`}
+              href={`https://wa.me/${(store.identity?.whatsapp || brand.whatsapp || "917304833625").replace(/\D/g, "")}?text=Hello%20Team%20Fin%20Envision%2C%20I%20have%20a%20few%20queries%20regarding%20the%20courses!`}
               target="_blank"
               rel="noreferrer"
               className="inline-flex items-center justify-center gap-2 rounded-full border border-white/25 bg-white/5 px-5 py-3 text-sm font-semibold text-white backdrop-blur hover:bg-white/10"
             >
-              Chat on WhatsApp
+              {secondaryButtonText}
             </a>
           </div>
         </div>

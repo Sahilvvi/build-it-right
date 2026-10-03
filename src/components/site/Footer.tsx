@@ -1,7 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import {
-  Sparkles,
   Linkedin,
   Instagram,
   Youtube,
@@ -12,6 +11,7 @@ import {
   MapPin,
 } from "lucide-react";
 import { brand } from "@/data/site";
+import { useAdminStore } from "@/lib/admin-store";
 const logoAsset = { url: "/finenvision-logo-light.png" };
 
 const cols = [
@@ -53,6 +53,13 @@ const SOCIALS = [
 ];
 
 export function Footer() {
+  const store = useAdminStore();
+  const logo = store.visuals?.logoUrl || logoAsset.url;
+  const description = store.identity.footerBlurb || store.identity.description || brand.description;
+  const address = store.identity.address || brand.address;
+  const phone = store.identity.phone || brand.phone;
+  const email = store.identity.email || brand.email;
+
   return (
     <footer className="relative overflow-hidden bg-[hsl(220_55%_10%)] text-primary-foreground">
       {/* Decorative background */}
@@ -65,29 +72,31 @@ export function Footer() {
         <div className="grid gap-12 lg:grid-cols-[1.5fr_repeat(3,1fr)]">
           {/* Brand block */}
           <div>
-            <Link to="/" className="inline-flex items-center gap-2.5" aria-label={brand.name}>
-              <img src={logoAsset.url} alt={brand.name} className="h-16 w-auto" />
+            <Link
+              to="/"
+              className="inline-flex items-center gap-2.5"
+              aria-label={store.identity.name || brand.name}
+            >
+              <img src={logo} alt={store.identity.name || brand.name} className="h-16 w-auto" />
             </Link>
 
-            <p className="mt-5 max-w-sm text-sm leading-relaxed text-white/65">
-              {brand.description}
-            </p>
+            <p className="mt-5 max-w-sm text-sm leading-relaxed text-white/65">{description}</p>
 
             <ul className="mt-7 space-y-3 text-sm text-white/75">
               <li className="flex items-start gap-3">
                 <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-accent" />
-                <span>{brand.address}</span>
+                <span>{address}</span>
               </li>
               <li className="flex items-center gap-3">
                 <Phone className="h-4 w-4 shrink-0 text-accent" />
-                <a href={`tel:${brand.phone.replace(/\s/g, "")}`} className="hover:text-white">
-                  {brand.phone}
+                <a href={`tel:${phone.replace(/\s/g, "")}`} className="hover:text-white">
+                  {phone}
                 </a>
               </li>
               <li className="flex items-center gap-3">
                 <Mail className="h-4 w-4 shrink-0 text-accent" />
-                <a href={`mailto:${brand.email}`} className="hover:text-white">
-                  {brand.email}
+                <a href={`mailto:${email}`} className="hover:text-white">
+                  {email}
                 </a>
               </li>
             </ul>
@@ -153,7 +162,8 @@ export function Footer() {
         {/* Bottom bar */}
         <div className="mt-14 flex flex-col items-start justify-between gap-4 border-t border-white/10 pt-7 text-xs text-white/55 md:flex-row md:items-center">
           <div>
-            © {new Date().getFullYear()} {brand.name}. Crafted with intent in Mumbai.
+            {store.identity.footerCopyright ||
+              `© ${new Date().getFullYear()} ${store.identity.name || brand.name}. Crafted with intent in Mumbai.`}
           </div>
           <div className="flex flex-wrap gap-x-6 gap-y-2">
             <Link to="/contact" className="transition-colors hover:text-white">
@@ -164,6 +174,9 @@ export function Footer() {
             </Link>
             <Link to="/contact" className="transition-colors hover:text-white">
               Cookies
+            </Link>
+            <Link to="/admin" className="transition-colors text-white/40 hover:text-white">
+              Staff Portal
             </Link>
           </div>
         </div>

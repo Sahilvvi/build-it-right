@@ -3,7 +3,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useMemo, useState } from "react";
 import {
   ArrowRight,
-  Sparkles,
   Clock,
   Eye,
   Languages,
@@ -35,6 +34,7 @@ import { PremiumOrbs, AmbientDark, EyebrowBadge, GradientAccent } from "@/compon
 import { CompaniesMarquee } from "@/components/site/Marquee";
 import { FAQ } from "@/components/site/FAQ";
 import { cn } from "@/lib/utils";
+import { useAdminStore } from "@/lib/admin-store";
 
 export const Route = createFileRoute("/cfa")({
   head: () => ({
@@ -419,8 +419,32 @@ function ConicRing({ size = "h-14 w-14", className = "" }: { size?: string; clas
 
 // ─────────────────────────────── component ───────────────────────────────
 function CFAPage() {
+  const store = useAdminStore();
   const [level, setLevel] = useState<Level>("L1");
-  const data = levels[level];
+  const storeLevel = store.cfaPageContent?.levels?.[level];
+  const baseData = levels[level];
+
+  const data = useMemo(() => {
+    if (!storeLevel) return baseData;
+    return {
+      ...baseData,
+      badge: storeLevel.badge || baseData.badge,
+      tagline: storeLevel.tagline || baseData.tagline,
+      description: storeLevel.description || baseData.description,
+      meta: {
+        ...baseData.meta,
+        duration: storeLevel.duration || baseData.meta.duration,
+        views: storeLevel.views || baseData.meta.views,
+        language: storeLevel.language || baseData.meta.language,
+        coverage: storeLevel.coverage || baseData.meta.coverage,
+      },
+      pricing: {
+        offline: storeLevel.pricingOffline || baseData.pricing.offline,
+        online: storeLevel.pricingOnline || baseData.pricing.online,
+      },
+    };
+  }, [baseData, storeLevel]);
+
   const maxWeight = useMemo(
     () => Math.max(...data.weights.map((w) => parseInt(w.range.split("–")[1] || w.range))),
     [data],
@@ -440,7 +464,8 @@ function CFAPage() {
             className="flex flex-wrap items-center gap-3 text-xs font-medium uppercase tracking-[0.2em] text-white/80"
           >
             <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-3 py-1 backdrop-blur">
-              <Sparkles className="h-3 w-3 text-accent" /> Learn CFA® with real life examples
+              <Award className="h-3 w-3 text-accent" />{" "}
+              {store.cfaPageContent?.heroHeadline || "Learn CFA® with real life examples"}
             </span>
           </motion.div>
 
@@ -936,7 +961,7 @@ function CFAPage() {
                   className="absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-transparent via-white/15 to-transparent"
                 />
                 <span className="relative inline-flex items-center gap-1.5 rounded-full bg-accent px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.16em] text-accent-foreground">
-                  <Sparkles className="h-3 w-3" /> Most picked
+                  <Award className="h-3 w-3" /> Most picked
                 </span>
                 <div className="relative mt-4 text-xs uppercase tracking-[0.2em] text-white/70">
                   Early bird registration

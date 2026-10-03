@@ -6,7 +6,6 @@ import {
   MapPin,
   MessageCircle,
   ArrowRight,
-  Sparkles,
   Send,
   UserCheck,
   CalendarCheck,
@@ -155,7 +154,6 @@ function ContactPage() {
                   Send a message
                 </a>
                 <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-white/80 backdrop-blur">
-                  <Sparkles className="h-3 w-3 text-accent" />
                   <span className="relative flex h-1.5 w-1.5">
                     <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
                     <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-400" />

@@ -1,10 +1,11 @@
 import { useState, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowRight, Clock, ChevronLeft, ChevronRight } from "lucide-react";
+import { ArrowRight, Clock, ChevronLeft, ChevronRight, ExternalLink } from "lucide-react";
 import { FadeIn } from "@/components/site/primitives";
 import { AmbientLight, EyebrowBadge, GradientAccent } from "@/components/site/premium";
 import { cn } from "@/lib/utils";
 import { resourcePlaylists } from "@/data/site";
+import { useAdminStore } from "@/lib/admin-store";
 
 const YT_CHANNEL = "https://www.youtube.com/@financewithmanojrajgopal";
 
@@ -137,6 +138,10 @@ const tabs = [
 const PAGE_SIZE = 3;
 
 export function DemoVideos() {
+  const store = useAdminStore();
+  const demoCfg = store.homeContent?.demoVideos;
+  const channelUrl = demoCfg?.channelUrl || YT_CHANNEL;
+
   const [active, setActive] = useState<(typeof tabs)[number]>("All");
   const [page, setPage] = useState(1);
 
@@ -157,11 +162,25 @@ export function DemoVideos() {
         <FadeIn>
           <div className="flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
             <div className="flex flex-col gap-5">
-              <EyebrowBadge>Library</EyebrowBadge>
+              <EyebrowBadge>{demoCfg?.eyebrow || "Library"}</EyebrowBadge>
               <h2 className="font-display text-4xl font-semibold leading-[1.05] tracking-tight md:text-5xl lg:text-6xl">
-                Demo Videos. <GradientAccent>Every topic.</GradientAccent>
+                {demoCfg?.headline || "Demo Videos. Every topic."}
               </h2>
+              {demoCfg?.subheadline && (
+                <p className="text-muted-foreground text-base md:text-lg max-w-2xl">
+                  {demoCfg.subheadline}
+                </p>
+              )}
             </div>
+            <a
+              href={channelUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-5 py-2.5 text-xs font-bold uppercase tracking-wider text-foreground hover:border-accent hover:text-accent transition shadow-card"
+            >
+              <span>Visit YouTube Channel</span>
+              <ExternalLink className="h-3.5 w-3.5" />
+            </a>
           </div>
         </FadeIn>
 

@@ -1,11 +1,20 @@
-import { defineConfig } from "@lovable.dev/vite-tanstack-config";
+import { defineConfig } from "vite";
+import { tanstackStart } from "@tanstack/react-start/plugin/vite";
+import viteReact from "@vitejs/plugin-react";
+import viteTsConfigPaths from "vite-tsconfig-paths";
+import tailwindcss from "@tailwindcss/vite";
 
 export default defineConfig({
-  tanstackStart: {
-    server: { entry: "server" },
+  server: {
+    port: 5173,
+    host: true,
   },
-  // Build for Vercel instead of the default Cloudflare Workers target.
-  nitro: {
-    preset: "vercel",
-  },
+  plugins: [
+    tanstackStart({
+      server: { entry: "server" },
+    }),
+    viteReact(),
+    viteTsConfigPaths(),
+    tailwindcss(),
+  ],
 });

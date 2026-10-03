@@ -3,14 +3,20 @@ import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Phone, LogIn } from "lucide-react";
 import { navLinks, brand } from "@/data/site";
+import { useAdminStore } from "@/lib/admin-store";
 const logoAsset = { url: "/finenvision-logo-light.png" };
 import { cn } from "@/lib/utils";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 
 export function Navbar() {
+  const store = useAdminStore();
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const pathname = useRouterState({ select: (s) => s.location.pathname });
+
+  const activeAnnouncement =
+    store.announcements.find((a) => a.isActive)?.text ||
+    "Welcome to Fin-Envision Learning — An Educator to the Financial Markets";
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 16);
@@ -23,11 +29,12 @@ export function Navbar() {
 
   return (
     <>
-      {/* Top announcement bar — Fintree style */}
-      <div className="hidden bg-secondary/80 py-2 text-center text-[13px] text-foreground/80 backdrop-blur md:block">
-        <span className="font-semibold text-primary">Welcome to Fin-Envision Learning</span>
-        <span className="mx-2 text-muted-foreground">—</span>
-        <span>An Educator to the Financial Markets</span>
+      {/* Top announcement bar — Dynamic from Admin Notice Marquee */}
+      <div className="hidden bg-secondary/90 py-2 text-center text-[13px] text-foreground/85 backdrop-blur md:block border-b border-border/40">
+        <span className="inline-flex items-center gap-2 font-semibold text-primary">
+          <span className="h-2 w-2 rounded-full bg-accent animate-pulse shrink-0" />
+          {activeAnnouncement}
+        </span>
       </div>
 
       <motion.header
@@ -42,10 +49,14 @@ export function Navbar() {
         )}
       >
         <div className="container-px mx-auto flex max-w-7xl items-center justify-between gap-6 py-3">
-          <Link to="/" className="flex items-center gap-3" aria-label={brand.name}>
+          <Link
+            to="/"
+            className="flex items-center gap-3"
+            aria-label={store.identity.name || brand.name}
+          >
             <img
-              src={logoAsset.url}
-              alt={brand.name}
+              src={store.visuals?.logoUrl || logoAsset.url}
+              alt={store.identity.name || brand.name}
               className="h-12 w-auto md:h-14"
               loading="eager"
               decoding="async"
@@ -75,11 +86,11 @@ export function Navbar() {
 
           <div className="flex items-center gap-2">
             <a
-              href={`tel:${brand.phone.replace(/\s/g, "")}`}
+              href={`tel:${(store.identity.phone || brand.phone).replace(/\s/g, "")}`}
               className="hidden h-10 items-center gap-2 rounded-full border border-border/70 px-4 text-sm font-semibold text-foreground/80 transition-colors hover:border-primary/40 hover:text-primary md:inline-flex"
             >
               <Phone className="h-4 w-4" />
-              <span className="hidden xl:inline">{brand.phone}</span>
+              <span className="hidden xl:inline">{store.identity.phone || brand.phone}</span>
             </a>
             <TooltipProvider>
               <Tooltip>
@@ -88,7 +99,7 @@ export function Navbar() {
                     href="https://web.classplusapp.com"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group hidden h-10 items-center gap-2 rounded-full bg-primary px-5 text-sm font-semibold tracking-wide text-primary-foreground shadow-elevated transition-all hover:bg-primary-glow md:inline-flex"
+                    className="btn-sheen group hidden h-10 items-center gap-2 rounded-full bg-gradient-to-r from-primary via-[#0077ee] to-primary px-5 text-sm font-semibold tracking-wide text-white shadow-[0_4px_16px_rgba(0,109,218,0.35)] transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_8px_25px_rgba(0,109,218,0.5)] md:inline-flex"
                   >
                     <LogIn className="h-4 w-4" />
                     Login

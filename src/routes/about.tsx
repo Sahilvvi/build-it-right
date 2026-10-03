@@ -20,6 +20,7 @@ import {
 import { FAQ } from "@/components/site/FAQ";
 import { cn } from "@/lib/utils";
 import { googleReviewsCount } from "@/data/site";
+import { useAdminStore } from "@/lib/admin-store";
 const FOUNDER_PHOTO = "/manoj-rajgopal.jpg";
 
 export const Route = createFileRoute("/about")({
@@ -149,6 +150,72 @@ function ConicRing({ size = "h-14 w-14" }: { size?: string }) {
 
 // ─────────────────────────────── component ───────────────────────────────
 function AboutPage() {
+  const store = useAdminStore();
+  const about = store.aboutContent || {};
+  const founderPhoto =
+    store.visuals?.founderPhotoUrl ||
+    store.homeContent?.founderSpotlight?.founderPhoto ||
+    FOUNDER_PHOTO;
+  const founderName = store.homeContent?.founderSpotlight?.founderName || leadership.name;
+  const founderTitle = store.homeContent?.founderSpotlight?.founderTitle || leadership.role;
+  const founderCreds =
+    store.homeContent?.founderSpotlight?.credentials &&
+    store.homeContent.founderSpotlight.credentials.length > 0
+      ? store.homeContent.founderSpotlight.credentials
+      : leadership.creds;
+  const founderJourney =
+    about.founderBullets && about.founderBullets.length > 0
+      ? about.founderBullets
+      : store.homeContent?.founderSpotlight?.journey &&
+          store.homeContent.founderSpotlight.journey.length > 0
+        ? store.homeContent.founderSpotlight.journey
+        : leadership.work;
+
+  const whoWeAreHeading = about.whoWeAreHeading || "Learn Finance the Way the Industry Works.";
+  const p1 =
+    about.whoWeAre?.[0] ||
+    'Fin-Envision is a leading training institute offering certified programs in Financial Modelling and CFA®. As the name suggests, "Financial Envision" is about giving a future perspective to your career — helping individuals realize their potential through mentoring and imparting skills.';
+  const p2 =
+    about.whoWeAre?.[1] ||
+    "Formulated through years of teaching experience, our coaching methodology places utmost emphasis on problem solving and conceptual clarity. Every instructor is carefully selected for their blend of expertise and passion for teaching — the human touch and care for each candidate is the real hallmark of Fin-Envision.";
+
+  const missionText =
+    about.mission ||
+    "To simplify finance education and equip every learner with practical skills required for successful careers in global finance.";
+  const visionText =
+    about.vision ||
+    "To become the most trusted finance learning platform by making quality education accessible, practical, and career-oriented.";
+  const valuesList =
+    about.values && about.values.length > 0
+      ? about.values
+      : [
+          "Practical Learning",
+          "Student First",
+          "Industry Relevance",
+          "Continuous Mentorship",
+          "Excellence Through Consistency",
+        ];
+
+  const dynamicStats = [
+    {
+      value: store.homeContent?.placementSection?.studentsCount || 5000,
+      suffix: store.homeContent?.placementSection?.studentsSuffix || "+",
+      label: "Students trained",
+    },
+    {
+      value: `~${store.homeContent?.placementSection?.successRateMin || 80}–${store.homeContent?.placementSection?.successRateMax || 90}%`,
+      suffix: "",
+      label: "Success rate",
+      isStatic: true,
+    },
+    { value: googleReviewsCount, suffix: "", label: "Google reviews" },
+    {
+      value: parseInt(store.homeContent?.founderSpotlight?.experienceYears || "8") || 8,
+      suffix: "+ yrs",
+      label: "Teaching experience",
+    },
+  ];
+
   return (
     <SiteLayout>
       {/* HERO */}
@@ -163,7 +230,7 @@ function AboutPage() {
             transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
             className="mt-6 max-w-5xl text-balance font-display text-5xl font-semibold leading-[1.02] tracking-tight md:text-7xl lg:text-[5.5rem]"
           >
-            Learn Finance the <GradientAccent>Way</GradientAccent> the Industry Works.
+            {whoWeAreHeading}
           </motion.h1>
 
           <div className="mt-14 grid gap-10 lg:grid-cols-[1.1fr_1fr] lg:items-end">
@@ -172,22 +239,13 @@ function AboutPage() {
                 Who we are
               </div>
               <p className="mt-5 text-pretty text-lg leading-relaxed text-white/85 md:text-xl">
-                Fin-Envision is a leading training institute offering certified programs in
-                Financial Modelling and CFA®. As the name suggests,{" "}
-                <span className="text-white">"Financial Envision"</span> is about giving a future
-                perspective to your career — helping individuals realize their potential through
-                mentoring and imparting skills.
+                {p1}
               </p>
-              <p className="mt-5 text-pretty text-base text-white/70 md:text-lg">
-                Formulated through years of teaching experience, our coaching methodology places
-                utmost emphasis on problem solving and conceptual clarity. Every instructor is
-                carefully selected for their blend of expertise and passion for teaching — the human
-                touch and care for each candidate is the real hallmark of Fin-Envision.
-              </p>
+              <p className="mt-5 text-pretty text-base text-white/70 md:text-lg">{p2}</p>
             </FadeIn>
 
             <Stagger className="grid grid-cols-2 gap-3">
-              {heroStats.map((s) => (
+              {dynamicStats.map((s) => (
                 <StaggerItem key={s.label} variants={staggerItemVariants}>
                   <div className="relative overflow-hidden rounded-3xl border border-white/15 bg-white/10 p-5 backdrop-blur-md transition-all hover:border-accent/40 hover:bg-white/[0.14]">
                     <div className="pointer-events-none absolute -right-10 -top-10 h-32 w-32 rounded-full bg-accent/30 opacity-0 blur-3xl transition-opacity duration-500 hover:opacity-100" />
@@ -221,23 +279,17 @@ function AboutPage() {
             {
               label: "Our Mission",
               tone: "from-[#1a3a5c] to-[#2d5a8c]",
-              body: "To simplify finance education and equip every learner with practical skills required for successful careers in global finance.",
+              body: missionText,
             },
             {
               label: "Our Vision",
               tone: "from-indigo-700 to-violet-800",
-              body: "To become the most trusted finance learning platform by making quality education accessible, practical, and career-oriented.",
+              body: visionText,
             },
             {
               label: "Our Values",
               tone: "from-amber-500 to-orange-600",
-              values: [
-                "Practical Learning",
-                "Student First",
-                "Industry Relevance",
-                "Continuous Mentorship",
-                "Excellence Through Consistency",
-              ],
+              values: valuesList,
             },
           ].map((card, i) => (
             <motion.div
@@ -297,17 +349,17 @@ function AboutPage() {
                 />
                 <div className="relative aspect-[4/5] overflow-hidden rounded-[2.5rem] bg-gradient-to-br from-[#1a3a5c] via-[#21426b] to-[#0f2a44] shadow-elevated">
                   <img
-                    src={FOUNDER_PHOTO}
-                    alt={`${leadership.name} — Founder & Lead Instructor, Fin-Envision Learning`}
+                    src={founderPhoto}
+                    alt={`${founderName} — ${founderTitle}, Fin-Envision Learning`}
                     className="absolute inset-0 h-full w-full object-cover object-top"
                     loading="lazy"
                     decoding="async"
                   />
                   <div className="absolute inset-x-0 bottom-0 h-2/5 bg-gradient-to-t from-[#0b1f33] via-[#0b1f33]/70 to-transparent" />
                   <div className="absolute inset-x-0 bottom-0 p-7 text-white">
-                    <div className="font-display text-3xl font-semibold">{leadership.name}</div>
+                    <div className="font-display text-3xl font-semibold">{founderName}</div>
                     <div className="mt-1 text-sm uppercase tracking-[0.2em] text-white/70">
-                      Founder
+                      {founderTitle}
                     </div>
                   </div>
                 </div>
@@ -321,7 +373,7 @@ function AboutPage() {
                     Academic Credentials
                   </div>
                   <div className="mt-4 flex flex-wrap gap-2">
-                    {leadership.creds.map((c, i) => (
+                    {founderCreds.map((c, i) => (
                       <motion.span
                         key={c}
                         initial={{ opacity: 0, scale: 0.9 }}
@@ -343,7 +395,7 @@ function AboutPage() {
                     Manoj Sir's Journey
                   </div>
                   <ul className="mt-5 space-y-3">
-                    {leadership.work.map((w, i) => (
+                    {founderJourney.map((w, i) => (
                       <motion.li
                         key={w}
                         initial={{ opacity: 0, x: -8 }}

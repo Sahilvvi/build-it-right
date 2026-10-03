@@ -171,6 +171,10 @@ export type Course = {
   rating: number;
   learners: number;
   badge?: string;
+  nextBatchDate?: string;
+  batchSchedule?: string;
+  seatsRemaining?: number;
+  enrollmentStatus?: "Open" | "Filling Fast" | "Waitlist" | "Closed";
 };
 
 export const courses: Course[] = [

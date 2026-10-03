@@ -1,16 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import {
-  ArrowRight,
-  Play,
-  Youtube,
-  Sparkles,
-  Clock,
-  Search,
-  ChevronLeft,
-  ChevronRight,
-} from "lucide-react";
+import { ArrowRight, Play, Youtube, Clock, Search, ChevronLeft, ChevronRight } from "lucide-react";
 import { SiteLayout } from "@/components/site/Layout";
 import { FadeIn, Counter } from "@/components/site/primitives";
 import {

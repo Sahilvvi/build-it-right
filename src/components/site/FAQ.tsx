@@ -3,13 +3,14 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "@tanstack/react-router";
 import { ArrowRight, MessageSquare } from "lucide-react";
 import { faqs as defaultFaqs } from "@/data/site";
+import { useAdminStore } from "@/lib/admin-store";
 import { FadeIn } from "@/components/site/primitives";
 import { cn } from "@/lib/utils";
 
 type FaqItem = { q: string; a: string };
 
 export function FAQ({
-  items = defaultFaqs,
+  items,
   eyebrow = "Questions, answered",
   title,
   description = "Everything you wanted to know — from materials to mentorship to fees. Tap a question to expand.",
@@ -27,7 +28,15 @@ export function FAQ({
   ctaLabel?: string;
   ctaHref?: string;
 }) {
+  const store = useAdminStore();
   const [open, setOpen] = useState<number | null>(0);
+
+  const activeStoreFaqs =
+    store.faqs && store.faqs.length > 0
+      ? store.faqs.filter((f) => f.isActive).map((f) => ({ q: f.question, a: f.answer }))
+      : defaultFaqs;
+
+  const currentItems = items || activeStoreFaqs;
 
   const heading = title ?? (
     <>
@@ -110,7 +119,7 @@ export function FAQ({
             />
 
             <ul className="space-y-4">
-              {items.map((f, i) => {
+              {currentItems.map((f, i) => {
                 const isOpen = open === i;
                 return (
                   <motion.li

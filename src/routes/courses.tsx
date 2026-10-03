@@ -15,12 +15,13 @@ import {
   Phone,
   Mail,
   User,
-  Sparkles,
+  Award,
   MessageSquare,
   ChevronDown,
 } from "lucide-react";
 import { SiteLayout } from "@/components/site/Layout";
 import { faqs, googleReviewsCount, googleRating, brand, courses } from "@/data/site";
+import { useAdminStore, addLead } from "@/lib/admin-store";
 
 export const Route = createFileRoute("/courses")({
   head: () => ({
@@ -394,12 +395,13 @@ function GradientHeading({
   );
 }
 
-/* ─────────── PAGE ─────────── */
-
 function CoursesPage() {
   return (
     <SiteLayout>
       <Hero />
+      <Curriculum />
+      <ImportantNote />
+      <PlanExam />
       <Pricing />
       <LeadForm />
       <CourseFaqs />
@@ -410,6 +412,11 @@ function CoursesPage() {
 /* ─────────── HERO ─────────── */
 
 function Hero() {
+  const store = useAdminStore();
+  const headline = store.coursesPageContent?.heroHeadline || "CFA® Prep Program";
+  const subheadline = store.coursesPageContent?.heroSubheadline;
+  const ratingText = store.coursesPageContent?.ratingText;
+
   return (
     <section className="relative overflow-hidden bg-[hsl(220_55%_12%)] pb-20 pt-14 text-primary-foreground md:pt-20">
       <AmbientDark />
@@ -441,17 +448,19 @@ function Hero() {
                       {googleRating}
                     </span>
                     <span className="text-xs text-white/60">
-                      Google Reviews · {googleReviewsCount} reviews
+                      {ratingText || `Google Reviews · ${googleReviewsCount} reviews`}
                     </span>
                   </div>
                 </div>
 
                 <h1 className="mt-4 font-display text-5xl font-bold leading-[1.05] text-white md:text-6xl lg:text-[4.2rem]">
-                  CFA<sup className="text-2xl text-accent">®</sup> Prep{" "}
-                  <span className="italic bg-gradient-to-r from-accent via-accent to-accent/70 bg-clip-text text-transparent pr-[0.15em] -mr-[0.15em]">
-                    Program
-                  </span>
+                  {headline}
                 </h1>
+                {subheadline && (
+                  <p className="mt-4 text-white/80 text-base md:text-lg max-w-3xl leading-relaxed">
+                    {subheadline}
+                  </p>
+                )}
 
                 <div className="mt-10 grid gap-6 sm:grid-cols-2">
                   <HeroFact
@@ -547,6 +556,9 @@ function ChapterNav() {
 /* ─────────── ABOUT ─────────── */
 
 function AboutCFA() {
+  const store = useAdminStore();
+  const audience = store.coursesPageContent?.whoItsFor || WHO_ITS_FOR;
+
   return (
     <section id="about" className="relative overflow-hidden scroll-mt-32 py-24 md:py-32">
       <AmbientLight />
@@ -563,7 +575,7 @@ function AboutCFA() {
         <div className="mt-14">
           <h3 className="font-display text-2xl font-semibold tracking-tight">Who is it for?</h3>
           <div className="mt-6 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
-            {WHO_ITS_FOR.map((t, i) => (
+            {audience.map((t, i) => (
               <motion.div
                 key={t}
                 initial={{ opacity: 0, y: 20 }}
@@ -731,6 +743,12 @@ function Curriculum() {
 /* ─────────── IMPORTANT NOTE ─────────── */
 
 function ImportantNote() {
+  const store = useAdminStore();
+  const notes =
+    store.coursesPageContent?.importantNotes && store.coursesPageContent.importantNotes.length > 0
+      ? store.coursesPageContent.importantNotes
+      : IMPORTANT_NOTES;
+
   return (
     <section className="container-px mx-auto max-w-7xl py-16">
       <motion.div
@@ -756,7 +774,7 @@ function ImportantNote() {
             </h3>
           </div>
           <ul className="mt-6 grid gap-3 md:grid-cols-2">
-            {IMPORTANT_NOTES.map((n, i) => (
+            {notes.map((n, i) => (
               <motion.li
                 key={n}
                 initial={{ opacity: 0, x: -10 }}
@@ -884,7 +902,7 @@ function PlanExam() {
             <div className="pointer-events-none absolute -right-20 -top-20 h-56 w-56 rounded-full bg-accent/20 blur-3xl" />
             <div>
               <div className="inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.22em] text-accent">
-                <Sparkles className="h-3 w-3" /> From Knowing to Doing
+                <Target className="h-3 w-3" /> From Knowing to Doing
               </div>
               <h3 className="mt-3 font-display text-2xl font-semibold text-white md:text-3xl">
                 Make the rest{" "}
@@ -1013,7 +1031,7 @@ function Pricing() {
                         className="pointer-events-none absolute -right-16 -top-16 h-44 w-44 rounded-full bg-accent/30 blur-3xl"
                       />
                       <div className="absolute right-5 top-5 inline-flex items-center gap-1.5 rounded-full bg-accent px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-accent-foreground shadow-[0_10px_24px_-8px_hsl(var(--accent)/0.7)]">
-                        <Sparkles className="h-3 w-3" /> Most Picked
+                        <Award className="h-3 w-3" /> Most Picked
                       </div>
                     </>
                   )}
@@ -1065,14 +1083,14 @@ function Pricing() {
                     target="_blank"
                     rel="noopener noreferrer"
                     className={
-                      "group/btn mt-7 inline-flex w-full items-center justify-center gap-2 rounded-full py-3 text-xs font-bold uppercase tracking-[0.18em] transition-all " +
+                      "btn-sheen group/btn mt-7 inline-flex w-full items-center justify-center gap-2 rounded-full py-3.5 text-xs font-bold uppercase tracking-[0.18em] transition-all duration-300 hover:scale-[1.02] " +
                       (p.popular
-                        ? "bg-accent text-accent-foreground hover:bg-accent/90 hover:shadow-[0_16px_32px_-12px_hsl(var(--accent)/0.7)]"
-                        : "border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground hover:shadow-[0_16px_32px_-12px_hsl(var(--primary)/0.6)]")
+                        ? "bg-accent text-accent-foreground hover:bg-accent/90 shadow-[0_10px_25px_-5px_hsl(var(--accent)/0.6)]"
+                        : "border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground shadow-[0_10px_25px_-5px_hsl(var(--primary)/0.4)]")
                     }
                   >
                     Enroll Now{" "}
-                    <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover/btn:translate-x-0.5" />
+                    <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover/btn:translate-x-1" />
                   </a>
                 </div>
               </motion.div>
