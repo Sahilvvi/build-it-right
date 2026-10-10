@@ -1,3 +1,4 @@
+/** @jsxImportSource @/lib/editable */
 import { useState, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, Clock, ChevronLeft, ChevronRight, ExternalLink } from "lucide-react";

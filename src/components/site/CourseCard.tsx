@@ -1,3 +1,4 @@
+/** @jsxImportSource @/lib/editable */
 import { motion } from "framer-motion";
 import { Star, Users, Clock, ArrowUpRight } from "lucide-react";
 import { Link } from "@tanstack/react-router";

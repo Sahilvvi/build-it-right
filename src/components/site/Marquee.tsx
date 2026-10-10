@@ -1,3 +1,4 @@
+/** @jsxImportSource @/lib/editable */
 import { hiringCompanies } from "@/data/site";
 import { Building2 } from "lucide-react";
 

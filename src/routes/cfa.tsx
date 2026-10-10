@@ -1,3 +1,6 @@
+/** @jsxImportSource @/lib/editable */
+import { Section } from "@/components/site/Section";
+import { withSeo } from "@/lib/seo";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion, AnimatePresence } from "framer-motion";
 import { useMemo, useState } from "react";
@@ -37,19 +40,20 @@ import { cn } from "@/lib/utils";
 import { useAdminStore } from "@/lib/admin-store";
 
 export const Route = createFileRoute("/cfa")({
-  head: () => ({
-    meta: [
-      { title: "CFA® Program — Level I, II & III Prep | Fin-Envision Learning" },
-      {
-        name: "description",
-        content:
-          "Self-paced CFA® Level I, II & III prep with one mentor, real-life examples, and 100% coverage in English + Hindi. Trusted by candidates worldwide.",
-      },
-      { property: "og:title", content: "CFA® Program — Level I, II & III Prep" },
-      { property: "og:url", content: "/cfa" },
-    ],
-    links: [{ rel: "canonical", href: "/cfa" }],
-  }),
+  head: () =>
+    withSeo("/cfa", {
+      meta: [
+        { title: "CFA® Program — Level I, II & III Prep | Fin-Envision Learning" },
+        {
+          name: "description",
+          content:
+            "Self-paced CFA® Level I, II & III prep with one mentor, real-life examples, and 100% coverage in English + Hindi. Trusted by candidates worldwide.",
+        },
+        { property: "og:title", content: "CFA® Program — Level I, II & III Prep" },
+        { property: "og:url", content: "/cfa" },
+      ],
+      links: [{ rel: "canonical", href: "/cfa" }],
+    }),
   component: CFAPage,
 });
 
@@ -453,614 +457,636 @@ function CFAPage() {
   return (
     <SiteLayout>
       {/* HERO */}
-      <section className="relative overflow-hidden bg-[hsl(220_55%_12%)] text-primary-foreground">
-        <PremiumOrbs />
+      <Section id="cfa.hero" label="Hero">
+        <section className="relative overflow-hidden bg-[hsl(220_55%_12%)] text-primary-foreground">
+          <PremiumOrbs />
 
-        <div className="container-px relative mx-auto max-w-7xl pb-24 pt-20 md:pt-28">
-          <motion.div
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="flex flex-wrap items-center gap-3 text-xs font-medium uppercase tracking-[0.2em] text-white/80"
-          >
-            <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-3 py-1 backdrop-blur">
-              <Award className="h-3 w-3 text-accent" />{" "}
-              {store.cfaPageContent?.heroHeadline || "Learn CFA® with real life examples"}
-            </span>
-          </motion.div>
+          <div className="container-px relative mx-auto max-w-7xl pb-24 pt-20 md:pt-28">
+            <motion.div
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className="flex flex-wrap items-center gap-3 text-xs font-medium uppercase tracking-[0.2em] text-white/80"
+            >
+              <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-3 py-1 backdrop-blur">
+                <Award className="h-3 w-3 text-accent" />{" "}
+                {store.cfaPageContent?.heroHeadline || "Learn CFA® with real life examples"}
+              </span>
+            </motion.div>
 
-          {/* Level toggle */}
-          <div className="mt-8 inline-flex rounded-full border border-white/15 bg-white/10 p-1.5 backdrop-blur">
-            {levelOrder.map((l) => (
-              <button
-                key={l}
-                onClick={() => setLevel(l)}
-                className={cn(
-                  "relative rounded-full px-5 py-2 text-sm font-semibold uppercase tracking-wider transition-colors",
-                  level === l ? "text-foreground" : "text-white/70 hover:text-white",
-                )}
+            {/* Level toggle */}
+            <div className="mt-8 inline-flex rounded-full border border-white/15 bg-white/10 p-1.5 backdrop-blur">
+              {levelOrder.map((l) => (
+                <button
+                  key={l}
+                  onClick={() => setLevel(l)}
+                  className={cn(
+                    "relative rounded-full px-5 py-2 text-sm font-semibold uppercase tracking-wider transition-colors",
+                    level === l ? "text-foreground" : "text-white/70 hover:text-white",
+                  )}
+                >
+                  {level === l && (
+                    <motion.span
+                      layoutId="cfa-pill"
+                      className="absolute inset-0 rounded-full bg-accent shadow-glow"
+                      transition={{ type: "spring", duration: 0.5 }}
+                    />
+                  )}
+                  <span className="relative">{levelLabels[l]}</span>
+                </button>
+              ))}
+            </div>
+
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={level}
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.45 }}
+                className="mt-8 grid gap-12 lg:grid-cols-[1.4fr_1fr] lg:items-end"
               >
-                {level === l && (
+                <div>
+                  <div className="text-sm uppercase tracking-[0.24em] text-accent">
+                    {data.tagline}
+                  </div>
+                  <h1 className="mt-4 max-w-3xl text-balance font-display text-5xl font-semibold leading-[1.02] tracking-tight md:text-7xl">
+                    CFA® <GradientAccent>{data.badge}</GradientAccent>
+                  </h1>
+                  <p className="mt-3 text-sm uppercase tracking-[0.24em] text-white/60">
+                    Chartered Financial Analyst
+                  </p>
+                  <p className="mt-6 max-w-2xl text-pretty text-lg text-white/80">
+                    {data.description}
+                  </p>
+                </div>
+
+                {/* Pricing card with rotating conic ring */}
+                <div className="relative">
                   <motion.span
-                    layoutId="cfa-pill"
-                    className="absolute inset-0 rounded-full bg-accent shadow-glow"
-                    transition={{ type: "spring", duration: 0.5 }}
+                    aria-hidden
+                    animate={{ rotate: 360 }}
+                    transition={{ duration: 22, repeat: Infinity, ease: "linear" }}
+                    className="absolute -inset-[1px] rounded-[2rem] opacity-60"
+                    style={{
+                      background:
+                        "conic-gradient(from 0deg, hsl(var(--accent)/0.6), transparent 30%, hsl(var(--primary)/0.6) 60%, transparent 90%, hsl(var(--accent)/0.6))",
+                      mask: "radial-gradient(farthest-side, transparent calc(100% - 2px), #000 0)",
+                      WebkitMask:
+                        "radial-gradient(farthest-side, transparent calc(100% - 2px), #000 0)",
+                    }}
                   />
-                )}
-                <span className="relative">{levelLabels[l]}</span>
-              </button>
-            ))}
+                  <div className="relative rounded-[2rem] border border-white/15 bg-white/10 p-6 backdrop-blur-md">
+                    <div className="text-[10px] uppercase tracking-[0.24em] text-accent">
+                      Enroll now
+                    </div>
+                    <div className="mt-3 flex items-baseline gap-3">
+                      <span className="font-display text-5xl font-semibold text-white md:text-6xl">
+                        {data.pricing.offline}
+                      </span>
+                    </div>
+                    <div className="mt-5 flex flex-wrap gap-2">
+                      <a
+                        href="https://wa.me/917304833625?text=Hello%20Team%20Fin%20Envision%2C%20I%20have%20a%20few%20queries%20regarding%20the%20courses!"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 rounded-full bg-accent px-4 py-2.5 text-sm font-semibold uppercase tracking-wider text-accent-foreground transition-transform hover:scale-[1.02]"
+                      >
+                        Enroll <ArrowRight className="h-4 w-4" />
+                      </a>
+                    </div>
+
+                    <div className="mt-6 grid grid-cols-2 gap-3 text-[11px]">
+                      {[
+                        { icon: Eye, k: "Views", v: data.meta.views },
+                        { icon: Languages, k: "Language", v: data.meta.language },
+                        { icon: ShieldCheck, k: "Coverage", v: data.meta.coverage },
+                        { icon: Calendar, k: "Validity", v: data.meta.validity },
+                      ].map((m) => (
+                        <div key={m.k} className="rounded-xl border border-white/10 bg-white/5 p-3">
+                          <div className="flex items-center gap-1.5 text-white/60">
+                            <m.icon className="h-3 w-3" />{" "}
+                            <span className="uppercase tracking-[0.16em]">{m.k}</span>
+                          </div>
+                          <div className="mt-1 text-sm font-semibold text-white leading-normal py-0.5">
+                            {m.v}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            </AnimatePresence>
           </div>
+        </section>
+      </Section>
+
+      {/* SYLLABUS WEIGHTS */}
+      <Section id="cfa.syllabus-weights" label="Syllabus Weights">
+        <section className="relative container-px mx-auto max-w-7xl py-24 md:py-32">
+          <PremiumHeader
+            eyebrow="Syllabus & weights"
+            title={
+              <>
+                Subject weightage — <GradientAccent>{levelLabels[level]}</GradientAccent>
+              </>
+            }
+            description="Understand exam weightage across all subjects so you can prioritise your prep correctly."
+          />
 
           <AnimatePresence mode="wait">
             <motion.div
               key={level}
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
+              exit={{ opacity: 0 }}
               transition={{ duration: 0.45 }}
-              className="mt-8 grid gap-12 lg:grid-cols-[1.4fr_1fr] lg:items-end"
+              className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3"
             >
-              <div>
-                <div className="text-sm uppercase tracking-[0.24em] text-accent">
-                  {data.tagline}
-                </div>
-                <h1 className="mt-4 max-w-3xl text-balance font-display text-5xl font-semibold leading-[1.02] tracking-tight md:text-7xl">
-                  CFA® <GradientAccent>{data.badge}</GradientAccent>
-                </h1>
-                <p className="mt-3 text-sm uppercase tracking-[0.24em] text-white/60">
-                  Chartered Financial Analyst
-                </p>
-                <p className="mt-6 max-w-2xl text-pretty text-lg text-white/80">
-                  {data.description}
-                </p>
-              </div>
-
-              {/* Pricing card with rotating conic ring */}
-              <div className="relative">
-                <motion.span
-                  aria-hidden
-                  animate={{ rotate: 360 }}
-                  transition={{ duration: 22, repeat: Infinity, ease: "linear" }}
-                  className="absolute -inset-[1px] rounded-[2rem] opacity-60"
-                  style={{
-                    background:
-                      "conic-gradient(from 0deg, hsl(var(--accent)/0.6), transparent 30%, hsl(var(--primary)/0.6) 60%, transparent 90%, hsl(var(--accent)/0.6))",
-                    mask: "radial-gradient(farthest-side, transparent calc(100% - 2px), #000 0)",
-                    WebkitMask:
-                      "radial-gradient(farthest-side, transparent calc(100% - 2px), #000 0)",
-                  }}
-                />
-                <div className="relative rounded-[2rem] border border-white/15 bg-white/10 p-6 backdrop-blur-md">
-                  <div className="text-[10px] uppercase tracking-[0.24em] text-accent">
-                    Enroll now
-                  </div>
-                  <div className="mt-3 flex items-baseline gap-3">
-                    <span className="font-display text-5xl font-semibold text-white md:text-6xl">
-                      {data.pricing.offline}
-                    </span>
-                  </div>
-                  <div className="mt-5 flex flex-wrap gap-2">
-                    <a
-                      href="https://wa.me/917304833625?text=Hello%20Team%20Fin%20Envision%2C%20I%20have%20a%20few%20queries%20regarding%20the%20courses!"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 rounded-full bg-accent px-4 py-2.5 text-sm font-semibold uppercase tracking-wider text-accent-foreground transition-transform hover:scale-[1.02]"
-                    >
-                      Enroll <ArrowRight className="h-4 w-4" />
-                    </a>
-                  </div>
-
-                  <div className="mt-6 grid grid-cols-2 gap-3 text-[11px]">
-                    {[
-                      { icon: Eye, k: "Views", v: data.meta.views },
-                      { icon: Languages, k: "Language", v: data.meta.language },
-                      { icon: ShieldCheck, k: "Coverage", v: data.meta.coverage },
-                      { icon: Calendar, k: "Validity", v: data.meta.validity },
-                    ].map((m) => (
-                      <div key={m.k} className="rounded-xl border border-white/10 bg-white/5 p-3">
-                        <div className="flex items-center gap-1.5 text-white/60">
-                          <m.icon className="h-3 w-3" />{" "}
-                          <span className="uppercase tracking-[0.16em]">{m.k}</span>
+              {data.weights.map((w, i) => {
+                const top = parseInt(w.range.split("–")[1] || w.range);
+                const pct = Math.round((top / maxWeight) * 100);
+                return (
+                  <motion.div
+                    key={w.subject}
+                    initial={{ opacity: 0, y: 24 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: "-40px" }}
+                    transition={{ duration: 0.55, delay: i * 0.04, ease: [0.16, 1, 0.3, 1] }}
+                    className="group relative overflow-hidden rounded-3xl border border-border bg-card p-6 shadow-card transition-all hover-lift"
+                  >
+                    <div className="pointer-events-none absolute -right-12 -top-12 h-40 w-40 rounded-full bg-gradient-brand opacity-0 blur-3xl transition-opacity duration-500 group-hover:opacity-25" />
+                    <div className="flex items-start justify-between gap-3">
+                      <div className="flex items-center gap-3">
+                        {/* Numbered conic-ring counter — homepage signature */}
+                        <div className="relative grid h-12 w-12 place-items-center">
+                          <ConicRing size="h-12 w-12" />
+                          <div className="relative grid h-10 w-10 place-items-center rounded-full bg-background font-display text-sm font-bold text-primary">
+                            {String(i + 1).padStart(2, "0")}
+                          </div>
                         </div>
-                        <div className="mt-1 text-sm font-semibold text-white leading-normal py-0.5">
-                          {m.v}
+                        <div>
+                          <div className="text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
+                            Subject
+                          </div>
+                          <div className="mt-0.5 font-display text-base font-semibold leading-tight">
+                            {w.subject}
+                          </div>
                         </div>
                       </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
+                      <span
+                        className={cn(
+                          "rounded-full bg-gradient-to-br px-3 py-1 text-xs font-bold text-white shadow",
+                          levelAccent[level],
+                        )}
+                      >
+                        {w.range}
+                      </span>
+                    </div>
+                    <div className="mt-6 h-2 overflow-hidden rounded-full bg-muted">
+                      <motion.div
+                        initial={{ width: 0 }}
+                        whileInView={{ width: `${pct}%` }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 1.1, delay: i * 0.05, ease: [0.16, 1, 0.3, 1] }}
+                        className={cn("h-full rounded-full bg-gradient-to-r", levelAccent[level])}
+                      />
+                    </div>
+                  </motion.div>
+                );
+              })}
             </motion.div>
           </AnimatePresence>
-        </div>
-      </section>
-
-      {/* SYLLABUS WEIGHTS */}
-      <section className="relative container-px mx-auto max-w-7xl py-24 md:py-32">
-        <PremiumHeader
-          eyebrow="Syllabus & weights"
-          title={
-            <>
-              Subject weightage — <GradientAccent>{levelLabels[level]}</GradientAccent>
-            </>
-          }
-          description="Understand exam weightage across all subjects so you can prioritise your prep correctly."
-        />
-
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={level}
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.45 }}
-            className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3"
-          >
-            {data.weights.map((w, i) => {
-              const top = parseInt(w.range.split("–")[1] || w.range);
-              const pct = Math.round((top / maxWeight) * 100);
-              return (
-                <motion.div
-                  key={w.subject}
-                  initial={{ opacity: 0, y: 24 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-40px" }}
-                  transition={{ duration: 0.55, delay: i * 0.04, ease: [0.16, 1, 0.3, 1] }}
-                  className="group relative overflow-hidden rounded-3xl border border-border bg-card p-6 shadow-card transition-all hover-lift"
-                >
-                  <div className="pointer-events-none absolute -right-12 -top-12 h-40 w-40 rounded-full bg-gradient-brand opacity-0 blur-3xl transition-opacity duration-500 group-hover:opacity-25" />
-                  <div className="flex items-start justify-between gap-3">
-                    <div className="flex items-center gap-3">
-                      {/* Numbered conic-ring counter — homepage signature */}
-                      <div className="relative grid h-12 w-12 place-items-center">
-                        <ConicRing size="h-12 w-12" />
-                        <div className="relative grid h-10 w-10 place-items-center rounded-full bg-background font-display text-sm font-bold text-primary">
-                          {String(i + 1).padStart(2, "0")}
-                        </div>
-                      </div>
-                      <div>
-                        <div className="text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
-                          Subject
-                        </div>
-                        <div className="mt-0.5 font-display text-base font-semibold leading-tight">
-                          {w.subject}
-                        </div>
-                      </div>
-                    </div>
-                    <span
-                      className={cn(
-                        "rounded-full bg-gradient-to-br px-3 py-1 text-xs font-bold text-white shadow",
-                        levelAccent[level],
-                      )}
-                    >
-                      {w.range}
-                    </span>
-                  </div>
-                  <div className="mt-6 h-2 overflow-hidden rounded-full bg-muted">
-                    <motion.div
-                      initial={{ width: 0 }}
-                      whileInView={{ width: `${pct}%` }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 1.1, delay: i * 0.05, ease: [0.16, 1, 0.3, 1] }}
-                      className={cn("h-full rounded-full bg-gradient-to-r", levelAccent[level])}
-                    />
-                  </div>
-                </motion.div>
-              );
-            })}
-          </motion.div>
-        </AnimatePresence>
-      </section>
+        </section>
+      </Section>
 
       {/* LEVEL COMPARISON */}
-      <section className="container-px mx-auto max-w-7xl pb-24 md:pb-32">
-        <PremiumHeader
-          eyebrow="Level comparison"
-          title={
-            <>
-              All three levels, <GradientAccent>side by side.</GradientAccent>
-            </>
-          }
-          description="A complete weight comparison across Levels I, II and III to help you plan your full CFA® journey."
-        />
-
-        <FadeIn>
-          <div className="mt-12 overflow-hidden rounded-3xl border border-border bg-card shadow-elevated">
-            <div className="grid grid-cols-4 bg-navy-gradient px-6 py-4 text-xs font-semibold uppercase tracking-[0.18em] text-white">
-              <div>Subject</div>
-              <div className="text-center">Level I</div>
-              <div className="text-center">Level II</div>
-              <div className="text-center">Level III</div>
-            </div>
-            <div className="divide-y divide-border">
-              {comparisonRows.map((r, i) => (
-                <motion.div
-                  key={r.subject}
-                  initial={{ opacity: 0, x: -10 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true, margin: "-40px" }}
-                  transition={{ duration: 0.35, delay: Math.min(i * 0.02, 0.3) }}
-                  className={cn(
-                    "grid grid-cols-4 items-center px-6 py-3.5 text-sm transition-colors hover:bg-secondary/40",
-                    i % 2 === 1 && "bg-secondary/20",
-                  )}
-                >
-                  <div className="font-medium">{r.subject}</div>
-                  <div
-                    className={cn("text-center", level === "L1" && "font-semibold text-primary")}
-                  >
-                    {r.l1}
-                  </div>
-                  <div
-                    className={cn("text-center", level === "L2" && "font-semibold text-primary")}
-                  >
-                    {r.l2}
-                  </div>
-                  <div
-                    className={cn("text-center", level === "L3" && "font-semibold text-primary")}
-                  >
-                    {r.l3}
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-          <p className="mt-3 text-xs text-muted-foreground">
-            * Ethics and Derivatives in Level III are included in broader curriculum modules.
-          </p>
-        </FadeIn>
-      </section>
-
-      {/* CAREER OPPORTUNITIES — dark navy "stage" like homepage CareerStage */}
-      <section className="relative overflow-hidden bg-[hsl(220_50%_9%)] py-24 text-primary-foreground md:py-32">
-        <AmbientDark />
-        <div className="container-px relative mx-auto max-w-7xl">
+      <Section id="cfa.level-comparison" label="Level Comparison">
+        <section className="container-px mx-auto max-w-7xl pb-24 md:pb-32">
           <PremiumHeader
-            tone="dark"
-            eyebrow="Career opportunities"
+            eyebrow="Level comparison"
             title={
               <>
-                Job roles you can <GradientAccent>pursue</GradientAccent> with CFA®.
+                All three levels, <GradientAccent>side by side.</GradientAccent>
               </>
             }
-            description="The CFA® charter opens doors across investing, research, banking and risk — globally recognised, deeply respected."
+            description="A complete weight comparison across Levels I, II and III to help you plan your full CFA® journey."
           />
 
-          <Stagger className="mt-14 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-            {careers.map((c, i) => (
-              <StaggerItem key={c.t} variants={staggerItemVariants}>
-                <div className="group relative h-full overflow-hidden rounded-3xl border border-white/10 bg-white/[0.04] p-6 backdrop-blur-md transition-all hover:-translate-y-1 hover:border-accent/40 hover:bg-white/[0.07]">
-                  <div className="pointer-events-none absolute -right-12 -top-12 h-40 w-40 rounded-full bg-accent/30 opacity-0 blur-3xl transition-opacity duration-500 group-hover:opacity-100" />
-                  <div className="flex items-center gap-4">
-                    <div className="relative grid h-14 w-14 place-items-center">
-                      <ConicRing size="h-14 w-14" />
-                      <div className="relative grid h-12 w-12 place-items-center rounded-full bg-[hsl(220_50%_9%)] text-accent">
-                        <c.icon className="h-5 w-5" />
-                      </div>
-                    </div>
-                    <div className="text-[10px] font-bold uppercase tracking-[0.22em] text-white/40">
-                      0{i + 1}
-                    </div>
-                  </div>
-                  <h3 className="mt-6 font-display text-lg font-semibold text-white">{c.t}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-white/65">{c.b}</p>
-                </div>
-              </StaggerItem>
-            ))}
-          </Stagger>
-        </div>
-      </section>
-
-      {/* WHERE CHARTERHOLDERS WORK */}
-      <section className="relative overflow-hidden border-y border-white/5 bg-[hsl(220_60%_10%)] py-20 text-primary-foreground md:py-24">
-        <AmbientDark />
-        <FadeIn className="container-px relative mx-auto max-w-7xl">
-          <div className="mb-10 flex flex-col items-start gap-5">
-            <EyebrowBadge tone="dark">Where CFA® charterholders work</EyebrowBadge>
-            <h2 className="font-display text-3xl font-semibold tracking-tight text-white md:text-4xl">
-              Trusted by leading organisations <GradientAccent>worldwide.</GradientAccent>
-            </h2>
-          </div>
-        </FadeIn>
-        <div className="relative">
-          <CompaniesMarquee />
-        </div>
-      </section>
-
-      {/* EXAM STRUCTURE */}
-      <section className="container-px mx-auto max-w-7xl py-24 md:py-32">
-        <PremiumHeader
-          eyebrow="Exam structure"
-          title={
-            <>
-              Format & requirements — <GradientAccent>{levelLabels[level]}</GradientAccent>
-            </>
-          }
-          description="Know the format before you sit. Each level has a distinct rhythm — plan your stamina accordingly."
-        />
-
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={level}
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.45 }}
-            className="mt-14 grid gap-5 md:grid-cols-3"
-          >
-            {[
-              {
-                icon: ListChecks,
-                t: "Exam Format",
-                items: data.exam.format,
-                accent: "from-amber-500 to-orange-600",
-                num: "01",
-              },
-              {
-                icon: FileText,
-                t: "Question Format",
-                items: data.exam.question,
-                accent: "from-rose-500 to-pink-700",
-                num: "02",
-              },
-              {
-                icon: Award,
-                t: "Key Details",
-                items: data.exam.key,
-                accent: "from-indigo-600 to-violet-800",
-                num: "03",
-              },
-            ].map((b, i) => (
-              <motion.div
-                key={b.t}
-                initial={{ opacity: 0, y: 24 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-40px" }}
-                transition={{ duration: 0.55, delay: i * 0.08, ease: [0.16, 1, 0.3, 1] }}
-                className="group relative overflow-hidden rounded-3xl border border-border bg-card p-7 shadow-card transition-all hover-lift"
-              >
-                <div className="pointer-events-none absolute -right-12 -top-12 h-40 w-40 rounded-full bg-gradient-brand opacity-0 blur-3xl transition-opacity duration-500 group-hover:opacity-30" />
-                <div className="flex items-center justify-between gap-3">
-                  <div className="relative grid h-14 w-14 place-items-center">
-                    <ConicRing size="h-14 w-14" />
-                    <div
-                      className={cn(
-                        "relative grid h-12 w-12 place-items-center rounded-full bg-gradient-to-br text-white shadow-glow",
-                        b.accent,
-                      )}
-                    >
-                      <b.icon className="h-5 w-5" />
-                    </div>
-                  </div>
-                  <span className="font-display text-2xl font-bold text-muted-foreground/30">
-                    {b.num}
-                  </span>
-                </div>
-                <h3 className="mt-5 font-display text-xl font-semibold">{b.t}</h3>
-                <ul className="mt-4 space-y-3 text-sm text-muted-foreground">
-                  {b.items.map((it) => (
-                    <li key={it} className="flex gap-2.5">
-                      <CheckCircle2
-                        className={cn(
-                          "mt-0.5 h-4 w-4 shrink-0 bg-gradient-to-br bg-clip-text text-transparent",
-                          b.accent,
-                        )}
-                        style={{ color: "hsl(var(--accent))" }}
-                      />
-                      <span>{it}</span>
-                    </li>
-                  ))}
-                </ul>
-              </motion.div>
-            ))}
-          </motion.div>
-        </AnimatePresence>
-      </section>
-
-      {/* DEADLINES & FEES */}
-      <section className="container-px mx-auto max-w-7xl pb-24 md:pb-32">
-        <PremiumHeader
-          eyebrow="Deadlines & fees"
-          title={
-            <>
-              Registration windows for <GradientAccent>2026–2027.</GradientAccent>
-            </>
-          }
-          description="Plan early — the earlier you register, the more you save."
-        />
-
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={level}
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.45 }}
-            className="mt-14 grid gap-8 lg:grid-cols-[1.2fr_1fr]"
-          >
-            {/* Exam windows timeline */}
-            <div className="relative overflow-hidden rounded-[2rem] border border-border bg-card p-8 shadow-elevated md:p-10">
-              <div className="pointer-events-none absolute -right-24 -top-24 h-56 w-56 rounded-full bg-accent/15 blur-3xl" />
-              <EyebrowBadge>Exam windows</EyebrowBadge>
-              <h3 className="mt-4 font-display text-2xl font-semibold md:text-3xl">
-                Pick your sitting.
-              </h3>
-
-              <div className="relative mt-8">
-                <motion.div
-                  initial={{ scaleY: 0 }}
-                  whileInView={{ scaleY: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-                  style={{ transformOrigin: "top" }}
-                  className="absolute left-5 top-2 h-[calc(100%-1rem)] w-px bg-gradient-to-b from-accent via-primary/40 to-transparent"
-                />
-                <div className="space-y-5">
-                  {data.deadlines.map((d, i) => (
-                    <motion.div
-                      key={d.window}
-                      initial={{ opacity: 0, x: -12 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.5, delay: 0.2 + i * 0.1 }}
-                      className="flex items-start gap-5"
-                    >
-                      <div className="relative grid h-10 w-10 shrink-0 place-items-center">
-                        <ConicRing size="h-10 w-10" />
-                        <div
-                          className={cn(
-                            "relative grid h-9 w-9 place-items-center rounded-full bg-gradient-to-br text-white shadow-glow",
-                            levelAccent[level],
-                          )}
-                        >
-                          <Calendar className="h-4 w-4" />
-                        </div>
-                      </div>
-                      <div className="flex-1 rounded-2xl border border-border bg-background p-4 transition-colors hover:border-accent/50">
-                        <div className="text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
-                          Exam window
-                        </div>
-                        <div className="mt-1 flex items-center justify-between gap-3">
-                          <span className="font-display text-base font-semibold">{d.window}</span>
-                          <span className="rounded-full bg-secondary px-3 py-1 text-xs font-medium">
-                            {d.date}
-                          </span>
-                        </div>
-                      </div>
-                    </motion.div>
-                  ))}
-                </div>
+          <FadeIn>
+            <div className="mt-12 overflow-hidden rounded-3xl border border-border bg-card shadow-elevated">
+              <div className="grid grid-cols-4 bg-navy-gradient px-6 py-4 text-xs font-semibold uppercase tracking-[0.18em] text-white">
+                <div>Subject</div>
+                <div className="text-center">Level I</div>
+                <div className="text-center">Level II</div>
+                <div className="text-center">Level III</div>
               </div>
-
-              <div className="mt-8 grid gap-3 sm:grid-cols-3">
-                {[
-                  { k: "Registration", v: data.registration.window },
-                  { k: "Early bird", v: data.registration.earlyBird },
-                  { k: "Final", v: data.registration.final },
-                ].map((p) => (
-                  <div
-                    key={p.k}
-                    className="rounded-2xl border border-dashed border-border bg-background p-4"
+              <div className="divide-y divide-border">
+                {comparisonRows.map((r, i) => (
+                  <motion.div
+                    key={r.subject}
+                    initial={{ opacity: 0, x: -10 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true, margin: "-40px" }}
+                    transition={{ duration: 0.35, delay: Math.min(i * 0.02, 0.3) }}
+                    className={cn(
+                      "grid grid-cols-4 items-center px-6 py-3.5 text-sm transition-colors hover:bg-secondary/40",
+                      i % 2 === 1 && "bg-secondary/20",
+                    )}
                   >
-                    <div className="text-[10px] uppercase tracking-[0.2em] text-accent">{p.k}</div>
-                    <div className="mt-1 text-sm font-semibold">{p.v}</div>
-                  </div>
+                    <div className="font-medium">{r.subject}</div>
+                    <div
+                      className={cn("text-center", level === "L1" && "font-semibold text-primary")}
+                    >
+                      {r.l1}
+                    </div>
+                    <div
+                      className={cn("text-center", level === "L2" && "font-semibold text-primary")}
+                    >
+                      {r.l2}
+                    </div>
+                    <div
+                      className={cn("text-center", level === "L3" && "font-semibold text-primary")}
+                    >
+                      {r.l3}
+                    </div>
+                  </motion.div>
                 ))}
               </div>
             </div>
+            <p className="mt-3 text-xs text-muted-foreground">
+              * Ethics and Derivatives in Level III are included in broader curriculum modules.
+            </p>
+          </FadeIn>
+        </section>
+      </Section>
 
-            {/* Pricing cards */}
-            <div className="space-y-4">
-              <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-primary to-[#2a4ea8] p-7 text-primary-foreground shadow-elevated">
-                <div className="pointer-events-none absolute -right-16 -top-16 h-44 w-44 rounded-full bg-accent/30 blur-3xl" />
-                <motion.div
-                  aria-hidden
-                  animate={{ x: ["-100%", "100%"] }}
-                  transition={{ duration: 3.5, repeat: Infinity, ease: "linear" }}
-                  className="absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-transparent via-white/15 to-transparent"
-                />
-                <span className="relative inline-flex items-center gap-1.5 rounded-full bg-accent px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.16em] text-accent-foreground">
-                  <Award className="h-3 w-3" /> Most picked
-                </span>
-                <div className="relative mt-4 text-xs uppercase tracking-[0.2em] text-white/70">
-                  Early bird registration
-                </div>
-                <div className="relative mt-3 flex items-baseline gap-3">
-                  <span className="font-display text-4xl font-semibold">{data.fees.early.inr}</span>
-                </div>
-                <p className="relative mt-3 flex items-center gap-2 text-sm text-white/80">
-                  <Tag className="h-4 w-4 text-accent" /> {data.fees.early.note}
-                </p>
-              </div>
+      {/* CAREER OPPORTUNITIES — dark navy "stage" like homepage CareerStage */}
+      <Section id="cfa.career-opportunities" label="Career Opportunities">
+        <section className="relative overflow-hidden bg-[hsl(220_50%_9%)] py-24 text-primary-foreground md:py-32">
+          <AmbientDark />
+          <div className="container-px relative mx-auto max-w-7xl">
+            <PremiumHeader
+              tone="dark"
+              eyebrow="Career opportunities"
+              title={
+                <>
+                  Job roles you can <GradientAccent>pursue</GradientAccent> with CFA®.
+                </>
+              }
+              description="The CFA® charter opens doors across investing, research, banking and risk — globally recognised, deeply respected."
+            />
 
-              <div className="rounded-3xl border border-border bg-card p-7 shadow-card transition-all hover-lift">
-                <div className="text-xs uppercase tracking-[0.2em] text-muted-foreground">
-                  Standard registration
-                </div>
-                <div className="mt-3 flex items-baseline gap-3">
-                  <span className="font-display text-4xl font-semibold">
-                    {data.fees.standard.inr}
-                  </span>
-                </div>
-                <p className="mt-3 flex items-center gap-2 text-sm text-muted-foreground">
-                  <Info className="h-4 w-4" /> {data.fees.standard.note}
-                </p>
-              </div>
-
-              <a
-                href="https://www.cfainstitute.org/programs/cfa-program/dates-fees"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group flex items-center justify-between rounded-2xl border border-white/10 bg-white/5 p-4 transition-colors hover:border-accent/40 hover:bg-white/[0.07]"
-              >
-                <div>
-                  <div className="text-[10px] uppercase tracking-[0.2em] text-accent">
-                    Official source
+            <Stagger className="mt-14 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+              {careers.map((c, i) => (
+                <StaggerItem key={c.t} variants={staggerItemVariants}>
+                  <div className="group relative h-full overflow-hidden rounded-3xl border border-white/10 bg-white/[0.04] p-6 backdrop-blur-md transition-all hover:-translate-y-1 hover:border-accent/40 hover:bg-white/[0.07]">
+                    <div className="pointer-events-none absolute -right-12 -top-12 h-40 w-40 rounded-full bg-accent/30 opacity-0 blur-3xl transition-opacity duration-500 group-hover:opacity-100" />
+                    <div className="flex items-center gap-4">
+                      <div className="relative grid h-14 w-14 place-items-center">
+                        <ConicRing size="h-14 w-14" />
+                        <div className="relative grid h-12 w-12 place-items-center rounded-full bg-[hsl(220_50%_9%)] text-accent">
+                          <c.icon className="h-5 w-5" />
+                        </div>
+                      </div>
+                      <div className="text-[10px] font-bold uppercase tracking-[0.22em] text-white/40">
+                        0{i + 1}
+                      </div>
+                    </div>
+                    <h3 className="mt-6 font-display text-lg font-semibold text-white">{c.t}</h3>
+                    <p className="mt-2 text-sm leading-relaxed text-white/65">{c.b}</p>
                   </div>
-                  <div className="mt-1 text-sm font-semibold text-white/90">
-                    CFA® Institute dates & fees
-                  </div>
-                </div>
-                <ArrowRight className="h-4 w-4 text-white/60 transition-transform group-hover:translate-x-1" />
-              </a>
+                </StaggerItem>
+              ))}
+            </Stagger>
+          </div>
+        </section>
+      </Section>
+
+      {/* WHERE CHARTERHOLDERS WORK */}
+      <Section id="cfa.where-charterholders-work" label="Where Charterholders Work">
+        <section className="relative overflow-hidden border-y border-white/5 bg-[hsl(220_60%_10%)] py-20 text-primary-foreground md:py-24">
+          <AmbientDark />
+          <FadeIn className="container-px relative mx-auto max-w-7xl">
+            <div className="mb-10 flex flex-col items-start gap-5">
+              <EyebrowBadge tone="dark">Where CFA® charterholders work</EyebrowBadge>
+              <h2 className="font-display text-3xl font-semibold tracking-tight text-white md:text-4xl">
+                Trusted by leading organisations <GradientAccent>worldwide.</GradientAccent>
+              </h2>
             </div>
-          </motion.div>
-        </AnimatePresence>
-      </section>
+          </FadeIn>
+          <div className="relative">
+            <CompaniesMarquee />
+          </div>
+        </section>
+      </Section>
+
+      {/* EXAM STRUCTURE */}
+      <Section id="cfa.exam-structure" label="Exam Structure">
+        <section className="container-px mx-auto max-w-7xl py-24 md:py-32">
+          <PremiumHeader
+            eyebrow="Exam structure"
+            title={
+              <>
+                Format & requirements — <GradientAccent>{levelLabels[level]}</GradientAccent>
+              </>
+            }
+            description="Know the format before you sit. Each level has a distinct rhythm — plan your stamina accordingly."
+          />
+
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={level}
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.45 }}
+              className="mt-14 grid gap-5 md:grid-cols-3"
+            >
+              {[
+                {
+                  icon: ListChecks,
+                  t: "Exam Format",
+                  items: data.exam.format,
+                  accent: "from-amber-500 to-orange-600",
+                  num: "01",
+                },
+                {
+                  icon: FileText,
+                  t: "Question Format",
+                  items: data.exam.question,
+                  accent: "from-rose-500 to-pink-700",
+                  num: "02",
+                },
+                {
+                  icon: Award,
+                  t: "Key Details",
+                  items: data.exam.key,
+                  accent: "from-indigo-600 to-violet-800",
+                  num: "03",
+                },
+              ].map((b, i) => (
+                <motion.div
+                  key={b.t}
+                  initial={{ opacity: 0, y: 24 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-40px" }}
+                  transition={{ duration: 0.55, delay: i * 0.08, ease: [0.16, 1, 0.3, 1] }}
+                  className="group relative overflow-hidden rounded-3xl border border-border bg-card p-7 shadow-card transition-all hover-lift"
+                >
+                  <div className="pointer-events-none absolute -right-12 -top-12 h-40 w-40 rounded-full bg-gradient-brand opacity-0 blur-3xl transition-opacity duration-500 group-hover:opacity-30" />
+                  <div className="flex items-center justify-between gap-3">
+                    <div className="relative grid h-14 w-14 place-items-center">
+                      <ConicRing size="h-14 w-14" />
+                      <div
+                        className={cn(
+                          "relative grid h-12 w-12 place-items-center rounded-full bg-gradient-to-br text-white shadow-glow",
+                          b.accent,
+                        )}
+                      >
+                        <b.icon className="h-5 w-5" />
+                      </div>
+                    </div>
+                    <span className="font-display text-2xl font-bold text-muted-foreground/30">
+                      {b.num}
+                    </span>
+                  </div>
+                  <h3 className="mt-5 font-display text-xl font-semibold">{b.t}</h3>
+                  <ul className="mt-4 space-y-3 text-sm text-muted-foreground">
+                    {b.items.map((it) => (
+                      <li key={it} className="flex gap-2.5">
+                        <CheckCircle2
+                          className={cn(
+                            "mt-0.5 h-4 w-4 shrink-0 bg-gradient-to-br bg-clip-text text-transparent",
+                            b.accent,
+                          )}
+                          style={{ color: "hsl(var(--accent))" }}
+                        />
+                        <span>{it}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </motion.div>
+              ))}
+            </motion.div>
+          </AnimatePresence>
+        </section>
+      </Section>
+
+      {/* DEADLINES & FEES */}
+      <Section id="cfa.deadlines-fees" label="Deadlines & Fees">
+        <section className="container-px mx-auto max-w-7xl pb-24 md:pb-32">
+          <PremiumHeader
+            eyebrow="Deadlines & fees"
+            title={
+              <>
+                Registration windows for <GradientAccent>2026–2027.</GradientAccent>
+              </>
+            }
+            description="Plan early — the earlier you register, the more you save."
+          />
+
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={level}
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.45 }}
+              className="mt-14 grid gap-8 lg:grid-cols-[1.2fr_1fr]"
+            >
+              {/* Exam windows timeline */}
+              <div className="relative overflow-hidden rounded-[2rem] border border-border bg-card p-8 shadow-elevated md:p-10">
+                <div className="pointer-events-none absolute -right-24 -top-24 h-56 w-56 rounded-full bg-accent/15 blur-3xl" />
+                <EyebrowBadge>Exam windows</EyebrowBadge>
+                <h3 className="mt-4 font-display text-2xl font-semibold md:text-3xl">
+                  Pick your sitting.
+                </h3>
+
+                <div className="relative mt-8">
+                  <motion.div
+                    initial={{ scaleY: 0 }}
+                    whileInView={{ scaleY: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+                    style={{ transformOrigin: "top" }}
+                    className="absolute left-5 top-2 h-[calc(100%-1rem)] w-px bg-gradient-to-b from-accent via-primary/40 to-transparent"
+                  />
+                  <div className="space-y-5">
+                    {data.deadlines.map((d, i) => (
+                      <motion.div
+                        key={d.window}
+                        initial={{ opacity: 0, x: -12 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.5, delay: 0.2 + i * 0.1 }}
+                        className="flex items-start gap-5"
+                      >
+                        <div className="relative grid h-10 w-10 shrink-0 place-items-center">
+                          <ConicRing size="h-10 w-10" />
+                          <div
+                            className={cn(
+                              "relative grid h-9 w-9 place-items-center rounded-full bg-gradient-to-br text-white shadow-glow",
+                              levelAccent[level],
+                            )}
+                          >
+                            <Calendar className="h-4 w-4" />
+                          </div>
+                        </div>
+                        <div className="flex-1 rounded-2xl border border-border bg-background p-4 transition-colors hover:border-accent/50">
+                          <div className="text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
+                            Exam window
+                          </div>
+                          <div className="mt-1 flex items-center justify-between gap-3">
+                            <span className="font-display text-base font-semibold">{d.window}</span>
+                            <span className="rounded-full bg-secondary px-3 py-1 text-xs font-medium">
+                              {d.date}
+                            </span>
+                          </div>
+                        </div>
+                      </motion.div>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="mt-8 grid gap-3 sm:grid-cols-3">
+                  {[
+                    { k: "Registration", v: data.registration.window },
+                    { k: "Early bird", v: data.registration.earlyBird },
+                    { k: "Final", v: data.registration.final },
+                  ].map((p) => (
+                    <div
+                      key={p.k}
+                      className="rounded-2xl border border-dashed border-border bg-background p-4"
+                    >
+                      <div className="text-[10px] uppercase tracking-[0.2em] text-accent">
+                        {p.k}
+                      </div>
+                      <div className="mt-1 text-sm font-semibold">{p.v}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Pricing cards */}
+              <div className="space-y-4">
+                <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-primary to-[#2a4ea8] p-7 text-primary-foreground shadow-elevated">
+                  <div className="pointer-events-none absolute -right-16 -top-16 h-44 w-44 rounded-full bg-accent/30 blur-3xl" />
+                  <motion.div
+                    aria-hidden
+                    animate={{ x: ["-100%", "100%"] }}
+                    transition={{ duration: 3.5, repeat: Infinity, ease: "linear" }}
+                    className="absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-transparent via-white/15 to-transparent"
+                  />
+                  <span className="relative inline-flex items-center gap-1.5 rounded-full bg-accent px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.16em] text-accent-foreground">
+                    <Award className="h-3 w-3" /> Most picked
+                  </span>
+                  <div className="relative mt-4 text-xs uppercase tracking-[0.2em] text-white/70">
+                    Early bird registration
+                  </div>
+                  <div className="relative mt-3 flex items-baseline gap-3">
+                    <span className="font-display text-4xl font-semibold">
+                      {data.fees.early.inr}
+                    </span>
+                  </div>
+                  <p className="relative mt-3 flex items-center gap-2 text-sm text-white/80">
+                    <Tag className="h-4 w-4 text-accent" /> {data.fees.early.note}
+                  </p>
+                </div>
+
+                <div className="rounded-3xl border border-border bg-card p-7 shadow-card transition-all hover-lift">
+                  <div className="text-xs uppercase tracking-[0.2em] text-muted-foreground">
+                    Standard registration
+                  </div>
+                  <div className="mt-3 flex items-baseline gap-3">
+                    <span className="font-display text-4xl font-semibold">
+                      {data.fees.standard.inr}
+                    </span>
+                  </div>
+                  <p className="mt-3 flex items-center gap-2 text-sm text-muted-foreground">
+                    <Info className="h-4 w-4" /> {data.fees.standard.note}
+                  </p>
+                </div>
+
+                <a
+                  href="https://www.cfainstitute.org/programs/cfa-program/dates-fees"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group flex items-center justify-between rounded-2xl border border-white/10 bg-white/5 p-4 transition-colors hover:border-accent/40 hover:bg-white/[0.07]"
+                >
+                  <div>
+                    <div className="text-[10px] uppercase tracking-[0.2em] text-accent">
+                      Official source
+                    </div>
+                    <div className="mt-1 text-sm font-semibold text-white/90">
+                      CFA® Institute dates & fees
+                    </div>
+                  </div>
+                  <ArrowRight className="h-4 w-4 text-white/60 transition-transform group-hover:translate-x-1" />
+                </a>
+              </div>
+            </motion.div>
+          </AnimatePresence>
+        </section>
+      </Section>
 
       {/* IMPORTANT DETAILS */}
-      <section className="container-px mx-auto max-w-7xl pb-24 md:pb-32">
-        <PremiumHeader
-          eyebrow="Important details"
-          title={
-            <>
-              Everything else you should <GradientAccent>know.</GradientAccent>
-            </>
-          }
-          description="Quick access to essential course information so you're not chasing answers later."
-        />
+      <Section id="cfa.important-details" label="Important Details">
+        <section className="container-px mx-auto max-w-7xl pb-24 md:pb-32">
+          <PremiumHeader
+            eyebrow="Important details"
+            title={
+              <>
+                Everything else you should <GradientAccent>know.</GradientAccent>
+              </>
+            }
+            description="Quick access to essential course information so you're not chasing answers later."
+          />
 
-        <Stagger className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {importantDetails.map((d) => (
-            <StaggerItem key={d.t} variants={staggerItemVariants}>
-              <a
-                href="#"
-                className="group relative flex h-full items-start gap-4 overflow-hidden rounded-3xl border border-border bg-card p-6 shadow-card transition-all hover-lift"
-              >
-                <div className="pointer-events-none absolute -right-12 -top-12 h-40 w-40 rounded-full bg-accent/20 opacity-0 blur-3xl transition-opacity duration-500 group-hover:opacity-100" />
-                <div className="relative grid h-14 w-14 shrink-0 place-items-center">
-                  <ConicRing size="h-14 w-14" />
-                  <div className="relative grid h-12 w-12 place-items-center rounded-full bg-gradient-brand text-primary-foreground shadow-glow">
-                    <d.icon className="h-5 w-5" />
+          <Stagger className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {importantDetails.map((d) => (
+              <StaggerItem key={d.t} variants={staggerItemVariants}>
+                <a
+                  href="#"
+                  className="group relative flex h-full items-start gap-4 overflow-hidden rounded-3xl border border-border bg-card p-6 shadow-card transition-all hover-lift"
+                >
+                  <div className="pointer-events-none absolute -right-12 -top-12 h-40 w-40 rounded-full bg-accent/20 opacity-0 blur-3xl transition-opacity duration-500 group-hover:opacity-100" />
+                  <div className="relative grid h-14 w-14 shrink-0 place-items-center">
+                    <ConicRing size="h-14 w-14" />
+                    <div className="relative grid h-12 w-12 place-items-center rounded-full bg-gradient-brand text-primary-foreground shadow-glow">
+                      <d.icon className="h-5 w-5" />
+                    </div>
                   </div>
-                </div>
-                <div className="flex-1">
-                  <div className="flex items-center justify-between">
-                    <h3 className="font-display text-base font-semibold">{d.t}</h3>
-                    <ArrowRight className="h-4 w-4 text-muted-foreground transition-transform group-hover:translate-x-1 group-hover:text-primary" />
+                  <div className="flex-1">
+                    <div className="flex items-center justify-between">
+                      <h3 className="font-display text-base font-semibold">{d.t}</h3>
+                      <ArrowRight className="h-4 w-4 text-muted-foreground transition-transform group-hover:translate-x-1 group-hover:text-primary" />
+                    </div>
+                    <p className="mt-2 text-sm text-muted-foreground">{d.b}</p>
                   </div>
-                  <p className="mt-2 text-sm text-muted-foreground">{d.b}</p>
-                </div>
-              </a>
-            </StaggerItem>
-          ))}
-        </Stagger>
-      </section>
+                </a>
+              </StaggerItem>
+            ))}
+          </Stagger>
+        </section>
+      </Section>
 
       {/* FAQ */}
-      <FAQ
-        eyebrow="FAQ"
-        title={
-          <>
-            CFA® program{" "}
-            <span className="italic bg-gradient-to-r from-accent via-accent to-accent/60 bg-clip-text text-transparent pr-[0.15em] -mr-[0.15em]">
-              questions.
-            </span>
-          </>
-        }
-        description="Common questions about levels, eligibility, exam pattern and registration."
-      />
+      <Section id="cfa.faq" label="FAQ">
+        <FAQ
+          eyebrow="FAQ"
+          title={
+            <>
+              CFA® program{" "}
+              <span className="italic bg-gradient-to-r from-accent via-accent to-accent/60 bg-clip-text text-transparent pr-[0.15em] -mr-[0.15em]">
+                questions.
+              </span>
+            </>
+          }
+          description="Common questions about levels, eligibility, exam pattern and registration."
+        />
+      </Section>
     </SiteLayout>
   );
 }

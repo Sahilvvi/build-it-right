@@ -1,3 +1,4 @@
+/** @jsxImportSource @/lib/editable */
 import { motion, useInView, useMotionValue, useTransform, animate } from "framer-motion";
 import { useEffect, useRef, type ReactNode } from "react";
 import { cn } from "@/lib/utils";

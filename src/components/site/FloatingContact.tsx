@@ -1,3 +1,4 @@
+/** @jsxImportSource @/lib/editable */
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { MessageCircle, Phone, Mail, X, Plus } from "lucide-react";

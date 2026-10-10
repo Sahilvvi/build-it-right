@@ -3,10 +3,13 @@ import { useState, useEffect } from "react";
 import { Activity, Save, CheckCircle2, Code, ShieldAlert, Zap } from "lucide-react";
 import {
   getAdminStore,
+  getCurrentAdmin,
   saveAdminStore,
   type AdminStoreData,
   type TrackingSettings,
 } from "@/lib/admin-store";
+import { cleanTrackingId } from "@/lib/tracking";
+import { parseSearchConsoleToken } from "@/lib/seo";
 
 export const Route = createFileRoute("/admin/tracking")({
   component: AdminTrackingPage,
@@ -15,6 +18,7 @@ export const Route = createFileRoute("/admin/tracking")({
 export function AdminTrackingPage() {
   const [store, setStore] = useState<AdminStoreData>(getAdminStore());
   const [isSaved, setIsSaved] = useState(false);
+  const isSuper = getCurrentAdmin()?.role === "super_admin";
 
   useEffect(() => {
     const handleUpdate = () => setStore(getAdminStore());
@@ -49,9 +53,69 @@ export function AdminTrackingPage() {
 
         {isSaved && (
           <span className="text-xs text-emerald-600 font-semibold flex items-center gap-1">
-            <CheckCircle2 className="w-4 h-4" /> Tracking Scripts Active!
+            <CheckCircle2 className="w-4 h-4" /> Saved to draft
           </span>
         )}
+      </div>
+
+      {/* What the live site will actually load, after validating the IDs */}
+      <div className="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-2xs">
+        <h2 className="text-xs font-bold text-slate-900 mb-3">Live on the website right now</h2>
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 text-[11px]">
+          {(
+            [
+              [
+                "GA4",
+                store.tracking.ga4Id,
+                cleanTrackingId("ga4", store.tracking.ga4Id),
+                "G-XXXXXXXXXX",
+              ],
+              [
+                "Tag Manager",
+                store.tracking.gtmId,
+                cleanTrackingId("gtm", store.tracking.gtmId),
+                "GTM-XXXXXXX",
+              ],
+              [
+                "Meta Pixel",
+                store.tracking.metaPixelId,
+                cleanTrackingId("pixel", store.tracking.metaPixelId),
+                "15-16 digits",
+              ],
+              [
+                "Search Console",
+                store.tracking.searchConsoleToken,
+                parseSearchConsoleToken(store.tracking.searchConsoleToken),
+                "verification token",
+              ],
+            ] as const
+          ).map(([label, raw, valid, hint]) => (
+            <div
+              key={label}
+              className={`rounded-xl border px-3 py-2 ${
+                valid
+                  ? "border-emerald-200 bg-emerald-50 text-emerald-800"
+                  : raw.trim()
+                    ? "border-amber-200 bg-amber-50 text-amber-800"
+                    : "border-slate-200 bg-slate-50 text-slate-500"
+              }`}
+            >
+              <div className="font-bold">{label}</div>
+              <div>
+                {valid
+                  ? "Active"
+                  : raw.trim()
+                    ? `Invalid format - not loaded (${hint})`
+                    : "Not set"}
+              </div>
+            </div>
+          ))}
+        </div>
+        <p className="mt-3 text-[11px] text-slate-500">
+          Scripts load for website visitors only, never inside this admin portal. Custom scripts are
+          raw HTML run on every public page, so paste only code you trust. Changes reach visitors on
+          their next page load.
+        </p>
       </div>
 
       <form onSubmit={handleSave} className="space-y-6 text-xs">
@@ -159,6 +223,12 @@ export function AdminTrackingPage() {
             Approved tracking scripts, chat widgets, or conversion pixels injected directly into the
             HTML document.
           </p>
+          {!isSuper && (
+            <p className="rounded-lg border border-amber-200 bg-amber-50 p-3 text-[11px] text-amber-900">
+              Custom code runs on every public page, so only a <strong>Super Admin</strong> can add
+              or change it. You can still publish a draft that already contains approved scripts.
+            </p>
+          )}
 
           <div>
             <label className="block text-slate-700 font-semibold mb-1">
@@ -167,6 +237,7 @@ export function AdminTrackingPage() {
             <textarea
               rows={4}
               placeholder="<!-- Paste your custom tracking scripts here -->"
+              disabled={!isSuper}
               value={store.tracking.customHeadScript}
               onChange={(e) =>
                 setStore({
@@ -174,7 +245,7 @@ export function AdminTrackingPage() {
                   tracking: { ...store.tracking, customHeadScript: e.target.value },
                 })
               }
-              className="w-full px-3 py-2 border border-slate-300 rounded-lg font-mono text-[11px] bg-slate-50/50"
+              className="w-full px-3 py-2 border border-slate-300 rounded-lg font-mono text-[11px] bg-slate-50/50 disabled:cursor-not-allowed disabled:opacity-60"
             />
           </div>
 
@@ -185,6 +256,7 @@ export function AdminTrackingPage() {
             <textarea
               rows={4}
               placeholder="<!-- Paste your custom body or chat widgets here -->"
+              disabled={!isSuper}
               value={store.tracking.customBodyScript}
               onChange={(e) =>
                 setStore({
@@ -192,7 +264,7 @@ export function AdminTrackingPage() {
                   tracking: { ...store.tracking, customBodyScript: e.target.value },
                 })
               }
-              className="w-full px-3 py-2 border border-slate-300 rounded-lg font-mono text-[11px] bg-slate-50/50"
+              className="w-full px-3 py-2 border border-slate-300 rounded-lg font-mono text-[11px] bg-slate-50/50 disabled:cursor-not-allowed disabled:opacity-60"
             />
           </div>
         </div>

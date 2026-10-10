@@ -143,7 +143,7 @@ export function AdminCoursesPage() {
         <div className="flex items-center gap-3">
           {isSaved && (
             <span className="text-xs text-emerald-600 font-semibold flex items-center gap-1">
-              <CheckCircle2 className="w-4 h-4" /> Changes Published Live!
+              <CheckCircle2 className="w-4 h-4" /> Saved to draft
             </span>
           )}
           <button

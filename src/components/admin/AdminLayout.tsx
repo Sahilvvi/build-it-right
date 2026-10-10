@@ -28,14 +28,45 @@ import {
   PhoneCall,
   CheckCircle2,
   Calendar,
+  LayoutPanelTop,
+  FilePlus2,
+  Type as TypeIcon,
+  History as HistoryIcon,
+  type LucideIcon,
 } from "lucide-react";
-import { getCurrentAdmin, setCurrentAdmin, getAdminStore } from "@/lib/admin-store";
+import {
+  getCurrentAdmin,
+  setCurrentAdmin,
+  getAdminStore,
+  getContentEpoch,
+  useAdminStore,
+  restoreAdminSession,
+  loadAdminData,
+  hasLegacyLocalStore,
+  importLegacyLocalStore,
+  dismissLegacyLocalStore,
+  type SaveStatus,
+} from "@/lib/admin-store";
+import { PublishBar } from "@/components/admin/PublishBar";
 
 interface AdminLayoutProps {
   children?: ReactNode;
 }
 
-const navSections = [
+interface NavItem {
+  label: string;
+  href: string;
+  icon: LucideIcon;
+  exact?: boolean;
+  badgeKey?: "leads";
+  /** Only visible to Super Admins. */
+  superOnly?: boolean;
+}
+
+/** Screens only a Super Admin may open (the database enforces the real rule). */
+const SUPER_ONLY_PATHS = ["/admin/users", "/admin/settings"];
+
+const navSections: Array<{ title: string; items: NavItem[] }> = [
   {
     title: "GROWTH & PIPELINE",
     items: [
@@ -48,6 +79,9 @@ const navSections = [
     items: [
       { label: "Website Pages CMS", href: "/admin/pages", icon: FileEdit },
       { label: "Courses & Batch Pricing", href: "/admin/courses", icon: GraduationCap },
+      { label: "Page Text & Sections", href: "/admin/text", icon: TypeIcon },
+      { label: "Pages You Create", href: "/admin/custom-pages", icon: FilePlus2 },
+      { label: "Header & Footer Menus", href: "/admin/navigation", icon: LayoutPanelTop },
       { label: "Notice Marquee Ticker", href: "/admin/announcements", icon: Megaphone },
       { label: "Student Reviews", href: "/admin/testimonials", icon: MessageSquareQuote },
       { label: "Media & Documents", href: "/admin/media", icon: ImageIcon },
@@ -58,8 +92,9 @@ const navSections = [
     items: [
       { label: "SEO Meta & 301 Redirects", href: "/admin/seo", icon: Globe },
       { label: "Tracking & Pixels", href: "/admin/tracking", icon: Activity },
-      { label: "Admin Users & Roles", href: "/admin/users", icon: ShieldCheck },
-      { label: "System Settings & SMTP", href: "/admin/settings", icon: Settings },
+      { label: "Version History", href: "/admin/history", icon: HistoryIcon },
+      { label: "Admin Users & Roles", href: "/admin/users", icon: ShieldCheck, superOnly: true },
+      { label: "System Settings & SMTP", href: "/admin/settings", icon: Settings, superOnly: true },
     ],
   },
 ];
@@ -67,18 +102,43 @@ const navSections = [
 export function AdminLayout({ children }: AdminLayoutProps) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [currentUser, setUser] = useState(getCurrentAdmin());
+  const [ready, setReady] = useState(false);
+  const liveNotice = useAdminStore()
+    .announcements.filter((a) => a.isActive && a.text.trim())
+    .sort((a, b) => a.priority - b.priority)[0]?.text;
+  const [loadError, setLoadError] = useState("");
+  const [saveStatus, setSaveStatus] = useState<SaveStatus>({ state: "idle" });
+  const [legacyAvailable, setLegacyAvailable] = useState(false);
   const [pendingLeads, setPendingLeads] = useState(0);
   const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
 
   useEffect(() => {
-    const user = getCurrentAdmin();
-    if (!user) {
-      navigate({ to: "/admin-login" });
-      return;
-    }
-    setUser(user);
+    let cancelled = false;
+
+    // Verify the Supabase session server-side, then load everything this admin may see.
+    // Editors are not rendered until this finishes so a save can never overwrite the
+    // database with built-in defaults.
+    (async () => {
+      try {
+        const user = await restoreAdminSession();
+        if (cancelled) return;
+        if (!user) {
+          navigate({ to: "/admin-login" });
+          return;
+        }
+        setUser(user);
+        await loadAdminData();
+        if (cancelled) return;
+        setLegacyAvailable(hasLegacyLocalStore());
+        setReady(true);
+      } catch (err) {
+        if (!cancelled) {
+          setLoadError(err instanceof Error ? err.message : "Could not load admin data.");
+        }
+      }
+    })();
 
     const refreshCounts = () => {
       const store = getAdminStore();
@@ -87,11 +147,30 @@ export function AdminLayout({ children }: AdminLayoutProps) {
       ).length;
       setPendingLeads(count);
     };
+    const onStatus = (e: Event) => setSaveStatus((e as CustomEvent<SaveStatus>).detail);
 
     refreshCounts();
     window.addEventListener("finenvision_store_updated", refreshCounts);
-    return () => window.removeEventListener("finenvision_store_updated", refreshCounts);
+    window.addEventListener("finenvision_save_status", onStatus);
+    return () => {
+      cancelled = true;
+      window.removeEventListener("finenvision_store_updated", refreshCounts);
+      window.removeEventListener("finenvision_save_status", onStatus);
+    };
   }, [navigate]);
+
+  const handleImportLegacy = () => {
+    if (
+      !window.confirm(
+        "Copy the content and leads previously saved in this browser into the live database? " +
+          "This replaces the current live website content.",
+      )
+    )
+      return;
+    const { leads } = importLegacyLocalStore();
+    setLegacyAvailable(false);
+    window.alert(`Imported site content and ${leads} lead(s).`);
+  };
 
   const handleConfirmLogout = () => {
     setCurrentAdmin(null);
@@ -107,10 +186,21 @@ export function AdminLayout({ children }: AdminLayoutProps) {
   }, []);
 
   const currentPath = location.pathname;
+  const blockedForRole =
+    ready &&
+    currentUser?.role !== "super_admin" &&
+    SUPER_ONLY_PATHS.some((p) => currentPath === p || currentPath.startsWith(`${p}/`));
+
+  useEffect(() => {
+    if (blockedForRole) navigate({ to: "/admin", replace: true });
+  }, [blockedForRole, navigate]);
 
   if (!currentUser) {
     return (
-      <div className="admin-scope min-h-screen bg-slate-50 flex items-center justify-center p-4" data-admin-portal="true">
+      <div
+        className="admin-scope min-h-screen bg-slate-50 flex items-center justify-center p-4"
+        data-admin-portal="true"
+      >
         <div className="text-center p-8 bg-white rounded-2xl border border-slate-200 shadow-sm max-w-sm w-full">
           <div className="w-12 h-12 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center mx-auto mb-3">
             <ShieldCheck className="w-6 h-6" />
@@ -203,65 +293,64 @@ export function AdminLayout({ children }: AdminLayoutProps) {
               <div className="px-3 text-[10px] font-bold text-slate-400 uppercase tracking-wider">
                 {section.title}
               </div>
-              {section.items.map((item) => {
-                const Icon = item.icon;
-                const isActive = item.exact
-                  ? currentPath === item.href
-                  : currentPath.startsWith(item.href);
+              {section.items
+                .filter((item) => !item.superOnly || currentUser?.role === "super_admin")
+                .map((item) => {
+                  const Icon = item.icon;
+                  const isActive = item.exact
+                    ? currentPath === item.href
+                    : currentPath.startsWith(item.href);
 
-                return (
-                  <Link
-                    key={item.href}
-                    to={item.href}
-                    onClick={() => setSidebarOpen(false)}
-                    className={`flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold transition-all duration-200 group ${
-                      isActive
-                        ? "bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-[0_3px_10px_rgba(37,99,235,0.35)] ring-1 ring-white/20"
-                        : "text-slate-600 hover:text-slate-950 hover:bg-slate-100/90 hover:translate-x-0.5"
-                    }`}
-                  >
-                    <div className="flex items-center gap-3 truncate">
-                      <Icon
-                        className={`w-4 h-4 shrink-0 transition-transform duration-200 group-hover:scale-110 ${
-                          isActive ? "text-white" : "text-slate-400 group-hover:text-blue-600"
-                        }`}
-                      />
-                      <span className="truncate">{item.label}</span>
-                    </div>
+                  return (
+                    <Link
+                      key={item.href}
+                      to={item.href}
+                      onClick={() => setSidebarOpen(false)}
+                      className={`flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold transition-all duration-200 group ${
+                        isActive
+                          ? "bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-[0_3px_10px_rgba(37,99,235,0.35)] ring-1 ring-white/20"
+                          : "text-slate-600 hover:text-slate-950 hover:bg-slate-100/90 hover:translate-x-0.5"
+                      }`}
+                    >
+                      <div className="flex items-center gap-3 truncate">
+                        <Icon
+                          className={`w-4 h-4 shrink-0 transition-transform duration-200 group-hover:scale-110 ${
+                            isActive ? "text-white" : "text-slate-400 group-hover:text-blue-600"
+                          }`}
+                        />
+                        <span className="truncate">{item.label}</span>
+                      </div>
 
-                    {item.badgeKey === "leads" && pendingLeads > 0 && (
-                      <span
-                        className={`inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold tabular-nums ${
-                          isActive
-                            ? "bg-white/25 text-white"
-                            : "bg-rose-50 text-rose-700 border border-rose-200 shadow-2xs"
-                        }`}
-                      >
-                        {pendingLeads} new
-                      </span>
-                    )}
-                  </Link>
-                );
-              })}
+                      {item.badgeKey === "leads" && pendingLeads > 0 && (
+                        <span
+                          className={`inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold tabular-nums ${
+                            isActive
+                              ? "bg-white/25 text-white"
+                              : "bg-rose-50 text-rose-700 border border-rose-200 shadow-2xs"
+                          }`}
+                        >
+                          {pendingLeads} new
+                        </span>
+                      )}
+                    </Link>
+                  );
+                })}
             </div>
           ))}
         </nav>
 
-        {/* Live Academic Batch Card */}
-        <div className="p-3.5 mx-3 mb-2 rounded-xl bg-gradient-to-br from-blue-50/60 via-slate-50 to-indigo-50/40 border border-blue-100/80 text-xs shadow-2xs">
-          <div className="flex items-center justify-between mb-1.5">
-            <span className="text-[10px] font-bold text-slate-500 uppercase tracking-wider flex items-center gap-1">
-              <Calendar className="w-3 h-3 text-blue-600" />
-              Active Window
-            </span>
-            <span className="inline-flex items-center gap-1 text-[10px] font-bold text-blue-700 bg-blue-100/80 px-2 py-0.5 rounded-full border border-blue-200/60">
-              Nov 2026 Batch
-            </span>
+        {/* Currently live notice (edited under Notice Marquee Ticker) */}
+        {liveNotice && (
+          <div className="p-3.5 mx-3 mb-2 rounded-xl bg-gradient-to-br from-blue-50/60 via-slate-50 to-indigo-50/40 border border-blue-100/80 text-xs shadow-2xs">
+            <div className="flex items-center justify-between mb-1.5">
+              <span className="text-[10px] font-bold text-slate-500 uppercase tracking-wider flex items-center gap-1">
+                <Calendar className="w-3 h-3 text-blue-600" />
+                Live notice
+              </span>
+            </div>
+            <p className="text-[11px] text-slate-600 leading-snug line-clamp-3">{liveNotice}</p>
           </div>
-          <p className="text-[11px] text-slate-600 leading-snug">
-            CFA Level 1 & 2 weekend admissions open at Thane Center.
-          </p>
-        </div>
+        )}
 
         {/* User Card & Logout Trigger */}
         <div className="p-3.5 border-t border-slate-100 bg-white">
@@ -299,28 +388,42 @@ export function AdminLayout({ children }: AdminLayoutProps) {
       {/* Main Panel Viewport */}
       <div className="flex-1 flex flex-col min-w-0">
         {/* Desktop Header */}
-        <header className="hidden md:flex h-16 bg-white/95 backdrop-blur-md border-b border-slate-200/80 px-8 items-center justify-between sticky top-0 z-20 shadow-[0_1px_3px_rgba(0,0,0,0.03)]">
-          <div className="flex items-center gap-3">
-            <div className="flex items-center gap-2 text-xs text-slate-400 font-medium">
-              <span className="text-slate-500 font-semibold">Admin Center</span>
-              <ChevronRight className="w-3.5 h-3.5 text-slate-300" />
-              <span className="text-slate-900 font-bold capitalize bg-slate-100 px-2.5 py-0.5 rounded-md border border-slate-200/60">
+        <header className="hidden md:flex h-16 bg-white/95 backdrop-blur-md border-b border-slate-200/80 px-4 lg:px-8 gap-3 items-center justify-between sticky top-0 z-20 shadow-[0_1px_3px_rgba(0,0,0,0.03)]">
+          <div className="flex min-w-0 items-center gap-3">
+            <div className="flex min-w-0 items-center gap-2 text-xs text-slate-400 font-medium">
+              <span className="hidden lg:inline text-slate-500 font-semibold">Admin Center</span>
+              <ChevronRight className="hidden lg:block w-3.5 h-3.5 text-slate-300" />
+              <span className="truncate text-slate-900 font-bold capitalize bg-slate-100 px-2.5 py-0.5 rounded-md border border-slate-200/60">
                 {currentPath === "/admin"
                   ? "Executive Overview"
                   : currentPath.split("/")[2]?.replace("-", " ") || "Dashboard"}
               </span>
             </div>
 
-            <div className="hidden lg:flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50/80 border border-emerald-200/70 text-[11px] font-semibold text-emerald-700">
-              <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
-              <span>Real-Time LocalStorage Synced</span>
+            <div
+              className={`items-center gap-2 whitespace-nowrap px-3 py-1 rounded-full border text-[11px] font-semibold ${
+                saveStatus.state === "error"
+                  ? "flex bg-rose-50 border-rose-200 text-rose-700"
+                  : saveStatus.state === "saving"
+                    ? "flex bg-amber-50 border-amber-200 text-amber-700"
+                    : "hidden xl:flex bg-emerald-50/80 border-emerald-200/70 text-emerald-700"
+              }`}
+            >
+              <span className="h-1.5 w-1.5 rounded-full bg-current animate-pulse" />
+              <span>
+                {saveStatus.state === "saving"
+                  ? "Saving to database…"
+                  : saveStatus.state === "error"
+                    ? `Save failed: ${saveStatus.message ?? "unknown error"}`
+                    : "Draft saved automatically"}
+              </span>
             </div>
           </div>
 
-          <div className="flex items-center gap-3">
+          <div className="flex shrink-0 items-center gap-2 lg:gap-3">
             <Link
               to="/admin/leads"
-              className="btn-sheen inline-flex items-center gap-1.5 px-4 py-2 text-xs font-bold rounded-xl bg-blue-600 text-white hover:bg-blue-700 transition-all shadow-[0_2px_8px_rgba(37,99,235,0.3)] hover:shadow-[0_4px_12px_rgba(37,99,235,0.4)]"
+              className="btn-sheen inline-flex items-center gap-1.5 whitespace-nowrap px-3 lg:px-4 py-2 text-xs font-bold rounded-xl bg-blue-600 text-white hover:bg-blue-700 transition-all shadow-[0_2px_8px_rgba(37,99,235,0.3)] hover:shadow-[0_4px_12px_rgba(37,99,235,0.4)]"
             >
               <PlusCircle className="w-3.5 h-3.5" />
               <span>Record Lead</span>
@@ -329,17 +432,82 @@ export function AdminLayout({ children }: AdminLayoutProps) {
             <Link
               to="/"
               target="_blank"
-              className="inline-flex items-center gap-1.5 px-3.5 py-2 text-xs font-semibold rounded-xl border border-slate-200 text-slate-700 bg-white hover:bg-slate-50 hover:border-slate-300 transition-all shadow-2xs hover:shadow-xs"
+              className="inline-flex items-center gap-1.5 whitespace-nowrap px-3 lg:px-3.5 py-2 text-xs font-semibold rounded-xl border border-slate-200 text-slate-700 bg-white hover:bg-slate-50 hover:border-slate-300 transition-all shadow-2xs hover:shadow-xs"
             >
-              <span>View Live Website</span>
+              <span className="hidden lg:inline">View Live Website</span>
+              <span className="lg:hidden">Live Site</span>
               <ArrowUpRight className="w-3.5 h-3.5 text-slate-400" />
             </Link>
           </div>
         </header>
 
         {/* Content Render Outlet */}
-        <main className="flex-1 p-4 md:p-8 max-w-[1440px] w-full mx-auto">{children}</main>
+        <main className="flex-1 p-4 md:p-8 max-w-[1440px] w-full mx-auto">
+          {loadError ? (
+            <div className="rounded-2xl border border-rose-200 bg-rose-50 p-6 text-sm text-rose-800">
+              <p className="font-bold">Could not load the admin data</p>
+              <p className="mt-1 text-xs">{loadError}</p>
+              <p className="mt-2 text-xs">
+                Check the Supabase env vars and that supabase/migrations/0001_init.sql has been run.
+              </p>
+            </div>
+          ) : !ready || blockedForRole ? (
+            <div className="py-24 text-center text-xs font-medium text-slate-500">
+              Loading your workspace…
+            </div>
+          ) : (
+            <>
+              {legacyAvailable && (
+                <div className="mb-6 flex flex-col gap-3 rounded-2xl border border-amber-200 bg-amber-50 p-4 text-xs text-amber-900 sm:flex-row sm:items-center sm:justify-between">
+                  <span>
+                    This browser still holds content and leads saved before the database was set up.
+                    Import them once to keep your earlier edits.
+                  </span>
+                  <span className="flex shrink-0 gap-2">
+                    <button
+                      onClick={handleImportLegacy}
+                      className="rounded-lg bg-amber-600 px-3 py-1.5 font-semibold text-white hover:bg-amber-700"
+                    >
+                      Import to database
+                    </button>
+                    <button
+                      onClick={() => {
+                        dismissLegacyLocalStore();
+                        setLegacyAvailable(false);
+                      }}
+                      className="rounded-lg border border-amber-300 px-3 py-1.5 font-semibold hover:bg-amber-100"
+                    >
+                      Discard
+                    </button>
+                  </span>
+                </div>
+              )}
+              <PublishBar />
+              {/* Remount the page when content is reloaded so no stale local copy survives. */}
+              <div key={getContentEpoch()}>{children}</div>
+            </>
+          )}
+        </main>
       </div>
+
+      {/* Save failures must be visible at every screen size */}
+      {saveStatus.state === "error" && (
+        <div
+          role="alert"
+          className="fixed bottom-4 left-4 right-4 z-[60] mx-auto max-w-md rounded-xl border border-rose-200 bg-rose-50 px-4 py-3 text-xs font-medium text-rose-800 shadow-lg md:left-auto md:right-6"
+        >
+          <span className="font-bold">Changes not saved.</span>{" "}
+          {saveStatus.message ?? "Unknown error."}
+          {saveStatus.conflict && (
+            <button
+              onClick={() => window.location.reload()}
+              className="ml-2 rounded-md bg-rose-600 px-2 py-0.5 font-bold text-white hover:bg-rose-700"
+            >
+              Reload
+            </button>
+          )}
+        </div>
+      )}
 
       {/* Logout Confirmation Modal */}
       {showLogoutConfirm && (
