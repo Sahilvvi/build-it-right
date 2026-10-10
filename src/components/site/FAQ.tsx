@@ -1,3 +1,4 @@
+/** @jsxImportSource @/lib/editable */
 import { useState, type ReactNode } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "@tanstack/react-router";

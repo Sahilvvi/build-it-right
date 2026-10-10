@@ -1,3 +1,4 @@
+/** @jsxImportSource @/lib/editable */
 import { Link } from "@tanstack/react-router";
 import type { ReactNode } from "react";
 import { isHttpUrl, isValidLinkTarget, needsPlainAnchor } from "@/lib/links";

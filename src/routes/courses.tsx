@@ -1,3 +1,5 @@
+/** @jsxImportSource @/lib/editable */
+import { Section } from "@/components/site/Section";
 import { withSeo } from "@/lib/seo";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState, useEffect, useRef, type ElementType } from "react";
@@ -401,13 +403,27 @@ function GradientHeading({
 function CoursesPage() {
   return (
     <SiteLayout>
-      <Hero />
-      <Curriculum />
-      <ImportantNote />
-      <PlanExam />
-      <Pricing />
-      <LeadForm />
-      <CourseFaqs />
+      <Section id="courses.hero" label="Hero">
+        <Hero />
+      </Section>
+      <Section id="courses.curriculum" label="Curriculum">
+        <Curriculum />
+      </Section>
+      <Section id="courses.important-notes" label="Important notes">
+        <ImportantNote />
+      </Section>
+      <Section id="courses.plan-your-exam" label="Plan your exam">
+        <PlanExam />
+      </Section>
+      <Section id="courses.pricing" label="Pricing">
+        <Pricing />
+      </Section>
+      <Section id="courses.callback-form" label="Callback form">
+        <LeadForm />
+      </Section>
+      <Section id="courses.faq" label="FAQ">
+        <CourseFaqs />
+      </Section>
     </SiteLayout>
   );
 }

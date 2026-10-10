@@ -7,7 +7,7 @@ import {
   HeadContent,
   Scripts,
 } from "@tanstack/react-router";
-import { useEffect, type ReactNode } from "react";
+import { Fragment, useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { loadPublicContent, getAdminStore, hydratePublicContent } from "@/lib/admin-store";
@@ -15,6 +15,8 @@ import { absoluteUrl, parseSearchConsoleToken, siteOrigin } from "@/lib/seo";
 import { isExternalTarget, matchRedirect, redirectDestination } from "@/lib/redirects";
 import { Tracking } from "@/components/site/Tracking";
 import { PreviewBar } from "@/components/site/PreviewBar";
+import { EditToolbar } from "@/components/site/EditToolbar";
+import { usePageEpoch } from "@/lib/editable/epoch";
 import { pageOverrides } from "@/lib/pages";
 const faviconAsset = { url: "/finenvision-icon.png" };
 const ogAsset = { url: "/finenvision-logo.png" };
@@ -183,6 +185,16 @@ function RootShell({ children }: { children: ReactNode }) {
   );
 }
 
+/** Remounts the page when the site editor changes copy, so static text re-renders. */
+function PageRemount() {
+  const epoch = usePageEpoch();
+  return (
+    <Fragment key={epoch}>
+      <Outlet />
+    </Fragment>
+  );
+}
+
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
   const { publicContent } = Route.useLoaderData();
@@ -192,9 +204,10 @@ function RootComponent() {
   return (
     <QueryClientProvider client={queryClient}>
       {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-      <Outlet />
+      <PageRemount />
       <Tracking />
       <PreviewBar />
+      <EditToolbar />
     </QueryClientProvider>
   );
 }

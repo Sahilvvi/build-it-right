@@ -1,3 +1,4 @@
+/** @jsxImportSource @/lib/editable */
 import { useCallback, useEffect, useRef, useState } from "react";
 import { z } from "zod";
 import { motion } from "framer-motion";

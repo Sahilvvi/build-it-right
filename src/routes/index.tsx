@@ -1,3 +1,5 @@
+/** @jsxImportSource @/lib/editable */
+import { Section } from "@/components/site/Section";
 import { withSeo } from "@/lib/seo";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion, AnimatePresence, useInView } from "framer-motion";
@@ -76,19 +78,41 @@ export const Route = createFileRoute("/")({
 function Home() {
   return (
     <SiteLayout>
-      <Hero />
-      <FounderSpotlight />
-      <DemoVideos />
+      <Section id="home.hero" label="Hero">
+        <Hero />
+      </Section>
+      <Section id="home.founder-spotlight" label="Founder spotlight">
+        <FounderSpotlight />
+      </Section>
+      <Section id="home.demo-videos" label="Demo videos">
+        <DemoVideos />
+      </Section>
 
-      <WhyUs />
-      <CourseTabs />
-      <PlacementAnalytics />
-      <TestimonialsSection />
+      <Section id="home.why-fin-envision" label="Why Fin-Envision">
+        <WhyUs />
+      </Section>
+      <Section id="home.course-tabs" label="Course tabs">
+        <CourseTabs />
+      </Section>
+      <Section id="home.results-and-numbers" label="Results and numbers">
+        <PlacementAnalytics />
+      </Section>
+      <Section id="home.testimonials" label="Testimonials">
+        <TestimonialsSection />
+      </Section>
 
-      <DownloadApp />
-      <CompaniesSection />
-      <FAQ />
-      <FinalCta />
+      <Section id="home.mobile-app" label="Mobile app">
+        <DownloadApp />
+      </Section>
+      <Section id="home.companies" label="Companies">
+        <CompaniesSection />
+      </Section>
+      <Section id="home.faq" label="FAQ">
+        <FAQ />
+      </Section>
+      <Section id="home.final-call-to-action" label="Final call-to-action">
+        <FinalCta />
+      </Section>
     </SiteLayout>
   );
 }

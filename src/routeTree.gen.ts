@@ -32,6 +32,7 @@ import { Route as AdminPagesRouteImport } from './routes/admin/pages'
 import { Route as AdminSeoRouteImport } from './routes/admin/seo'
 import { Route as AdminSettingsRouteImport } from './routes/admin/settings'
 import { Route as AdminTestimonialsRouteImport } from './routes/admin/testimonials'
+import { Route as AdminTextRouteImport } from './routes/admin/text'
 import { Route as AdminTrackingRouteImport } from './routes/admin/tracking'
 import { Route as AdminUsersRouteImport } from './routes/admin/users'
 
@@ -150,6 +151,11 @@ const AdminTestimonialsRoute = AdminTestimonialsRouteImport.update({
   path: '/testimonials',
   getParentRoute: () => AdminRoute,
 } as any)
+const AdminTextRoute = AdminTextRouteImport.update({
+  id: '/text',
+  path: '/text',
+  getParentRoute: () => AdminRoute,
+} as any)
 const AdminTrackingRoute = AdminTrackingRouteImport.update({
   id: '/tracking',
   path: '/tracking',
@@ -184,6 +190,7 @@ export interface FileRoutesByFullPath {
   '/admin/seo': typeof AdminSeoRoute
   '/admin/settings': typeof AdminSettingsRoute
   '/admin/testimonials': typeof AdminTestimonialsRoute
+  '/admin/text': typeof AdminTextRoute
   '/admin/tracking': typeof AdminTrackingRoute
   '/admin/users': typeof AdminUsersRoute
   '/admin/': typeof AdminIndexRoute
@@ -210,6 +217,7 @@ export interface FileRoutesByTo {
   '/admin/seo': typeof AdminSeoRoute
   '/admin/settings': typeof AdminSettingsRoute
   '/admin/testimonials': typeof AdminTestimonialsRoute
+  '/admin/text': typeof AdminTextRoute
   '/admin/tracking': typeof AdminTrackingRoute
   '/admin/users': typeof AdminUsersRoute
   '/admin': typeof AdminIndexRoute
@@ -238,6 +246,7 @@ export interface FileRoutesById {
   '/admin/seo': typeof AdminSeoRoute
   '/admin/settings': typeof AdminSettingsRoute
   '/admin/testimonials': typeof AdminTestimonialsRoute
+  '/admin/text': typeof AdminTextRoute
   '/admin/tracking': typeof AdminTrackingRoute
   '/admin/users': typeof AdminUsersRoute
   '/admin/': typeof AdminIndexRoute
@@ -267,6 +276,7 @@ export interface FileRouteTypes {
     | '/admin/seo'
     | '/admin/settings'
     | '/admin/testimonials'
+    | '/admin/text'
     | '/admin/tracking'
     | '/admin/users'
     | '/admin/'
@@ -293,6 +303,7 @@ export interface FileRouteTypes {
     | '/admin/seo'
     | '/admin/settings'
     | '/admin/testimonials'
+    | '/admin/text'
     | '/admin/tracking'
     | '/admin/users'
     | '/admin'
@@ -320,6 +331,7 @@ export interface FileRouteTypes {
     | '/admin/seo'
     | '/admin/settings'
     | '/admin/testimonials'
+    | '/admin/text'
     | '/admin/tracking'
     | '/admin/users'
     | '/admin/'
@@ -502,6 +514,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminTestimonialsRouteImport
       parentRoute: typeof AdminRoute
     }
+    '/admin/text': {
+      id: '/admin/text'
+      path: '/text'
+      fullPath: '/admin/text'
+      preLoaderRoute: typeof AdminTextRouteImport
+      parentRoute: typeof AdminRoute
+    }
     '/admin/tracking': {
       id: '/admin/tracking'
       path: '/tracking'
@@ -531,6 +550,7 @@ interface AdminRouteChildren {
   AdminSeoRoute: typeof AdminSeoRoute
   AdminSettingsRoute: typeof AdminSettingsRoute
   AdminTestimonialsRoute: typeof AdminTestimonialsRoute
+  AdminTextRoute: typeof AdminTextRoute
   AdminTrackingRoute: typeof AdminTrackingRoute
   AdminUsersRoute: typeof AdminUsersRoute
   AdminIndexRoute: typeof AdminIndexRoute
@@ -548,6 +568,7 @@ const AdminRouteChildren: AdminRouteChildren = {
   AdminSeoRoute: AdminSeoRoute,
   AdminSettingsRoute: AdminSettingsRoute,
   AdminTestimonialsRoute: AdminTestimonialsRoute,
+  AdminTextRoute: AdminTextRoute,
   AdminTrackingRoute: AdminTrackingRoute,
   AdminUsersRoute: AdminUsersRoute,
   AdminIndexRoute: AdminIndexRoute,

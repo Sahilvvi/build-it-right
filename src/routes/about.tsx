@@ -1,3 +1,5 @@
+/** @jsxImportSource @/lib/editable */
+import { Section } from "@/components/site/Section";
 import { withSeo } from "@/lib/seo";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion } from "framer-motion";
@@ -221,270 +223,280 @@ function AboutPage() {
   return (
     <SiteLayout>
       {/* HERO */}
-      <section className="relative overflow-hidden bg-[hsl(220_55%_12%)] text-primary-foreground">
-        <PremiumOrbs />
+      <Section id="about.hero" label="Hero">
+        <section className="relative overflow-hidden bg-[hsl(220_55%_12%)] text-primary-foreground">
+          <PremiumOrbs />
 
-        <div className="container-px relative mx-auto max-w-7xl pb-24 pt-20 md:pt-28">
-          <EyebrowBadge tone="dark">About Fin-Envision Learning</EyebrowBadge>
-          <motion.h1
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
-            className="mt-6 max-w-5xl text-balance font-display text-5xl font-semibold leading-[1.02] tracking-tight md:text-7xl lg:text-[5.5rem]"
-          >
-            {whoWeAreHeading}
-          </motion.h1>
-
-          <div className="mt-14 grid gap-10 lg:grid-cols-[1.1fr_1fr] lg:items-end">
-            <FadeIn>
-              <div className="text-xs font-bold uppercase tracking-[0.28em] text-accent">
-                Who we are
-              </div>
-              <p className="mt-5 text-pretty text-lg leading-relaxed text-white/85 md:text-xl">
-                {p1}
-              </p>
-              <p className="mt-5 text-pretty text-base text-white/70 md:text-lg">{p2}</p>
-            </FadeIn>
-
-            <Stagger className="grid grid-cols-2 gap-3">
-              {dynamicStats.map((s) => (
-                <StaggerItem key={s.label} variants={staggerItemVariants}>
-                  <div className="relative overflow-hidden rounded-3xl border border-white/15 bg-white/10 p-5 backdrop-blur-md transition-all hover:border-accent/40 hover:bg-white/[0.14]">
-                    <div className="pointer-events-none absolute -right-10 -top-10 h-32 w-32 rounded-full bg-accent/30 opacity-0 blur-3xl transition-opacity duration-500 hover:opacity-100" />
-                    <div className="font-display text-4xl font-semibold text-white md:text-5xl">
-                      {s.isStatic ? s.value : <Counter to={Number(s.value)} suffix={s.suffix} />}
-                    </div>
-                    <div className="mt-2 text-xs uppercase tracking-[0.18em] text-white/65">
-                      {s.label}
-                    </div>
-                  </div>
-                </StaggerItem>
-              ))}
-            </Stagger>
-          </div>
-        </div>
-      </section>
-
-      {/* MISSION · VISION · VALUES */}
-      <section className="relative -mt-12 pb-24 md:pb-32">
-        <FadeIn className="container-px mx-auto max-w-7xl">
-          <div className="flex flex-col gap-4">
-            <EyebrowBadge>Inside Fin-Envision</EyebrowBadge>
-            <h2 className="max-w-3xl font-display text-3xl font-semibold tracking-tight md:text-5xl">
-              What we <GradientAccent>stand for.</GradientAccent>
-            </h2>
-          </div>
-        </FadeIn>
-
-        <div className="container-px mx-auto mt-12 grid max-w-7xl gap-6 lg:grid-cols-3">
-          {[
-            {
-              label: "Our Mission",
-              tone: "from-[#1a3a5c] to-[#2d5a8c]",
-              body: missionText,
-            },
-            {
-              label: "Our Vision",
-              tone: "from-indigo-700 to-violet-800",
-              body: visionText,
-            },
-            {
-              label: "Our Values",
-              tone: "from-amber-500 to-orange-600",
-              values: valuesList,
-            },
-          ].map((card, i) => (
-            <motion.div
-              key={card.label}
+          <div className="container-px relative mx-auto max-w-7xl pb-24 pt-20 md:pt-28">
+            <EyebrowBadge tone="dark">About Fin-Envision Learning</EyebrowBadge>
+            <motion.h1
               initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-80px" }}
-              transition={{ duration: 0.5, delay: i * 0.08 }}
-              className="group relative overflow-hidden rounded-3xl border border-border bg-card p-8 shadow-elevated transition-all hover:-translate-y-1 hover:border-accent/40"
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
+              className="mt-6 max-w-5xl text-balance font-display text-5xl font-semibold leading-[1.02] tracking-tight md:text-7xl lg:text-[5.5rem]"
             >
-              <div className={cn("absolute inset-x-0 top-0 h-1.5 bg-gradient-to-r", card.tone)} />
-              <div className="text-xs font-bold uppercase tracking-[0.24em] text-accent">
-                {card.label}
-              </div>
-              {card.body && (
-                <p className="mt-5 text-pretty text-lg leading-relaxed text-foreground/80">
-                  {card.body}
+              {whoWeAreHeading}
+            </motion.h1>
+
+            <div className="mt-14 grid gap-10 lg:grid-cols-[1.1fr_1fr] lg:items-end">
+              <FadeIn>
+                <div className="text-xs font-bold uppercase tracking-[0.28em] text-accent">
+                  Who we are
+                </div>
+                <p className="mt-5 text-pretty text-lg leading-relaxed text-white/85 md:text-xl">
+                  {p1}
                 </p>
-              )}
-              {card.values && (
-                <ul className="mt-5 space-y-3">
-                  {card.values.map((v) => (
-                    <li key={v} className="flex items-center gap-3 text-base text-foreground/85">
-                      <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
-                      {v}
-                    </li>
-                  ))}
-                </ul>
-              )}
-            </motion.div>
-          ))}
-        </div>
-      </section>
+                <p className="mt-5 text-pretty text-base text-white/70 md:text-lg">{p2}</p>
+              </FadeIn>
 
-      {/* FOUNDER SPOTLIGHT */}
-      <section className="relative overflow-hidden bg-background py-24 md:py-32">
-        <AmbientLight />
-        <div className="container-px relative mx-auto max-w-7xl">
-          <PremiumHeader eyebrow="Lead Instructor" title={<>Lead Instructor</>} />
-
-          <div className="mt-14 grid gap-10 lg:grid-cols-[1fr_1.3fr] lg:items-start">
-            <FadeIn>
-              <div className="relative">
-                {/* Rotating conic ring around founder portrait */}
-                <motion.div
-                  aria-hidden
-                  animate={{ rotate: 360 }}
-                  transition={{ duration: 24, repeat: Infinity, ease: "linear" }}
-                  className="absolute -inset-3 rounded-[2.75rem] opacity-50"
-                  style={{
-                    background:
-                      "conic-gradient(from 0deg, hsl(var(--accent)/0.6), transparent 30%, hsl(var(--primary)/0.6) 60%, transparent 90%, hsl(var(--accent)/0.6))",
-                    mask: "radial-gradient(farthest-side, transparent calc(100% - 3px), #000 0)",
-                    WebkitMask:
-                      "radial-gradient(farthest-side, transparent calc(100% - 3px), #000 0)",
-                  }}
-                />
-                <div className="relative aspect-[4/5] overflow-hidden rounded-[2.5rem] bg-gradient-to-br from-[#1a3a5c] via-[#21426b] to-[#0f2a44] shadow-elevated">
-                  <img
-                    src={founderPhoto}
-                    alt={`${founderName} — ${founderTitle}, Fin-Envision Learning`}
-                    className="absolute inset-0 h-full w-full object-cover object-top"
-                    loading="lazy"
-                    decoding="async"
-                  />
-                  <div className="absolute inset-x-0 bottom-0 h-2/5 bg-gradient-to-t from-[#0b1f33] via-[#0b1f33]/70 to-transparent" />
-                  <div className="absolute inset-x-0 bottom-0 p-7 text-white">
-                    <div className="font-display text-3xl font-semibold">{founderName}</div>
-                    <div className="mt-1 text-sm uppercase tracking-[0.2em] text-white/70">
-                      {founderTitle}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </FadeIn>
-
-            <FadeIn delay={0.1}>
-              <div className="flex flex-col gap-8">
-                <div>
-                  <div className="text-xs font-bold uppercase tracking-[0.24em] text-accent">
-                    Academic Credentials
-                  </div>
-                  <div className="mt-4 flex flex-wrap gap-2">
-                    {founderCreds.map((c, i) => (
-                      <motion.span
-                        key={c}
-                        initial={{ opacity: 0, scale: 0.9 }}
-                        whileInView={{ opacity: 1, scale: 1 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.4, delay: i * 0.06 }}
-                        className="rounded-full border border-border bg-card px-3 py-1.5 text-xs font-medium shadow-card transition-all hover:border-accent/50 hover:text-accent"
-                      >
-                        {c}
-                      </motion.span>
-                    ))}
-                  </div>
-                </div>
-
-                <div className="h-px w-full bg-gradient-to-r from-primary/30 via-accent/20 to-transparent" />
-
-                <div>
-                  <div className="text-xs font-bold uppercase tracking-[0.24em] text-accent">
-                    Manoj Sir's Journey
-                  </div>
-                  <ul className="mt-5 space-y-3">
-                    {founderJourney.map((w, i) => (
-                      <motion.li
-                        key={w}
-                        initial={{ opacity: 0, x: -8 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.4, delay: i * 0.05 }}
-                        className="flex gap-3 rounded-xl border border-transparent bg-muted/30 px-4 py-3 text-sm leading-relaxed text-muted-foreground transition-colors hover:border-accent/30 hover:bg-muted/60"
-                      >
-                        <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-gradient-to-br from-accent to-primary" />
-                        <span>{w}</span>
-                      </motion.li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-            </FadeIn>
-          </div>
-        </div>
-      </section>
-
-      {/* LEADERSHIP PILLARS */}
-      <section className="container-px mx-auto max-w-7xl py-24 md:py-32">
-        <div className="relative overflow-hidden rounded-[2.5rem] border border-border bg-navy-gradient p-10 text-primary-foreground md:p-16">
-          <AmbientDark />
-          <div className="relative grid gap-12 lg:grid-cols-[1fr_1.2fr] lg:items-center">
-            <FadeIn>
-              <EyebrowBadge tone="dark">Leadership</EyebrowBadge>
-              <h2 className="mt-5 font-display text-4xl font-semibold leading-tight tracking-tight md:text-5xl">
-                Driven by <GradientAccent>purpose.</GradientAccent>
-              </h2>
-              <p className="mt-5 text-white/75 md:text-lg">
-                Our leadership brings deep expertise in finance and education — shaping a mission
-                focused on student success.
-              </p>
-            </FadeIn>
-
-            <Stagger className="grid gap-4">
-              {[
-                {
-                  icon: Target,
-                  t: "Driven by purpose",
-                  b: "Deep expertise in finance and education, shaping a mission focused on student success.",
-                },
-                {
-                  icon: Compass,
-                  t: "Vision in action",
-                  b: "We listen to your goals and recommend the course that truly fits — no fluff, no hard sell.",
-                },
-                {
-                  icon: Users,
-                  t: "Active involvement",
-                  b: "They mentor teams, interact with students, and stay engaged in daily progress — while keeping the long-term vision in focus.",
-                },
-              ].map((x) => (
-                <StaggerItem key={x.t} variants={staggerItemVariants}>
-                  <div className="group flex gap-5 rounded-2xl border border-white/15 bg-white/5 p-5 backdrop-blur transition-all hover:-translate-y-0.5 hover:border-accent/40 hover:bg-white/10">
-                    <div className="relative grid h-14 w-14 shrink-0 place-items-center">
-                      <ConicRing size="h-14 w-14" />
-                      <div className="relative grid h-12 w-12 place-items-center rounded-full bg-accent text-accent-foreground shadow-glow">
-                        <x.icon className="h-5 w-5" />
+              <Stagger className="grid grid-cols-2 gap-3">
+                {dynamicStats.map((s) => (
+                  <StaggerItem key={s.label} variants={staggerItemVariants}>
+                    <div className="relative overflow-hidden rounded-3xl border border-white/15 bg-white/10 p-5 backdrop-blur-md transition-all hover:border-accent/40 hover:bg-white/[0.14]">
+                      <div className="pointer-events-none absolute -right-10 -top-10 h-32 w-32 rounded-full bg-accent/30 opacity-0 blur-3xl transition-opacity duration-500 hover:opacity-100" />
+                      <div className="font-display text-4xl font-semibold text-white md:text-5xl">
+                        {s.isStatic ? s.value : <Counter to={Number(s.value)} suffix={s.suffix} />}
+                      </div>
+                      <div className="mt-2 text-xs uppercase tracking-[0.18em] text-white/65">
+                        {s.label}
                       </div>
                     </div>
-                    <div>
-                      <div className="font-display text-lg font-semibold text-white">{x.t}</div>
-                      <div className="mt-1 text-sm text-white/70">{x.b}</div>
+                  </StaggerItem>
+                ))}
+              </Stagger>
+            </div>
+          </div>
+        </section>
+      </Section>
+
+      {/* MISSION · VISION · VALUES */}
+      <Section id="about.mission" label="Mission">
+        <section className="relative -mt-12 pb-24 md:pb-32">
+          <FadeIn className="container-px mx-auto max-w-7xl">
+            <div className="flex flex-col gap-4">
+              <EyebrowBadge>Inside Fin-Envision</EyebrowBadge>
+              <h2 className="max-w-3xl font-display text-3xl font-semibold tracking-tight md:text-5xl">
+                What we <GradientAccent>stand for.</GradientAccent>
+              </h2>
+            </div>
+          </FadeIn>
+
+          <div className="container-px mx-auto mt-12 grid max-w-7xl gap-6 lg:grid-cols-3">
+            {[
+              {
+                label: "Our Mission",
+                tone: "from-[#1a3a5c] to-[#2d5a8c]",
+                body: missionText,
+              },
+              {
+                label: "Our Vision",
+                tone: "from-indigo-700 to-violet-800",
+                body: visionText,
+              },
+              {
+                label: "Our Values",
+                tone: "from-amber-500 to-orange-600",
+                values: valuesList,
+              },
+            ].map((card, i) => (
+              <motion.div
+                key={card.label}
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-80px" }}
+                transition={{ duration: 0.5, delay: i * 0.08 }}
+                className="group relative overflow-hidden rounded-3xl border border-border bg-card p-8 shadow-elevated transition-all hover:-translate-y-1 hover:border-accent/40"
+              >
+                <div className={cn("absolute inset-x-0 top-0 h-1.5 bg-gradient-to-r", card.tone)} />
+                <div className="text-xs font-bold uppercase tracking-[0.24em] text-accent">
+                  {card.label}
+                </div>
+                {card.body && (
+                  <p className="mt-5 text-pretty text-lg leading-relaxed text-foreground/80">
+                    {card.body}
+                  </p>
+                )}
+                {card.values && (
+                  <ul className="mt-5 space-y-3">
+                    {card.values.map((v) => (
+                      <li key={v} className="flex items-center gap-3 text-base text-foreground/85">
+                        <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
+                        {v}
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </motion.div>
+            ))}
+          </div>
+        </section>
+      </Section>
+
+      {/* FOUNDER SPOTLIGHT */}
+      <Section id="about.founder-spotlight" label="Founder Spotlight">
+        <section className="relative overflow-hidden bg-background py-24 md:py-32">
+          <AmbientLight />
+          <div className="container-px relative mx-auto max-w-7xl">
+            <PremiumHeader eyebrow="Lead Instructor" title={<>Lead Instructor</>} />
+
+            <div className="mt-14 grid gap-10 lg:grid-cols-[1fr_1.3fr] lg:items-start">
+              <FadeIn>
+                <div className="relative">
+                  {/* Rotating conic ring around founder portrait */}
+                  <motion.div
+                    aria-hidden
+                    animate={{ rotate: 360 }}
+                    transition={{ duration: 24, repeat: Infinity, ease: "linear" }}
+                    className="absolute -inset-3 rounded-[2.75rem] opacity-50"
+                    style={{
+                      background:
+                        "conic-gradient(from 0deg, hsl(var(--accent)/0.6), transparent 30%, hsl(var(--primary)/0.6) 60%, transparent 90%, hsl(var(--accent)/0.6))",
+                      mask: "radial-gradient(farthest-side, transparent calc(100% - 3px), #000 0)",
+                      WebkitMask:
+                        "radial-gradient(farthest-side, transparent calc(100% - 3px), #000 0)",
+                    }}
+                  />
+                  <div className="relative aspect-[4/5] overflow-hidden rounded-[2.5rem] bg-gradient-to-br from-[#1a3a5c] via-[#21426b] to-[#0f2a44] shadow-elevated">
+                    <img
+                      src={founderPhoto}
+                      alt={`${founderName} — ${founderTitle}, Fin-Envision Learning`}
+                      className="absolute inset-0 h-full w-full object-cover object-top"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                    <div className="absolute inset-x-0 bottom-0 h-2/5 bg-gradient-to-t from-[#0b1f33] via-[#0b1f33]/70 to-transparent" />
+                    <div className="absolute inset-x-0 bottom-0 p-7 text-white">
+                      <div className="font-display text-3xl font-semibold">{founderName}</div>
+                      <div className="mt-1 text-sm uppercase tracking-[0.2em] text-white/70">
+                        {founderTitle}
+                      </div>
                     </div>
                   </div>
-                </StaggerItem>
-              ))}
-            </Stagger>
+                </div>
+              </FadeIn>
+
+              <FadeIn delay={0.1}>
+                <div className="flex flex-col gap-8">
+                  <div>
+                    <div className="text-xs font-bold uppercase tracking-[0.24em] text-accent">
+                      Academic Credentials
+                    </div>
+                    <div className="mt-4 flex flex-wrap gap-2">
+                      {founderCreds.map((c, i) => (
+                        <motion.span
+                          key={c}
+                          initial={{ opacity: 0, scale: 0.9 }}
+                          whileInView={{ opacity: 1, scale: 1 }}
+                          viewport={{ once: true }}
+                          transition={{ duration: 0.4, delay: i * 0.06 }}
+                          className="rounded-full border border-border bg-card px-3 py-1.5 text-xs font-medium shadow-card transition-all hover:border-accent/50 hover:text-accent"
+                        >
+                          {c}
+                        </motion.span>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="h-px w-full bg-gradient-to-r from-primary/30 via-accent/20 to-transparent" />
+
+                  <div>
+                    <div className="text-xs font-bold uppercase tracking-[0.24em] text-accent">
+                      Manoj Sir's Journey
+                    </div>
+                    <ul className="mt-5 space-y-3">
+                      {founderJourney.map((w, i) => (
+                        <motion.li
+                          key={w}
+                          initial={{ opacity: 0, x: -8 }}
+                          whileInView={{ opacity: 1, x: 0 }}
+                          viewport={{ once: true }}
+                          transition={{ duration: 0.4, delay: i * 0.05 }}
+                          className="flex gap-3 rounded-xl border border-transparent bg-muted/30 px-4 py-3 text-sm leading-relaxed text-muted-foreground transition-colors hover:border-accent/30 hover:bg-muted/60"
+                        >
+                          <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-gradient-to-br from-accent to-primary" />
+                          <span>{w}</span>
+                        </motion.li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              </FadeIn>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      </Section>
+
+      {/* LEADERSHIP PILLARS */}
+      <Section id="about.leadership-pillars" label="Leadership Pillars">
+        <section className="container-px mx-auto max-w-7xl py-24 md:py-32">
+          <div className="relative overflow-hidden rounded-[2.5rem] border border-border bg-navy-gradient p-10 text-primary-foreground md:p-16">
+            <AmbientDark />
+            <div className="relative grid gap-12 lg:grid-cols-[1fr_1.2fr] lg:items-center">
+              <FadeIn>
+                <EyebrowBadge tone="dark">Leadership</EyebrowBadge>
+                <h2 className="mt-5 font-display text-4xl font-semibold leading-tight tracking-tight md:text-5xl">
+                  Driven by <GradientAccent>purpose.</GradientAccent>
+                </h2>
+                <p className="mt-5 text-white/75 md:text-lg">
+                  Our leadership brings deep expertise in finance and education — shaping a mission
+                  focused on student success.
+                </p>
+              </FadeIn>
+
+              <Stagger className="grid gap-4">
+                {[
+                  {
+                    icon: Target,
+                    t: "Driven by purpose",
+                    b: "Deep expertise in finance and education, shaping a mission focused on student success.",
+                  },
+                  {
+                    icon: Compass,
+                    t: "Vision in action",
+                    b: "We listen to your goals and recommend the course that truly fits — no fluff, no hard sell.",
+                  },
+                  {
+                    icon: Users,
+                    t: "Active involvement",
+                    b: "They mentor teams, interact with students, and stay engaged in daily progress — while keeping the long-term vision in focus.",
+                  },
+                ].map((x) => (
+                  <StaggerItem key={x.t} variants={staggerItemVariants}>
+                    <div className="group flex gap-5 rounded-2xl border border-white/15 bg-white/5 p-5 backdrop-blur transition-all hover:-translate-y-0.5 hover:border-accent/40 hover:bg-white/10">
+                      <div className="relative grid h-14 w-14 shrink-0 place-items-center">
+                        <ConicRing size="h-14 w-14" />
+                        <div className="relative grid h-12 w-12 place-items-center rounded-full bg-accent text-accent-foreground shadow-glow">
+                          <x.icon className="h-5 w-5" />
+                        </div>
+                      </div>
+                      <div>
+                        <div className="font-display text-lg font-semibold text-white">{x.t}</div>
+                        <div className="mt-1 text-sm text-white/70">{x.b}</div>
+                      </div>
+                    </div>
+                  </StaggerItem>
+                ))}
+              </Stagger>
+            </div>
+          </div>
+        </section>
+      </Section>
 
       {/* FAQ */}
-      <FAQ
-        eyebrow="FAQ"
-        title={
-          <>
-            More about{" "}
-            <span className="italic bg-gradient-to-r from-accent via-accent to-accent/60 bg-clip-text text-transparent pr-[0.15em] -mr-[0.15em]">
-              us.
-            </span>
-          </>
-        }
-        description="Frequently asked questions about Fin-Envision, our teaching style, and how we support every learner."
-      />
+      <Section id="about.faq" label="FAQ">
+        <FAQ
+          eyebrow="FAQ"
+          title={
+            <>
+              More about{" "}
+              <span className="italic bg-gradient-to-r from-accent via-accent to-accent/60 bg-clip-text text-transparent pr-[0.15em] -mr-[0.15em]">
+                us.
+              </span>
+            </>
+          }
+          description="Frequently asked questions about Fin-Envision, our teaching style, and how we support every learner."
+        />
+      </Section>
     </SiteLayout>
   );
 }

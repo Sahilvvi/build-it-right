@@ -30,6 +30,7 @@ import {
   Calendar,
   LayoutPanelTop,
   FilePlus2,
+  Type as TypeIcon,
   History as HistoryIcon,
   type LucideIcon,
 } from "lucide-react";
@@ -78,6 +79,7 @@ const navSections: Array<{ title: string; items: NavItem[] }> = [
     items: [
       { label: "Website Pages CMS", href: "/admin/pages", icon: FileEdit },
       { label: "Courses & Batch Pricing", href: "/admin/courses", icon: GraduationCap },
+      { label: "Page Text & Sections", href: "/admin/text", icon: TypeIcon },
       { label: "Pages You Create", href: "/admin/custom-pages", icon: FilePlus2 },
       { label: "Header & Footer Menus", href: "/admin/navigation", icon: LayoutPanelTop },
       { label: "Notice Marquee Ticker", href: "/admin/announcements", icon: Megaphone },

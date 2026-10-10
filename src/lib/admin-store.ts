@@ -372,6 +372,11 @@ export interface AdminStoreData {
   customPages: CustomPage[];
   /** Section keys (e.g. "home.faq") the admin has hidden on the built-in pages. */
   hiddenSections: string[];
+  /**
+   * Site-wide replacements keyed by the ORIGINAL text. Unprefixed keys replace visible text;
+   * "href:", "src:", "alt:" and "ph:" prefixes replace links, images, alt text and placeholders.
+   */
+  textOverrides: Record<string, string>;
   seo: Record<string, SeoPageMeta>;
   redirects: RedirectRule[];
   tracking: TrackingSettings;
@@ -660,6 +665,7 @@ const initialData: AdminStoreData = {
   pageSlugs: {},
   customPages: [],
   hiddenSections: [],
+  textOverrides: {},
   navigation: {
     announcementBar: { enabled: true, rotateSeconds: 5 },
     links: defaultNavLinks.map((l, i) => ({
@@ -936,6 +942,7 @@ function mergeWithDefaults(saved: Partial<AdminStoreData> | null | undefined): A
     pageSlugs: { ...(parsed.pageSlugs || {}) },
     customPages: parsed.customPages ?? base.customPages,
     hiddenSections: parsed.hiddenSections ?? base.hiddenSections,
+    textOverrides: { ...(parsed.textOverrides || {}) },
     smtp: { ...base.smtp, ...(parsed.smtp || {}) },
     activityHistory: base.activityHistory,
   };
@@ -956,6 +963,11 @@ let adminMode = false;
 // Bumped whenever content is re-read from the database (discard / restore). Pages that keep a
 // local working copy are remounted on change so they can never save a stale copy back.
 let contentEpoch = 0;
+/** True once an admin session has loaded the working draft in this tab. */
+export function isAdminDataLoaded(): boolean {
+  return adminMode;
+}
+
 export function getContentEpoch(): number {
   return contentEpoch;
 }
