@@ -31,6 +31,7 @@ export function PageAddressCard() {
       const res = checkPageSlug(page.defaultPath, draft[page.defaultPath] ?? "", {
         pageSlugs: { ...saved.pageSlugs, ...next },
         redirects: saved.redirects,
+        customPages: saved.customPages,
       });
       if (!res.ok) found[page.defaultPath] = res.error;
       else if (res.path) next[page.defaultPath] = res.path;
@@ -107,7 +108,7 @@ export function PageAddressCard() {
         <div className="flex items-center gap-2 shrink-0">
           {done && (
             <span className="text-xs text-emerald-600 font-semibold flex items-center gap-1">
-              <CheckCircle2 className="w-4 h-4" /> Published!
+              <CheckCircle2 className="w-4 h-4" /> Saved to draft
             </span>
           )}
           <button

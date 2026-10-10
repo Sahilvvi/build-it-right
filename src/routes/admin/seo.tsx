@@ -19,6 +19,7 @@ import {
 import { isValidRedirectTarget, wouldLoop } from "@/lib/redirects";
 import { CORE_PAGES, toPublicPath } from "@/lib/pages";
 import { PageAddressCard } from "@/components/admin/PageAddressCard";
+import { ImageField } from "@/components/admin/MediaPicker";
 
 export const Route = createFileRoute("/admin/seo")({
   component: AdminSeoPage,
@@ -158,7 +159,7 @@ export function AdminSeoPage() {
 
         {isSaved && (
           <span className="text-xs text-emerald-600 font-semibold flex items-center gap-1">
-            <CheckCircle2 className="w-4 h-4" /> SEO Changes Published!
+            <CheckCircle2 className="w-4 h-4" /> Saved to draft
           </span>
         )}
       </div>
@@ -233,6 +234,39 @@ export function AdminSeoPage() {
               <span className="text-[10px] text-slate-400 mt-0.5 block">
                 {currentMeta.description.length} characters
               </span>
+            </div>
+
+            <ImageField
+              label="Social share image (shown when the page is shared on WhatsApp, LinkedIn…)"
+              value={currentMeta.ogImage || ""}
+              onChange={(url) =>
+                setStore({
+                  ...store,
+                  seo: { ...store.seo, [selectedRoute]: { ...currentMeta, ogImage: url } },
+                })
+              }
+              hint="Ideal size 1200×630."
+            />
+
+            <div>
+              <label className="block text-slate-700 font-semibold mb-1">
+                Canonical URL (optional)
+              </label>
+              <input
+                type="text"
+                value={currentMeta.canonicalUrl || ""}
+                onChange={(e) =>
+                  setStore({
+                    ...store,
+                    seo: {
+                      ...store.seo,
+                      [selectedRoute]: { ...currentMeta, canonicalUrl: e.target.value.trim() },
+                    },
+                  })
+                }
+                placeholder="Leave blank to use this page's own address"
+                className="w-full px-3 py-2 border border-slate-300 rounded-lg font-mono"
+              />
             </div>
 
             {/* Google SERP Live Simulation */}

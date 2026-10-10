@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState, useEffect } from "react";
+import { ImageField } from "@/components/admin/MediaPicker";
 import {
   FileEdit,
   Save,
@@ -177,7 +178,7 @@ export function AdminPagesManager() {
         <div className="flex items-center gap-3">
           {isSaved && (
             <span className="text-xs text-emerald-600 font-semibold flex items-center gap-1">
-              <CheckCircle2 className="w-4 h-4" /> Published Live!
+              <CheckCircle2 className="w-4 h-4" /> Saved to draft
             </span>
           )}
           <button
@@ -185,7 +186,7 @@ export function AdminPagesManager() {
             className="inline-flex items-center gap-2 px-5 py-2.5 text-xs font-semibold rounded-xl bg-blue-600 text-white hover:bg-blue-700 shadow-xs hover:shadow-sm transition-all"
           >
             <Save className="w-3.5 h-3.5" />
-            <span>Save & Publish Live</span>
+            <span>Save changes</span>
           </button>
         </div>
       </div>
@@ -242,23 +243,14 @@ export function AdminPagesManager() {
                   />
                 </div>
                 <div className="md:col-span-2 space-y-3">
-                  <div>
-                    <label className="block text-xs font-semibold text-slate-700 mb-1">
-                      Logo Image URL / Local Asset Path
-                    </label>
-                    <input
-                      type="text"
-                      value={store.visuals?.logoUrl || ""}
-                      onChange={(e) =>
-                        setStore({
-                          ...store,
-                          visuals: { ...store.visuals, logoUrl: e.target.value },
-                        })
-                      }
-                      placeholder="/finenvision-logo-light.png or https://example.com/logo.png"
-                      className="w-full px-3 py-2 text-xs border border-slate-300 rounded-xl font-mono"
-                    />
-                  </div>
+                  <ImageField
+                    label="Logo image"
+                    value={store.visuals?.logoUrl || ""}
+                    onChange={(url) =>
+                      setStore({ ...store, visuals: { ...store.visuals, logoUrl: url } })
+                    }
+                    hint="Shown in the header and footer. A transparent PNG or WebP works best."
+                  />
                   <div className="flex flex-wrap gap-2 text-[11px]">
                     <button
                       type="button"
@@ -311,23 +303,14 @@ export function AdminPagesManager() {
                   />
                 </div>
                 <div className="md:col-span-2 space-y-3">
-                  <div>
-                    <label className="block text-xs font-semibold text-slate-700 mb-1">
-                      Favicon / App Icon URL
-                    </label>
-                    <input
-                      type="text"
-                      value={store.visuals?.iconUrl || ""}
-                      onChange={(e) =>
-                        setStore({
-                          ...store,
-                          visuals: { ...store.visuals, iconUrl: e.target.value },
-                        })
-                      }
-                      placeholder="/finenvision-icon.png or https://example.com/icon.png"
-                      className="w-full px-3 py-2 text-xs border border-slate-300 rounded-xl font-mono"
-                    />
-                  </div>
+                  <ImageField
+                    label="Favicon / square icon"
+                    value={store.visuals?.iconUrl || ""}
+                    onChange={(url) =>
+                      setStore({ ...store, visuals: { ...store.visuals, iconUrl: url } })
+                    }
+                    hint="Browser tab icon. Use a square image, at least 192×192."
+                  />
                   <button
                     type="button"
                     onClick={() =>
@@ -368,30 +351,24 @@ export function AdminPagesManager() {
                   />
                 </div>
                 <div className="md:col-span-2 space-y-3">
-                  <div>
-                    <label className="block text-xs font-semibold text-slate-700 mb-1">
-                      Portrait Photo URL / Image Path
-                    </label>
-                    <input
-                      type="text"
-                      value={store.visuals?.founderPhotoUrl || ""}
-                      onChange={(e) =>
-                        setStore({
-                          ...store,
-                          visuals: { ...store.visuals, founderPhotoUrl: e.target.value },
-                          homeContent: {
-                            ...store.homeContent,
-                            founderSpotlight: {
-                              ...store.homeContent.founderSpotlight,
-                              founderPhoto: e.target.value,
-                            },
+                  <ImageField
+                    label="Portrait photo"
+                    value={store.visuals?.founderPhotoUrl || ""}
+                    onChange={(url) =>
+                      setStore({
+                        ...store,
+                        visuals: { ...store.visuals, founderPhotoUrl: url },
+                        homeContent: {
+                          ...store.homeContent,
+                          founderSpotlight: {
+                            ...store.homeContent.founderSpotlight,
+                            founderPhoto: url,
                           },
-                        })
-                      }
-                      placeholder="/manoj-rajgopal.jpg or https://example.com/manoj-sir.jpg"
-                      className="w-full px-3 py-2 text-xs border border-slate-300 rounded-xl font-mono"
-                    />
-                  </div>
+                        },
+                      })
+                    }
+                    hint="Used on the Home and About pages."
+                  />
                   <button
                     type="button"
                     onClick={() =>

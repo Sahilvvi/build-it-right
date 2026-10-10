@@ -29,12 +29,16 @@ import {
   CheckCircle2,
   Calendar,
   LayoutPanelTop,
+  FilePlus2,
+  History as HistoryIcon,
   type LucideIcon,
 } from "lucide-react";
 import {
   getCurrentAdmin,
   setCurrentAdmin,
   getAdminStore,
+  getContentEpoch,
+  useAdminStore,
   restoreAdminSession,
   loadAdminData,
   hasLegacyLocalStore,
@@ -42,6 +46,7 @@ import {
   dismissLegacyLocalStore,
   type SaveStatus,
 } from "@/lib/admin-store";
+import { PublishBar } from "@/components/admin/PublishBar";
 
 interface AdminLayoutProps {
   children?: ReactNode;
@@ -53,7 +58,12 @@ interface NavItem {
   icon: LucideIcon;
   exact?: boolean;
   badgeKey?: "leads";
+  /** Only visible to Super Admins. */
+  superOnly?: boolean;
 }
+
+/** Screens only a Super Admin may open (the database enforces the real rule). */
+const SUPER_ONLY_PATHS = ["/admin/users", "/admin/settings"];
 
 const navSections: Array<{ title: string; items: NavItem[] }> = [
   {
@@ -68,6 +78,7 @@ const navSections: Array<{ title: string; items: NavItem[] }> = [
     items: [
       { label: "Website Pages CMS", href: "/admin/pages", icon: FileEdit },
       { label: "Courses & Batch Pricing", href: "/admin/courses", icon: GraduationCap },
+      { label: "Pages You Create", href: "/admin/custom-pages", icon: FilePlus2 },
       { label: "Header & Footer Menus", href: "/admin/navigation", icon: LayoutPanelTop },
       { label: "Notice Marquee Ticker", href: "/admin/announcements", icon: Megaphone },
       { label: "Student Reviews", href: "/admin/testimonials", icon: MessageSquareQuote },
@@ -79,8 +90,9 @@ const navSections: Array<{ title: string; items: NavItem[] }> = [
     items: [
       { label: "SEO Meta & 301 Redirects", href: "/admin/seo", icon: Globe },
       { label: "Tracking & Pixels", href: "/admin/tracking", icon: Activity },
-      { label: "Admin Users & Roles", href: "/admin/users", icon: ShieldCheck },
-      { label: "System Settings & SMTP", href: "/admin/settings", icon: Settings },
+      { label: "Version History", href: "/admin/history", icon: HistoryIcon },
+      { label: "Admin Users & Roles", href: "/admin/users", icon: ShieldCheck, superOnly: true },
+      { label: "System Settings & SMTP", href: "/admin/settings", icon: Settings, superOnly: true },
     ],
   },
 ];
@@ -89,6 +101,9 @@ export function AdminLayout({ children }: AdminLayoutProps) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [currentUser, setUser] = useState(getCurrentAdmin());
   const [ready, setReady] = useState(false);
+  const liveNotice = useAdminStore()
+    .announcements.filter((a) => a.isActive && a.text.trim())
+    .sort((a, b) => a.priority - b.priority)[0]?.text;
   const [loadError, setLoadError] = useState("");
   const [saveStatus, setSaveStatus] = useState<SaveStatus>({ state: "idle" });
   const [legacyAvailable, setLegacyAvailable] = useState(false);
@@ -169,6 +184,14 @@ export function AdminLayout({ children }: AdminLayoutProps) {
   }, []);
 
   const currentPath = location.pathname;
+  const blockedForRole =
+    ready &&
+    currentUser?.role !== "super_admin" &&
+    SUPER_ONLY_PATHS.some((p) => currentPath === p || currentPath.startsWith(`${p}/`));
+
+  useEffect(() => {
+    if (blockedForRole) navigate({ to: "/admin", replace: true });
+  }, [blockedForRole, navigate]);
 
   if (!currentUser) {
     return (
@@ -268,65 +291,64 @@ export function AdminLayout({ children }: AdminLayoutProps) {
               <div className="px-3 text-[10px] font-bold text-slate-400 uppercase tracking-wider">
                 {section.title}
               </div>
-              {section.items.map((item) => {
-                const Icon = item.icon;
-                const isActive = item.exact
-                  ? currentPath === item.href
-                  : currentPath.startsWith(item.href);
+              {section.items
+                .filter((item) => !item.superOnly || currentUser?.role === "super_admin")
+                .map((item) => {
+                  const Icon = item.icon;
+                  const isActive = item.exact
+                    ? currentPath === item.href
+                    : currentPath.startsWith(item.href);
 
-                return (
-                  <Link
-                    key={item.href}
-                    to={item.href}
-                    onClick={() => setSidebarOpen(false)}
-                    className={`flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold transition-all duration-200 group ${
-                      isActive
-                        ? "bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-[0_3px_10px_rgba(37,99,235,0.35)] ring-1 ring-white/20"
-                        : "text-slate-600 hover:text-slate-950 hover:bg-slate-100/90 hover:translate-x-0.5"
-                    }`}
-                  >
-                    <div className="flex items-center gap-3 truncate">
-                      <Icon
-                        className={`w-4 h-4 shrink-0 transition-transform duration-200 group-hover:scale-110 ${
-                          isActive ? "text-white" : "text-slate-400 group-hover:text-blue-600"
-                        }`}
-                      />
-                      <span className="truncate">{item.label}</span>
-                    </div>
+                  return (
+                    <Link
+                      key={item.href}
+                      to={item.href}
+                      onClick={() => setSidebarOpen(false)}
+                      className={`flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold transition-all duration-200 group ${
+                        isActive
+                          ? "bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-[0_3px_10px_rgba(37,99,235,0.35)] ring-1 ring-white/20"
+                          : "text-slate-600 hover:text-slate-950 hover:bg-slate-100/90 hover:translate-x-0.5"
+                      }`}
+                    >
+                      <div className="flex items-center gap-3 truncate">
+                        <Icon
+                          className={`w-4 h-4 shrink-0 transition-transform duration-200 group-hover:scale-110 ${
+                            isActive ? "text-white" : "text-slate-400 group-hover:text-blue-600"
+                          }`}
+                        />
+                        <span className="truncate">{item.label}</span>
+                      </div>
 
-                    {item.badgeKey === "leads" && pendingLeads > 0 && (
-                      <span
-                        className={`inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold tabular-nums ${
-                          isActive
-                            ? "bg-white/25 text-white"
-                            : "bg-rose-50 text-rose-700 border border-rose-200 shadow-2xs"
-                        }`}
-                      >
-                        {pendingLeads} new
-                      </span>
-                    )}
-                  </Link>
-                );
-              })}
+                      {item.badgeKey === "leads" && pendingLeads > 0 && (
+                        <span
+                          className={`inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold tabular-nums ${
+                            isActive
+                              ? "bg-white/25 text-white"
+                              : "bg-rose-50 text-rose-700 border border-rose-200 shadow-2xs"
+                          }`}
+                        >
+                          {pendingLeads} new
+                        </span>
+                      )}
+                    </Link>
+                  );
+                })}
             </div>
           ))}
         </nav>
 
-        {/* Live Academic Batch Card */}
-        <div className="p-3.5 mx-3 mb-2 rounded-xl bg-gradient-to-br from-blue-50/60 via-slate-50 to-indigo-50/40 border border-blue-100/80 text-xs shadow-2xs">
-          <div className="flex items-center justify-between mb-1.5">
-            <span className="text-[10px] font-bold text-slate-500 uppercase tracking-wider flex items-center gap-1">
-              <Calendar className="w-3 h-3 text-blue-600" />
-              Active Window
-            </span>
-            <span className="inline-flex items-center gap-1 text-[10px] font-bold text-blue-700 bg-blue-100/80 px-2 py-0.5 rounded-full border border-blue-200/60">
-              Nov 2026 Batch
-            </span>
+        {/* Currently live notice (edited under Notice Marquee Ticker) */}
+        {liveNotice && (
+          <div className="p-3.5 mx-3 mb-2 rounded-xl bg-gradient-to-br from-blue-50/60 via-slate-50 to-indigo-50/40 border border-blue-100/80 text-xs shadow-2xs">
+            <div className="flex items-center justify-between mb-1.5">
+              <span className="text-[10px] font-bold text-slate-500 uppercase tracking-wider flex items-center gap-1">
+                <Calendar className="w-3 h-3 text-blue-600" />
+                Live notice
+              </span>
+            </div>
+            <p className="text-[11px] text-slate-600 leading-snug line-clamp-3">{liveNotice}</p>
           </div>
-          <p className="text-[11px] text-slate-600 leading-snug">
-            CFA Level 1 & 2 weekend admissions open at Thane Center.
-          </p>
-        </div>
+        )}
 
         {/* User Card & Logout Trigger */}
         <div className="p-3.5 border-t border-slate-100 bg-white">
@@ -391,7 +413,7 @@ export function AdminLayout({ children }: AdminLayoutProps) {
                   ? "Saving to database…"
                   : saveStatus.state === "error"
                     ? `Save failed: ${saveStatus.message ?? "unknown error"}`
-                    : "Connected to Supabase"}
+                    : "Draft saved automatically"}
               </span>
             </div>
           </div>
@@ -427,7 +449,7 @@ export function AdminLayout({ children }: AdminLayoutProps) {
                 Check the Supabase env vars and that supabase/migrations/0001_init.sql has been run.
               </p>
             </div>
-          ) : !ready ? (
+          ) : !ready || blockedForRole ? (
             <div className="py-24 text-center text-xs font-medium text-slate-500">
               Loading your workspace…
             </div>
@@ -458,7 +480,9 @@ export function AdminLayout({ children }: AdminLayoutProps) {
                   </span>
                 </div>
               )}
-              {children}
+              <PublishBar />
+              {/* Remount the page when content is reloaded so no stale local copy survives. */}
+              <div key={getContentEpoch()}>{children}</div>
             </>
           )}
         </main>
@@ -472,6 +496,14 @@ export function AdminLayout({ children }: AdminLayoutProps) {
         >
           <span className="font-bold">Changes not saved.</span>{" "}
           {saveStatus.message ?? "Unknown error."}
+          {saveStatus.conflict && (
+            <button
+              onClick={() => window.location.reload()}
+              className="ml-2 rounded-md bg-rose-600 px-2 py-0.5 font-bold text-white hover:bg-rose-700"
+            >
+              Reload
+            </button>
+          )}
         </div>
       )}
 

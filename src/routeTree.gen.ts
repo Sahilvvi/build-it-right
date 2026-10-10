@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as SplatRouteImport } from './routes/$'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as AdminRouteImport } from './routes/admin'
 import { Route as AdminLoginRouteImport } from './routes/admin-login'
@@ -17,9 +18,13 @@ import { Route as CfaRouteImport } from './routes/cfa'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as CoursesRouteImport } from './routes/courses'
 import { Route as ResourcesRouteImport } from './routes/resources'
+import { Route as RobotsDottxtRouteImport } from './routes/robots[.]txt'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as AdminIndexRouteImport } from './routes/admin/index'
 import { Route as AdminAnnouncementsRouteImport } from './routes/admin/announcements'
 import { Route as AdminCoursesRouteImport } from './routes/admin/courses'
+import { Route as AdminCustomPagesRouteImport } from './routes/admin/custom-pages'
+import { Route as AdminHistoryRouteImport } from './routes/admin/history'
 import { Route as AdminLeadsRouteImport } from './routes/admin/leads'
 import { Route as AdminMediaRouteImport } from './routes/admin/media'
 import { Route as AdminNavigationRouteImport } from './routes/admin/navigation'
@@ -33,6 +38,11 @@ import { Route as AdminUsersRouteImport } from './routes/admin/users'
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SplatRoute = SplatRouteImport.update({
+  id: '/$',
+  path: '/$',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AboutRoute = AboutRouteImport.update({
@@ -70,6 +80,16 @@ const ResourcesRoute = ResourcesRouteImport.update({
   path: '/resources',
   getParentRoute: () => rootRouteImport,
 } as any)
+const RobotsDottxtRoute = RobotsDottxtRouteImport.update({
+  id: '/robots.txt',
+  path: '/robots.txt',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AdminIndexRoute = AdminIndexRouteImport.update({
   id: '/',
   path: '/',
@@ -83,6 +103,16 @@ const AdminAnnouncementsRoute = AdminAnnouncementsRouteImport.update({
 const AdminCoursesRoute = AdminCoursesRouteImport.update({
   id: '/courses',
   path: '/courses',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminCustomPagesRoute = AdminCustomPagesRouteImport.update({
+  id: '/custom-pages',
+  path: '/custom-pages',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminHistoryRoute = AdminHistoryRouteImport.update({
+  id: '/history',
+  path: '/history',
   getParentRoute: () => AdminRoute,
 } as any)
 const AdminLeadsRoute = AdminLeadsRouteImport.update({
@@ -133,6 +163,7 @@ const AdminUsersRoute = AdminUsersRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/$': typeof SplatRoute
   '/about': typeof AboutRoute
   '/admin': typeof AdminRouteWithChildren
   '/admin-login': typeof AdminLoginRoute
@@ -140,8 +171,12 @@ export interface FileRoutesByFullPath {
   '/contact': typeof ContactRoute
   '/courses': typeof CoursesRoute
   '/resources': typeof ResourcesRoute
+  '/robots.txt': typeof RobotsDottxtRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/admin/announcements': typeof AdminAnnouncementsRoute
   '/admin/courses': typeof AdminCoursesRoute
+  '/admin/custom-pages': typeof AdminCustomPagesRoute
+  '/admin/history': typeof AdminHistoryRoute
   '/admin/leads': typeof AdminLeadsRoute
   '/admin/media': typeof AdminMediaRoute
   '/admin/navigation': typeof AdminNavigationRoute
@@ -155,14 +190,19 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/$': typeof SplatRoute
   '/about': typeof AboutRoute
   '/admin-login': typeof AdminLoginRoute
   '/cfa': typeof CfaRoute
   '/contact': typeof ContactRoute
   '/courses': typeof CoursesRoute
   '/resources': typeof ResourcesRoute
+  '/robots.txt': typeof RobotsDottxtRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/admin/announcements': typeof AdminAnnouncementsRoute
   '/admin/courses': typeof AdminCoursesRoute
+  '/admin/custom-pages': typeof AdminCustomPagesRoute
+  '/admin/history': typeof AdminHistoryRoute
   '/admin/leads': typeof AdminLeadsRoute
   '/admin/media': typeof AdminMediaRoute
   '/admin/navigation': typeof AdminNavigationRoute
@@ -177,6 +217,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/$': typeof SplatRoute
   '/about': typeof AboutRoute
   '/admin': typeof AdminRouteWithChildren
   '/admin-login': typeof AdminLoginRoute
@@ -184,8 +225,12 @@ export interface FileRoutesById {
   '/contact': typeof ContactRoute
   '/courses': typeof CoursesRoute
   '/resources': typeof ResourcesRoute
+  '/robots.txt': typeof RobotsDottxtRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/admin/announcements': typeof AdminAnnouncementsRoute
   '/admin/courses': typeof AdminCoursesRoute
+  '/admin/custom-pages': typeof AdminCustomPagesRoute
+  '/admin/history': typeof AdminHistoryRoute
   '/admin/leads': typeof AdminLeadsRoute
   '/admin/media': typeof AdminMediaRoute
   '/admin/navigation': typeof AdminNavigationRoute
@@ -201,6 +246,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/$'
     | '/about'
     | '/admin'
     | '/admin-login'
@@ -208,8 +254,12 @@ export interface FileRouteTypes {
     | '/contact'
     | '/courses'
     | '/resources'
+    | '/robots.txt'
+    | '/sitemap.xml'
     | '/admin/announcements'
     | '/admin/courses'
+    | '/admin/custom-pages'
+    | '/admin/history'
     | '/admin/leads'
     | '/admin/media'
     | '/admin/navigation'
@@ -223,14 +273,19 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/$'
     | '/about'
     | '/admin-login'
     | '/cfa'
     | '/contact'
     | '/courses'
     | '/resources'
+    | '/robots.txt'
+    | '/sitemap.xml'
     | '/admin/announcements'
     | '/admin/courses'
+    | '/admin/custom-pages'
+    | '/admin/history'
     | '/admin/leads'
     | '/admin/media'
     | '/admin/navigation'
@@ -244,6 +299,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/$'
     | '/about'
     | '/admin'
     | '/admin-login'
@@ -251,8 +307,12 @@ export interface FileRouteTypes {
     | '/contact'
     | '/courses'
     | '/resources'
+    | '/robots.txt'
+    | '/sitemap.xml'
     | '/admin/announcements'
     | '/admin/courses'
+    | '/admin/custom-pages'
+    | '/admin/history'
     | '/admin/leads'
     | '/admin/media'
     | '/admin/navigation'
@@ -267,6 +327,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  SplatRoute: typeof SplatRoute
   AboutRoute: typeof AboutRoute
   AdminRoute: typeof AdminRouteWithChildren
   AdminLoginRoute: typeof AdminLoginRoute
@@ -274,6 +335,8 @@ export interface RootRouteChildren {
   ContactRoute: typeof ContactRoute
   CoursesRoute: typeof CoursesRoute
   ResourcesRoute: typeof ResourcesRoute
+  RobotsDottxtRoute: typeof RobotsDottxtRoute
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -283,6 +346,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/$': {
+      id: '/$'
+      path: '/$'
+      fullPath: '/$'
+      preLoaderRoute: typeof SplatRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/about': {
@@ -334,6 +404,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ResourcesRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/robots.txt': {
+      id: '/robots.txt'
+      path: '/robots.txt'
+      fullPath: '/robots.txt'
+      preLoaderRoute: typeof RobotsDottxtRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/admin/': {
       id: '/admin/'
       path: '/'
@@ -353,6 +437,20 @@ declare module '@tanstack/react-router' {
       path: '/courses'
       fullPath: '/admin/courses'
       preLoaderRoute: typeof AdminCoursesRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/custom-pages': {
+      id: '/admin/custom-pages'
+      path: '/custom-pages'
+      fullPath: '/admin/custom-pages'
+      preLoaderRoute: typeof AdminCustomPagesRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/history': {
+      id: '/admin/history'
+      path: '/history'
+      fullPath: '/admin/history'
+      preLoaderRoute: typeof AdminHistoryRouteImport
       parentRoute: typeof AdminRoute
     }
     '/admin/leads': {
@@ -424,6 +522,8 @@ declare module '@tanstack/react-router' {
 interface AdminRouteChildren {
   AdminAnnouncementsRoute: typeof AdminAnnouncementsRoute
   AdminCoursesRoute: typeof AdminCoursesRoute
+  AdminCustomPagesRoute: typeof AdminCustomPagesRoute
+  AdminHistoryRoute: typeof AdminHistoryRoute
   AdminLeadsRoute: typeof AdminLeadsRoute
   AdminMediaRoute: typeof AdminMediaRoute
   AdminNavigationRoute: typeof AdminNavigationRoute
@@ -439,6 +539,8 @@ interface AdminRouteChildren {
 const AdminRouteChildren: AdminRouteChildren = {
   AdminAnnouncementsRoute: AdminAnnouncementsRoute,
   AdminCoursesRoute: AdminCoursesRoute,
+  AdminCustomPagesRoute: AdminCustomPagesRoute,
+  AdminHistoryRoute: AdminHistoryRoute,
   AdminLeadsRoute: AdminLeadsRoute,
   AdminMediaRoute: AdminMediaRoute,
   AdminNavigationRoute: AdminNavigationRoute,
@@ -455,6 +557,7 @@ const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  SplatRoute: SplatRoute,
   AboutRoute: AboutRoute,
   AdminRoute: AdminRouteWithChildren,
   AdminLoginRoute: AdminLoginRoute,
@@ -462,6 +565,8 @@ const rootRouteChildren: RootRouteChildren = {
   ContactRoute: ContactRoute,
   CoursesRoute: CoursesRoute,
   ResourcesRoute: ResourcesRoute,
+  RobotsDottxtRoute: RobotsDottxtRoute,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

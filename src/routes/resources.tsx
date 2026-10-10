@@ -1,6 +1,7 @@
 import { withSeo } from "@/lib/seo";
 import { createFileRoute } from "@tanstack/react-router";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { submitLead } from "@/lib/lead-client";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, Play, Youtube, Clock, Search, ChevronLeft, ChevronRight } from "lucide-react";
 import { SiteLayout } from "@/components/site/Layout";
@@ -656,15 +657,15 @@ function NewsletterForm() {
   const [subscribed, setSubscribed] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setLoading(true);
+  const startedAt = useRef(0);
+  useEffect(() => {
+    startedAt.current = Date.now();
+  }, []);
 
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     const fd = new FormData(e.currentTarget);
-    const data = {
-      Email: fd.get("email"),
-      _subject: "New Newsletter Subscription - Fin-Envision (Resources Page)",
-    };
+    setLoading(true);
 
     // Open YouTube channel in a new tab synchronously to prevent popup blockers
     window.open(
@@ -673,26 +674,19 @@ function NewsletterForm() {
       "noopener,noreferrer",
     );
 
-    fetch("https://formsubmit.co/ajax/contactfinenvision@gmail.com", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-      body: JSON.stringify(data),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log("Subscribed successfully:", data);
-        setSubscribed(true);
-      })
-      .catch((err) => {
-        console.error("Error subscribing:", err);
-        setSubscribed(true);
-      })
-      .finally(() => {
-        setLoading(false);
+    try {
+      await submitLead({
+        kind: "newsletter",
+        email: String(fd.get("email") ?? ""),
+        website: String(fd.get("website") ?? ""),
+        startedAt: startedAt.current,
       });
+    } catch (err) {
+      console.error("Newsletter signup failed:", err);
+    } finally {
+      setLoading(false);
+      setSubscribed(true); // never block the visitor on a failed signup
+    }
   };
 
   if (subscribed) {
@@ -708,7 +702,13 @@ function NewsletterForm() {
   }
 
   return (
-    <form onSubmit={onSubmit} className="mt-8 flex flex-col gap-3 sm:flex-row">
+    <form onSubmit={onSubmit} className="relative mt-8 flex flex-col gap-3 sm:flex-row">
+      <div aria-hidden="true" className="absolute -left-[9999px] h-0 w-0 overflow-hidden">
+        <label>
+          Website
+          <input type="text" name="website" tabIndex={-1} autoComplete="off" />
+        </label>
+      </div>
       <input
         type="email"
         name="email"

@@ -1,6 +1,7 @@
 import { withSeo } from "@/lib/seo";
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useState, useEffect, type ElementType } from "react";
+import { useState, useEffect, useRef, type ElementType } from "react";
+import { LeadError, submitLead } from "@/lib/lead-client";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Star,
@@ -1110,39 +1111,33 @@ function LeadForm() {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const [error, setError] = useState("");
+  const startedAt = useRef(0);
+  useEffect(() => {
+    startedAt.current = Date.now();
+  }, []);
+
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setLoading(true);
-
     const fd = new FormData(e.currentTarget);
-    const data = {
-      Name: fd.get("name"),
-      Email: fd.get("email"),
-      Phone: fd.get("phone"),
-      Message: fd.get("message"),
-      _subject: "New Callback Request - Fin-Envision (Courses Page)",
-    };
-
-    fetch("https://formsubmit.co/ajax/contactfinenvision@gmail.com", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-      body: JSON.stringify(data),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log("Form submitted successfully:", data);
-        setSubmitted(true);
-      })
-      .catch((err) => {
-        console.error("Error submitting form:", err);
-        setSubmitted(true); // show success view even if network fails to prevent user friction
-      })
-      .finally(() => {
-        setLoading(false);
+    setLoading(true);
+    setError("");
+    try {
+      await submitLead({
+        name: String(fd.get("name") ?? ""),
+        email: String(fd.get("email") ?? ""),
+        phone: String(fd.get("phone") ?? ""),
+        message: String(fd.get("message") ?? ""),
+        interest: "Callback request (Courses page)",
+        website: String(fd.get("website") ?? ""),
+        startedAt: startedAt.current,
       });
+      setSubmitted(true);
+    } catch (err) {
+      setError(err instanceof LeadError ? err.message : "Something went wrong. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -1214,6 +1209,12 @@ function LeadForm() {
               onSubmit={onSubmit}
               className="relative rounded-[calc(2rem-1px)] border border-white/10 bg-[#0b1a36]/80 p-8 backdrop-blur-md md:p-10"
             >
+              <div aria-hidden="true" className="absolute -left-[9999px] h-0 w-0 overflow-hidden">
+                <label>
+                  Website
+                  <input type="text" name="website" tabIndex={-1} autoComplete="off" />
+                </label>
+              </div>
               <div className="grid gap-5">
                 <FormField
                   name="name"
@@ -1236,6 +1237,7 @@ function LeadForm() {
                   label="Phone Number"
                   type="tel"
                   placeholder="+91 7304833625"
+                  required
                 />
                 <div>
                   <label className="text-[11px] font-bold uppercase tracking-[0.18em] text-white/55">
@@ -1248,6 +1250,11 @@ function LeadForm() {
                     className="mt-2 w-full rounded-2xl border border-white/15 bg-white/[0.04] px-4 py-3 text-sm text-white placeholder:text-white/40 focus:border-accent/60 focus:outline-none"
                   />
                 </div>
+                {error && (
+                  <p role="alert" className="text-center text-xs font-medium text-red-300">
+                    {error}
+                  </p>
+                )}
                 <motion.button
                   whileHover={{ scale: loading ? 1 : 1.02 }}
                   whileTap={{ scale: loading ? 1 : 0.98 }}

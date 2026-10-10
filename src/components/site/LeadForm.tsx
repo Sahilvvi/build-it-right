@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { z } from "zod";
 import { motion } from "framer-motion";
 import { ArrowRight, CheckCircle2 } from "lucide-react";
-import { courses } from "@/data/site";
-import { trackLead } from "@/lib/tracking";
+import { useAdminStore } from "@/lib/admin-store";
+import { LeadError, submitLead } from "@/lib/lead-client";
+import { Turnstile, turnstileEnabled } from "./Turnstile";
 
 const schema = z.object({
   name: z.string().trim().min(2, "Please enter your name").max(80),
@@ -19,10 +20,19 @@ export function LeadForm({
   compact?: boolean;
   defaultInterest?: string;
 }) {
+  const { courses } = useAdminStore();
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [submitted, setSubmitted] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [formError, setFormError] = useState("");
+  const [token, setToken] = useState("");
+  const startedAt = useRef(0);
+  useEffect(() => {
+    startedAt.current = Date.now();
+  }, []);
+  const onToken = useCallback((t: string) => setToken(t), []);
 
-  function onSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const fd = new FormData(e.currentTarget);
     const parsed = schema.safeParse({
@@ -38,56 +48,28 @@ export function LeadForm({
       return;
     }
     setErrors({});
+    setFormError("");
+    if (turnstileEnabled && !token) {
+      setFormError("Please complete the verification below.");
+      return;
+    }
 
-    const searchParams =
-      typeof window !== "undefined" ? new URLSearchParams(window.location.search) : null;
-    const utmSource = searchParams?.get("utm_source") || "website_direct";
-    const utmMedium = searchParams?.get("utm_medium") || undefined;
-    const utmCampaign = searchParams?.get("utm_campaign") || undefined;
-    const utmTerm = searchParams?.get("utm_term") || undefined;
-    const utmContent = searchParams?.get("utm_content") || undefined;
-
-    // Save to the Supabase `leads` table (anonymous insert-only). The email below is a backup.
-    import("@/lib/admin-store")
-      .then(({ submitPublicLead }) =>
-        submitPublicLead({
-          name: parsed.data.name,
-          email: parsed.data.email,
-          phone: parsed.data.phone,
-          courseInterest: parsed.data.interest || "Chartered Financial Analyst (CFA®) Level 1",
-          city: "Mumbai",
-          sourcePage: typeof window !== "undefined" ? window.location.pathname : "/contact",
-          utmSource,
-          utmMedium,
-          utmCampaign,
-          utmTerm,
-          utmContent,
-        }),
-      )
-      .catch((err) => console.error("Could not save lead to CRM:", err));
-
-    const data = {
-      Name: parsed.data.name,
-      Email: parsed.data.email,
-      Phone: parsed.data.phone,
-      "Course Interest": parsed.data.interest || "Not specified",
-      _subject: "New Career Guidance Booking - Fin-Envision",
-    };
-
-    fetch("https://formsubmit.co/ajax/contactfinenvision@gmail.com", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-      body: JSON.stringify(data),
-    })
-      .then((res) => res.json())
-      .then((data) => console.log("Form submitted successfully:", data))
-      .catch((err) => console.error("Error submitting form:", err));
-
-    trackLead();
-    setSubmitted(true);
+    setSending(true);
+    try {
+      await submitLead({
+        ...parsed.data,
+        website: String(fd.get("website") ?? ""),
+        startedAt: startedAt.current,
+        turnstileToken: token,
+      });
+      setSubmitted(true);
+    } catch (err) {
+      setFormError(
+        err instanceof LeadError ? err.message : "Something went wrong. Please try again.",
+      );
+    } finally {
+      setSending(false);
+    }
   }
 
   if (submitted) {
@@ -111,7 +93,14 @@ export function LeadForm({
   }
 
   return (
-    <form onSubmit={onSubmit} className={compact ? "grid gap-3" : "grid gap-4"}>
+    <form onSubmit={onSubmit} className={`relative ${compact ? "grid gap-3" : "grid gap-4"}`}>
+      {/* Honeypot: invisible to people, irresistible to bots. */}
+      <div aria-hidden="true" className="absolute -left-[9999px] h-0 w-0 overflow-hidden">
+        <label>
+          Website
+          <input type="text" name="website" tabIndex={-1} autoComplete="off" />
+        </label>
+      </div>
       <Field name="name" label="Full name" placeholder="Aisha Verma" error={errors.name} />
       <div className="grid gap-4 md:grid-cols-2">
         <Field
@@ -147,11 +136,18 @@ export function LeadForm({
           <option value="Not sure yet">Not sure yet — guide me</option>
         </select>
       </div>
+      <Turnstile onToken={onToken} />
+      {formError && (
+        <p role="alert" className="text-center text-xs font-medium text-destructive">
+          {formError}
+        </p>
+      )}
       <button
         type="submit"
-        className="btn-sheen group mt-2 inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-brand px-5 py-3.5 text-sm font-bold text-primary-foreground shadow-glow transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_15px_35px_-5px_hsl(var(--accent)/0.6)]"
+        disabled={sending}
+        className="btn-sheen group mt-2 disabled:opacity-60 inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-brand px-5 py-3.5 text-sm font-bold text-primary-foreground shadow-glow transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_15px_35px_-5px_hsl(var(--accent)/0.6)]"
       >
-        <span>Book Free Career Guidance Call</span>
+        <span>{sending ? "Sending…" : "Book Free Career Guidance Call"}</span>
         <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
       </button>
       <p className="text-center text-[11px] text-muted-foreground flex items-center justify-center gap-1.5">

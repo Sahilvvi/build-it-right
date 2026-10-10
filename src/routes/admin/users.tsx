@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, redirect } from "@tanstack/react-router";
 import { useState, useEffect } from "react";
 import {
   ShieldCheck,
@@ -21,6 +21,12 @@ import {
 } from "@/lib/admin-store";
 
 export const Route = createFileRoute("/admin/users")({
+  beforeLoad: () => {
+    // UI guard only: the database enforces the real rule.
+    if (typeof window !== "undefined" && getCurrentAdmin()?.role !== "super_admin") {
+      throw redirect({ to: "/admin" });
+    }
+  },
   component: AdminUsersPage,
 });
 

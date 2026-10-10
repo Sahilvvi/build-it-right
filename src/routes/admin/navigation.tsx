@@ -23,7 +23,7 @@ import {
   type SocialPlatform,
 } from "@/lib/admin-store";
 import { isHttpUrl, isValidLinkTarget } from "@/lib/links";
-import { CORE_PAGES, linkTargetExists, toPublicPath } from "@/lib/pages";
+import { LinkTargetField as TargetField } from "@/components/admin/LinkTargetField";
 
 export const Route = createFileRoute("/admin/navigation")({
   component: AdminNavigationPage,
@@ -85,73 +85,6 @@ function SectionTitle({ title, hint }: { title: string; hint?: string }) {
     <div className="pb-3 border-b border-slate-100">
       <h2 className="text-sm font-bold text-slate-900">{title}</h2>
       {hint && <p className="text-[11px] text-slate-500 mt-0.5">{hint}</p>}
-    </div>
-  );
-}
-
-/**
- * Pick one of the site's pages (recommended: the link then follows the page if its address is
- * renamed), or type any path / URL. Warns when a same-site path matches no page.
- */
-function TargetField({
-  value,
-  onChange,
-  invalid,
-}: {
-  value: string;
-  onChange: (to: string) => void;
-  invalid: boolean;
-}) {
-  const store = useAdminStore();
-  const page = CORE_PAGES.find((p) => p.defaultPath === value.trim());
-  const [customMode, setCustomMode] = useState(!page);
-  const missing = !invalid && value.trim() !== "" && !linkTargetExists(value, store);
-
-  return (
-    <div className="space-y-1.5">
-      <select
-        value={customMode ? "__custom__" : value}
-        onChange={(e) => {
-          if (e.target.value === "__custom__") {
-            setCustomMode(true);
-          } else {
-            setCustomMode(false);
-            onChange(e.target.value);
-          }
-        }}
-        aria-label="Link destination"
-        className={inputCls}
-      >
-        <optgroup label="Pages on this site">
-          {CORE_PAGES.map((p) => (
-            <option key={p.defaultPath} value={p.defaultPath}>
-              {p.title} — {toPublicPath(p.defaultPath)}
-            </option>
-          ))}
-        </optgroup>
-        <option value="__custom__">Custom path or external URL…</option>
-      </select>
-      {customMode && (
-        <input
-          type="text"
-          value={value}
-          onChange={(e) => onChange(e.target.value.trim())}
-          placeholder="/page-slug, /#section or https://…"
-          aria-label="Link target"
-          className={`${inputCls} font-mono ${invalid || missing ? "border-rose-400" : ""}`}
-        />
-      )}
-      {invalid && (
-        <p className="text-[11px] text-rose-600">
-          Use a path like /about, or a full http(s)://, mailto: or tel: link.
-        </p>
-      )}
-      {missing && (
-        <p className="text-[11px] text-amber-700">
-          No page exists at this address, so visitors would see a 404 page. Pick a page above, or
-          add a redirect for it under SEO.
-        </p>
-      )}
     </div>
   );
 }
@@ -345,7 +278,7 @@ export function AdminNavigationPage() {
         <div className="flex items-center gap-2 shrink-0">
           {justSaved && (
             <span className="text-xs text-emerald-600 font-semibold flex items-center gap-1">
-              <CheckCircle2 className="w-4 h-4" /> Published!
+              <CheckCircle2 className="w-4 h-4" /> Saved to draft
             </span>
           )}
           {dirty && !justSaved && (
@@ -365,7 +298,7 @@ export function AdminNavigationPage() {
             disabled={!dirty}
             className="inline-flex items-center gap-1.5 px-4 py-2 text-xs font-semibold rounded-lg bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-40"
           >
-            <Save className="w-3.5 h-3.5" /> Save & Publish
+            <Save className="w-3.5 h-3.5" /> Save changes
           </button>
         </div>
       </div>

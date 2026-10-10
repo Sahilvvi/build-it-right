@@ -1,4 +1,4 @@
-import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { createFileRoute, redirect, useNavigate } from "@tanstack/react-router";
 import { useState, useEffect } from "react";
 import {
   Settings,
@@ -19,9 +19,18 @@ import {
   type AdminStoreData,
   getCurrentAdmin,
   setCurrentAdmin,
+  flushPersist,
 } from "@/lib/admin-store";
+import { supabase } from "@/lib/supabase";
+import { sendTestEmailFn } from "@/lib/leads";
 
 export const Route = createFileRoute("/admin/settings")({
+  beforeLoad: () => {
+    // UI guard only: the database enforces the real rule.
+    if (typeof window !== "undefined" && getCurrentAdmin()?.role !== "super_admin") {
+      throw redirect({ to: "/admin" });
+    }
+  },
   component: AdminSettingsPage,
 });
 
@@ -30,7 +39,10 @@ export function AdminSettingsPage() {
   const [store, setStore] = useState<AdminStoreData>(getAdminStore());
   const [currentUser, setCurrentUser] = useState(getCurrentAdmin());
   const [isSaved, setIsSaved] = useState(false);
-  const [testSent, setTestSent] = useState(false);
+  const [testState, setTestState] = useState<{
+    status: "idle" | "sending" | "ok" | "error";
+    message?: string;
+  }>({ status: "idle" });
 
   useEffect(() => {
     setCurrentUser(getCurrentAdmin());
@@ -54,9 +66,22 @@ export function AdminSettingsPage() {
     setTimeout(() => setIsSaved(false), 3000);
   };
 
-  const handleSendTestEmail = () => {
-    setTestSent(true);
-    setTimeout(() => setTestSent(false), 3000);
+  const handleSendTestEmail = async () => {
+    setTestState({ status: "sending" });
+    try {
+      // The server reads the SMTP settings from the database, so save what is on screen first.
+      saveAdminStore(store, { action: "Updated SMTP settings", target: "System Settings" });
+      await flushPersist();
+      const { data } = (await supabase?.auth.getSession()) ?? { data: { session: null } };
+      if (!data.session) throw new Error("Your session expired. Please sign in again.");
+      const res = await sendTestEmailFn({ data: { accessToken: data.session.access_token } });
+      setTestState({ status: "ok", message: `Test email sent to ${res.sentTo}.` });
+    } catch (err) {
+      setTestState({
+        status: "error",
+        message: err instanceof Error ? err.message : "The test email could not be sent.",
+      });
+    }
   };
 
   return (
@@ -254,6 +279,13 @@ export function AdminSettingsPage() {
             </div>
           </div>
 
+          <p className="rounded-lg border border-amber-200 bg-amber-50 p-3 text-[11px] text-amber-900">
+            The SMTP <strong>password is never stored in the database</strong>. Add it as a server
+            environment variable named <code className="font-mono">SMTP_PASS</code> (for Gmail, an
+            App Password). Without it, enquiries are still saved to the CRM, just without the email
+            alert.
+          </p>
+
           <div className="pt-2 flex items-center justify-between">
             <button
               type="button"
@@ -261,12 +293,16 @@ export function AdminSettingsPage() {
               className="px-3 py-1.5 border border-slate-200 text-slate-700 rounded-lg hover:bg-slate-50 font-medium inline-flex items-center gap-1.5"
             >
               <Send className="w-3.5 h-3.5 text-slate-500" />
-              Send Test Lead Alert Email
+              {testState.status === "sending" ? "Sending…" : "Send Test Lead Alert Email"}
             </button>
-            {testSent && (
+            {testState.status === "ok" && (
               <span className="text-emerald-600 font-medium text-[11px] flex items-center gap-1">
-                <CheckCircle2 className="w-3.5 h-3.5" /> Test email triggered to{" "}
-                {store.smtp.leadNotificationEmail}
+                <CheckCircle2 className="w-3.5 h-3.5" /> {testState.message}
+              </span>
+            )}
+            {testState.status === "error" && (
+              <span className="max-w-sm text-right text-rose-600 font-medium text-[11px]">
+                {testState.message}
               </span>
             )}
           </div>

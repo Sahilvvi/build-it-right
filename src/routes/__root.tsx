@@ -10,10 +10,11 @@ import {
 import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
-import { fetchPublicContent, getAdminStore, hydratePublicContent } from "@/lib/admin-store";
+import { loadPublicContent, getAdminStore, hydratePublicContent } from "@/lib/admin-store";
 import { absoluteUrl, parseSearchConsoleToken, siteOrigin } from "@/lib/seo";
 import { isExternalTarget, matchRedirect, redirectDestination } from "@/lib/redirects";
 import { Tracking } from "@/components/site/Tracking";
+import { PreviewBar } from "@/components/site/PreviewBar";
 import { pageOverrides } from "@/lib/pages";
 const faviconAsset = { url: "/finenvision-icon.png" };
 const ogAsset = { url: "/finenvision-logo.png" };
@@ -89,9 +90,8 @@ function ErrorComponent({ error, reset }: { error: unknown; reset: () => void })
 
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
   loader: async () => {
-    const publicContent = await fetchPublicContent();
-    // Hydrate here (not only at render) so every route's head() sees the live SEO settings.
-    hydratePublicContent(publicContent);
+    // Also applies the content to the store, so every route's head() sees the live settings.
+    const publicContent = await loadPublicContent();
     return { publicContent };
   },
   head: () => {
@@ -194,6 +194,7 @@ function RootComponent() {
       {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
       <Outlet />
       <Tracking />
+      <PreviewBar />
     </QueryClientProvider>
   );
 }

@@ -1,4 +1,5 @@
-import { getAdminStore } from "./admin-store";
+import { getAdminStore, type CustomPage } from "./admin-store";
+import { REVIEW_NOTE_MARKER } from "./page-blocks";
 import { toPublicPath } from "./pages";
 
 type MetaEntry = {
@@ -86,4 +87,48 @@ export function parseSearchConsoleToken(raw: string | undefined): string | null 
   const token = (fromTag ?? value).replace(/^google-site-verification=/i, "").trim();
   if (!token || /SAMPLE|X{6,}/i.test(token)) return null;
   return token;
+}
+
+const stripMarkdown = (md: string) =>
+  md
+    .replace(/\[([^\]]+)\]\([^)]+\)/g, "$1")
+    .replace(/[*_`#>-]/g, "")
+    .replace(/\s+/g, " ")
+    .trim();
+
+/** <head> for an admin-created page: its own SEO fields, with sensible fallbacks. */
+export function customPageHead(page: CustomPage): {
+  meta: MetaEntry[];
+  links: LinkEntry[];
+} {
+  const store = getAdminStore();
+  const title = page.seoTitle.trim() || `${page.title} — ${store.identity.name}`;
+  const firstText = page.blocks.find(
+    (b) => b.type === "text" && !b.markdown.startsWith(REVIEW_NOTE_MARKER),
+  );
+  const fallback = firstText && firstText.type === "text" ? stripMarkdown(firstText.markdown) : "";
+  const description = page.seoDescription.trim() || fallback.slice(0, 160);
+
+  const meta: MetaEntry[] = [
+    { title },
+    { property: "og:title", content: title },
+    { name: "twitter:title", content: title },
+  ];
+  if (description) {
+    meta.push(
+      { name: "description", content: description },
+      { property: "og:description", content: description },
+      { name: "twitter:description", content: description },
+    );
+  }
+  if (page.ogImage.trim()) {
+    const abs = absoluteUrl(page.ogImage.trim());
+    meta.push({ property: "og:image", content: abs }, { name: "twitter:image", content: abs });
+  }
+  if (page.status === "hidden") meta.push({ name: "robots", content: "noindex, nofollow" });
+
+  const links: LinkEntry[] = SITE_URL
+    ? [{ rel: "canonical", href: absoluteUrl(`/${page.slug}`) }]
+    : [];
+  return { meta, links };
 }

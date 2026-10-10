@@ -62,10 +62,9 @@ let cache: { at: number; rules: RedirectRule[] } | null = null;
 /** Rules change rarely, so each server instance re-reads them at most every 30 s. */
 export async function getRedirectRules(): Promise<RedirectRule[]> {
   if (cache && Date.now() - cache.at < TTL_MS) return cache.rules;
-  const { fetchPublicContent, hydratePublicContent, getAdminStore } = await import("./admin-store");
+  const { loadPublicContent, getAdminStore } = await import("./admin-store");
   try {
-    const row = await fetchPublicContent();
-    hydratePublicContent(row);
+    await loadPublicContent();
     cache = { at: Date.now(), rules: getAdminStore().redirects };
   } catch (err) {
     console.error("Could not refresh redirect rules:", err);

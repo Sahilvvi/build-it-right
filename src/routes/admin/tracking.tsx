@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { Activity, Save, CheckCircle2, Code, ShieldAlert, Zap } from "lucide-react";
 import {
   getAdminStore,
+  getCurrentAdmin,
   saveAdminStore,
   type AdminStoreData,
   type TrackingSettings,
@@ -17,6 +18,7 @@ export const Route = createFileRoute("/admin/tracking")({
 export function AdminTrackingPage() {
   const [store, setStore] = useState<AdminStoreData>(getAdminStore());
   const [isSaved, setIsSaved] = useState(false);
+  const isSuper = getCurrentAdmin()?.role === "super_admin";
 
   useEffect(() => {
     const handleUpdate = () => setStore(getAdminStore());
@@ -51,7 +53,7 @@ export function AdminTrackingPage() {
 
         {isSaved && (
           <span className="text-xs text-emerald-600 font-semibold flex items-center gap-1">
-            <CheckCircle2 className="w-4 h-4" /> Tracking Scripts Active!
+            <CheckCircle2 className="w-4 h-4" /> Saved to draft
           </span>
         )}
       </div>
@@ -221,6 +223,12 @@ export function AdminTrackingPage() {
             Approved tracking scripts, chat widgets, or conversion pixels injected directly into the
             HTML document.
           </p>
+          {!isSuper && (
+            <p className="rounded-lg border border-amber-200 bg-amber-50 p-3 text-[11px] text-amber-900">
+              Custom code runs on every public page, so only a <strong>Super Admin</strong> can add
+              or change it. You can still publish a draft that already contains approved scripts.
+            </p>
+          )}
 
           <div>
             <label className="block text-slate-700 font-semibold mb-1">
@@ -229,6 +237,7 @@ export function AdminTrackingPage() {
             <textarea
               rows={4}
               placeholder="<!-- Paste your custom tracking scripts here -->"
+              disabled={!isSuper}
               value={store.tracking.customHeadScript}
               onChange={(e) =>
                 setStore({
@@ -236,7 +245,7 @@ export function AdminTrackingPage() {
                   tracking: { ...store.tracking, customHeadScript: e.target.value },
                 })
               }
-              className="w-full px-3 py-2 border border-slate-300 rounded-lg font-mono text-[11px] bg-slate-50/50"
+              className="w-full px-3 py-2 border border-slate-300 rounded-lg font-mono text-[11px] bg-slate-50/50 disabled:cursor-not-allowed disabled:opacity-60"
             />
           </div>
 
@@ -247,6 +256,7 @@ export function AdminTrackingPage() {
             <textarea
               rows={4}
               placeholder="<!-- Paste your custom body or chat widgets here -->"
+              disabled={!isSuper}
               value={store.tracking.customBodyScript}
               onChange={(e) =>
                 setStore({
@@ -254,7 +264,7 @@ export function AdminTrackingPage() {
                   tracking: { ...store.tracking, customBodyScript: e.target.value },
                 })
               }
-              className="w-full px-3 py-2 border border-slate-300 rounded-lg font-mono text-[11px] bg-slate-50/50"
+              className="w-full px-3 py-2 border border-slate-300 rounded-lg font-mono text-[11px] bg-slate-50/50 disabled:cursor-not-allowed disabled:opacity-60"
             />
           </div>
         </div>
