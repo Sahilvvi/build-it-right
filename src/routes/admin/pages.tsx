@@ -548,55 +548,12 @@ export function AdminPagesManager() {
                 />
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-3 pt-2">
-                <div>
-                  <label className="block text-[11px] font-semibold text-slate-500 mb-1">
-                    YouTube URL
-                  </label>
-                  <input
-                    type="text"
-                    value={store.identity.youtubeUrl}
-                    onChange={(e) =>
-                      setStore({
-                        ...store,
-                        identity: { ...store.identity, youtubeUrl: e.target.value },
-                      })
-                    }
-                    className="w-full px-3 py-1.5 text-xs border border-slate-300 rounded-lg font-mono"
-                  />
-                </div>
-                <div>
-                  <label className="block text-[11px] font-semibold text-slate-500 mb-1">
-                    LinkedIn URL
-                  </label>
-                  <input
-                    type="text"
-                    value={store.identity.linkedinUrl}
-                    onChange={(e) =>
-                      setStore({
-                        ...store,
-                        identity: { ...store.identity, linkedinUrl: e.target.value },
-                      })
-                    }
-                    className="w-full px-3 py-1.5 text-xs border border-slate-300 rounded-lg font-mono"
-                  />
-                </div>
-                <div>
-                  <label className="block text-[11px] font-semibold text-slate-500 mb-1">
-                    Instagram URL
-                  </label>
-                  <input
-                    type="text"
-                    value={store.identity.instagramUrl}
-                    onChange={(e) =>
-                      setStore({
-                        ...store,
-                        identity: { ...store.identity, instagramUrl: e.target.value },
-                      })
-                    }
-                    className="w-full px-3 py-1.5 text-xs border border-slate-300 rounded-lg font-mono"
-                  />
-                </div>
+              <div className="rounded-xl border border-blue-100 bg-blue-50/60 p-3 text-[11px] text-blue-900">
+                Social links, header menu, login button, footer columns and legal links now live in{" "}
+                <a href="/admin/navigation" className="font-bold underline">
+                  Header &amp; Footer Menus
+                </a>
+                .
               </div>
             </div>
           </div>
@@ -1520,7 +1477,7 @@ export function AdminPagesManager() {
                         homeContent: {
                           ...store.homeContent,
                           placementSection: {
-                            ...store.homeContent,
+                            ...store.homeContent.placementSection,
                             successRateMin: Number(e.target.value),
                           },
                         },
@@ -1542,7 +1499,7 @@ export function AdminPagesManager() {
                         homeContent: {
                           ...store.homeContent,
                           placementSection: {
-                            ...store.homeContent,
+                            ...store.homeContent.placementSection,
                             successRateMax: Number(e.target.value),
                           },
                         },

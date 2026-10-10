@@ -9,8 +9,11 @@ import {
   tickerItems as defaultTickers,
   testimonials as defaultTestimonials,
   faqs as defaultFaqs,
+  navLinks as defaultNavLinks,
 } from "../data/site";
 import type { Course } from "../data/site";
+import { supabase } from "./supabase";
+import { createAdminUserFn } from "./admin-users";
 
 export type LeadStage =
   | "Inquiry"
@@ -106,7 +109,6 @@ export interface AdminUser {
   role: "super_admin" | "admin";
   status: "active" | "inactive";
   lastLogin?: string;
-  password?: string;
 }
 
 export interface SmtpSettings {
@@ -141,6 +143,51 @@ export interface VisualAssets {
   founderPhotoUrl: string;
 }
 
+export interface MenuLink {
+  id: string;
+  label: string;
+  /** Site path ("/about"), or a full http(s):// / mailto: / tel: URL. */
+  to: string;
+  isActive: boolean;
+  openInNewTab: boolean;
+}
+
+export interface FooterColumn {
+  id: string;
+  title: string;
+  links: MenuLink[];
+}
+
+export type SocialPlatform = "linkedin" | "instagram" | "youtube" | "whatsapp" | "facebook" | "x";
+
+export interface SocialLink {
+  id: string;
+  platform: SocialPlatform;
+  url: string;
+  isActive: boolean;
+}
+
+export interface NavigationSettings {
+  announcementBar: { enabled: boolean; rotateSeconds: number };
+  links: MenuLink[];
+  showPhoneButton: boolean;
+  loginButton: {
+    enabled: boolean;
+    label: string;
+    url: string;
+    openInNewTab: boolean;
+    tooltipTitle: string;
+    showOrgCode: boolean;
+  };
+}
+
+export interface FooterSettings {
+  columns: FooterColumn[];
+  socials: SocialLink[];
+  legalLinks: MenuLink[];
+  showStaffPortalLink: boolean;
+}
+
 export interface AdminStoreData {
   visuals: VisualAssets;
   identity: {
@@ -152,9 +199,6 @@ export interface AdminStoreData {
     phone: string;
     whatsapp: string;
     address: string;
-    youtubeUrl: string;
-    linkedinUrl: string;
-    instagramUrl: string;
     footerCopyright: string;
     footerBlurb: string;
   };
@@ -299,6 +343,10 @@ export interface AdminStoreData {
   faqs: FaqItem[];
   testimonials: TestimonialItem[];
   announcements: AnnouncementItem[];
+  navigation: NavigationSettings;
+  footer: FooterSettings;
+  /** built-in page address -> custom public address (only pages the admin renamed) */
+  pageSlugs: Record<string, string>;
   media: MediaItem[];
   seo: Record<string, SeoPageMeta>;
   redirects: RedirectRule[];
@@ -308,7 +356,6 @@ export interface AdminStoreData {
   activityHistory: ActivityLogItem[];
 }
 
-const STORAGE_KEY = "finenvision_admin_store_v2";
 const AUTH_KEY = "finenvision_staff_session_v3";
 
 // Seed data
@@ -327,113 +374,11 @@ const initialData: AdminStoreData = {
     phone: defaultBrand.phone,
     whatsapp: defaultBrand.whatsapp,
     address: defaultBrand.address,
-    youtubeUrl: "https://www.youtube.com/@Fin-Envision",
-    linkedinUrl: "https://www.linkedin.com/company/fin-envision",
-    instagramUrl: "https://www.instagram.com/finenvision",
     footerCopyright:
       "© 2026 Fin-Envision Learning. All rights reserved. CFA® and Chartered Financial Analyst are registered trademarks owned by CFA Institute.",
     footerBlurb: defaultBrand.description,
   },
-  leads: [
-    {
-      id: "lead-1",
-      name: "Aarav Sharma",
-      email: "aarav.sharma@example.com",
-      phone: "+91 98201 44521",
-      courseInterest: "Chartered Financial Analyst (CFA®) Level 1",
-      leadStage: "Interested",
-      city: "Mumbai",
-      sourcePage: "/cfa",
-      utmSource: "google_ads",
-      utmMedium: "cpc",
-      utmCampaign: "cfa_l1_nov26",
-      createdAt: "2026-10-01T14:32:00Z",
-      notes: [
-        {
-          id: "n-1",
-          author: "Manoj Rajgopal",
-          text: "Spoke to Aarav. Preparing for November attempt. Interested in weekend offline batch in Thane.",
-          createdAt: "2026-10-01T15:10:00Z",
-        },
-      ],
-    },
-    {
-      id: "lead-2",
-      name: "Sneha Patel",
-      email: "sneha.patel@consulting.in",
-      phone: "+91 98199 87654",
-      courseInterest: "Holistic Finance (Equity Research and Financial Modeling)",
-      leadStage: "Coming for Meeting",
-      city: "Thane",
-      sourcePage: "/courses",
-      utmSource: "instagram",
-      utmMedium: "story_ad",
-      utmCampaign: "financial_modeling_autumn",
-      createdAt: "2026-09-30T10:15:00Z",
-      notes: [
-        {
-          id: "n-2",
-          author: "Admin Counselor",
-          text: "Meeting scheduled at Thane center this Saturday at 11:30 AM with faculty.",
-          createdAt: "2026-09-30T11:00:00Z",
-        },
-      ],
-    },
-    {
-      id: "lead-3",
-      name: "Rohan Deshmukh",
-      email: "rohan.d@icici.com",
-      phone: "+91 97690 12345",
-      courseInterest: "Chartered Financial Analyst (CFA®) Level 2",
-      leadStage: "Enrolled",
-      city: "Navi Mumbai",
-      sourcePage: "/cfa",
-      utmSource: "organic_google",
-      utmMedium: "search",
-      createdAt: "2026-09-28T18:40:00Z",
-      notes: [
-        {
-          id: "n-3",
-          author: "Super Admin",
-          text: "Payment received ₹40,000 for classroom batch. LMS access sent.",
-          createdAt: "2026-09-29T09:30:00Z",
-        },
-      ],
-    },
-    {
-      id: "lead-4",
-      name: "Pooja Mehta",
-      email: "pooja.mehta@gmail.com",
-      phone: "+91 99300 56789",
-      courseInterest: "Chartered Financial Analyst (CFA®) Level 1",
-      leadStage: "Inquiry",
-      city: "Pune",
-      sourcePage: "/",
-      utmSource: "linkedin",
-      utmMedium: "post",
-      createdAt: "2026-10-01T19:20:00Z",
-      notes: [],
-    },
-    {
-      id: "lead-5",
-      name: "Vikram Singhania",
-      email: "vikram.s@outlook.com",
-      phone: "+91 98210 99887",
-      courseInterest: "Chartered Financial Analyst (CFA®) Level 3",
-      leadStage: "Contacted",
-      city: "Mumbai",
-      sourcePage: "/courses",
-      createdAt: "2026-09-27T12:00:00Z",
-      notes: [
-        {
-          id: "n-4",
-          author: "Manoj Rajgopal",
-          text: "Sent Level 3 curriculum and mock paper breakdown.",
-          createdAt: "2026-09-27T14:15:00Z",
-        },
-      ],
-    },
-  ],
+  leads: [],
   courses: defaultCourses,
   homeContent: {
     heroBadge: "CFA® Program Preparation & Financial Modeling",
@@ -645,7 +590,7 @@ const initialData: AdminStoreData = {
   },
   faqs: defaultFaqs.map((f, i) => ({
     id: `faq-${i + 1}`,
-    category: f.category,
+    category: "General",
     question: f.q,
     answer: f.a,
     isActive: true,
@@ -688,6 +633,97 @@ const initialData: AdminStoreData = {
     isActive: true,
     priority: idx + 1,
   })),
+  pageSlugs: {},
+  navigation: {
+    announcementBar: { enabled: true, rotateSeconds: 5 },
+    links: defaultNavLinks.map((l, i) => ({
+      id: `nav-${i + 1}`,
+      label: l.label,
+      to: l.to,
+      isActive: true,
+      openInNewTab: false,
+    })),
+    showPhoneButton: true,
+    loginButton: {
+      enabled: true,
+      label: "Login",
+      url: "https://web.classplusapp.com",
+      openInNewTab: true,
+      tooltipTitle: "Classplus Login Portal",
+      showOrgCode: true,
+    },
+  },
+  footer: {
+    columns: [
+      {
+        id: "col-company",
+        title: "Company",
+        links: [
+          { id: "fl-1", label: "About Us", to: "/about", isActive: true, openInNewTab: false },
+        ],
+      },
+      {
+        id: "col-resources",
+        title: "Resources",
+        links: [
+          { id: "fl-2", label: "Blog", to: "/resources", isActive: true, openInNewTab: false },
+          {
+            id: "fl-3",
+            label: "Case Studies",
+            to: "/resources",
+            isActive: true,
+            openInNewTab: false,
+          },
+          {
+            id: "fl-4",
+            label: "YouTube",
+            to: "https://www.youtube.com/@financewithmanojrajgopal",
+            isActive: true,
+            openInNewTab: true,
+          },
+        ],
+      },
+      {
+        id: "col-support",
+        title: "Support",
+        links: [
+          { id: "fl-5", label: "Contact Us", to: "/contact", isActive: true, openInNewTab: false },
+        ],
+      },
+    ],
+    socials: [
+      {
+        id: "soc-1",
+        platform: "linkedin",
+        url: "https://www.linkedin.com/in/manojrajgopal",
+        isActive: true,
+      },
+      {
+        id: "soc-2",
+        platform: "instagram",
+        url: "https://www.instagram.com/finenvision.cfa",
+        isActive: true,
+      },
+      {
+        id: "soc-3",
+        platform: "youtube",
+        url: "https://www.youtube.com/@financewithmanojrajgopal",
+        isActive: true,
+      },
+      {
+        id: "soc-4",
+        platform: "whatsapp",
+        url: "https://wa.me/917304833625?text=Hello%20Team%20Fin%20Envision%2C%20I%20have%20a%20few%20queries%20regarding%20the%20courses!",
+        isActive: true,
+      },
+    ],
+    legalLinks: [
+      { id: "lg-1", label: "Privacy", to: "/contact", isActive: true, openInNewTab: false },
+      { id: "lg-2", label: "Terms", to: "/contact", isActive: true, openInNewTab: false },
+      { id: "lg-3", label: "Cookies", to: "/contact", isActive: true, openInNewTab: false },
+    ],
+    showStaffPortalLink: true,
+  },
   media: [
     {
       id: "m-1",
@@ -719,39 +755,38 @@ const initialData: AdminStoreData = {
   ],
   seo: {
     "/": {
-      title: "Fin-Envision Learning — Master Financial Modelling & Crack the CFA®",
+      title: "Fin-Envision Learning — Learn What Finance Really Feels Like",
       description:
-        "Fin-Envision is a leading finance training institute helping students master financial modelling and crack the CFA® with clarity and confidence.",
+        "Fin-Envision Learning — leading CFA® classes in Mumbai. CFA® Level 1, 2, 3 and Financial Modeling, taught by Manoj Rajgopal, CFA. ~80–90% success rate, 1,500+ students trained.",
       ogImage: "/finenvision-logo.png",
     },
     "/cfa": {
-      title: "CFA® Program Preparation (Level 1, 2 & 3) — Fin-Envision Mumbai",
+      title: "CFA® Program — Level I, II & III Prep | Fin-Envision Learning",
       description:
-        "Comprehensive CFA preparation led by first-attempt charterholder Manoj Rajgopal. 80-90% success rate with live classroom & pre-recorded batches.",
+        "Self-paced CFA® Level I, II & III prep with one mentor, real-life examples, and 100% coverage in English + Hindi. Trusted by candidates worldwide.",
       ogImage: "/finenvision-logo.png",
     },
     "/courses": {
-      title: "Finance & Financial Modeling Courses — Fin-Envision",
+      title: "CFA® Prep Program — Fin-Envision Learning",
       description:
-        "Practical Financial Modeling, Valuation, and Equity Research programs designed for real-world finance careers.",
+        "Master the CFA® Program with India's most trusted prep — live mentors, 216+ Google reviews at 4.9★. Levels I, II, III with structured curriculum, mocks, doubt clinics and placement support.",
       ogImage: "/finenvision-logo.png",
     },
     "/about": {
-      title: "About Us — Fin-Envision Learning & Manoj Rajgopal, CFA",
+      title: "About — Learn Finance the Way the Industry Works | Fin-Envision Learning",
       description:
-        "Meet Manoj Rajgopal, CFA charterholder and founder of Fin-Envision. 5,000+ students trained with concept-driven coaching.",
+        "Fin-Envision offers certified programs in CFA® and Financial Modelling — 5,000+ students trained, ~80–90% success rate, 8+ years of teaching experience, led by Manoj Rajgopal, CFA.",
       ogImage: "/finenvision-logo.png",
     },
     "/resources": {
-      title: "Free Finance & CFA Study Resources — Fin-Envision",
+      title: "Resources — Learn Finance with Manoj Rajgopal | Fin-Envision Learning",
       description:
-        "Watch curated YouTube playlists and study guides for CFA Level 1, Level 2, and Financial Modeling.",
+        "Free YouTube playlists on CFA® Level I & II, Financial Modelling, Stock Markets, Corporate Finance and Investment Banking — taught by Manoj Rajgopal, CFA.",
       ogImage: "/finenvision-logo.png",
     },
     "/contact": {
-      title: "Contact Fin-Envision — Thane Mumbai Coaching Center",
-      description:
-        "Get in touch with Fin-Envision Learning. Book a free career guidance call or visit our Thane Mumbai classroom.",
+      title: "Contact — Fin-Envision Learning",
+      description: "Talk to our team. WhatsApp, email, phone or visit us in Mumbai.",
       ogImage: "/finenvision-logo.png",
     },
   },
@@ -772,144 +807,185 @@ const initialData: AdminStoreData = {
     },
   ],
   tracking: {
-    ga4Id: "G-XXXXXXXXXX",
-    gtmId: "GTM-XXXXXXX",
-    metaPixelId: "987654321012345",
-    searchConsoleToken: "google-site-verification=SAMPLE_TOKEN_HERE",
+    ga4Id: "",
+    gtmId: "",
+    metaPixelId: "",
+    searchConsoleToken: "",
     customHeadScript: "",
     customBodyScript: "",
   },
-  users: [
-    {
-      id: "u-1",
-      name: "Manoj Rajgopal",
-      email: "manoj@finenvision.com",
-      role: "super_admin",
-      status: "active",
-      password: "admin123",
-      lastLogin: "2026-10-02T00:10:00Z",
-    },
-    {
-      id: "u-2",
-      name: "Admin Team",
-      email: "contactfinenvision@gmail.com",
-      role: "admin",
-      status: "active",
-      password: "admin123",
-      lastLogin: "2026-10-01T18:45:00Z",
-    },
-  ],
+  users: [],
   smtp: {
     leadNotificationEmail: "contactfinenvision@gmail.com",
     sendLeadAlerts: true,
     smtpHost: "smtp.gmail.com",
     smtpPort: 587,
     smtpUser: "contactfinenvision@gmail.com",
-    smtpPass: "••••••••••••",
+    smtpPass: "",
     senderName: "Fin-Envision Portal",
   },
-  activityHistory: [
-    {
-      id: "act-1",
-      user: "Manoj Rajgopal",
-      action: "Updated Course Highlights",
-      target: "CFA Level 1",
-      timestamp: "2026-10-01T16:20:00Z",
-    },
-    {
-      id: "act-2",
-      user: "Admin Team",
-      action: "Changed Lead Stage to Enrolled",
-      target: "Rohan Deshmukh",
-      timestamp: "2026-09-29T09:30:00Z",
-    },
-    {
-      id: "act-3",
-      user: "Manoj Rajgopal",
-      action: "Approved New Media Asset",
-      target: "cfa-l1-syllabus-2026.pdf",
-      timestamp: "2026-09-25T16:50:00Z",
-    },
-  ],
+  activityHistory: [],
 };
 
-// Storage helper functions
+// ---------------------------------------------------------------------------
+// Persistence — Supabase is the source of truth (see supabase/migrations).
+//
+//  * Public site content   -> site_content row 'public'  (world-readable, loaded on the server)
+//  * Admin-only settings   -> site_content row 'private' (SMTP, activity log; RLS: admins only)
+//  * Leads                 -> leads table                (visitors may only INSERT)
+//  * Admin accounts        -> Supabase Auth + admin_profiles
+//
+// `getAdminStore()` / `saveAdminStore()` keep their old synchronous signatures so the admin
+// pages did not need to change: reads come from an in-memory copy, writes are applied
+// immediately and flushed to Supabase in the background (see `schedulePersist`).
+// ---------------------------------------------------------------------------
+
+const LEGACY_STORAGE_KEY = "finenvision_admin_store_v2";
+const SEED_LEAD_IDS = /^lead-[1-5]$/;
+
+type PublicContent = Omit<AdminStoreData, "leads" | "users" | "smtp" | "activityHistory">;
+type PrivateContent = Pick<AdminStoreData, "smtp" | "activityHistory">;
+export type ContentRow = { data: Partial<AdminStoreData> | null; updated_at: string };
+
+export type SaveStatus = { state: "idle" | "saving" | "saved" | "error"; message?: string };
+
+function clone<T>(value: T): T {
+  return JSON.parse(JSON.stringify(value)) as T;
+}
+
+function pickPublic(d: AdminStoreData): PublicContent {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { leads, users, smtp, activityHistory, ...rest } = d;
+  return rest;
+}
+
+function pickPrivate(d: AdminStoreData): PrivateContent {
+  return { smtp: d.smtp, activityHistory: d.activityHistory };
+}
+
+/** Layer saved content over the built-in defaults so newly added fields always exist. */
+function mergeWithDefaults(saved: Partial<AdminStoreData> | null | undefined): AdminStoreData {
+  const base = clone(initialData);
+  const parsed = saved ?? {};
+  return {
+    ...base,
+    ...parsed,
+    leads: base.leads,
+    users: base.users,
+    visuals: { ...base.visuals, ...(parsed.visuals || {}) },
+    identity: { ...base.identity, ...(parsed.identity || {}) },
+    homeContent: {
+      ...base.homeContent,
+      ...(parsed.homeContent || {}),
+      founderSpotlight: {
+        ...base.homeContent.founderSpotlight,
+        ...(parsed.homeContent?.founderSpotlight || {}),
+      },
+      demoVideos: {
+        ...base.homeContent.demoVideos,
+        ...(parsed.homeContent?.demoVideos || {}),
+      },
+      placementSection: {
+        ...base.homeContent.placementSection,
+        ...(parsed.homeContent?.placementSection || {}),
+      },
+      appSection: {
+        ...base.homeContent.appSection,
+        ...(parsed.homeContent?.appSection || {}),
+      },
+      companiesSection: {
+        ...base.homeContent.companiesSection,
+        ...(parsed.homeContent?.companiesSection || {}),
+      },
+      finalCta: {
+        ...base.homeContent.finalCta,
+        ...(parsed.homeContent?.finalCta || {}),
+      },
+    },
+    coursesPageContent: { ...base.coursesPageContent, ...(parsed.coursesPageContent || {}) },
+    cfaPageContent: { ...base.cfaPageContent, ...(parsed.cfaPageContent || {}) },
+    aboutContent: { ...base.aboutContent, ...(parsed.aboutContent || {}) },
+    resourcesContent: { ...base.resourcesContent, ...(parsed.resourcesContent || {}) },
+    contactPageContent: { ...base.contactPageContent, ...(parsed.contactPageContent || {}) },
+    navigation: {
+      ...base.navigation,
+      ...(parsed.navigation || {}),
+      announcementBar: {
+        ...base.navigation.announcementBar,
+        ...(parsed.navigation?.announcementBar || {}),
+      },
+      loginButton: {
+        ...base.navigation.loginButton,
+        ...(parsed.navigation?.loginButton || {}),
+      },
+    },
+    footer: { ...base.footer, ...(parsed.footer || {}) },
+    pageSlugs: { ...(parsed.pageSlugs || {}) },
+    smtp: { ...base.smtp, ...(parsed.smtp || {}) },
+    activityHistory: parsed.activityHistory ?? base.activityHistory,
+  };
+}
+
+// In-memory state. On the server this holds the latest *public* content only.
+let current: AdminStoreData = clone(initialData);
+// Epoch ms of the newest public-content row we have applied or written ourselves. Content is only
+// ever replaced by a *newer* row, so a stale copy (e.g. the root loader's original data being
+// re-applied on a later render) can never overwrite fresher edits.
+let newestSeen: number | null = null;
+const persisted = { public: "", private: "", leads: new Map<string, string>() };
+
+/** True once real content from the database has been applied (vs. built-in defaults). */
+export function isStoreHydrated(): boolean {
+  return newestSeen !== null;
+}
+
 export function getAdminStore(): AdminStoreData {
-  if (typeof window === "undefined") {
-    return initialData;
+  return current;
+}
+
+function emitStoreUpdated() {
+  if (typeof window === "undefined") return;
+  window.dispatchEvent(new CustomEvent("finenvision_store_updated", { detail: current }));
+}
+
+function emitStatus(status: SaveStatus) {
+  if (typeof window === "undefined") return;
+  window.dispatchEvent(new CustomEvent("finenvision_save_status", { detail: status }));
+}
+
+/** Read the public content row. Works on the server (SSR) and in the browser. */
+export async function fetchPublicContent(): Promise<ContentRow | null> {
+  if (!supabase) return null;
+  const { data, error } = await supabase
+    .from("site_content")
+    .select("data, updated_at")
+    .eq("id", "public")
+    .maybeSingle();
+  if (error) {
+    console.error("Failed to load site content:", error.message);
+    return null;
   }
-  try {
-    const raw = localStorage.getItem(STORAGE_KEY);
-    if (!raw) {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(initialData));
-      return initialData;
-    }
-    const parsed = JSON.parse(raw);
-    const existingUsers = Array.isArray(parsed.users) ? parsed.users : initialData.users;
-    const mergedUsers = existingUsers.map((u: AdminUser) => ({
-      ...u,
-      password: u.password || "admin123",
-    }));
-    // Deep merge missing keys if schema was updated
-    return {
-      ...initialData,
-      ...parsed,
-      users: mergedUsers,
-      visuals: { ...initialData.visuals, ...(parsed.visuals || {}) },
-      identity: { ...initialData.identity, ...(parsed.identity || {}) },
-      homeContent: {
-        ...initialData.homeContent,
-        ...(parsed.homeContent || {}),
-        founderSpotlight: {
-          ...initialData.homeContent.founderSpotlight,
-          ...(parsed.homeContent?.founderSpotlight || {}),
-        },
-        demoVideos: {
-          ...initialData.homeContent.demoVideos,
-          ...(parsed.homeContent?.demoVideos || {}),
-        },
-        placementSection: {
-          ...initialData.homeContent.placementSection,
-          ...(parsed.homeContent?.placementSection || {}),
-        },
-        appSection: {
-          ...initialData.homeContent.appSection,
-          ...(parsed.homeContent?.appSection || {}),
-        },
-        companiesSection: {
-          ...initialData.homeContent.companiesSection,
-          ...(parsed.homeContent?.companiesSection || {}),
-        },
-        finalCta: {
-          ...initialData.homeContent.finalCta,
-          ...(parsed.homeContent?.finalCta || {}),
-        },
-      },
-      coursesPageContent: {
-        ...initialData.coursesPageContent,
-        ...(parsed.coursesPageContent || {}),
-      },
-      cfaPageContent: {
-        ...initialData.cfaPageContent,
-        ...(parsed.cfaPageContent || {}),
-      },
-      aboutContent: {
-        ...initialData.aboutContent,
-        ...(parsed.aboutContent || {}),
-      },
-      resourcesContent: {
-        ...initialData.resourcesContent,
-        ...(parsed.resourcesContent || {}),
-      },
-      contactPageContent: {
-        ...initialData.contactPageContent,
-        ...(parsed.contactPageContent || {}),
-      },
-    };
-  } catch (err) {
-    console.error("Error reading admin store from localStorage:", err);
-    return initialData;
-  }
+  return (data as ContentRow | null) ?? null;
+}
+
+/**
+ * Apply the public content row to the in-memory store. Called from the root route during
+ * render (server and client) so the first paint already shows live content. It is a no-op
+ * unless the row is newer than anything already applied or saved, so re-renders with stale
+ * loader data never clobber fresher edits.
+ */
+export function hydratePublicContent(row: ContentRow | null | undefined, force = false): void {
+  const ts = row?.updated_at ? Date.parse(row.updated_at) : 0;
+  if (!force && newestSeen !== null && ts <= newestSeen) return;
+  newestSeen = Math.max(ts, newestSeen ?? 0);
+  const merged = mergeWithDefaults(row?.data);
+  current = {
+    ...merged,
+    leads: current.leads,
+    users: current.users,
+    smtp: current.smtp,
+    activityHistory: current.activityHistory,
+  };
 }
 
 export function saveAdminStore(
@@ -917,23 +993,215 @@ export function saveAdminStore(
   logAction?: { action: string; target: string },
 ): void {
   if (typeof window === "undefined") return;
-  try {
-    if (logAction) {
-      const currentUser = getCurrentAdmin();
-      const newLog: ActivityLogItem = {
-        id: `act-${Date.now()}`,
-        user: currentUser?.name || "Admin",
-        action: logAction.action,
-        target: logAction.target,
-        timestamp: new Date().toISOString(),
-      };
-      data.activityHistory = [newLog, ...(data.activityHistory || [])].slice(0, 50);
-    }
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
-    window.dispatchEvent(new CustomEvent("finenvision_store_updated", { detail: data }));
-  } catch (err) {
-    console.error("Error writing admin store to localStorage:", err);
+  if (logAction) {
+    const currentUser = getCurrentAdmin();
+    const newLog: ActivityLogItem = {
+      id: `act-${Date.now()}`,
+      user: currentUser?.name || "Admin",
+      action: logAction.action,
+      target: logAction.target,
+      timestamp: new Date().toISOString(),
+    };
+    data.activityHistory = [newLog, ...(data.activityHistory || [])].slice(0, 50);
   }
+  current = data;
+  emitStoreUpdated();
+  schedulePersist();
+}
+
+let persisting = false;
+let dirty = false;
+
+function schedulePersist() {
+  dirty = true;
+  if (!persisting) void runPersist();
+}
+
+async function runPersist() {
+  persisting = true;
+  emitStatus({ state: "saving" });
+  try {
+    while (dirty) {
+      dirty = false;
+      await persistOnce(current);
+    }
+    emitStatus({ state: "saved" });
+  } catch (err) {
+    const message = err instanceof Error ? err.message : "Could not save changes.";
+    console.error("Supabase save failed:", err);
+    emitStatus({ state: "error", message });
+  } finally {
+    persisting = false;
+  }
+}
+
+async function persistOnce(data: AdminStoreData) {
+  if (!supabase) throw new Error("Backend is not configured (missing Supabase env vars).");
+  const { data: sessionData } = await supabase.auth.getSession();
+  if (!sessionData.session) throw new Error("Your session expired. Please sign in again.");
+
+  const publicJson = JSON.stringify(pickPublic(data));
+  if (publicJson !== persisted.public) {
+    const { data: row, error } = await supabase
+      .from("site_content")
+      .upsert({ id: "public", data: JSON.parse(publicJson) })
+      .select("updated_at")
+      .single();
+    if (error) throw new Error(error.message);
+    persisted.public = publicJson;
+    // Anything older than our own write is stale and must never be re-applied.
+    newestSeen = Math.max(newestSeen ?? 0, Date.parse((row as { updated_at: string }).updated_at));
+  }
+
+  const privateJson = JSON.stringify(pickPrivate(data));
+  if (privateJson !== persisted.private) {
+    const { error } = await supabase
+      .from("site_content")
+      .upsert({ id: "private", data: JSON.parse(privateJson) });
+    if (error) throw new Error(error.message);
+    persisted.private = privateJson;
+  }
+
+  const next = new Map(data.leads.map((l) => [l.id, JSON.stringify(l)]));
+  const changed = data.leads.filter((l) => persisted.leads.get(l.id) !== next.get(l.id));
+  const removed = [...persisted.leads.keys()].filter((id) => !next.has(id));
+  if (changed.length) {
+    const { error } = await supabase
+      .from("leads")
+      .upsert(changed.map((l) => ({ id: l.id, data: l, created_at: l.createdAt })));
+    if (error) throw new Error(error.message);
+  }
+  if (removed.length) {
+    const { error } = await supabase.from("leads").delete().in("id", removed);
+    if (error) throw new Error(error.message);
+  }
+  persisted.leads = next;
+}
+
+type ProfileRow = {
+  user_id: string;
+  name: string;
+  email: string;
+  role: AdminUser["role"];
+  status: AdminUser["status"];
+  last_login: string | null;
+};
+
+function toAdminUser(p: ProfileRow): AdminUser {
+  return {
+    id: p.user_id,
+    name: p.name,
+    email: p.email,
+    role: p.role,
+    status: p.status,
+    lastLogin: p.last_login ?? undefined,
+  };
+}
+
+/**
+ * Pull everything an admin is allowed to see (private settings, leads, admin accounts) and the
+ * freshest public content. The admin shell must await this before rendering editors, otherwise
+ * a save could overwrite the database with built-in defaults.
+ */
+export async function loadAdminData(): Promise<void> {
+  if (!supabase) throw new Error("Backend is not configured (missing Supabase env vars).");
+  const [publicRow, privateRes, leadsRes, profilesRes] = await Promise.all([
+    fetchPublicContent(),
+    supabase.from("site_content").select("data").eq("id", "private").maybeSingle(),
+    supabase.from("leads").select("id, data").order("created_at", { ascending: false }),
+    supabase.from("admin_profiles").select("*").order("created_at", { ascending: true }),
+  ]);
+  const failure = privateRes.error || leadsRes.error || profilesRes.error;
+  if (failure) throw new Error(failure.message);
+
+  hydratePublicContent(publicRow, true);
+  const priv = (privateRes.data?.data ?? {}) as Partial<PrivateContent>;
+  const leads = (leadsRes.data ?? []).map((r) => r.data as Lead);
+
+  current = {
+    ...current,
+    smtp: { ...initialData.smtp, ...(priv.smtp || {}) },
+    activityHistory: priv.activityHistory ?? [],
+    leads,
+    users: (profilesRes.data as ProfileRow[]).map(toAdminUser),
+  };
+  persisted.public = JSON.stringify(pickPublic(current));
+  persisted.private = JSON.stringify(pickPrivate(current));
+  persisted.leads = new Map(leads.map((l) => [l.id, JSON.stringify(l)]));
+  emitStoreUpdated();
+}
+
+function resetAdminOnlyState() {
+  current = {
+    ...current,
+    leads: [],
+    users: [],
+    smtp: clone(initialData.smtp),
+    activityHistory: [],
+  };
+  persisted.public = "";
+  persisted.private = "";
+  persisted.leads = new Map();
+}
+
+// ---------------------------------------------------------------- legacy migration
+// Before Supabase, edits lived in this browser's localStorage. Offer a one-time import.
+
+function readLegacy(): Partial<AdminStoreData> | null {
+  if (typeof window === "undefined") return null;
+  try {
+    const raw = localStorage.getItem(LEGACY_STORAGE_KEY);
+    return raw ? (JSON.parse(raw) as Partial<AdminStoreData>) : null;
+  } catch {
+    return null;
+  }
+}
+
+export function hasLegacyLocalStore(): boolean {
+  return readLegacy() !== null;
+}
+
+export function dismissLegacyLocalStore(): void {
+  if (typeof window !== "undefined") localStorage.removeItem(LEGACY_STORAGE_KEY);
+}
+
+/** Copies the old browser-only content (and any non-demo leads) into Supabase. */
+export function importLegacyLocalStore(): { leads: number } {
+  const legacy = readLegacy();
+  if (!legacy) return { leads: 0 };
+  const merged = mergeWithDefaults(legacy);
+  const legacyLeads = (Array.isArray(legacy.leads) ? legacy.leads : []).filter(
+    (l) => !SEED_LEAD_IDS.test(l.id),
+  );
+  const known = new Set(current.leads.map((l) => l.id));
+  const newLeads = legacyLeads.filter((l) => !known.has(l.id));
+  saveAdminStore(
+    { ...current, ...pickPublic(merged), leads: [...newLeads, ...current.leads] },
+    { action: "Imported previous browser data", target: `${newLeads.length} leads + site content` },
+  );
+  dismissLegacyLocalStore();
+  return { leads: newLeads.length };
+}
+
+// ---------------------------------------------------------------- public lead capture
+
+/** Called by the public lead form. Anonymous INSERT only — RLS blocks reading it back. */
+export async function submitPublicLead(
+  leadData: Omit<Lead, "id" | "createdAt" | "notes" | "leadStage">,
+): Promise<void> {
+  if (!supabase) throw new Error("Backend is not configured (missing Supabase env vars).");
+  const createdAt = new Date().toISOString();
+  const lead: Lead = {
+    ...leadData,
+    leadStage: "Inquiry",
+    id: `lead-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
+    createdAt,
+    notes: [],
+  };
+  const { error } = await supabase
+    .from("leads")
+    .insert({ id: lead.id, data: lead, created_at: createdAt });
+  if (error) throw new Error(error.message);
 }
 
 // Leads Management
@@ -1033,7 +1301,109 @@ export function deleteCourseItem(slug: string): void {
   saveAdminStore(store, { action: "Deleted Program", target });
 }
 
-// Auth Helper
+// ---------------------------------------------------------------- Auth (Supabase Auth)
+
+const NOT_CONFIGURED =
+  "Backend is not configured. Set VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY.";
+
+async function fetchOwnProfile(userId: string): Promise<ProfileRow | null> {
+  if (!supabase) return null;
+  const { data } = await supabase
+    .from("admin_profiles")
+    .select("*")
+    .eq("user_id", userId)
+    .maybeSingle();
+  return (data as ProfileRow | null) ?? null;
+}
+
+export async function signInAdmin(email: string, password: string): Promise<AdminUser> {
+  if (!supabase) throw new Error(NOT_CONFIGURED);
+  const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+  if (error || !data.user) throw new Error("Invalid email or password.");
+  const profile = await fetchOwnProfile(data.user.id);
+  if (!profile || profile.status !== "active") {
+    await supabase.auth.signOut();
+    throw new Error("This account is not authorised for the admin portal or is deactivated.");
+  }
+  await supabase.rpc("touch_last_login");
+  const user = toAdminUser({ ...profile, last_login: new Date().toISOString() });
+  setCurrentAdmin(user);
+  return user;
+}
+
+/** Verifies the stored Supabase session is still valid and the account is still active. */
+export async function restoreAdminSession(): Promise<AdminUser | null> {
+  if (!supabase) return null;
+  const { data } = await supabase.auth.getSession();
+  if (!data.session) {
+    setCurrentAdmin(null);
+    return null;
+  }
+  const profile = await fetchOwnProfile(data.session.user.id);
+  if (!profile || profile.status !== "active") {
+    setCurrentAdmin(null);
+    return null;
+  }
+  const user = toAdminUser(profile);
+  setCurrentAdmin(user);
+  return user;
+}
+
+export async function requestPasswordReset(email: string): Promise<void> {
+  if (!supabase) throw new Error(NOT_CONFIGURED);
+  const { error } = await supabase.auth.resetPasswordForEmail(email, {
+    redirectTo: `${window.location.origin}/admin-login`,
+  });
+  if (error) throw new Error(error.message);
+}
+
+export async function setNewPassword(password: string): Promise<void> {
+  if (!supabase) throw new Error(NOT_CONFIGURED);
+  const { error } = await supabase.auth.updateUser({ password });
+  if (error) throw new Error(error.message);
+}
+
+export async function changeOwnPassword(currentPassword: string, newPassword: string) {
+  if (!supabase) throw new Error(NOT_CONFIGURED);
+  const me = getCurrentAdmin();
+  if (!me) throw new Error("No active admin session found.");
+  const check = await supabase.auth.signInWithPassword({
+    email: me.email,
+    password: currentPassword,
+  });
+  if (check.error) throw new Error("Current password is incorrect.");
+  await setNewPassword(newPassword);
+  saveAdminStore({ ...current }, { action: "Updated Password", target: me.name });
+}
+
+export async function setAdminUserStatus(userId: string, status: AdminUser["status"]) {
+  if (!supabase) throw new Error(NOT_CONFIGURED);
+  const { error } = await supabase.from("admin_profiles").update({ status }).eq("user_id", userId);
+  if (error) throw new Error(error.message);
+  current = {
+    ...current,
+    users: current.users.map((u) => (u.id === userId ? { ...u, status } : u)),
+  };
+  emitStoreUpdated();
+}
+
+export async function createAdminUser(input: {
+  name: string;
+  email: string;
+  password: string;
+  role: AdminUser["role"];
+}): Promise<void> {
+  if (!supabase) throw new Error(NOT_CONFIGURED);
+  const { data } = await supabase.auth.getSession();
+  if (!data.session) throw new Error("Your session expired. Please sign in again.");
+  const created = await createAdminUserFn({
+    data: { ...input, accessToken: data.session.access_token },
+  });
+  current = { ...current, users: [...current.users, created] };
+  saveAdminStore({ ...current }, { action: "Added Admin User", target: created.name });
+}
+
+// Auth Helper — a UI cache of who is signed in. It grants nothing: Supabase RLS decides access.
 export function getCurrentAdmin(): AdminUser | null {
   if (typeof window === "undefined") return null;
   try {
@@ -1058,6 +1428,8 @@ export function setCurrentAdmin(user: AdminUser | null): void {
     localStorage.removeItem(AUTH_KEY);
     localStorage.removeItem("finenvision_current_admin_user");
     localStorage.removeItem("finenvision_current_admin");
+    void supabase?.auth.signOut();
+    resetAdminOnlyState();
   } else {
     sessionStorage.setItem(AUTH_KEY, JSON.stringify(user));
     localStorage.setItem(AUTH_KEY, JSON.stringify(user));

@@ -10,7 +10,8 @@ import {
   Eye,
   EyeOff,
 } from "lucide-react";
-import { setCurrentAdmin, getAdminStore } from "@/lib/admin-store";
+import { supabase } from "@/lib/supabase";
+import { signInAdmin, requestPasswordReset, setNewPassword } from "@/lib/admin-store";
 
 export const Route = createFileRoute("/admin-login")({
   component: AdminLoginPage,
@@ -23,6 +24,12 @@ function AdminLoginPage() {
   const [error, setError] = useState("");
   const [forgotModal, setForgotModal] = useState(false);
   const [forgotSent, setForgotSent] = useState(false);
+  const [forgotEmail, setForgotEmail] = useState("");
+  const [forgotError, setForgotError] = useState("");
+  const [busy, setBusy] = useState(false);
+  const [notice, setNotice] = useState("");
+  const [recoveryMode, setRecoveryMode] = useState(false);
+  const [recoveryPassword, setRecoveryPassword] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -32,48 +39,72 @@ function AdminLoginPage() {
     };
   }, []);
 
-  const handleLogin = (e: React.FormEvent) => {
+  // Arriving from the reset-password email: Supabase signs the user into a recovery session.
+  useEffect(() => {
+    if (!supabase) return;
+    const { data } = supabase.auth.onAuthStateChange((event) => {
+      if (event === "PASSWORD_RECOVERY") setRecoveryMode(true);
+    });
+    return () => data.subscription.unsubscribe();
+  }, []);
+
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
 
     const trimmedEmail = email.trim().toLowerCase();
-    const trimmedPass = password.trim();
-
     if (!trimmedEmail) {
       setError("Please enter your admin work email address.");
       return;
     }
-
-    if (!trimmedPass) {
+    if (!password) {
       setError("Please enter your password.");
       return;
     }
 
-    const store = getAdminStore();
-    const user = store.users.find(
-      (u) => u.email.toLowerCase() === trimmedEmail && u.status === "active",
-    );
+    setBusy(true);
+    try {
+      await signInAdmin(trimmedEmail, password);
+      navigate({ to: "/admin" });
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Sign in failed. Please try again.");
+    } finally {
+      setBusy(false);
+    }
+  };
 
-    if (!user) {
-      setError("Invalid admin work email address or account is deactivated.");
+  const handleSendReset = async () => {
+    setForgotError("");
+    const target = forgotEmail.trim().toLowerCase();
+    if (!target) {
+      setForgotError("Enter your registered administrator email.");
       return;
     }
+    try {
+      await requestPasswordReset(target);
+      setForgotSent(true);
+    } catch (err) {
+      setForgotError(err instanceof Error ? err.message : "Could not send the recovery email.");
+    }
+  };
 
-    const expectedPassword = user.password || "admin123";
-    if (trimmedPass !== expectedPassword) {
-      setError("Incorrect password. Please verify your credentials and try again.");
+  const handleSetNewPassword = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError("");
+    if (recoveryPassword.length < 8) {
+      setError("Password must be at least 8 characters.");
       return;
     }
-
-    // Success: update lastLogin in store
-    const updatedUsers = store.users.map((u) =>
-      u.id === user.id ? { ...u, lastLogin: new Date().toISOString() } : u,
-    );
-    store.users = updatedUsers;
-
-    const sessionUser = { ...user, lastLogin: new Date().toISOString() };
-    setCurrentAdmin(sessionUser);
-    navigate({ to: "/admin" });
+    try {
+      await setNewPassword(recoveryPassword);
+      await supabase?.auth.signOut();
+      setRecoveryMode(false);
+      setRecoveryPassword("");
+      setPassword("");
+      setNotice("Password updated. Sign in with your new password.");
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Could not update the password.");
+    }
   };
 
   return (
@@ -110,67 +141,104 @@ function AdminLoginPage() {
             </div>
           )}
 
-          <form onSubmit={handleLogin} className="space-y-4">
-            <div>
-              <label className="block text-xs font-semibold text-slate-700 mb-1.5">
-                Admin Work Email
-              </label>
-              <div className="relative">
+          {notice && (
+            <div className="mb-5 p-3 rounded-xl bg-emerald-50 border border-emerald-200 text-xs text-emerald-800 flex items-center gap-2">
+              <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+              <span>{notice}</span>
+            </div>
+          )}
+
+          {recoveryMode ? (
+            <form onSubmit={handleSetNewPassword} className="space-y-4">
+              <div>
+                <label className="block text-xs font-semibold text-slate-700 mb-1.5">
+                  Choose a new password
+                </label>
                 <input
-                  type="email"
+                  type="password"
                   required
+                  minLength={8}
                   autoFocus
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  className="w-full pl-9 pr-3.5 py-2.5 text-xs border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-600/20 focus:border-blue-600 bg-white font-medium placeholder:text-slate-400"
-                  placeholder="name@finenvision.com"
+                  value={recoveryPassword}
+                  onChange={(e) => setRecoveryPassword(e.target.value)}
+                  className="w-full px-3.5 py-2.5 text-xs border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-600/20 focus:border-blue-600 bg-white"
+                  placeholder="At least 8 characters"
                 />
-                <Mail className="w-4 h-4 text-slate-400 absolute left-3 top-3" />
               </div>
-            </div>
-
-            <div>
-              <div className="flex items-center justify-between mb-1.5">
-                <label className="block text-xs font-semibold text-slate-700">Password</label>
-                <button
-                  type="button"
-                  onClick={() => setForgotModal(true)}
-                  className="text-xs text-blue-600 hover:text-blue-700 hover:underline font-semibold"
-                >
-                  Forgot password?
-                </button>
-              </div>
-              <div className="relative">
-                <input
-                  type={showPassword ? "text" : "password"}
-                  required
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  className="w-full pl-9 pr-10 py-2.5 text-xs border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-600/20 focus:border-blue-600 bg-white placeholder:text-slate-400"
-                  placeholder="Enter administrator password"
-                />
-                <Lock className="w-4 h-4 text-slate-400 absolute left-3 top-3" />
-                <button
-                  type="button"
-                  onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3 top-3 text-slate-400 hover:text-slate-600 transition-colors"
-                  aria-label={showPassword ? "Hide password" : "Show password"}
-                >
-                  {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
-                </button>
-              </div>
-            </div>
-
-            <div className="pt-2">
               <button
                 type="submit"
-                className="w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-semibold text-xs shadow-xs hover:shadow-sm transition-all cursor-pointer"
+                className="w-full py-2.5 px-4 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-semibold text-xs"
               >
-                <span>Sign in to Dashboard</span>
-                <ArrowRight className="w-3.5 h-3.5" />
+                Update password
               </button>
-            </div>
-          </form>
+            </form>
+          ) : (
+            <form onSubmit={handleLogin} className="space-y-4">
+              <div>
+                <label className="block text-xs font-semibold text-slate-700 mb-1.5">
+                  Admin Work Email
+                </label>
+                <div className="relative">
+                  <input
+                    type="email"
+                    required
+                    autoFocus
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    className="w-full pl-9 pr-3.5 py-2.5 text-xs border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-600/20 focus:border-blue-600 bg-white font-medium placeholder:text-slate-400"
+                    placeholder="name@finenvision.com"
+                  />
+                  <Mail className="w-4 h-4 text-slate-400 absolute left-3 top-3" />
+                </div>
+              </div>
+
+              <div>
+                <div className="flex items-center justify-between mb-1.5">
+                  <label className="block text-xs font-semibold text-slate-700">Password</label>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setForgotEmail(email);
+                      setForgotModal(true);
+                    }}
+                    className="text-xs text-blue-600 hover:text-blue-700 hover:underline font-semibold"
+                  >
+                    Forgot password?
+                  </button>
+                </div>
+                <div className="relative">
+                  <input
+                    type={showPassword ? "text" : "password"}
+                    required
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    className="w-full pl-9 pr-10 py-2.5 text-xs border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-600/20 focus:border-blue-600 bg-white placeholder:text-slate-400"
+                    placeholder="Enter administrator password"
+                  />
+                  <Lock className="w-4 h-4 text-slate-400 absolute left-3 top-3" />
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword(!showPassword)}
+                    className="absolute right-3 top-3 text-slate-400 hover:text-slate-600 transition-colors"
+                    aria-label={showPassword ? "Hide password" : "Show password"}
+                  >
+                    {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                  </button>
+                </div>
+              </div>
+
+              <div className="pt-2">
+                <button
+                  type="submit"
+                  disabled={busy}
+                  className="w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-semibold text-xs shadow-xs hover:shadow-sm transition-all cursor-pointer disabled:opacity-60"
+                >
+                  <span>{busy ? "Signing in..." : "Sign in to Dashboard"}</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </button>
+              </div>
+            </form>
+          )}
 
           <div className="mt-6 pt-5 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-500">
             <span className="flex items-center gap-1.5 text-slate-600 font-medium">
@@ -196,19 +264,23 @@ function AdminLoginPage() {
             {forgotSent ? (
               <div className="mt-4 p-3 bg-emerald-50 border border-emerald-200 rounded-xl text-xs text-emerald-800 flex items-center gap-2">
                 <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
-                <span>Instructions have been sent to your registered inbox.</span>
+                <span>
+                  If that address belongs to an administrator, a reset link is on its way.
+                </span>
               </div>
             ) : (
               <div className="mt-4 space-y-3">
                 <input
                   type="email"
-                  defaultValue={email}
+                  value={forgotEmail}
+                  onChange={(e) => setForgotEmail(e.target.value)}
                   className="w-full px-3 py-2 text-xs border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-600/20 focus:border-blue-600"
                   placeholder="admin@finenvision.com"
                 />
+                {forgotError && <p className="text-xs text-rose-600">{forgotError}</p>}
                 <button
                   type="button"
-                  onClick={() => setForgotSent(true)}
+                  onClick={handleSendReset}
                   className="w-full py-2.5 bg-blue-600 text-white rounded-xl text-xs font-semibold hover:bg-blue-700 shadow-xs cursor-pointer"
                 >
                   Send Recovery Link
@@ -220,6 +292,7 @@ function AdminLoginPage() {
               onClick={() => {
                 setForgotModal(false);
                 setForgotSent(false);
+                setForgotError("");
               }}
               className="mt-4 w-full py-2 border border-slate-200 text-slate-600 rounded-xl text-xs font-medium hover:bg-slate-50 cursor-pointer"
             >

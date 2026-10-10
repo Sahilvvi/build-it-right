@@ -22,6 +22,7 @@ import { Route as AdminAnnouncementsRouteImport } from './routes/admin/announcem
 import { Route as AdminCoursesRouteImport } from './routes/admin/courses'
 import { Route as AdminLeadsRouteImport } from './routes/admin/leads'
 import { Route as AdminMediaRouteImport } from './routes/admin/media'
+import { Route as AdminNavigationRouteImport } from './routes/admin/navigation'
 import { Route as AdminPagesRouteImport } from './routes/admin/pages'
 import { Route as AdminSeoRouteImport } from './routes/admin/seo'
 import { Route as AdminSettingsRouteImport } from './routes/admin/settings'
@@ -94,6 +95,11 @@ const AdminMediaRoute = AdminMediaRouteImport.update({
   path: '/media',
   getParentRoute: () => AdminRoute,
 } as any)
+const AdminNavigationRoute = AdminNavigationRouteImport.update({
+  id: '/navigation',
+  path: '/navigation',
+  getParentRoute: () => AdminRoute,
+} as any)
 const AdminPagesRoute = AdminPagesRouteImport.update({
   id: '/pages',
   path: '/pages',
@@ -138,6 +144,7 @@ export interface FileRoutesByFullPath {
   '/admin/courses': typeof AdminCoursesRoute
   '/admin/leads': typeof AdminLeadsRoute
   '/admin/media': typeof AdminMediaRoute
+  '/admin/navigation': typeof AdminNavigationRoute
   '/admin/pages': typeof AdminPagesRoute
   '/admin/seo': typeof AdminSeoRoute
   '/admin/settings': typeof AdminSettingsRoute
@@ -158,6 +165,7 @@ export interface FileRoutesByTo {
   '/admin/courses': typeof AdminCoursesRoute
   '/admin/leads': typeof AdminLeadsRoute
   '/admin/media': typeof AdminMediaRoute
+  '/admin/navigation': typeof AdminNavigationRoute
   '/admin/pages': typeof AdminPagesRoute
   '/admin/seo': typeof AdminSeoRoute
   '/admin/settings': typeof AdminSettingsRoute
@@ -180,6 +188,7 @@ export interface FileRoutesById {
   '/admin/courses': typeof AdminCoursesRoute
   '/admin/leads': typeof AdminLeadsRoute
   '/admin/media': typeof AdminMediaRoute
+  '/admin/navigation': typeof AdminNavigationRoute
   '/admin/pages': typeof AdminPagesRoute
   '/admin/seo': typeof AdminSeoRoute
   '/admin/settings': typeof AdminSettingsRoute
@@ -203,6 +212,7 @@ export interface FileRouteTypes {
     | '/admin/courses'
     | '/admin/leads'
     | '/admin/media'
+    | '/admin/navigation'
     | '/admin/pages'
     | '/admin/seo'
     | '/admin/settings'
@@ -223,6 +233,7 @@ export interface FileRouteTypes {
     | '/admin/courses'
     | '/admin/leads'
     | '/admin/media'
+    | '/admin/navigation'
     | '/admin/pages'
     | '/admin/seo'
     | '/admin/settings'
@@ -244,6 +255,7 @@ export interface FileRouteTypes {
     | '/admin/courses'
     | '/admin/leads'
     | '/admin/media'
+    | '/admin/navigation'
     | '/admin/pages'
     | '/admin/seo'
     | '/admin/settings'
@@ -357,6 +369,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminMediaRouteImport
       parentRoute: typeof AdminRoute
     }
+    '/admin/navigation': {
+      id: '/admin/navigation'
+      path: '/navigation'
+      fullPath: '/admin/navigation'
+      preLoaderRoute: typeof AdminNavigationRouteImport
+      parentRoute: typeof AdminRoute
+    }
     '/admin/pages': {
       id: '/admin/pages'
       path: '/pages'
@@ -407,6 +426,7 @@ interface AdminRouteChildren {
   AdminCoursesRoute: typeof AdminCoursesRoute
   AdminLeadsRoute: typeof AdminLeadsRoute
   AdminMediaRoute: typeof AdminMediaRoute
+  AdminNavigationRoute: typeof AdminNavigationRoute
   AdminPagesRoute: typeof AdminPagesRoute
   AdminSeoRoute: typeof AdminSeoRoute
   AdminSettingsRoute: typeof AdminSettingsRoute
@@ -421,6 +441,7 @@ const AdminRouteChildren: AdminRouteChildren = {
   AdminCoursesRoute: AdminCoursesRoute,
   AdminLeadsRoute: AdminLeadsRoute,
   AdminMediaRoute: AdminMediaRoute,
+  AdminNavigationRoute: AdminNavigationRoute,
   AdminPagesRoute: AdminPagesRoute,
   AdminSeoRoute: AdminSeoRoute,
   AdminSettingsRoute: AdminSettingsRoute,

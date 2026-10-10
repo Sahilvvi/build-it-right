@@ -1,3 +1,4 @@
+import { withSeo } from "@/lib/seo";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion, AnimatePresence, useInView } from "framer-motion";
 import { useState, useRef, useEffect } from "react";
@@ -52,22 +53,23 @@ import { AmbientLight, EyebrowBadge, GradientAccent } from "@/components/site/pr
 const FOUNDER_PHOTO = "/manoj-rajgopal.jpg";
 
 export const Route = createFileRoute("/")({
-  head: () => ({
-    meta: [
-      { title: "Fin-Envision Learning — Learn What Finance Really Feels Like" },
-      {
-        name: "description",
-        content:
-          "Fin-Envision Learning — leading CFA® classes in Mumbai. CFA® Level 1, 2, 3 and Financial Modeling, taught by Manoj Rajgopal, CFA. ~80–90% success rate, 1,500+ students trained.",
-      },
-      {
-        property: "og:title",
-        content: "Fin-Envision Learning — Learn What Finance Really Feels Like",
-      },
-      { property: "og:url", content: "/" },
-    ],
-    links: [{ rel: "canonical", href: "/" }],
-  }),
+  head: () =>
+    withSeo("/", {
+      meta: [
+        { title: "Fin-Envision Learning — Learn What Finance Really Feels Like" },
+        {
+          name: "description",
+          content:
+            "Fin-Envision Learning — leading CFA® classes in Mumbai. CFA® Level 1, 2, 3 and Financial Modeling, taught by Manoj Rajgopal, CFA. ~80–90% success rate, 1,500+ students trained.",
+        },
+        {
+          property: "og:title",
+          content: "Fin-Envision Learning — Learn What Finance Really Feels Like",
+        },
+        { property: "og:url", content: "/" },
+      ],
+      links: [{ rel: "canonical", href: "/" }],
+    }),
   component: Home,
 });
 
@@ -1226,15 +1228,14 @@ function FounderSpotlight() {
   const experienceYears = spotlight?.experienceYears || "8+";
   const studentsTrained = spotlight?.studentsTrained || "5,000+";
   const attemptFocus = spotlight?.attemptFocus || "1st";
-  const credentials = spotlight?.credentials ||
-    store.aboutContent?.leadership?.creds || [
-      "CFA® Charterholder",
-      "Investment Banking",
-      "Financial Modeling",
-      "Portfolio Strategy",
-    ];
+  const credentials = spotlight?.credentials || [
+    "CFA® Charterholder",
+    "Investment Banking",
+    "Financial Modeling",
+    "Portfolio Strategy",
+  ];
   const journey = spotlight?.journey ||
-    store.aboutContent?.leadership?.work || [
+    store.aboutContent?.founderBullets || [
       "Founder and Lead Instructor of Fin-Envision Learning.",
       "Cleared all three levels of the CFA® Program in the first attempt.",
       "Worked with reputed organizations such as CRISIL and JHP, gaining valuable industry exposure.",

@@ -1,3 +1,4 @@
+import { withSeo } from "@/lib/seo";
 import { createFileRoute } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -15,19 +16,20 @@ import { FAQ } from "@/components/site/FAQ";
 import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/resources")({
-  head: () => ({
-    meta: [
-      { title: "Resources — Learn Finance with Manoj Rajgopal | Fin-Envision Learning" },
-      {
-        name: "description",
-        content:
-          "Free YouTube playlists on CFA® Level I & II, Financial Modelling, Stock Markets, Corporate Finance and Investment Banking — taught by Manoj Rajgopal, CFA.",
-      },
-      { property: "og:title", content: "Resources — Finance Insights You Can Actually Use" },
-      { property: "og:url", content: "/resources" },
-    ],
-    links: [{ rel: "canonical", href: "/resources" }],
-  }),
+  head: () =>
+    withSeo("/resources", {
+      meta: [
+        { title: "Resources — Learn Finance with Manoj Rajgopal | Fin-Envision Learning" },
+        {
+          name: "description",
+          content:
+            "Free YouTube playlists on CFA® Level I & II, Financial Modelling, Stock Markets, Corporate Finance and Investment Banking — taught by Manoj Rajgopal, CFA.",
+        },
+        { property: "og:title", content: "Resources — Finance Insights You Can Actually Use" },
+        { property: "og:url", content: "/resources" },
+      ],
+      links: [{ rel: "canonical", href: "/resources" }],
+    }),
   component: ResourcesPage,
 });
 

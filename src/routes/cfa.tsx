@@ -1,3 +1,4 @@
+import { withSeo } from "@/lib/seo";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion, AnimatePresence } from "framer-motion";
 import { useMemo, useState } from "react";
@@ -37,19 +38,20 @@ import { cn } from "@/lib/utils";
 import { useAdminStore } from "@/lib/admin-store";
 
 export const Route = createFileRoute("/cfa")({
-  head: () => ({
-    meta: [
-      { title: "CFA® Program — Level I, II & III Prep | Fin-Envision Learning" },
-      {
-        name: "description",
-        content:
-          "Self-paced CFA® Level I, II & III prep with one mentor, real-life examples, and 100% coverage in English + Hindi. Trusted by candidates worldwide.",
-      },
-      { property: "og:title", content: "CFA® Program — Level I, II & III Prep" },
-      { property: "og:url", content: "/cfa" },
-    ],
-    links: [{ rel: "canonical", href: "/cfa" }],
-  }),
+  head: () =>
+    withSeo("/cfa", {
+      meta: [
+        { title: "CFA® Program — Level I, II & III Prep | Fin-Envision Learning" },
+        {
+          name: "description",
+          content:
+            "Self-paced CFA® Level I, II & III prep with one mentor, real-life examples, and 100% coverage in English + Hindi. Trusted by candidates worldwide.",
+        },
+        { property: "og:title", content: "CFA® Program — Level I, II & III Prep" },
+        { property: "og:url", content: "/cfa" },
+      ],
+      links: [{ rel: "canonical", href: "/cfa" }],
+    }),
   component: CFAPage,
 });
 

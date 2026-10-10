@@ -3,6 +3,7 @@ import { z } from "zod";
 import { motion } from "framer-motion";
 import { ArrowRight, CheckCircle2 } from "lucide-react";
 import { courses } from "@/data/site";
+import { trackLead } from "@/lib/tracking";
 
 const schema = z.object({
   name: z.string().trim().min(2, "Please enter your name").max(80),
@@ -46,23 +47,24 @@ export function LeadForm({
     const utmTerm = searchParams?.get("utm_term") || undefined;
     const utmContent = searchParams?.get("utm_content") || undefined;
 
-    // Save directly into Fin-Envision CRM Store
-    import("@/lib/admin-store").then(({ addLead }) => {
-      addLead({
-        name: parsed.data.name,
-        email: parsed.data.email,
-        phone: parsed.data.phone,
-        courseInterest: parsed.data.interest || "Chartered Financial Analyst (CFA®) Level 1",
-        leadStage: "Inquiry",
-        city: "Mumbai",
-        sourcePage: typeof window !== "undefined" ? window.location.pathname : "/contact",
-        utmSource,
-        utmMedium,
-        utmCampaign,
-        utmTerm,
-        utmContent,
-      });
-    });
+    // Save to the Supabase `leads` table (anonymous insert-only). The email below is a backup.
+    import("@/lib/admin-store")
+      .then(({ submitPublicLead }) =>
+        submitPublicLead({
+          name: parsed.data.name,
+          email: parsed.data.email,
+          phone: parsed.data.phone,
+          courseInterest: parsed.data.interest || "Chartered Financial Analyst (CFA®) Level 1",
+          city: "Mumbai",
+          sourcePage: typeof window !== "undefined" ? window.location.pathname : "/contact",
+          utmSource,
+          utmMedium,
+          utmCampaign,
+          utmTerm,
+          utmContent,
+        }),
+      )
+      .catch((err) => console.error("Could not save lead to CRM:", err));
 
     const data = {
       Name: parsed.data.name,
@@ -84,6 +86,7 @@ export function LeadForm({
       .then((data) => console.log("Form submitted successfully:", data))
       .catch((err) => console.error("Error submitting form:", err));
 
+    trackLead();
     setSubmitted(true);
   }
 

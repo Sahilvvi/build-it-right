@@ -1,3 +1,4 @@
+import { withSeo } from "@/lib/seo";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 
@@ -24,23 +25,24 @@ import { useAdminStore } from "@/lib/admin-store";
 const FOUNDER_PHOTO = "/manoj-rajgopal.jpg";
 
 export const Route = createFileRoute("/about")({
-  head: () => ({
-    meta: [
-      { title: "About — Learn Finance the Way the Industry Works | Fin-Envision Learning" },
-      {
-        name: "description",
-        content:
-          "Fin-Envision offers certified programs in CFA® and Financial Modelling — 5,000+ students trained, ~80–90% success rate, 8+ years of teaching experience, led by Manoj Rajgopal, CFA.",
-      },
-      { property: "og:title", content: "About — Learn Finance the Way the Industry Works" },
-      {
-        property: "og:description",
-        content: "We don't just teach finance — we transform how you learn it.",
-      },
-      { property: "og:url", content: "/about" },
-    ],
-    links: [{ rel: "canonical", href: "/about" }],
-  }),
+  head: () =>
+    withSeo("/about", {
+      meta: [
+        { title: "About — Learn Finance the Way the Industry Works | Fin-Envision Learning" },
+        {
+          name: "description",
+          content:
+            "Fin-Envision offers certified programs in CFA® and Financial Modelling — 5,000+ students trained, ~80–90% success rate, 8+ years of teaching experience, led by Manoj Rajgopal, CFA.",
+        },
+        { property: "og:title", content: "About — Learn Finance the Way the Industry Works" },
+        {
+          property: "og:description",
+          content: "We don't just teach finance — we transform how you learn it.",
+        },
+        { property: "og:url", content: "/about" },
+      ],
+      links: [{ rel: "canonical", href: "/about" }],
+    }),
   component: AboutPage,
 });
 

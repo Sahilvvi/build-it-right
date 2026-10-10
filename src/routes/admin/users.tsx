@@ -13,10 +13,11 @@ import {
 } from "lucide-react";
 import {
   getAdminStore,
-  saveAdminStore,
   getCurrentAdmin,
+  createAdminUser,
+  changeOwnPassword,
+  setAdminUserStatus,
   type AdminStoreData,
-  type AdminUser,
 } from "@/lib/admin-store";
 
 export const Route = createFileRoute("/admin/users")({
@@ -29,11 +30,14 @@ export function AdminUsersPage() {
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const [isPasswordModalOpen, setIsPasswordModalOpen] = useState(false);
   const [passwordNotice, setPasswordNotice] = useState("");
+  const [addError, setAddError] = useState("");
+  const [busy, setBusy] = useState(false);
 
   // Add User Form
   const [newUser, setNewUser] = useState({
     name: "",
     email: "",
+    password: "",
     role: "admin" as "super_admin" | "admin",
   });
 
@@ -53,74 +57,56 @@ export function AdminUsersPage() {
     return () => window.removeEventListener("finenvision_store_updated", handleUpdate);
   }, []);
 
-  const handleAddUser = (e: React.FormEvent) => {
+  const handleAddUser = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!newUser.name.trim() || !newUser.email.trim()) return;
-
-    const user: AdminUser = {
-      id: `u-${Date.now()}`,
-      name: newUser.name.trim(),
-      email: newUser.email.trim(),
-      role: newUser.role,
-      status: "active",
-      lastLogin: "Never",
-    };
-
-    const updated = [...store.users, user];
-    saveAdminStore({ ...store, users: updated }, { action: "Added Admin User", target: user.name });
-    setIsAddModalOpen(false);
-    setNewUser({ name: "", email: "", role: "admin" });
+    setBusy(true);
+    setAddError("");
+    try {
+      await createAdminUser({ ...newUser, name: newUser.name.trim(), email: newUser.email.trim() });
+      setIsAddModalOpen(false);
+      setNewUser({ name: "", email: "", password: "", role: "admin" });
+    } catch (err) {
+      setAddError(err instanceof Error ? err.message : "Could not create the administrator.");
+    } finally {
+      setBusy(false);
+    }
   };
 
-  const handleToggleStatus = (id: string) => {
+  const handleToggleStatus = async (id: string) => {
     const userToToggle = store.users.find((u) => u.id === id);
-    if (userToToggle?.role === "super_admin") {
+    if (!userToToggle) return;
+    if (userToToggle.role === "super_admin") {
       alert("Super Admin cannot be deactivated.");
       return;
     }
-
-    const updated = store.users.map((u) =>
-      u.id === id
-        ? {
-            ...u,
-            status: (u.status === "active" ? "inactive" : "active") as "active" | "inactive",
-          }
-        : u,
-    );
-    saveAdminStore(
-      { ...store, users: updated },
-      { action: "Toggled User Status", target: userToToggle?.name || id },
-    );
+    try {
+      await setAdminUserStatus(id, userToToggle.status === "active" ? "inactive" : "active");
+    } catch (err) {
+      alert(err instanceof Error ? err.message : "Could not update the account.");
+    }
   };
 
-  const handleChangePassword = (e: React.FormEvent) => {
+  const handleChangePassword = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!currentAdmin) {
       setPasswordNotice("No active admin session found.");
-      return;
-    }
-    const currentActiveUser = store.users.find((u) => u.id === currentAdmin.id);
-    const expected = currentActiveUser?.password || "admin123";
-    if (passForm.currentPass !== expected) {
-      setPasswordNotice("Current password does not match records.");
       return;
     }
     if (passForm.newPass !== passForm.confirmPass) {
       setPasswordNotice("New passwords do not match.");
       return;
     }
-    if (passForm.newPass.length < 6) {
-      setPasswordNotice("New password must be at least 6 characters.");
+    if (passForm.newPass.length < 8) {
+      setPasswordNotice("New password must be at least 8 characters.");
       return;
     }
-
-    const updated = store.users.map((u) =>
-      u.id === currentAdmin.id ? { ...u, password: passForm.newPass } : u,
-    );
-    saveAdminStore(
-      { ...store, users: updated },
-      { action: "Updated Password", target: currentAdmin.name },
-    );
+    try {
+      await changeOwnPassword(passForm.currentPass, passForm.newPass);
+    } catch (err) {
+      setPasswordNotice(err instanceof Error ? err.message : "Could not update the password.");
+      return;
+    }
     setPasswordNotice("Password updated successfully.");
     setTimeout(() => {
       setIsPasswordModalOpen(false);
@@ -223,7 +209,7 @@ export function AdminUsersPage() {
                   </td>
 
                   <td className="py-3.5 px-4 text-slate-500 text-[11px]">
-                    {user.lastLogin || "Recent"}
+                    {user.lastLogin ? new Date(user.lastLogin).toLocaleString() : "Never"}
                   </td>
 
                   <td className="py-3.5 px-4 text-right">
@@ -259,6 +245,11 @@ export function AdminUsersPage() {
             </div>
 
             <form onSubmit={handleAddUser} className="space-y-3 text-xs">
+              {addError && (
+                <div className="p-2.5 rounded-lg bg-rose-50 border border-rose-200 text-rose-700">
+                  {addError}
+                </div>
+              )}
               <div>
                 <label className="block text-slate-600 font-medium mb-1">Full Name *</label>
                 <input
@@ -279,6 +270,20 @@ export function AdminUsersPage() {
                   value={newUser.email}
                   onChange={(e) => setNewUser({ ...newUser, email: e.target.value })}
                   placeholder="rahul@finenvision.com"
+                  className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-600"
+                />
+              </div>
+
+              <div>
+                <label className="block text-slate-600 font-medium mb-1">
+                  Temporary Password * (min. 8 characters)
+                </label>
+                <input
+                  type="password"
+                  required
+                  minLength={8}
+                  value={newUser.password}
+                  onChange={(e) => setNewUser({ ...newUser, password: e.target.value })}
                   className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-600"
                 />
               </div>
@@ -310,9 +315,10 @@ export function AdminUsersPage() {
                 </button>
                 <button
                   type="submit"
-                  className="flex-1 py-2 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700"
+                  disabled={busy}
+                  className="flex-1 py-2 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 disabled:opacity-60"
                 >
-                  Create User
+                  {busy ? "Creating..." : "Create User"}
                 </button>
               </div>
             </form>

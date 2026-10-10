@@ -7,6 +7,8 @@ import {
   type AdminStoreData,
   type TrackingSettings,
 } from "@/lib/admin-store";
+import { cleanTrackingId } from "@/lib/tracking";
+import { parseSearchConsoleToken } from "@/lib/seo";
 
 export const Route = createFileRoute("/admin/tracking")({
   component: AdminTrackingPage,
@@ -52,6 +54,66 @@ export function AdminTrackingPage() {
             <CheckCircle2 className="w-4 h-4" /> Tracking Scripts Active!
           </span>
         )}
+      </div>
+
+      {/* What the live site will actually load, after validating the IDs */}
+      <div className="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-2xs">
+        <h2 className="text-xs font-bold text-slate-900 mb-3">Live on the website right now</h2>
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 text-[11px]">
+          {(
+            [
+              [
+                "GA4",
+                store.tracking.ga4Id,
+                cleanTrackingId("ga4", store.tracking.ga4Id),
+                "G-XXXXXXXXXX",
+              ],
+              [
+                "Tag Manager",
+                store.tracking.gtmId,
+                cleanTrackingId("gtm", store.tracking.gtmId),
+                "GTM-XXXXXXX",
+              ],
+              [
+                "Meta Pixel",
+                store.tracking.metaPixelId,
+                cleanTrackingId("pixel", store.tracking.metaPixelId),
+                "15-16 digits",
+              ],
+              [
+                "Search Console",
+                store.tracking.searchConsoleToken,
+                parseSearchConsoleToken(store.tracking.searchConsoleToken),
+                "verification token",
+              ],
+            ] as const
+          ).map(([label, raw, valid, hint]) => (
+            <div
+              key={label}
+              className={`rounded-xl border px-3 py-2 ${
+                valid
+                  ? "border-emerald-200 bg-emerald-50 text-emerald-800"
+                  : raw.trim()
+                    ? "border-amber-200 bg-amber-50 text-amber-800"
+                    : "border-slate-200 bg-slate-50 text-slate-500"
+              }`}
+            >
+              <div className="font-bold">{label}</div>
+              <div>
+                {valid
+                  ? "Active"
+                  : raw.trim()
+                    ? `Invalid format - not loaded (${hint})`
+                    : "Not set"}
+              </div>
+            </div>
+          ))}
+        </div>
+        <p className="mt-3 text-[11px] text-slate-500">
+          Scripts load for website visitors only, never inside this admin portal. Custom scripts are
+          raw HTML run on every public page, so paste only code you trust. Changes reach visitors on
+          their next page load.
+        </p>
       </div>
 
       <form onSubmit={handleSave} className="space-y-6 text-xs">

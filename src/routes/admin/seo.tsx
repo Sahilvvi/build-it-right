@@ -16,6 +16,9 @@ import {
   type AdminStoreData,
   type RedirectRule,
 } from "@/lib/admin-store";
+import { isValidRedirectTarget, wouldLoop } from "@/lib/redirects";
+import { CORE_PAGES, toPublicPath } from "@/lib/pages";
+import { PageAddressCard } from "@/components/admin/PageAddressCard";
 
 export const Route = createFileRoute("/admin/seo")({
   component: AdminSeoPage,
@@ -30,6 +33,7 @@ export function AdminSeoPage() {
   const [newFrom, setNewFrom] = useState("");
   const [newTo, setNewTo] = useState("");
   const [newStatus, setNewStatus] = useState<301 | 302>(301);
+  const [redirectError, setRedirectError] = useState("");
 
   useEffect(() => {
     const handleUpdate = () => setStore(getAdminStore());
@@ -51,12 +55,49 @@ export function AdminSeoPage() {
 
   const handleAddRedirect = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!newFrom.trim() || !newTo.trim()) return;
+    setRedirectError("");
+    const from = newFrom.trim();
+    const to = newTo.trim();
+    if (!from || !to) return;
+
+    const fromPath = (from.startsWith("/") ? from : `/${from}`).split("?")[0];
+    const toPath = /^https?:\/\//i.test(to) ? to : to.startsWith("/") ? to : `/${to}`;
+
+    if (fromPath.toLowerCase().startsWith("/admin")) {
+      setRedirectError("The admin portal cannot be redirected.");
+      return;
+    }
+    const livePage = CORE_PAGES.find((p) =>
+      [p.defaultPath, store.pageSlugs[p.defaultPath]]
+        .filter(Boolean)
+        .some((a) => a.toLowerCase() === fromPath.toLowerCase().replace(/(.)\/+$/, "$1")),
+    );
+    if (livePage) {
+      setRedirectError(
+        `${fromPath} is an address of the ${livePage.title} page. Change the page's address above instead.`,
+      );
+      return;
+    }
+    if (!isValidRedirectTarget(toPath)) {
+      setRedirectError("Target must be a path like /cfa or a full http(s):// URL.");
+      return;
+    }
+    if (store.redirects.some((r) => r.fromPath.toLowerCase() === fromPath.toLowerCase())) {
+      setRedirectError(`A rule for ${fromPath} already exists. Delete it first.`);
+      return;
+    }
+    if (
+      fromPath.toLowerCase() === toPath.toLowerCase() ||
+      wouldLoop(fromPath, toPath, store.redirects)
+    ) {
+      setRedirectError("That rule would create a redirect loop.");
+      return;
+    }
 
     const newRule: RedirectRule = {
       id: `r-${Date.now()}`,
-      fromPath: newFrom.startsWith("/") ? newFrom.trim() : `/${newFrom.trim()}`,
-      toPath: newTo.startsWith("/") ? newTo.trim() : `/${newTo.trim()}`,
+      fromPath,
+      toPath,
       statusCode: newStatus,
       isActive: true,
     };
@@ -64,10 +105,30 @@ export function AdminSeoPage() {
     const updated = [newRule, ...store.redirects];
     saveAdminStore(
       { ...store, redirects: updated },
-      { action: "Added 301 Redirect Rule", target: newRule.fromPath },
+      { action: `Added ${newStatus} Redirect Rule`, target: newRule.fromPath },
     );
     setNewFrom("");
     setNewTo("");
+  };
+
+  const handleToggleRedirect = (id: string) => {
+    const rule = store.redirects.find((r) => r.id === id);
+    if (!rule) return;
+    if (!rule.isActive && wouldLoop(rule.fromPath, rule.toPath, store.redirects)) {
+      setRedirectError("Re-enabling this rule would create a redirect loop.");
+      return;
+    }
+    setRedirectError("");
+    saveAdminStore(
+      {
+        ...store,
+        redirects: store.redirects.map((r) => (r.id === id ? { ...r, isActive: !r.isActive } : r)),
+      },
+      {
+        action: rule.isActive ? "Paused Redirect Rule" : "Resumed Redirect Rule",
+        target: rule.fromPath,
+      },
+    );
   };
 
   const handleDeleteRedirect = (id: string, fromPath: string) => {
@@ -101,6 +162,8 @@ export function AdminSeoPage() {
           </span>
         )}
       </div>
+
+      <PageAddressCard />
 
       {/* 2 Tabs: Meta Editor & Redirect Rules */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -181,7 +244,7 @@ export function AdminSeoPage() {
                 {currentMeta.title}
               </div>
               <div className="text-[11px] text-emerald-700 truncate">
-                https://finenvision.com{selectedRoute}
+                https://finenvision.com{toPublicPath(selectedRoute)}
               </div>
               <div className="text-[11px] text-slate-600 line-clamp-2">
                 {currentMeta.description}
@@ -206,6 +269,11 @@ export function AdminSeoPage() {
           </p>
 
           <form onSubmit={handleAddRedirect} className="space-y-2 text-xs">
+            {redirectError && (
+              <div className="p-2 rounded-lg bg-rose-50 border border-rose-200 text-rose-700">
+                {redirectError}
+              </div>
+            )}
             <div className="grid grid-cols-2 gap-2">
               <div>
                 <label className="block text-[11px] text-slate-500 font-medium mb-1">
@@ -263,7 +331,9 @@ export function AdminSeoPage() {
             {store.redirects.map((r) => (
               <div
                 key={r.id}
-                className="p-3 bg-slate-50 border border-slate-200/80 rounded-xl flex items-center justify-between text-xs"
+                className={`p-3 bg-slate-50 border border-slate-200/80 rounded-xl flex items-center justify-between text-xs ${
+                  r.isActive ? "" : "opacity-60"
+                }`}
               >
                 <div className="flex items-center gap-2 font-mono text-[11px]">
                   <span className="text-slate-600">{r.fromPath}</span>
@@ -276,6 +346,18 @@ export function AdminSeoPage() {
                     {r.statusCode}
                   </span>
                   <button
+                    type="button"
+                    onClick={() => handleToggleRedirect(r.id)}
+                    className={`text-[10px] font-semibold px-1.5 py-0.5 rounded border ${
+                      r.isActive
+                        ? "bg-emerald-50 text-emerald-700 border-emerald-200"
+                        : "bg-slate-100 text-slate-500 border-slate-200"
+                    }`}
+                  >
+                    {r.isActive ? "Active" : "Paused"}
+                  </button>
+                  <button
+                    type="button"
                     onClick={() => handleDeleteRedirect(r.id, r.fromPath)}
                     className="p-1 text-slate-400 hover:text-rose-600"
                   >

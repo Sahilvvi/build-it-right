@@ -1,3 +1,4 @@
+import { withSeo } from "@/lib/seo";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState, useEffect, type ElementType } from "react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -24,24 +25,25 @@ import { faqs, googleReviewsCount, googleRating, brand, courses } from "@/data/s
 import { useAdminStore, addLead } from "@/lib/admin-store";
 
 export const Route = createFileRoute("/courses")({
-  head: () => ({
-    meta: [
-      { title: "CFA® Prep Program — Fin-Envision Learning" },
-      {
-        name: "description",
-        content:
-          "Master the CFA® Program with India's most trusted prep — live mentors, 216+ Google reviews at 4.9★. Levels I, II, III with structured curriculum, mocks, doubt clinics and placement support.",
-      },
-      { property: "og:title", content: "CFA® Prep Program — Fin-Envision Learning" },
-      {
-        property: "og:description",
-        content:
-          "Live cohort CFA® prep by practitioners. Levels I, II, III. Mocks, doubt clinics, placement support.",
-      },
-      { property: "og:url", content: "/courses" },
-    ],
-    links: [{ rel: "canonical", href: "/courses" }],
-  }),
+  head: () =>
+    withSeo("/courses", {
+      meta: [
+        { title: "CFA® Prep Program — Fin-Envision Learning" },
+        {
+          name: "description",
+          content:
+            "Master the CFA® Program with India's most trusted prep — live mentors, 216+ Google reviews at 4.9★. Levels I, II, III with structured curriculum, mocks, doubt clinics and placement support.",
+        },
+        { property: "og:title", content: "CFA® Prep Program — Fin-Envision Learning" },
+        {
+          property: "og:description",
+          content:
+            "Live cohort CFA® prep by practitioners. Levels I, II, III. Mocks, doubt clinics, placement support.",
+        },
+        { property: "og:url", content: "/courses" },
+      ],
+      links: [{ rel: "canonical", href: "/courses" }],
+    }),
   component: CoursesPage,
 });
 

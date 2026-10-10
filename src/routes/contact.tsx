@@ -1,3 +1,4 @@
+import { withSeo } from "@/lib/seo";
 import { createFileRoute } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import {
@@ -33,18 +34,19 @@ import { brand } from "@/data/site";
 import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/contact")({
-  head: () => ({
-    meta: [
-      { title: "Contact — Fin-Envision Learning" },
-      {
-        name: "description",
-        content: "Talk to our team. WhatsApp, email, phone or visit us in Mumbai.",
-      },
-      { property: "og:title", content: "Contact — Fin-Envision Learning" },
-      { property: "og:url", content: "/contact" },
-    ],
-    links: [{ rel: "canonical", href: "/contact" }],
-  }),
+  head: () =>
+    withSeo("/contact", {
+      meta: [
+        { title: "Contact — Fin-Envision Learning" },
+        {
+          name: "description",
+          content: "Talk to our team. WhatsApp, email, phone or visit us in Mumbai.",
+        },
+        { property: "og:title", content: "Contact — Fin-Envision Learning" },
+        { property: "og:url", content: "/contact" },
+      ],
+      links: [{ rel: "canonical", href: "/contact" }],
+    }),
   component: ContactPage,
 });
 
